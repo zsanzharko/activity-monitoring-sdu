@@ -2,14 +2,14 @@ package kz.sdu.activitymonitoringsdu.service;
 
 import kz.sdu.activitymonitoringsdu.entity.User;
 import kz.sdu.activitymonitoringsdu.enums.Gender;
-import kz.sdu.activitymonitoringsdu.enums.Position;
+import kz.sdu.activitymonitoringsdu.enums.TypeUser;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;
 
 public interface UserService extends UserDetailsService {
 
-    List<User> findAllByPosition(Position position);
+    List<User> findAllByTypeUser(TypeUser typeUser);
 
     List<User> findAllByGender(Gender gender);
 

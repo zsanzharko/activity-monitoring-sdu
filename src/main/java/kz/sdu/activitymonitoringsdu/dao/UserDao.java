@@ -2,7 +2,7 @@ package kz.sdu.activitymonitoringsdu.dao;
 
 import kz.sdu.activitymonitoringsdu.entity.User;
 import kz.sdu.activitymonitoringsdu.enums.Gender;
-import kz.sdu.activitymonitoringsdu.enums.Position;
+import kz.sdu.activitymonitoringsdu.enums.TypeUser;
 import kz.sdu.activitymonitoringsdu.repository.UserRepository;
 import kz.sdu.activitymonitoringsdu.service.UserService;
 import lombok.Getter;
@@ -26,8 +26,8 @@ public class UserDao implements UserService {
     }
 
     @Override
-    public List<User> findAllByPosition(Position position) {
-        return userRepository.findAllByPosition(position);
+    public List<User> findAllByTypeUser(TypeUser typeUser) {
+        return userRepository.findAllByTypeUser(typeUser);
     }
 
     @Override

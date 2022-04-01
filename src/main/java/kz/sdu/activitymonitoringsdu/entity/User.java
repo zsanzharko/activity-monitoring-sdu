@@ -14,7 +14,7 @@ import javax.persistence.*;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "employee_id", nullable = false)
+    @Column(name = "id", nullable = false)
     private Long id;
 
     @Column(name = "first_name", nullable = false)
@@ -24,12 +24,14 @@ public class User {
     private String last_name;
 
     @Column(name = "gender")
+    @Enumerated(EnumType.STRING)
     private Gender gender;
 
     @Column(name = "email", nullable = false)
     private String email;
 
     @Column(name = "type_user", nullable = false)
+    @Enumerated(EnumType.STRING)
     private TypeUser typeUser;
 
     @Column(name = "password", nullable = false)
