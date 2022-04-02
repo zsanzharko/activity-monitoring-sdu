@@ -1,7 +1,7 @@
 package kz.sdu.activitymonitoringsdu.entity;
 
 import kz.sdu.activitymonitoringsdu.enums.Gender;
-import kz.sdu.activitymonitoringsdu.enums.TypeUser;
+import kz.sdu.activitymonitoringsdu.enums.Role;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,23 +17,23 @@ public class User {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "first_name", nullable = false)
+    @Column(name = "user_first_name", nullable = false)
     private String firstName;
 
-    @Column(name = "last_name", nullable = false)
+    @Column(name = "user_last_name", nullable = false)
     private String lastName;
 
-    @Column(name = "gender")
+    @Column(name = "user_gender")
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    @Column(name = "email", nullable = false)
+    @Column(name = "user_email", nullable = false)
     private String email;
 
-    @Column(name = "type_user", nullable = false)
+    @Column(name = "user_role", nullable = false)
     @Enumerated(EnumType.STRING)
-    private TypeUser typeUser;
+    private Role role;
 
-    @Column(name = "password", nullable = false)
+    @Column(name = "user_password", nullable = false)
     private String password;
 }

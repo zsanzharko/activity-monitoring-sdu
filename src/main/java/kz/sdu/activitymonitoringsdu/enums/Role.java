@@ -1,5 +1,5 @@
 package kz.sdu.activitymonitoringsdu.enums;
 
-public enum TypeUser {
-    EMPLOYEE, MANAGER
+public enum Role {
+    EMPLOYEE, MANAGER, USER
 }

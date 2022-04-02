@@ -2,8 +2,7 @@ package kz.sdu.activitymonitoringsdu.repository;
 
 import kz.sdu.activitymonitoringsdu.entity.User;
 import kz.sdu.activitymonitoringsdu.enums.Gender;
-import kz.sdu.activitymonitoringsdu.enums.Position;
-import kz.sdu.activitymonitoringsdu.enums.TypeUser;
+import kz.sdu.activitymonitoringsdu.enums.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -12,7 +11,7 @@ import java.util.List;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    List<User> findAllByTypeUser(TypeUser typeUser);
+    List<User> findAllByRole(Role role);
 
     List<User> findAllByGender(Gender gender);
 

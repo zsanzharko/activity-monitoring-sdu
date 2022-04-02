@@ -2,12 +2,13 @@ package kz.sdu.activitymonitoringsdu.dao;
 
 import kz.sdu.activitymonitoringsdu.entity.User;
 import kz.sdu.activitymonitoringsdu.enums.Gender;
-import kz.sdu.activitymonitoringsdu.enums.TypeUser;
+import kz.sdu.activitymonitoringsdu.enums.Role;
 import kz.sdu.activitymonitoringsdu.repository.UserRepository;
 import kz.sdu.activitymonitoringsdu.service.UserService;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -25,9 +26,10 @@ public class UserDao implements UserService {
         this.userRepository = userRepository;
     }
 
+
     @Override
-    public List<User> findAllByTypeUser(TypeUser typeUser) {
-        return userRepository.findAllByTypeUser(typeUser);
+    public List<User> findAllByRole(Role role) {
+        return userRepository.findAllByRole(role);
     }
 
     @Override
@@ -66,16 +68,4 @@ public class UserDao implements UserService {
         userRepository.deleteById(id);
     }
 
-    @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = userRepository.findUserByEmail(email);
-        if(user == null)
-            throw new UsernameNotFoundException(email);
-
-        return new org.springframework.security.core.userdetails.User(
-                user.getEmail(),
-                user.getPassword(),
-                true, true,true,true,
-                new ArrayList<>());
-    }
 }
