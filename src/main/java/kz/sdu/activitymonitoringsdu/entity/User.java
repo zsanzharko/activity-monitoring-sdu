@@ -4,6 +4,7 @@ import kz.sdu.activitymonitoringsdu.enums.Gender;
 import kz.sdu.activitymonitoringsdu.enums.Role;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 
@@ -11,10 +12,11 @@ import javax.persistence.*;
 @Table(name = "users")
 @Setter
 @Getter
+@ToString
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(name = "user_id", nullable = false)
     private Long id;
 
     @Column(name = "user_first_name", nullable = false)

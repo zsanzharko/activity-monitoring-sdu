@@ -3,6 +3,7 @@ package kz.sdu.activitymonitoringsdu.dao;
 import kz.sdu.activitymonitoringsdu.entity.User;
 import kz.sdu.activitymonitoringsdu.enums.Gender;
 import kz.sdu.activitymonitoringsdu.enums.Role;
+import kz.sdu.activitymonitoringsdu.handlers.UserPrincipal;
 import kz.sdu.activitymonitoringsdu.repository.UserRepository;
 import kz.sdu.activitymonitoringsdu.service.UserService;
 import lombok.Getter;
@@ -17,7 +18,7 @@ import java.util.List;
 
 @Service
 @Getter
-public class UserDao implements UserService {
+public class UserDao implements UserService, UserDetailsService {
 
     private final UserRepository userRepository;
 
@@ -68,4 +69,12 @@ public class UserDao implements UserService {
         userRepository.deleteById(id);
     }
 
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        User user = userRepository.findUserByEmail(email);
+        if (user == null) {
+            throw new UsernameNotFoundException(email);
+        }
+        return new UserPrincipal(user);
+    }
 }
