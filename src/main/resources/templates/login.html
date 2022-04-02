@@ -1,65 +1,5 @@
-<!--<!DOCTYPE html>-->
-<!--<html xmlns:th="http://www.thymeleaf.org"-->
-<!--      xmlns="http://www.w3.org/1999/xhtml"-->
-<!--      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3"-->
-<!--      lang="en">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <meta http-equiv="X-UA-Compatible" content="IE=edge">-->
-<!--    <link rel="stylesheet" th:href="@{styles/registr_style.css}">-->
-<!--    <link rel="stylesheet" th:href="@{styles/registr_buttons.css}">-->
-<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
-<!--    <title>Authorization</title>-->
-<!--</head>-->
-<!--<body>-->
-<!--<header>-->
-<!--    <button id="sign_button" role="button">Sign In</button>-->
-<!--</header>-->
-
-<!--<section>-->
-<!--    <div class="registration_box">-->
-<!--        <div id='reg_text_box'>-->
-<!--            <h1>Auth</h1>-->
-<!--            <div th:if="${param.error}">-->
-<!--                Invalid username and password.-->
-<!--            </div>-->
-<!--            <div th:if="${param.logout}">-->
-<!--                You have been logged out.-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <div id="line"></div>-->
-<!--        <img th:src="@{images/login-page-1.png}" alt="picture" id="picture">\-->
-<!--        <form action="#" th:action="@{/login}" method="post" th:object="${form}">-->
-<!--            <div class="input_div">-->
-<!--                <label for="email">-->
-<!--                    <input type="text"-->
-<!--                           value="email"-->
-<!--                           th:value="*{email}"-->
-<!--                           th:field="*{email}"-->
-<!--                           placeholder="Enter email" id="email">-->
-<!--                </label>-->
-
-<!--&lt;!&ndash;                fixme class class="input_fields"> doesn't work correct&ndash;&gt;-->
-<!--                <label for="password">-->
-<!--                    <input type="password" th:value="*{password}"-->
-<!--                           th:field="*{password}"-->
-<!--                           placeholder="Enter password" id="password">-->
-<!--                </label>-->
-
-<!--            </div>-->
-<!--            <button type="submit" value="Submit">Log in</button>-->
-<!--        </form>-->
-<!--    </div>-->
-
-<!--</section>-->
-
-<!--</body>-->
-<!--</html>-->
-
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
       lang="en">
 <head>
     <meta charset="UTF-8">
@@ -78,27 +18,24 @@
     <div class="registration_box">
         <div id='reg_text_box'>
             <h1>Auth</h1>
+        </div>
+        <div id="line"></div>
+        <img th:src="@{images/login-page-1.png}" alt="picture" id="picture">
+        <form th:action="@{/login}" method="post">
             <div th:if="${param.error}">
                 Invalid username and password.
             </div>
             <div th:if="${param.logout}">
                 You have been logged out.
             </div>
-        </div>
-        <div id="line"></div>
-        <img th:src="@{images/login-page-1.png}" alt="picture" id="picture">\
-        <form action="/login" method="post">
             <div class="input_div">
                 <label for="email">
                     <input type="text"
-                           value="email"
-                           placeholder="Enter email" id="email">
+                           placeholder="Enter email" id="email" name="username">
                 </label>
                 <label for="password">
-                    <input type="password" value="password"
-                           placeholder="Enter password" id="password">
+                    <input type="password" placeholder="Enter password" id="password" name="password">
                 </label>
-
             </div>
             <button type="submit" value="Submit">Log in</button>
         </form>

@@ -17,7 +17,7 @@
             <div class="sidebar_head">
                 <div id="name_picture_box">
                     <img th:src="@{images/test photo profile.png}" alt="Flowers" id="sidebar_picture" src="">
-                    <p id="side_head_text">Surname Name</p>
+                    <p id="side_head_text" th:inline="text">Surname Name [[${#httpServletRequest.remoteUser}]]!</p>
                 </div>
                 <div id="sider_inf_box">
                     <div id="upper_dev_inf">
