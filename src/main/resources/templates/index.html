@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="stylesheet" th:href="@{styles/loged_style.css}">
     <link rel="stylesheet" th:href="@{styles/loged_buttons.css}">
+    <link rel="stylesheet" href="../static/styles/loged_style.css">
+    <link rel="stylesheet" href="../static/styles/loged_buttons.css">
     <title>Authorization</title>
 </head>
 <body>
@@ -17,7 +19,7 @@
             <div class="sidebar_head">
                 <div id="name_picture_box">
                     <img th:src="@{images/test photo profile.png}" alt="Flowers" id="sidebar_picture" src="">
-                    <p id="side_head_text" th:inline="text">Surname Name [[${#httpServletRequest.remoteUser}]]!</p>
+                    <p id="side_head_text" th:inline="text" th:text="${user.getFullName()}"></p>
                 </div>
                 <div id="sider_inf_box">
                     <div id="upper_dev_inf">
@@ -46,15 +48,16 @@
         <!-- Page Content Holder -->
         <div id="content">
             <p id="main_title">Projects</p>
-            <div class="space_for_box">
+            <div class="space_for_box" th:each="project : ${projects}">
                 <div id="line"></div>
                 <div class="box">
                     <div class="box_head">
                         <div id="box_head_left">
-                            <p id="projects_id">9511DXP</p>
+                            <p id="projects_id" th:text="${project.getProjectId()}">9511DXP</p>
+                            //todo where is
                             <p id="project_version">version B</p>
                         </div>
-                        <p id="project_name">Project name</p>
+                        <p id="project_name" th:text="${project.getTitle()}">Project name</p>
                     </div>
                     <div class="box_body">
                         <p id="project_activities">Activities</p>
