@@ -22,8 +22,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         this.dataSource = dataSource;
     }
 
-    //fixme have problem with allow resources in login page
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -44,19 +42,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl("/login")
                     .permitAll()
                 .and();
-//                .antMatcher("/css/**")
-//                .antMatcher("/images/**")
-//                .antMatcher("/js/**");
     }
 
     @Override
     public void configure(WebSecurity web) {
-        web
-                .ignoring()
-//                .antMatchers("/css/**")
-//                .antMatchers("/js/**")
-//                .antMatchers("/images/**")
-                .antMatchers("/static/**");
+        web.ignoring().antMatchers("/static/**");
     }
 
     @Override

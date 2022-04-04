@@ -38,12 +38,6 @@ public class MainController {
         this.activityDao = activityDao;
     }
 
-
-    @GetMapping("/login")
-    public String loginPage() {
-        return "login";
-    }
-
     @GetMapping("/")
     public String mainPage() {
         return "redirect:/dashboard";
