@@ -24,6 +24,7 @@
                 <p class="pr_name">Project name</p>
                 <label for="name_input">
                     <input type="text" class="name_input"
+                           id="name_input"
                            th:value="*{title}"
                            placeholder="Like 'Android App'"></label>
 
@@ -33,6 +34,7 @@
                 <label for="number_input">
                     <input type="text" class="number_input"
                            th:value="*{projectId}"
+                           id="number_input"
                            placeholder="Like '9511DXP'"></label>
 
             </div>
@@ -40,6 +42,7 @@
                 <p class="pr_version">Version:</p>
                 <label for="version_input">
                     <input type="text" th:value="*{projectVersion}" class="version_input"
+                           id="version_input"
                            placeholder="Like 'B'"></label>
 
             </div>
@@ -47,7 +50,9 @@
             <div class="version_box">
                 <p class="pr_version">Date to start:</p>
                 <label for="start_date">
-                    <input type="date" th:value="*{startDate}" class="start_date"></label>
+                    <input type="date"
+                           id="start_date"
+                           th:value="*{startDate}" class="start_date"></label>
 
             </div>
             <div class="box_footer">
