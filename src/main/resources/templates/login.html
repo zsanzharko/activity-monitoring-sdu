@@ -19,15 +19,15 @@
 <section>
     <div class="registration_box">
         
-        <div id= 'reg_text_box'>
+        <div class= 'reg_text_box'>
             <h1>Auth</h1>
         </div>
 
-        <div id="line"></div>
+        <div class="line"></div>
 
-        <img th:src="@{images/login-page-1.png}" alt="picture" id="picture">
+        <img src="images/login-page-1.png" alt="picture" class="picture">
 
-        <form action="#" th:action="@{/login}" method="post" id="form">
+        <form action="#" th:action="@{/login}" method="post" th:object="${form}" class="form">
             <div class="input_div">
                 <label for="email" class = 'label'>
                     <input type="text"
