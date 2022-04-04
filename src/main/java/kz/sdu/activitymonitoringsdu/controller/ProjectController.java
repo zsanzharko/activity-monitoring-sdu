@@ -1,9 +1,11 @@
 package kz.sdu.activitymonitoringsdu.controller;
 
+import kz.sdu.activitymonitoringsdu.dao.ActivityDao;
 import kz.sdu.activitymonitoringsdu.dao.ProjectDao;
 import kz.sdu.activitymonitoringsdu.dao.UserDao;
 import kz.sdu.activitymonitoringsdu.dto.ProjectDto;
 import kz.sdu.activitymonitoringsdu.dto.UserDto;
+import kz.sdu.activitymonitoringsdu.entity.Activity;
 import kz.sdu.activitymonitoringsdu.entity.Project;
 import kz.sdu.activitymonitoringsdu.enums.ProjectStatus;
 import kz.sdu.activitymonitoringsdu.enums.Role;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Controller
 @Getter
@@ -27,11 +30,13 @@ public class ProjectController {
 
     private final UserDao userDao;
     private final ProjectDao projectDao;
+    private final ActivityDao activityDao;
 
     @Autowired
-    public ProjectController(UserDao userDao, ProjectDao projectDao) {
+    public ProjectController(UserDao userDao, ProjectDao projectDao, ActivityDao activityDao) {
         this.userDao = userDao;
         this.projectDao = projectDao;
+        this.activityDao = activityDao;
     }
 
     @GetMapping("/create")
@@ -102,8 +107,10 @@ public class ProjectController {
     public ModelAndView showDetails(@RequestParam final Long id, ModelMap model) {
         UserDto userDto = UserHandlerUtils.getUserFromAuth(userDao);
         ProjectDto projectDto = ProjectHandlerUtils.convertToDto(projectDao.findById(id));
+        List<Activity> activities = activityDao.findAllByProjectId(projectDto.getProjectId());
 
         model.addAttribute("userIsManager", userDto.getRole() == Role.MANAGER);
+        model.addAttribute("activities", activities);
         model.addAttribute("project", projectDto);
         return new ModelAndView("project_details", model);
     }
