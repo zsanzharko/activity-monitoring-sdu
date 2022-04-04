@@ -79,6 +79,7 @@ section{
     /* background-color:blueviolet; */
 }
 .input_fields{
+    padding-left: 10px;
     height: 40px;
     width: 100%;
     font-size: 12px; 

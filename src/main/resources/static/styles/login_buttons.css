@@ -1,4 +1,4 @@
-#sign_button {
+.sign_button {
   background-color: #3A506B;
   border: 1px solid transparent;
   border-radius: 20px;
@@ -18,18 +18,18 @@
   box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
 }
 
-#sign_button:hover {
+.sign_button:hover {
   background-color: #2EE59D;
 }
 
-#sign_button:focus {
+.sign_button:focus {
   box-shadow: none; 
   outline: 2px solid transparent;
   outline-offset: 2px;
 }
 
 
-#log_button {
+.log_button {
   width: 40%;
   height: 20%;
   margin-top: 10%;
@@ -49,7 +49,7 @@
   /* transition-duration: .3s; */
   }
 
-  #log_button:hover {
+  .log_button:hover {
     background-color: #2EE59D;
     box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
     color: #fff;
