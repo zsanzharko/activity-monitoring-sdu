@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="stylesheet" href="../static/styles/manager_new_task.css">
-    <link rel="stylesheet" href="../static/styles/manager_new_task_buttons.css">
-    <link rel="stylesheet" th:href="@{/styles/manager_new_task.css}">
-    <link rel="stylesheet" th:href="@{/styles/manager_new_task_buttons.css}">
+    <link rel="stylesheet" href="../static/styles/new_project.css">
+    <link rel="stylesheet" href="../static/styles/new_project_buttons.css">
+    <link rel="stylesheet" th:href="@{/styles/new_project.css}">
+    <link rel="stylesheet" th:href="@{/styles/new_project_buttons.css}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>New Project</title>
 </head>
@@ -14,44 +14,44 @@
 <div th:insert="fragments/navigation :: header"></div>
 <section>
     <div class="box">
-        <div id="box_head">
-            <div id="new_project_button">
+        <div class="box_head">
+            <div class="new_project_button">
                 New project
             </div>
         </div>
         <form th:action="@{/project/create}" th:object="${project}" method="post">
-            <div id="project_name_box">
-                <p id="pr_name">Project name</p>
+            <div class="project_name_box">
+                <p class="pr_name">Project name</p>
                 <label for="name_input">
-                    <input type="text" id="name_input"
+                    <input type="text" class="name_input"
                            th:value="*{title}"
                            placeholder="Like 'Android App'"></label>
 
             </div>
-            <div id="project_id_box">
-                <p id="pr_number">Project number</p>
+            <div class="project_id_box">
+                <p class="pr_number">Project number</p>
                 <label for="number_input">
-                    <input type="text" id="number_input"
+                    <input type="text" class="number_input"
                            th:value="*{projectId}"
                            placeholder="Like '9511DXP'"></label>
 
             </div>
-            <div id="version_box">
-                <p id="pr_version">Version:</p>
+            <div class="version_box">
+                <p class="pr_version">Version:</p>
                 <label for="version_input">
-                    <input type="text" th:value="*{projectVersion}" id="version_input"
+                    <input type="text" th:value="*{projectVersion}" class="version_input"
                            placeholder="Like 'B'"></label>
 
             </div>
 
-            <div id="version_box">
-                <p id="pr_version">Date to start:</p>
+            <div class="version_box">
+                <p class="pr_version">Date to start:</p>
                 <label for="start_date">
-                    <input type="date" th:value="*{startDate}" id="start_date"></label>
+                    <input type="date" th:value="*{startDate}" class="start_date"></label>
 
             </div>
-            <div id="box_footer">
-                <button id="create_button" type="submit" value="Submit" role="button">Create</button>
+            <div class="box_footer">
+                <button class="create_button" type="submit" value="Submit" role="button">Create</button>
             </div>
         </form>
     </div>

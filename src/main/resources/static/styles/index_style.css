@@ -20,7 +20,7 @@ header{
     align-items: center;
     justify-content: space-between;
 }
-#header_user{
+.header_user{
     width: 50px;
     margin-right: 3%;
 }
@@ -63,7 +63,7 @@ header{
     height:280px;
     background-color:#292F40;
 }
-#name_picture_box{
+.name_picture_box{
     color:#FDFDFD;
     display: flex;
     justify-content: space-around;
@@ -71,30 +71,30 @@ header{
     margin-left: 6%;
     margin-top: 5%;
 }
-#sidebar_picture{
+.sidebar_picture{
    width:100px;
    border-radius:50%;
 }
-#side_head_text{
+.side_head_text{
     margin-right: 15%;
     margin-left: 5%;
 }
-#sider_inf_box{
+.sider_inf_box{
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
-#upper_dev_inf, #project{
+.upper_dev_inf, .project{
     margin-left: 7%;
     margin-top: 4%;
     color:#D2D3D6;
     font-size: small;
 }
-#project{
+.project{
     margin-bottom:10%;
 }
-#input_inf, #input_status, #input_project, .dash_text{
+.input_inf, .input_status, .input_project, .dash_text{
     color: #F6F7F7;
 }
 
@@ -118,7 +118,7 @@ header{
     border-radius:10px;
 
 }
-#dashboard_pic{
+.dashboard_pic{
     width: 30px;
 }
 .dash_text{
@@ -131,7 +131,7 @@ header{
 /* ---------------------------------------------------
     CONTENT STYLE
 ----------------------------------------------------- */
-#content {
+.content {
     width: 77%;
     min-height: 100vh;
     transition: all 0.3s;
@@ -144,13 +144,8 @@ header{
     margin-top: 2%;
 }
 
-#main_title{
-    color: #F3F5F7;
-    margin-left: 90%;
-    margin-top: 2%;
-}
 
-#line{
+.line{
     background-color: #59636D;
     height: 1px;
     width: 100%;
@@ -184,18 +179,18 @@ header{
     align-items:center;
     border-radius: 10px 10px 0px 0px;
 }
-#box_head_left{
+.box_head_left{
     margin-left: 2%;
     display: flex;
     flex-direction: column;
     /* align-items:center; */
     height: 100%;
 }
-#project_version{
+.project_version{
     font-size: 9px;
     margin-bottom: 2%;
 }
-#project_name{
+.project_name{
     margin-right: 4%;
     font-size: 13px;
 }
@@ -208,12 +203,12 @@ header{
     padding-left: 2%;
 }
 
-#project_activities{
+.project_activities{
     font-size: 12px;
     margin-bottom: 5px;
 }
 
-#project_work_dev{
+.project_work_dev{
     font-size: 10px;
     margin-top: 15px;
 }
@@ -224,28 +219,28 @@ header{
     justify-content: space-between;
     align-items:center;
 }
-#box_image{
+.box_image{
     width: 30px;
     border-radius: 50%;
 }
-#footer_images{
+.footer_images{
     margin-left: 2%;
 }
-#box_batton{
+.box_batton{
     margin-right: 20px;
 }
 /* ---------------------------------------------------
     button STYLE
 ----------------------------------------------------- */
 
-#sidebarCollapse_button {
+.sidebarCollapse_button {
     width: 40px;
     height: 40px;
     background: #f5f5f5;
     cursor: pointer;
 }
 
-#sidebarCollapse_button span {
+.sidebarCollapse_button span {
     width: 80%;
     height: 2px;
     margin: 0 auto;
@@ -255,18 +250,18 @@ header{
     transition-delay: 0.2s;
 }
 
-#sidebarCollapse_button span:first-of-type {
+.sidebarCollapse_button span:first-of-type {
     transform: rotate(45deg) translate(2px, 2px);
 }
-#sidebarCollapse_button span:nth-of-type(2) {
+.sidebarCollapse_button span:nth-of-type(2) {
     opacity: 0;
 }
-#sidebarCollapse_button span:last-of-type {
+.sidebarCollapse_button span:last-of-type {
     transform: rotate(-45deg) translate(1px, -1px);
 }
 
 
-#sidebarCollapse_button.active span {
+.sidebarCollapse_button.active span {
     transform: none;
     opacity: 1;
     margin: 5px auto;
@@ -276,7 +271,7 @@ header{
 /* ---------------------------------------------------
     color changes
 ----------------------------------------------------- */
-#color_swicher{
+.color_swicher{
     margin-left: 30px;
 }
 
@@ -322,11 +317,11 @@ body.light {
 	background: #FFFFFF;
 }
 
-#content.light{
+.content.light{
     background-color:#FFFFFF;
 }
 
-#main_title.light{
+.main_title.light{
     color:black;
 }
 header.light{
@@ -336,7 +331,7 @@ header.light{
 .sidebar_head.light{
     background-color:#CDCBCB;
 }
-#upper_dev_inf.light, #project.light{
+.upper_dev_inf.light, .project.light{
     color:#F7F7F7;
 }
 .sidebar.light{
@@ -362,7 +357,7 @@ header.light{
     .sidebar{
         width: 300px;
     }
-    #main_title{
+    .main_title{
         margin-left: 85%;
     }
 }
@@ -377,7 +372,7 @@ header.light{
         width: 450px;
     } */
 
-    #content{
+    .content{
         width:100%;
     }
     .sidebar {
@@ -388,23 +383,23 @@ header.light{
         margin-left: 0;
         transform: none;
     }
-    #sidebarCollapse_button span:first-of-type,
-    #sidebarCollapse_button span:nth-of-type(2),
-    #sidebarCollapse_button span:last-of-type {
+    .sidebarCollapse_button span:first-of-type,
+    .sidebarCollapse_button span:nth-of-type(2),
+    .sidebarCollapse_button span:last-of-type {
         transform: none;
         opacity: 1;
         margin: 5px auto;
     }
-    #sidebarCollapse_button.active span {
+    .sidebarCollapse_button.active span {
         margin: 0 auto;
     }
-    #sidebarCollapse_button.active span:first-of-type {
+    .sidebarCollapse_button.active span:first-of-type {
         transform: rotate(45deg) translate(2px, 2px);
     }
-    #sidebarCollapse_button.active span:nth-of-type(2) {
+    .sidebarCollapse_button.active span:nth-of-type(2) {
         opacity: 0;
     }
-    #sidebarCollapse_button.active span:last-of-type {
+    .sidebarCollapse_button.active span:last-of-type {
         transform: rotate(-45deg) translate(1px, -1px);
     }
 
@@ -428,7 +423,7 @@ header.light{
 }
 
 @media (max-width: 900px){
-    #main_title{
+    .main_title{
         margin-left: 80%;
     }
     .box{
@@ -437,7 +432,7 @@ header.light{
 }
 
 @media (max-width: 600px){
-    #main_title{
+    .main_title{
         margin-left: 75%;
     }
 }

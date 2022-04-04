@@ -41,7 +41,7 @@
     -webkit-transition-property: box-shadow, transform;
     transition-property: box-shadow, transform;
   }
-  #sider_dash_box:hover, #sider_dash_box:focus, #sider_dash_box:active {
+  .sider_dash_box:hover, .sider_dash_box:focus, .sider_dash_box:active {
     box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.5);
     -webkit-transform: scale(1.1);
     transform: scale(1.05);
@@ -92,7 +92,7 @@
 }
 
 
-#add_button {
+.add_button {
   background-color: #0B122B;
   border: 1px solid transparent;
   border-radius: 20px;
@@ -108,19 +108,19 @@
   
   box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
 }
-#add_button.light{
+.add_button.light{
   background-color: #5094DF;
 }
 
-#add_button:hover {
+.add_button:hover {
   background-color: #2EE59D;
 }
 
-#add_button:focus {
+.add_button:focus {
   box-shadow: none; 
   outline: 2px solid transparent;
   outline-offset: 2px;
 }
-#plus{
+.plus{
   color:#114A90;
 }
