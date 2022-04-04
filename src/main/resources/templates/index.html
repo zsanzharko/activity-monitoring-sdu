@@ -40,7 +40,7 @@
             </div>
 
             <div  class="color_swicher">
-                <input type="checkbox" class="checkbox" class="chk" />
+                <input type="checkbox" class="checkbox" id="chk" />
                 <label class="label" for="chk">
                   <div class="ball"></div>
                 </label>
@@ -76,11 +76,11 @@
                             <img th:src="@{images/test photo profile.png}" alt="" class="box_image">
 <!--                           todo in this place will insert users image, check in database-->
                         </div>
-                        <a class="see_button" role="button">See more</a>
+                        <a th:href="'/project/details?id=' + ${project.getId()}" class="see_button" role="button">See more</a>
                     </div>
                 </div>
             </div>
-   
+
         </div>
     </div>
 

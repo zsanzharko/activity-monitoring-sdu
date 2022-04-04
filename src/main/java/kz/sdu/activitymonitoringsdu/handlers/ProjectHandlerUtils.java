@@ -21,6 +21,7 @@ public class ProjectHandlerUtils {
 
     private static ProjectDto converting(Project project) {
         ProjectDto projectDto = new ProjectDto();
+        projectDto.setId(project.getId());
         projectDto.setProjectId(project.getProjectId());
         projectDto.setProjectVersion(project.getProjectVersion());
         projectDto.setCreatorId(project.getCreatorId());

@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 //todo do documentation
 // about spent time and expected Time
@@ -52,4 +53,6 @@ public class Project {
     @Column(name = "spent_time", nullable = false)
     private String spentTime;
 
+    @OneToMany(mappedBy = "project", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Activity> activities;
 }
