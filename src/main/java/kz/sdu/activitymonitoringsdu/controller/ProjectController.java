@@ -6,16 +6,16 @@ import kz.sdu.activitymonitoringsdu.dto.ProjectDto;
 import kz.sdu.activitymonitoringsdu.dto.UserDto;
 import kz.sdu.activitymonitoringsdu.entity.Project;
 import kz.sdu.activitymonitoringsdu.enums.ProjectStatus;
+import kz.sdu.activitymonitoringsdu.enums.Role;
+import kz.sdu.activitymonitoringsdu.handlers.ProjectHandlerUtils;
+import kz.sdu.activitymonitoringsdu.handlers.UserHandlerUtils;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.time.LocalDate;
@@ -50,13 +50,15 @@ public class ProjectController {
     }
 
     @PostMapping("/create")
-    public ModelAndView saveProject(@ModelAttribute ProjectDto projectDto, ModelMap model) {
+    public ModelAndView createProject(@ModelAttribute ProjectDto projectDto, ModelMap model) {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
             String userEmail = ((UserDetails) principal).getUsername();
 
         UserDto userDto = userDao.findUserByEmailDto(userEmail);
 
+
+        // fixme change this code
 //        {
 //            Project project = new Project();
 //            project.setProjectId(projectDto.getProjectId());
@@ -85,5 +87,24 @@ public class ProjectController {
         }
 
         return new ModelAndView("redirect:/dashboard", model);
+    }
+
+    @PostMapping(name = "/remove")
+    public ModelAndView removeProject(@RequestParam Boolean isCorrect, @RequestParam String idProject){
+        UserDto userDto = UserHandlerUtils.getUserFromAuth(userDao);
+        if (userDto.getRole() == Role.MANAGER && isCorrect) {
+            projectDao.deleteByProjectId(idProject);
+        }
+        return new ModelAndView("redirect:/");
+    }
+
+    @GetMapping("/details")
+    public ModelAndView showDetails(@RequestParam final Long id, ModelMap model) {
+        UserDto userDto = UserHandlerUtils.getUserFromAuth(userDao);
+        ProjectDto projectDto = ProjectHandlerUtils.convertToDto(projectDao.findById(id));
+
+        model.addAttribute("userIsManager", userDto.getRole() == Role.MANAGER);
+        model.addAttribute("project", projectDto);
+        return new ModelAndView("project_details", model);
     }
 }

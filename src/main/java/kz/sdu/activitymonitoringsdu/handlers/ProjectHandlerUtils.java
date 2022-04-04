@@ -6,7 +6,7 @@ import kz.sdu.activitymonitoringsdu.entity.Project;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProjectConverter {
+public class ProjectHandlerUtils {
 
     public static ProjectDto convertToDto(Project project) {
         return converting(project);

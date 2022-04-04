@@ -5,7 +5,8 @@ import kz.sdu.activitymonitoringsdu.dao.UserDao;
 import kz.sdu.activitymonitoringsdu.dto.ProjectDto;
 import kz.sdu.activitymonitoringsdu.dto.UserDto;
 import kz.sdu.activitymonitoringsdu.enums.Role;
-import kz.sdu.activitymonitoringsdu.handlers.ProjectConverter;
+import kz.sdu.activitymonitoringsdu.handlers.ProjectHandlerUtils;
+import kz.sdu.activitymonitoringsdu.handlers.UserHandlerUtils;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -39,19 +40,15 @@ public class MainController {
 
     @GetMapping("/dashboard")
     public ModelAndView getDashboardPanel(ModelMap model) {
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-        String userEmail = ((UserDetails) principal).getUsername();
-
-        UserDto userDto = userDao.findUserByEmailDto(userEmail);
+        UserDto userDto = UserHandlerUtils.getUserFromAuth(userDao);
         model.addAttribute("user", userDto);
         List<ProjectDto> projects;
 
         // Manager can get all projects
         if (userDto.getRole() == Role.MANAGER) {
-            projects = ProjectConverter.convertToDto(projectDao.findAll());
+            projects = ProjectHandlerUtils.convertToDto(projectDao.findAll());
         } else {
-            projects = ProjectConverter.convertToDto(projectDao.findAllByCreatorId(userDto.getId()));
+            projects = ProjectHandlerUtils.convertToDto(projectDao.findAllByCreatorId(userDto.getId()));
         }
         model.addAttribute("projects", projects);
 

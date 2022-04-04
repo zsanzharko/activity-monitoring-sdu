@@ -4,7 +4,7 @@ import kz.sdu.activitymonitoringsdu.dto.UserDto;
 import kz.sdu.activitymonitoringsdu.entity.User;
 import kz.sdu.activitymonitoringsdu.enums.Gender;
 import kz.sdu.activitymonitoringsdu.enums.Role;
-import kz.sdu.activitymonitoringsdu.handlers.UserConverter;
+import kz.sdu.activitymonitoringsdu.handlers.UserHandlerUtils;
 import kz.sdu.activitymonitoringsdu.handlers.UserPrincipal;
 import kz.sdu.activitymonitoringsdu.repository.UserRepository;
 import kz.sdu.activitymonitoringsdu.service.UserService;
@@ -15,7 +15,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -53,7 +52,7 @@ public class UserDao implements UserService, UserDetailsService {
 
 
     public UserDto findUserByEmailDto(String email) {
-        return new UserConverter().convertToDto(userRepository.findUserByEmail(email));
+        return new UserHandlerUtils().convertToDto(userRepository.findUserByEmail(email));
     }
 
     @Override
