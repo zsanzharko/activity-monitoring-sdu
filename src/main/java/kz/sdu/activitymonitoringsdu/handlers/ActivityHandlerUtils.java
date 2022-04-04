@@ -8,7 +8,7 @@ public class ActivityHandlerUtils {
     public static ActivityDto convertToDto(Activity activity) {
         ActivityDto activityDto = new ActivityDto();
         activityDto.setId(activity.getId());
-        activityDto.setProjectId(activity.getProjectId());
+        activityDto.setProjectId(activity.getProject().getProjectId());
         activityDto.setTitle(activity.getTitle());
         activityDto.setDescription(activity.getDescription());
         activityDto.setStatus(activity.getStatus());

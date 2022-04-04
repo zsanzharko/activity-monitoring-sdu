@@ -21,8 +21,9 @@ public class Activity {
     @Column(name = "activity_id", nullable = false)
     private Long id;
 
-    @Column(name = "project_id", nullable = false, length = 30)
-    private String projectId;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "project_id", nullable = false, referencedColumnName = "id")
+    private Project project;
 
     @Column(name = "title", nullable = false, length = 100)
     private String title;
@@ -39,9 +40,5 @@ public class Activity {
 
     @Column(name = "spent_time", length = 100)
     private String spentTime;
-
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "project_id")
-    private Project project;
 
 }

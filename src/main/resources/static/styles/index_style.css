@@ -24,7 +24,7 @@ header{
     width: 50px;
     margin-right: 3%;
 }
-.navbar-btn {
+#navbar-btn {
     margin-left: 2%;
     box-shadow: none;
     outline: none !important;
