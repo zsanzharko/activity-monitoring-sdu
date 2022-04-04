@@ -13,7 +13,9 @@
         <span></span>
         <span></span>
     </button>
-    <img th:src="@{images/user-icon.png}" alt="user icon" class="header_user" src="">
+    <a th:href="@{/profile}">
+        <img th:src="@{images/user-icon.png}" alt="user icon" class="header_user" src="">
+    </a>
     <form action="/logout" method="post">
         <input type="submit" value="Sign Out"/>
     </form>

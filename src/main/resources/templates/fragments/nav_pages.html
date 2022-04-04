@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" th:href="@{/styles/index_style.css}">
+    <link rel="stylesheet" th:href="@{/styles/index_buttons.css}">
+    <link rel="stylesheet" href="../static/styles/index_style.css">
+    <link rel="stylesheet" href="../static/styles/index_buttons.css">
+    <title></title>
+</head>
+<body>
+<!--Dashboard content-->
+<div th:fragment="dashboard_main_content">
+    <!--/*@thymesVar class="Role" type="kz.sdu.activitymonitoringsdu.enums.Role"*/-->
+    <div th:if="${user.getRole() != 'MANAGER'}" class="manage_creator">
+        <a class="add_button" th:href="@{/project/create}"><span class="plus">+</span>New</a>
+        <p class="main_title">Projects</p>
+    </div>
+    <div class="space_for_box">
+        <div class="line"></div>
+        <div class="box" th:each="project : ${projects}">
+            <div class="box_head">
+                <div class="box_head_left">
+                    <p class="projects_id" th:text="${project.projectId}">9511DXP</p>
+                    <p class="project_version">version <span th:text="${project.projectVersion}"></span></p>
+                </div>
+                <p class="project_name" th:text="${project.title}">Project name</p>
+            </div>
+            <div class="box_body">
+                <p class="project_activities">Activities</p>
+                <p class="project_deep_id" th:each="activity : ${project.getActivities()}"
+                   th:text="${activity.getTitle()}"></p>
+                <p class="project_work_dev">Developers</p>
+            </div>
+            <div class="footer">
+                <div class="footer_images">
+                    <img th:src="@{images/test photo profile.png}" alt="" class="box_image">
+                    <!--                           todo in this place will insert users image, check in database-->
+                </div>
+                <a th:href="'/project/details?id=' + ${project.getId()}" class="see_button" role="button">See more</a>
+            </div>
+        </div>
+    </div>
+</div>
+    <!--Dashboard content-->
+</div>
+
+<div th:fragment="profile">
+
+</div>
+
+</body>
+</html>
