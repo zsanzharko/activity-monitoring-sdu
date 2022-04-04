@@ -25,21 +25,19 @@
 
         <div id="line"></div>
 
-        <img src="images/login-page-1.png" alt="picture" id="picture">
+        <img th:src="@{images/login-page-1.png}" alt="picture" id="picture">
 
-        <form action="#" th:action="@{/login}" method="post" th:object="${form}" id="form">
+        <form action="#" th:action="@{/login}" method="post" id="form">
             <div class="input_div">
                 <label for="email" class = 'label'>
-                    <input type="text" th:value="*{email}"
-                           th:field="*{email}"
-                           placeholder="Enter email" id="email" class="input_fields">
+                    <input type="text"
+                           value="email"
+                           placeholder="Enter email" id="email" name="username" class="input_fields">
                 </label>
 
                <!-- fixme class class="input_fields"> doesn't work correct -->
                 <label for="password" class = 'label'>
-                    <input type="password" th:value="*{password}"
-                           th:field="*{password}"
-                           placeholder="Enter password" id="password" class="input_fields">
+                    <input type="password" placeholder="Enter password" id="password" name="password" class="input_fields">
                 </label>
 
             </div>
