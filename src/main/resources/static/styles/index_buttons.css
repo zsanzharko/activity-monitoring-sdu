@@ -6,13 +6,13 @@
     color: #FFFFFF;
     cursor: pointer;
     font-size: 12px;
-    /* font-weight: 200px; */
-    /* line-height: 1.5rem; */
-    text-align: center;
     transition-duration: .3s;
     width: 120px;
     height: 30px;
     margin-right: 4%;
+    display: flex;
+    align-items:center;
+    justify-content: center;
     
     box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
   }
@@ -99,13 +99,15 @@
   box-sizing: border-box;
   color: #FFFFFF;
   cursor: pointer;
-  font-size: 12px;
+  font-size: 15px;
   text-align: center;
-  transition-duration: .3s;
+  transition-duration: .3s; 
   min-width: 80px;
   height: 30px;
-  /* margin-left: 5%; */
-  
+  margin-left: 5%;
+  display: flex;
+  justify-content: center;
+  align-items:center;
   box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
 }
 .add_button.light{
@@ -123,4 +125,5 @@
 }
 .plus{
   color:#114A90;
+  margin-right: 5px;
 }

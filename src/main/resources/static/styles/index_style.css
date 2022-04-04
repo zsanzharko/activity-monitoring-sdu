@@ -42,9 +42,7 @@ header{
 }
 
 .sidebar {
-    /* width:23%; */
     width: 380px;
-    /* height: 100%; */
     background: #0B122B;
     transition: all 0.6s cubic-bezier(0.945, 0.020, 0.270, 0.665);
     transform-origin: bottom left;
@@ -112,7 +110,6 @@ header{
     width: 85%;
     display: flex;
     flex-direction: row;
-    /* justify-content: center; */
     align-items: center;
     background-color:#3A506B;
     border-radius:10px;
@@ -138,17 +135,16 @@ header{
     background-color: #3A506B;
 }
 .manage_creator{
-    background-color:#5094DF;
+    margin-top: 3%;
     width: 100%;
     display: flex;
     flex-direction: row;
-    /* justify-content: space-between; */
+    justify-content: space-between;
     align-items:center;
 }
 .main_title{
     color: #F3F5F7;
-    /* margin-right: 5%; */
-    margin-top: 2%;
+    margin-right: 5%;
 }
 
 
@@ -161,7 +157,6 @@ header{
 .space_for_box{
     margin-top: 10px;
     height: auto;
-    /* background-color:#2E3842; */
     display: flex;
     flex-direction:row;
     flex-wrap: wrap;
@@ -190,7 +185,6 @@ header{
     margin-left: 2%;
     display: flex;
     flex-direction: column;
-    /* align-items:center; */
     height: 100%;
 }
 .project_version{
@@ -279,6 +273,7 @@ header{
     color changes
 ----------------------------------------------------- */
 .color_swicher{
+    margin-top: 50%;
     margin-left: 30px;
 }
 
@@ -295,7 +290,6 @@ header{
 	align-items: center;
 	justify-content: space-between;
 	padding: 5px;
-	/* position: relative; */
 	height: 15px;
 	width: 40px;
 	transform: scale(1.5);
@@ -307,7 +301,6 @@ header{
 .label .ball {
 	background-color: #fff;
 	border-radius: 50%;
-	/* position: absolute; */
 	top: 2px;
 	left: 2px;
 	height: 20px;
@@ -369,7 +362,6 @@ header.light{
     } */
 }
 @media (max-width: 1200px){
- 
     .space_for_box{
         justify-content: center;
         margin: 0;
@@ -412,30 +404,31 @@ header.light{
 
 }
 
+
+
 @media (max-width: 900px){
-    .sidebar {
-        width: 580px;
+    .manage_creator{
+        margin-bottom: 10px;
     }
-    /* #content {
-        margin-right: -250px;
-        transform: rotateY(90deg);
-    } */
- 
+
     .space_for_box{
         justify-content: center;
         margin: 0;
         padding: 0;
     }
 
-}
-
-@media (max-width: 900px){
-    /* .main_title{
-        margin-left: 80%;
-    } */
-    .box{
-        width: 450px;
+    .sidebar {
+        width: 580px;
     }
+
+    .main_title{
+        margin-right: 10%;
+    }
+
+    .box{
+        width: 390px;
+    }
+
 }
 
 @media (max-width: 600px){
