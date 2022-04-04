@@ -25,7 +25,9 @@
                 <div class="sider_inf_box">
                     <div class="upper_dev_inf">
                         <p class="sider_dev_inf">Developer: <span class="input_inf">UX/UI Design</span></p>
-                        <p class="sider_dev_status">Status: <span class="input_status">Free</span></p>
+                        <p class="sider_dev_inf">Role: <span class="input_inf" th:text="${user.getRole().name()}">Free</span></p>
+                        <p class="sider_dev_inf">Gender: <span class="input_inf" th:text="${user.getGender().name()}">Free</span></p>
+                        <p class="sider_dev_inf">Email: <span class="input_inf" th:text="${user.getEmail()}">Free</span></p>
                     </div>
                     <p class="project">Project: <span class="input_project">IOS App</span></p>
                 </div>
@@ -60,14 +62,13 @@
                     <div class="box_head">
                         <div class="box_head_left">
                             <p class="projects_id" th:text="${project.projectId}">9511DXP</p>
-                            //todo where is
                             <p class="project_version">version <span th:text="${project.projectVersion}"></span></p>
                         </div>
                         <p class="project_name" th:text="${project.title}">Project name</p>
                     </div>
                     <div class="box_body">
                         <p class="project_activities">Activities</p>
-                        <p class ="project_deep_id">9511-12 Design of communication module</p>
+                        <p class ="project_deep_id" th:each="activity : ${project.getActivities()}" th:text="${activity.getTitle()}"></p>
 <!--                        todo in this place will insert activities, check max size-->
                         <p class="project_work_dev">Developers</p>
                     </div>

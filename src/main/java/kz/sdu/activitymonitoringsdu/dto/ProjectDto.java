@@ -5,6 +5,7 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 public class ProjectDto implements Serializable {
@@ -18,4 +19,6 @@ public class ProjectDto implements Serializable {
     private LocalDate startDate;
     private String expectedTime;
     private String spentTime;
+
+    private List<ActivityDto> activities;
 }
