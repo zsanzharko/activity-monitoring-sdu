@@ -28,7 +28,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                    .antMatchers("/home", "/css/**", "/images/**", "/js/**").permitAll()
+                    .antMatchers("/home").permitAll()
                     .anyRequest().authenticated()
                     .and()
                 .formLogin()
@@ -38,10 +38,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout()
                     .permitAll()
                 .and();
+//                .antMatcher("/css/**")
+//                .antMatcher("/images/**")
+//                .antMatcher("/js/**");
     }
 
-    public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/resources/**");
+    @Override
+    public void configure(WebSecurity web) {
+        web
+                .ignoring()
+                .antMatchers("/css/**")
+                .antMatchers("/js/**")
+                .antMatchers("/images/**")
+                .antMatchers("/resources/**");
     }
 
     @Override

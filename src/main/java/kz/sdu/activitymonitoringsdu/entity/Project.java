@@ -19,6 +19,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class Project {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 

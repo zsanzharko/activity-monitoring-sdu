@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="stylesheet" th:href="@{styles/loged_style.css}">
-    <link rel="stylesheet" th:href="@{styles/loged_buttons.css}">
+    <link rel="stylesheet" th:href="@{/styles/loged_style.css}">
+    <link rel="stylesheet" th:href="@{/styles/loged_buttons.css}">
     <link rel="stylesheet" href="../static/styles/loged_style.css">
     <link rel="stylesheet" href="../static/styles/loged_buttons.css">
     <title>Authorization</title>
@@ -47,17 +47,24 @@
 
         <!-- Page Content Holder -->
         <div id="content">
-            <p id="main_title">Projects</p>
-            <div class="space_for_box" th:each="project : ${projects}">
+            <!--/*@thymesVar id="Role" type="kz.sdu.activitymonitoringsdu.enums.Role"*/-->
+            <div th:if="${user.getRole() != 'MANAGER'}"
+                 class="manage_creator">
+                <a id="add_button" th:href="@{/project/create}"><span id="plus">+</span> New</a>
+<!--                <p class="main_title">Projects</p>-->
+<!--            fixme have problem with style id, should to change to class main title-->
+                <p class="main_title">Projects</p>
+            </div>
+            <div class="space_for_box" >
                 <div id="line"></div>
-                <div class="box">
+                <div class="box" th:each="project : ${projects}">
                     <div class="box_head">
                         <div id="box_head_left">
-                            <p id="projects_id" th:text="${project.getProjectId()}">9511DXP</p>
+                            <p id="projects_id" th:text="${project.projectId}">9511DXP</p>
                             //todo where is
-                            <p id="project_version">version B</p>
+                            <p id="project_version">version <span th:text="${project.projectVersion}"></span></p>
                         </div>
-                        <p id="project_name" th:text="${project.getTitle()}">Project name</p>
+                        <p id="project_name" th:text="${project.title}">Project name</p>
                     </div>
                     <div class="box_body">
                         <p id="project_activities">Activities</p>
