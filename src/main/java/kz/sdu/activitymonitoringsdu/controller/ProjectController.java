@@ -58,7 +58,7 @@ public class ProjectController {
     public ModelAndView createProject(@ModelAttribute ProjectDto projectDto, ModelMap model) {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-            String userEmail = ((UserDetails) principal).getUsername();
+        String userEmail = ((UserDetails) principal).getUsername();
 
         UserDto userDto = userDao.findUserByEmailDto(userEmail);
 
@@ -88,6 +88,7 @@ public class ProjectController {
             project.setSpentTime("null");
             project.setDescription("null");
             project.setCreatorId(userDto.getId());
+//            project.setActivities(null);
             projectDao.saveProject(project);
         }
 
@@ -95,7 +96,7 @@ public class ProjectController {
     }
 
     @PostMapping(name = "/remove")
-    public ModelAndView removeProject(@RequestParam Boolean isCorrect, @RequestParam String idProject){
+    public ModelAndView removeProject(@RequestParam Boolean isCorrect, @RequestParam String idProject) {
         UserDto userDto = UserHandlerUtils.getUserFromAuth(userDao);
         if (userDto.getRole() == Role.MANAGER && isCorrect) {
             projectDao.deleteByProjectId(idProject);

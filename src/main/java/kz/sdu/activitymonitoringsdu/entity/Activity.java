@@ -21,9 +21,8 @@ public class Activity {
     @Column(name = "activity_id", nullable = false)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "project_id", nullable = false, referencedColumnName = "id")
-    private Project project;
+    @Column(name = "project_id")
+    private String projectId;
 
     @Column(name = "title", nullable = false, length = 100)
     private String title;

@@ -38,4 +38,7 @@ public class User {
 
     @Column(name = "user_password", nullable = false)
     private String password;
+
+    @Column(name = "user_enabled")
+    private boolean userEnabled;
 }

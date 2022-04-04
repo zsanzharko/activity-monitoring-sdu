@@ -52,7 +52,7 @@ public class UserDao implements UserService, UserDetailsService {
 
 
     public UserDto findUserByEmailDto(String email) {
-        return new UserHandlerUtils().convertToDto(userRepository.findUserByEmail(email));
+        return UserHandlerUtils.convertToDto(userRepository.findUserByEmail(email));
     }
 
     @Override

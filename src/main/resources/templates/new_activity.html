@@ -19,29 +19,26 @@
                 New project
             </div>
         </div>
-        <form th:action="@{/project/create}" th:object="${project}" method="post">
+        <form th:action="'/project/activity/create/' + ${projectId}" th:object="${activity}" method="post">
             <div id="project_name_box">
-                <p id="pr_name">Project name</p>
-                <label for="name_input">
-                    <input type="text" id="name_input"
+                <p id="pr_name">Activity title</p>
+                <label for="title">
+                    <input type="text" id="title"
                            th:value="*{title}"
                            placeholder="Like 'Android App'"></label>
-
             </div>
             <div id="project_id_box">
-                <p id="pr_number">Project number</p>
-                <label for="number_input">
-                    <input type="text" id="number_input"
-                           th:value="*{projectId}"
-                           placeholder="Like '9511DXP'"></label>
-
+                <p id="pr_number">Description</p>
+                <label for="description">
+                    <input type="text" id="description"
+                           th:value="*{description}"
+                           placeholder="Like 'Develop new Application for the new company...'"></label>
             </div>
             <div id="version_box">
-                <p id="pr_version">Version:</p>
-                <label for="version_input">
-                    <input type="text" th:value="*{projectVersion}" id="version_input"
-                           placeholder="Like 'B'"></label>
-
+                <p id="pr_version">Status:</p>
+                <label for="status">
+                    <input type="text" th:value="*{status}" id="status"
+                           placeholder="Like 'IN_PROGRESS'"></label>
             </div>
 
             <div id="version_box">
