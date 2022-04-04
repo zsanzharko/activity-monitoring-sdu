@@ -137,10 +137,17 @@ header{
     transition: all 0.3s;
     background-color: #3A506B;
 }
-
+.manage_creator{
+    background-color:#5094DF;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    /* justify-content: space-between; */
+    align-items:center;
+}
 .main_title{
     color: #F3F5F7;
-    margin-left: 90%;
+    /* margin-right: 5%; */
     margin-top: 2%;
 }
 
@@ -357,9 +364,9 @@ header.light{
     .sidebar{
         width: 300px;
     }
-    .main_title{
+    /* .main_title{
         margin-left: 85%;
-    }
+    } */
 }
 @media (max-width: 1200px){
  
@@ -423,16 +430,16 @@ header.light{
 }
 
 @media (max-width: 900px){
-    .main_title{
+    /* .main_title{
         margin-left: 80%;
-    }
+    } */
     .box{
         width: 450px;
     }
 }
 
 @media (max-width: 600px){
-    .main_title{
+    /* .main_title{
         margin-left: 75%;
-    }
+    } */
 }
