@@ -31,14 +31,13 @@
 
 #log_button {
   width: 40%;
-  height: 8%;
+  height: 20%;
   margin-top: 10%;
   margin-bottom: 5%;
   font-family: 'Roboto', sans-serif;
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 2.5px;
-  font-weight: 500;
   color: #000;
   background-color: #8FDBFF;
   border: none;
