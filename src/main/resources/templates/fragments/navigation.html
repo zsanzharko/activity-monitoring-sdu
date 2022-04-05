@@ -20,5 +20,12 @@
         <input type="submit" value="Sign Out"/>
     </form>
 </header>
+
+<div th:fragment="back_to_dashoard">
+    <a th:href="@{/dashboard}" class="back">
+        <img th:src="@{/images/gauche-dark.png}" alt="" class="arrow">
+        <p>Back</p>
+    </a>
+</div>
 </body>
 </html>

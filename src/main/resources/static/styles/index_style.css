@@ -100,7 +100,8 @@ header{
     padding-top: 3%;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    /*justify-content: space-around;*/
+    flex-wrap: wrap;
     align-items:center;
     height: 30%;
 }

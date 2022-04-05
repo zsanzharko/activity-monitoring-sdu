@@ -9,12 +9,7 @@
     <title th:text="${project.getTitle()}">Details</title>
 </head>
 <body>
-    <header>
-        <a th:href="@{/dashboard}" class="back">
-            <img th:src="@{/images/gauche-dark.png}" alt="" class="arrow">
-            <p>Back</p>
-        </a>
-    </header>
+    <header th:insert="fragments/navigation :: back_to_dashoard"></header>
 
     <section>
         <div class="left_part">
