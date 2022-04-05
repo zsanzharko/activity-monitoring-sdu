@@ -22,37 +22,52 @@
         <form th:action="@{/project/create}" th:object="${project}" method="post">
             <div class="project_name_box">
                 <p class="pr_name">Project name</p>
-                <label for="name_input">
+                <label for="title">
                     <input type="text" class="name_input"
-                           id="name_input"
+                           id="title"
                            th:value="*{title}"
+                           th:field="*{title}"
                            placeholder="Like 'Android App'"></label>
 
             </div>
             <div class="project_id_box">
-                <p class="pr_number">Project number</p>
-                <label for="number_input">
+                <p class="pr_number">Project Id</p>
+                <label for="projectId">
                     <input type="text" class="number_input"
                            th:value="*{projectId}"
-                           id="number_input"
+                           th:field="*{projectId}"
+                           id="projectId"
                            placeholder="Like '9511DXP'"></label>
 
             </div>
             <div class="version_box">
                 <p class="pr_version">Version:</p>
-                <label for="version_input">
+                <label for="projectVersion">
                     <input type="text" th:value="*{projectVersion}" class="version_input"
-                           id="version_input"
+                           id="projectVersion"
                            placeholder="Like 'B'"></label>
 
             </div>
 
-            <div class="version_box">
-                <p class="pr_version">Date to start:</p>
+            <div class="project_id_box">
+                <p class="pr_number">Date to start:</p>
                 <label for="start_date">
-                    <input type="date"
+                    <input type="date" class="number_input"
+                           th:value="*{startDate}"
+                           th:field="*{startDate}"
                            id="start_date"
-                           th:value="*{startDate}" class="start_date"></label>
+                           placeholder="Like '9511DXP'"></label>
+
+            </div>
+
+            <div class="project_id_box">
+                <p class="pr_number">Project Id</p>
+                <label for="description">
+                    <input type="text" class="number_input"
+                           th:value="*{description}"
+                           th:field="*{description}"
+                           id="description"
+                           placeholder="Like 'This is a project for a new company... bla bla bla'"></label>
 
             </div>
             <div class="box_footer">

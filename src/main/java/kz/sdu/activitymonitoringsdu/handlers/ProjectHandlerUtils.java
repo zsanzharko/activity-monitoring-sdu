@@ -19,6 +19,17 @@ public class ProjectHandlerUtils {
         return projectDtos;
     }
 
+    public static Project convertToEntity(ProjectDto project) {
+        return converting(project);
+    }
+
+    public static List<Project> convertToEntity(List<ProjectDto> projectDtos) {
+        List<Project> projects = new ArrayList<>(projectDtos.size());
+        for (ProjectDto project : projectDtos)
+            projects.add(converting(project));
+        return projects;
+    }
+
     private static ProjectDto converting(Project project) {
         ProjectDto projectDto = new ProjectDto();
         projectDto.setId(project.getId());
@@ -32,5 +43,20 @@ public class ProjectHandlerUtils {
         projectDto.setExpectedTime(project.getExpectedTime());
         projectDto.setSpentTime(project.getSpentTime());
         return projectDto;
+    }
+
+    private static Project converting(ProjectDto projectDto) {
+        Project project = new Project();
+        project.setProjectId(projectDto.getProjectId());
+        project.setProjectVersion(projectDto.getProjectVersion());
+        project.setCreatorId(projectDto.getCreatorId());
+        project.setTitle(projectDto.getTitle());
+        project.setDescription(projectDto.getDescription());
+        project.setStatus(projectDto.getStatus());
+        project.setStartDate(projectDto.getStartDate());
+        project.setExpectedTime(project.getExpectedTime());
+        project.setProjectId(project.getSpentTime());
+
+        return project;
     }
 }

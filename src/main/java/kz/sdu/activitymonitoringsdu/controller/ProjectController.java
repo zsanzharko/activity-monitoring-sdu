@@ -11,6 +11,7 @@ import kz.sdu.activitymonitoringsdu.enums.ProjectStatus;
 import kz.sdu.activitymonitoringsdu.enums.Role;
 import kz.sdu.activitymonitoringsdu.handlers.ProjectHandlerUtils;
 import kz.sdu.activitymonitoringsdu.handlers.UserHandlerUtils;
+import kz.sdu.activitymonitoringsdu.handlers.forms.ProjectCreateForm;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -49,48 +50,20 @@ public class ProjectController {
         model.addAttribute("user", userDto);
 
         // Adding project facade to place input
-        model.addAttribute("project", new ProjectDto());
+        model.addAttribute("project", new ProjectCreateForm());
 
         return new ModelAndView("new_project", model);
     }
 
     @PostMapping("/create")
-    public ModelAndView createProject(@ModelAttribute ProjectDto projectDto, ModelMap model) {
+    public ModelAndView createProject(@ModelAttribute ProjectCreateForm form, ModelMap model) {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         String userEmail = ((UserDetails) principal).getUsername();
 
         UserDto userDto = userDao.findUserByEmailDto(userEmail);
 
-
-        // fixme change this code
-//        {
-//            Project project = new Project();
-//            project.setProjectId(projectDto.getProjectId());
-//            projectDto.setProjectVersion(projectDto.getProjectVersion());
-//            project.setTitle(projectDto.getTitle());
-//            project.setStartDate(projectDto.getStartDate());
-//            project.setStatus(ProjectStatus.NOT_STARTED);
-//            project.setExpectedTime("null");
-//            project.setSpentTime("null");
-//            project.setDescription("null");
-//            project.setCreatorId(userDto.getId());
-//            projectDao.saveProject(project);
-//        }
-        {
-            Project project = new Project();
-            project.setProjectId("9511LSP");
-            project.setProjectVersion("A");
-            project.setTitle("Android App");
-            project.setStartDate(LocalDate.now());
-            project.setStatus(ProjectStatus.NOT_STARTED);
-            project.setExpectedTime("null");
-            project.setSpentTime("null");
-            project.setDescription("null");
-            project.setCreatorId(userDto.getId());
-//            project.setActivities(null);
-            projectDao.saveProject(project);
-        }
+        projectDao.saveProject(ProjectHandlerUtils.convertToEntity(form.getDtoFromForm(userDto.getId())));
 
         return new ModelAndView("redirect:/dashboard", model);
     }
