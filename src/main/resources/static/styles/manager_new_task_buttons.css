@@ -1,4 +1,4 @@
-#new_project_button{
+.new_project_button{
   background-color:#62676F;
   color:white;
   height: 40px;
@@ -14,7 +14,7 @@
 
 
 
-#create_button {
+.create_button {
   width: 100px;
   height: 30px;
   /* margin-top: 10%; */
@@ -35,9 +35,13 @@
   /* transition-duration: .3s; */
   }
 
-  #create_button:hover {
+  .create_button:hover {
     background-color: #2EE59D;
     box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
     color: #fff;
     transform: translateY(-7px);
+  }
+  a:hover, a:visited, a:link, a:active{
+    text-decoration: none;
+    color:white;
   }

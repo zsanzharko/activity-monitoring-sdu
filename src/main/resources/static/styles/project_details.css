@@ -9,6 +9,10 @@ html,body,section{
     font-family: 'Roboto', sans-serif;
     background-color:#3A506A;
   }
+a:hover, a:visited, a:link, a:active{
+  text-decoration: none;
+  color:white;
+}
 
   header{
     background-color: #1C2441;
