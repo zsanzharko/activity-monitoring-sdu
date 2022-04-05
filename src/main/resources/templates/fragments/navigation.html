@@ -2,24 +2,21 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link rel="stylesheet" th:href="@{styles/loged_style.css}">
-    <link rel="stylesheet" th:href="@{styles/loged_buttons.css}">
+    <link rel="stylesheet" th:href="@{styles/index_style.css}">
+    <link rel="stylesheet" th:href="@{styles/index_buttons.css}">
     <title></title>
 </head>
 <body>
-<header class="header" th:fragment="header">
-    <button type="button" class="sidebarCollapse_button" id="navbar-btn">
-        <span></span>
-        <span></span>
-        <span></span>
-    </button>
-    <a th:href="@{/profile}">
-        <img th:src="@{images/user-icon.png}" alt="user icon" class="header_user" src="">
-    </a>
-    <form action="/logout" method="post">
-        <input type="submit" value="Sign Out"/>
-    </form>
-</header>
+    <header class="header" th:fragment="header">
+        <button type="button" class="sidebarCollapse_button" id="navbar-btn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <form action="/logout" method="post">
+            <input type="submit" value="Sign Out" class='sign_out_button'/>
+        </form>
+    </header>
 
 <div th:fragment="back_to_dashoard">
     <a th:href="@{/dashboard}" class="back">

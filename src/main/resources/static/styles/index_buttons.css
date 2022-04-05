@@ -131,3 +131,33 @@ a:hover, a:visited, a:link, a:active{
   text-decoration: none;
   color:white;
 }
+
+
+
+.sign_out_button {
+  background-color: #3A506B;
+  border: 1px solid transparent;
+  border-radius: 20px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  font-family: "Inter var",ui-sans-serif,system-ui,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  font-size: 14px;
+  text-align: center;
+  transition-duration: .3s;
+  width: 130px;
+  height: 40px;
+  margin-right: 10px;
+  
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+}
+
+.sign_out_button:hover {
+  background-color: #2EE59D;
+}
+
+.sign_out_button:focus {
+  box-shadow: none; 
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
