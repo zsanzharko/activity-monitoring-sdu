@@ -150,6 +150,7 @@ header{
 .main_title{
     color: #F3F5F7;
     margin-right: 5%;
+    font-size: 25px;
 }
 
 
@@ -168,11 +169,14 @@ header{
     padding-left: 3%;
 }
 .box{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     background-color:#0B122B;
     color:#EFF0F1;
     margin: 10px;
     width: 30%;
-    height: auto;
+    height: 180px;
     padding-bottom: 10px;
     border-radius: 10px;
     box-shadow: 1px 2px 3px 4px rgba(12,12,12,0.2);
@@ -193,12 +197,12 @@ header{
     height: 100%;
 }
 .project_version{
-    font-size: 9px;
+    font-size: 13px;
     margin-bottom: 2%;
 }
 .project_name{
     margin-right: 4%;
-    font-size: 13px;
+    font-size: 15px;
 }
 
 .box_body{
@@ -210,13 +214,20 @@ header{
 }
 
 .project_activities{
-    font-size: 12px;
+    font-size: 15px;
     margin-bottom: 5px;
+    margin-top: 5px;;
 }
-
-.project_work_dev{
+.project_deep_id{
     font-size: 10px;
+}
+.project_work_dev{
+    font-size: 13px;
     margin-top: 15px;
+}
+.extra_id{
+    font-size: 15px;
+    margin-left: 10px;
 }
 .footer{
     margin-top: 1%;
