@@ -17,12 +17,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Scanner;
 
 @Controller
 @Getter
@@ -56,16 +61,21 @@ public class ProjectController {
     }
 
     @PostMapping("/create")
-    public ModelAndView createProject(@ModelAttribute ProjectCreateForm form, ModelMap model) {
+    public String createProject( @ModelAttribute ProjectCreateForm project,
+                                BindingResult bindingResult) {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        if (bindingResult.hasErrors()) {
+            return "redirect:/create";
+        }
 
         String userEmail = ((UserDetails) principal).getUsername();
 
         UserDto userDto = userDao.findUserByEmailDto(userEmail);
 
-        projectDao.saveProject(ProjectHandlerUtils.convertToEntity(form.getDtoFromForm(userDto.getId())));
+        projectDao.saveProject(ProjectHandlerUtils.convertToEntity(project.getDtoFromForm(userDto.getId())));
 
-        return new ModelAndView("redirect:/dashboard", model);
+        return "redirect:/dashboard";
     }
 
     @PostMapping(name = "/remove")

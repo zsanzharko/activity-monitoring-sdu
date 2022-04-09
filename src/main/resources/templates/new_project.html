@@ -19,59 +19,48 @@
                 New project
             </div>
         </div>
-        <form th:action="@{/project/create}" th:object="${project}" method="post">
-            <div class="project_name_box">
-                <p class="pr_name">Project name</p>
-                <label for="title">
-                    <input type="text" class="name_input"
-                           id="title"
-                           th:value="*{title}"
-                           th:field="*{title}"
-                           placeholder="Like 'Android App'"></label>
+        <form th:object="${project}" th:action="@{/project/create}" method="post">
+            <p class="pr_name">Project name</p>
+            <label for="title" class="project_name_box">
+                <input type="text" class="name_input"
+                       id="title"
+                       th:field="*{title}"
+                       placeholder="Like 'Android App'">
+            </label>
+            <p class="pr_number">Project Id</p>
+            <label for="projectId" class="project_id_box">
+                <input type="text" class="number_input"
+                       th:field="*{projectId}"
+                       id="projectId"
+                       placeholder="Like '9511DXP'">
+            </label>
+            <p class="pr_version">Version:</p>
+            <label for="projectVersion" class="version_box">
+                <input type="text"
+                       th:field="*{projectVersion}"
+                       class="version_input"
+                       id="projectVersion"
+                       placeholder="Like 'B'">
+            </label>
 
-            </div>
-            <div class="project_id_box">
-                <p class="pr_number">Project Id</p>
-                <label for="projectId">
-                    <input type="text" class="number_input"
-                           th:value="*{projectId}"
-                           th:field="*{projectId}"
-                           id="projectId"
-                           placeholder="Like '9511DXP'"></label>
+            <p class="pr_number">Date to start:</p>
+            <label for="startDate" class="project_id_box">
+                <input type="date" class="number_input"
+                       pattern="yyyy-MM-dd"
+                       th:field="*{startDate}"
+                       id="startDate"
+                       placeholder="Like '9511DXP'">
+            </label>
 
-            </div>
-            <div class="version_box">
-                <p class="pr_version">Version:</p>
-                <label for="projectVersion">
-                    <input type="text" th:value="*{projectVersion}" class="version_input"
-                           id="projectVersion"
-                           placeholder="Like 'B'"></label>
-
-            </div>
-
-            <div class="project_id_box">
-                <p class="pr_number">Date to start:</p>
-                <label for="start_date">
-                    <input type="date" class="number_input"
-                           th:value="*{startDate}"
-                           th:field="*{startDate}"
-                           id="start_date"
-                           placeholder="Like '9511DXP'"></label>
-
-            </div>
-
-            <div class="project_id_box">
-                <p class="pr_number">Project Id</p>
-                <label for="description">
-                    <input type="text" class="number_input"
-                           th:value="*{description}"
-                           th:field="*{description}"
-                           id="description"
-                           placeholder="Like 'This is a project for a new company... bla bla bla'"></label>
-
-            </div>
+            <p class="pr_number">description</p>
+            <label for="description" class="project_id_box">
+                <input type="text" class="number_input"
+                       th:field="*{description}"
+                       id="description"
+                       placeholder="Like 'This is a project for a new company... bla bla bla'">
+            </label>
             <div class="box_footer">
-                <button class="create_button" type="submit" value="Submit" role="button">Create</button>
+                <input class="create_button" type="submit" value="Submit"/>
             </div>
         </form>
     </div>

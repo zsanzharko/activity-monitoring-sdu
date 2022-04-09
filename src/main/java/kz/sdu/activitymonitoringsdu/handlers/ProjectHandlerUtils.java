@@ -3,6 +3,7 @@ package kz.sdu.activitymonitoringsdu.handlers;
 import kz.sdu.activitymonitoringsdu.dto.ProjectDto;
 import kz.sdu.activitymonitoringsdu.entity.Project;
 
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +40,11 @@ public class ProjectHandlerUtils {
         projectDto.setTitle(project.getTitle());
         projectDto.setDescription(project.getDescription());
         projectDto.setStatus(project.getStatus());
-        projectDto.setStartDate(project.getStartDate());
+        projectDto.setStartDate(
+                java.util.Date.from(project.getStartDate().atStartOfDay()
+                        .atZone(ZoneId.systemDefault())
+                        .toInstant())
+        );
         projectDto.setExpectedTime(project.getExpectedTime());
         projectDto.setSpentTime(project.getSpentTime());
         return projectDto;
@@ -53,9 +58,11 @@ public class ProjectHandlerUtils {
         project.setTitle(projectDto.getTitle());
         project.setDescription(projectDto.getDescription());
         project.setStatus(projectDto.getStatus());
-        project.setStartDate(projectDto.getStartDate());
-        project.setExpectedTime(project.getExpectedTime());
-        project.setProjectId(project.getSpentTime());
+        project.setStartDate(projectDto.getStartDate().toInstant()
+                .atZone(ZoneId.systemDefault())
+                .toLocalDate());
+        project.setExpectedTime(projectDto.getExpectedTime());
+        project.setSpentTime(projectDto.getSpentTime());
 
         return project;
     }
