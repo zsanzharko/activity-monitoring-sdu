@@ -24,8 +24,9 @@ chk.addEventListener('change', () => {
             document.getElementsByClassName('see_button')[i].classList.toggle('light');
             document.getElementsByClassName('box')[i].classList.toggle('light');
         };
-        });
         document.getElementsByClassName('main_title')[0].classList.toggle('light');
         document.getElementsByClassName('header')[0].classList.toggle('light');
         document.getElementsByClassName('add_button')[0].classList.toggle('light');
 
+        });
+        

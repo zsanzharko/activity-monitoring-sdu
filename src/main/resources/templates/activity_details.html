@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" th:href="@{/styles/activity_detail_css.css}">
+  <link rel="stylesheet" href="../static/styles/activity_detail_css.css">
+  <title>Document</title>
+</head>
+<body>
+  
+  <div th:insert="fragments/navigation :: header"></div>
+
+  <div class="wrapper">
+    <!-- Sidebar Holder -->
+    <nav class="sidebar">
+        <div class="sidebar_head">
+            <div class="name_picture_box">
+                <img th:src="@{images/test photo profile.png}" src="../static/images/test photo profile.png" alt="Flowers" class="sidebar_picture">
+                <p class="side_head_text" th:inline="text" th:text="${user.getFullName()}"></p>
+            </div>
+            <div class="sider_inf_box">
+                <div class="upper_dev_inf">
+                    <p class="sider_dev_inf">Developer: <span class="input_inf">UX/UI Design</span></p>
+                    <p class="sider_dev_inf">Role: <span class="input_inf" th:text="${user.getRole().name()}">Free</span></p>
+                    <p class="sider_dev_inf">Gender: <span class="input_inf" th:text="${user.getGender().name()}">Free</span></p>
+                    <p class="sider_dev_inf">Email: <span class="input_inf" th:text="${user.getEmail()}">Free</span></p>
+                </div>
+                <p class="project">Project: <span class="input_project">IOS App</span></p>
+            </div>
+        </div>
+        <div class="sider_dashboards">
+            <div class="sider_dash_box">
+                 <img th:src="@{images/dashboard-dark-icon.png}" src="../static/images/dashboard-dark-icon.png" alt="dashboard_picture" class="dashboard_pic">
+                <p class="dash_text">Dashboard</p>
+            </div>
+
+        </div>
+
+        <div  class="color_swicher">
+            <input type="checkbox" class="checkbox" id="chk" />
+            <label class="label" for="chk">
+              <div class="ball"></div>
+            </label>
+        </div>
+    </nav>
+
+    <!-- Page Content Holder -->
+    <div class="content">
+      <div class="topic_title_status">
+        <p class="topic_title">Title</p>
+        <p class="topic_status">Status</p>
+      </div>
+    <div class="line"></div>
+
+    <div class="content_box">
+      <div class="start_date_box">
+        <p class="start_date">Start date: <span>start date</span></p>
+      </div>
+     
+      <div class="description_box">
+        <p class="description">Description</p>
+      </div>
+      <div class="description_text_box">
+        <p>
+          bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla
+        </p>
+        
+      </div>
+      <div class="assignet_box_text">
+        <p class="assignet">Assignet</p>
+      </div>
+
+      <div class="box_place">
+        <div class="time_box">
+          <p><span class="end_datet">04.09.2022</span>--------------------------------------------- <span class="wasted_time">1 hour 20 min</span></p>
+        </div>
+        <div class="time_box">
+          <p><span class="end_datet">04.09.2022</span>--------------------------------------------- <span class="wasted_time">1 hour 20 min</span></p>
+        </div>
+        <div class="time_box">
+          <p><span class="end_datet">04.09.2022</span>--------------------------------------------- <span class="wasted_time">1 hour 20 min</span></p>
+        </div>
+        <div class="time_box">
+          <p><span class="end_datet">04.09.2022</span>--------------------------------------------- <span class="wasted_time">1 hour 20 min</span></p>
+        </div>
+      </div>
+      <form action="" class="input_box">
+        <!-- <div > -->
+          <div class="text_of_input_box">
+            <p class="enter_time">Enter the time (in minutes):</p>
+            <input type="number">
+          </div>
+          <div class="push_box">
+            <button class="push_button">push</button>
+            <a href="" class="close_button"><div>close</div></a>
+          </div>
+        <!-- </div> -->
+
+      </form>
+    
+
+    </div>
+  </div>
+</div>
+</body>
+</html>
