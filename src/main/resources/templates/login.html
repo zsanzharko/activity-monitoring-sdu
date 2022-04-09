@@ -40,6 +40,10 @@
                 </label>
 
             </div>
+            <div th:if="${param.error}">
+                Invalid username and password.</div>
+            <div th:if="${param.logout}">
+                You have been logged out.</div>
             <button type="submit" value="Submit" class="log_button">Log in</button>
         </form>
     </div>
