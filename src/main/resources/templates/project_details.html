@@ -5,56 +5,82 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="stylesheet" href="../static/styles/project_details.css">
     <link rel="stylesheet" th:href="@{/styles/project_details.css}">
+    <link rel="stylesheet" th:href="@{/styles/index_style.css}">
+    <link rel="stylesheet" th:href="@{/styles/index_buttons.css}">
+    <link rel="stylesheet" href="../static/styles/index_style.css">
+    <link rel="stylesheet" href="../static/styles/index_buttons.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title th:text="${project.getTitle()}">Details</title>
 </head>
 <body>
-    <header th:insert="fragments/navigation :: back_to_dashoard"></header>
+<div th:insert="fragments/back_header :: back_to_dashoard"></div>
 
-    <section>
-        <div class="left_part">
-            <div class="left_head">
-                <p class="activity">Activities</p>
-                <a class="button_box" th:href="'/project/activity/create?id=' + ${project.getId()}">
-                    <img th:src="@{/images/nouveau-symbole-bleu.png}" alt="" class="plus">
-                    New
-                </a>
-            </div>
-            <div class="left_body">
-                <div class = "function_activities_box" th:each="activity : ${activities}">
-                    <div class="circle_func_box">
-                        <!-- <div class="circle"></div> -->
-                        <input type="radio" class ="circle"  >
-                        <p class="function_activities" th:text="${activity.title}">Do some function</p>
-                    </div>
-                    <a th:href="'/project/activity/' + ${activity.getId()}" class="view_button">View</a>
-                </div>
-                  
-            </div>
-        </div>
+<div class="wrapper">
+    <div th:insert="fragments/navigation :: left_nav"></div>
 
 
-        <div class="right_part">
-            <div class="box_1">
-                <div class="box_1_head">
-                    <div class="box1_head_left">
-                        <p class="task_id" th:text="${project.getProjectId()}">9511DXP</p>
-                        <p class="task_version">version <span th:text="${project.getProjectVersion()}"></span></p>
-                    </div>
-                    <div class="project_name" th:text="${project.getTitle()}">
-                        Project name...
-                    </div>
+    <div class="content">
+        <section>
+            <div class="left_part">
+                <div class="left_head">
+                    <p class="activity">Activities</p>
+                    <a class="button_box" th:href="'/project/activity/create?id=' + ${project.getId()}">
+                        <img th:src="@{/images/nouveau-symbole-bleu.png}" alt="" class="plus">
+                        New
+                    </a>
                 </div>
-                <div class="box_1_body">
-                    <p class="activity_num">Activities: <span class="activity_count" th:text="${activities.size()}">5</span></p>
-                    <p class="daily_record">Record Time (Daily):<span class="daily_record_count">3 hour 25 minutes (Test)</span></p>
-                    <p class="total_record">Record Time (Total):<span class="total_record_count">32 hour 21 minutes(Test)</span></p>
+                <div class="left_body">
+                    <div class="function_activities_box" th:each="activity : ${activities}">
+                        <div class="circle_func_box">
+                            <!-- <div class="circle"></div> -->
+                            <input type="radio" class="circle">
+                            <p class="function_activities" th:text="${activity.title}">Do some function</p>
+                        </div>
+                        <a th:href="'/project/activity/' + ${activity.getId()}" class="view_button">View</a>
+                    </div>
+
                 </div>
             </div>
-            <div class="box_2">
+
+
+            <div class="right_part">
+                <div class="box_1">
+                    <div class="box_1_head">
+                        <div class="box1_head_left">
+                            <p class="task_id" th:text="${project.getProjectId()}">9511DXP</p>
+                            <p class="task_version">version <span th:text="${project.getProjectVersion()}"></span></p>
+                        </div>
+                        <div class="project_name" th:text="${project.getTitle()}">
+                            Project name...
+                        </div>
+                    </div>
+                    <div class="box_1_body">
+                        <p class="activity_num">Activities: <span class="activity_count"
+                                                                  th:text="${activities.size()}">5</span></p>
+                        <p class="daily_record">Record Time (Daily):<span class="daily_record_count">3 hour 25 minutes (Test)</span>
+                        </p>
+                        <p class="total_record">Record Time (Total):<span class="total_record_count">32 hour 21 minutes(Test)</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="box_2">
+                    <div class="box_1_head">
+                        <div class="box1_head_left">
+                            <p class="task_id">Description</p>
+                        </div>
+
+                    </div>
+                    <div class="box_1_body">
+                        <p th:text="${project.getDescription()}"></p>
+                    </div>
+                </div>
             </div>
-        </div>
-    </section>
-    
+        </section>
+    </div>
+</div>
+<script th:src="@{https://code.jquery.com/jquery-3.3.1.slim.min.js}"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script th:src="@{/js/loged_js.js}"></script>
 </body>
 </html>

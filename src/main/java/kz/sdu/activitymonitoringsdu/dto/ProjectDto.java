@@ -2,6 +2,7 @@ package kz.sdu.activitymonitoringsdu.dto;
 
 import kz.sdu.activitymonitoringsdu.enums.ProjectStatus;
 import lombok.Data;
+import lombok.Getter;
 
 import java.io.Serializable;
 import java.time.LocalDate;
