@@ -1,4 +1,4 @@
-package kz.sdu.activitymonitoringsdu.entity;
+package kz.sdu.activitymonitoringsdu.handlers.forms;
 
 import lombok.Data;
 

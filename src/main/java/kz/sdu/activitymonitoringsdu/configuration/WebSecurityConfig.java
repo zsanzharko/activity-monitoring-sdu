@@ -22,27 +22,32 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         this.dataSource = dataSource;
     }
 
-    //fixme have problem with allow resources in login page
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .csrf().disable()
                 .authorizeRequests()
-                    .antMatchers("/home", "/css/**", "/images/**", "/js/**").permitAll()
-                    .anyRequest().authenticated()
+                    .antMatchers("/home", "/**/*.js", "/**/*.css", "/images/*").permitAll()
+                    .anyRequest()
+                    .authenticated()
                     .and()
                 .formLogin()
                     .loginPage("/login")
+                    .loginProcessingUrl("/login")
+                    .defaultSuccessUrl("/", true)
+                    .failureUrl("/login?error=true")
                     .permitAll()
                     .and()
                 .logout()
+                .deleteCookies("JSESSIONID")
                     .permitAll()
                 .and();
     }
 
-//    public void configure(WebSecurity web) throws Exception {
-//        web.ignoring().antMatchers("/resources/**");
-//    }
+    @Override
+    public void configure(WebSecurity web) {
+        web.ignoring().antMatchers("/static/**");
+    }
 
     @Override
     protected void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {

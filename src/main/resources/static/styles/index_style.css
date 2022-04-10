@@ -1,6 +1,3 @@
-/*
-    DEMO STYLE
-*/
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 
 *{
@@ -12,6 +9,10 @@ body {
     background-color:#3A506B;
     height: 100%;
 }
+a:hover, a:visited, a:link, a:active{
+    text-decoration: none;
+    color:white;
+}
 header{
     background-color: #1C2441;
     width: 100%;
@@ -20,11 +21,11 @@ header{
     align-items: center;
     justify-content: space-between;
 }
-#header_user{
+.header_user{
     width: 50px;
     margin-right: 3%;
 }
-.navbar-btn {
+#navbar-btn {
     margin-left: 2%;
     box-shadow: none;
     outline: none !important;
@@ -42,9 +43,7 @@ header{
 }
 
 .sidebar {
-    /* width:23%; */
     width: 380px;
-    /* height: 100%; */
     background: #0B122B;
     transition: all 0.6s cubic-bezier(0.945, 0.020, 0.270, 0.665);
     transform-origin: bottom left;
@@ -63,7 +62,7 @@ header{
     height:280px;
     background-color:#292F40;
 }
-#name_picture_box{
+.name_picture_box{
     color:#FDFDFD;
     display: flex;
     justify-content: space-around;
@@ -71,30 +70,30 @@ header{
     margin-left: 6%;
     margin-top: 5%;
 }
-#sidebar_picture{
+.sidebar_picture{
    width:100px;
    border-radius:50%;
 }
-#side_head_text{
+.side_head_text{
     margin-right: 15%;
     margin-left: 5%;
 }
-#sider_inf_box{
+.sider_inf_box{
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
-#upper_dev_inf, #project{
+.upper_dev_inf, .project{
     margin-left: 7%;
     margin-top: 4%;
     color:#D2D3D6;
     font-size: small;
 }
-#project{
+.project{
     margin-bottom:10%;
 }
-#input_inf, #input_status, #input_project, .dash_text{
+.input_inf, .input_status, .input_project, .dash_text{
     color: #F6F7F7;
 }
 
@@ -102,7 +101,8 @@ header{
     padding-top: 3%;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    /*justify-content: space-around;*/
+    flex-wrap: wrap;
     align-items:center;
     height: 30%;
 }
@@ -112,13 +112,12 @@ header{
     width: 85%;
     display: flex;
     flex-direction: row;
-    /* justify-content: center; */
     align-items: center;
     background-color:#3A506B;
     border-radius:10px;
 
 }
-#dashboard_pic{
+.dashboard_pic{
     width: 30px;
 }
 .dash_text{
@@ -131,27 +130,28 @@ header{
 /* ---------------------------------------------------
     CONTENT STYLE
 ----------------------------------------------------- */
-#content {
+.content {
     width: 77%;
     min-height: 100vh;
     transition: all 0.3s;
     background-color: #3A506B;
 }
 .manage_creator{
+    margin-top: 3%;
     width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items:center;
 }
-#main_title{
+.main_title{
     color: #F3F5F7;
     margin-right: 5%;
-    margin-top: 2%;
+    font-size: 25px;
 }
 
 
-#line{
+.line{
     background-color: #59636D;
     height: 1px;
     width: 100%;
@@ -160,18 +160,20 @@ header{
 .space_for_box{
     margin-top: 10px;
     height: auto;
-    /* background-color:#2E3842; */
     display: flex;
     flex-direction:row;
     flex-wrap: wrap;
     padding-left: 3%;
 }
 .box{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     background-color:#0B122B;
     color:#EFF0F1;
     margin: 10px;
-    width: 30%;
-    height: auto;
+    width: 370px;
+    height: 190px;
     padding-bottom: 10px;
     border-radius: 10px;
     box-shadow: 1px 2px 3px 4px rgba(12,12,12,0.2);
@@ -185,20 +187,19 @@ header{
     align-items:center;
     border-radius: 10px 10px 0px 0px;
 }
-#box_head_left{
+.box_head_left{
     margin-left: 2%;
     display: flex;
     flex-direction: column;
-    /* align-items:center; */
     height: 100%;
 }
-#project_version{
-    font-size: 9px;
+.project_version{
+    font-size: 13px;
     margin-bottom: 2%;
 }
-#project_name{
+.project_name{
     margin-right: 4%;
-    font-size: 13px;
+    font-size: 15px;
 }
 
 .box_body{
@@ -209,14 +210,21 @@ header{
     padding-left: 2%;
 }
 
-#project_activities{
-    font-size: 12px;
+.project_activities{
+    font-size: 15px;
     margin-bottom: 5px;
+    margin-top: 5px;;
 }
-
-#project_work_dev{
+.project_deep_id{
     font-size: 10px;
+}
+.project_work_dev{
+    font-size: 13px;
     margin-top: 15px;
+}
+.extra_id{
+    font-size: 15px;
+    margin-left: 10px;
 }
 .footer{
     margin-top: 1%;
@@ -225,28 +233,28 @@ header{
     justify-content: space-between;
     align-items:center;
 }
-#box_image{
+.box_image{
     width: 30px;
     border-radius: 50%;
 }
-#footer_images{
+.footer_images{
     margin-left: 2%;
 }
-#box_batton{
+.box_batton{
     margin-right: 20px;
 }
 /* ---------------------------------------------------
     button STYLE
 ----------------------------------------------------- */
 
-#sidebarCollapse_button {
+.sidebarCollapse_button {
     width: 40px;
     height: 40px;
     background: #f5f5f5;
     cursor: pointer;
 }
 
-#sidebarCollapse_button span {
+.sidebarCollapse_button span {
     width: 80%;
     height: 2px;
     margin: 0 auto;
@@ -256,18 +264,18 @@ header{
     transition-delay: 0.2s;
 }
 
-#sidebarCollapse_button span:first-of-type {
+.sidebarCollapse_button span:first-of-type {
     transform: rotate(45deg) translate(2px, 2px);
 }
-#sidebarCollapse_button span:nth-of-type(2) {
+.sidebarCollapse_button span:nth-of-type(2) {
     opacity: 0;
 }
-#sidebarCollapse_button span:last-of-type {
+.sidebarCollapse_button span:last-of-type {
     transform: rotate(-45deg) translate(1px, -1px);
 }
 
 
-#sidebarCollapse_button.active span {
+.sidebarCollapse_button.active span {
     transform: none;
     opacity: 1;
     margin: 5px auto;
@@ -277,7 +285,8 @@ header{
 /* ---------------------------------------------------
     color changes
 ----------------------------------------------------- */
-#color_swicher{
+.color_swicher{
+    margin-top: 50%;
     margin-left: 30px;
 }
 
@@ -294,7 +303,6 @@ header{
 	align-items: center;
 	justify-content: space-between;
 	padding: 5px;
-	/* position: relative; */
 	height: 15px;
 	width: 40px;
 	transform: scale(1.5);
@@ -306,7 +314,6 @@ header{
 .label .ball {
 	background-color: #fff;
 	border-radius: 50%;
-	/* position: absolute; */
 	top: 2px;
 	left: 2px;
 	height: 20px;
@@ -323,11 +330,11 @@ body.light {
 	background: #FFFFFF;
 }
 
-#content.light{
+.content.light{
     background-color:#FFFFFF;
 }
 
-#main_title.light{
+.main_title.light{
     color:black;
 }
 header.light{
@@ -337,7 +344,7 @@ header.light{
 .sidebar_head.light{
     background-color:#CDCBCB;
 }
-#upper_dev_inf.light, #project.light{
+.upper_dev_inf.light, .project.light{
     color:#F7F7F7;
 }
 .sidebar.light{
@@ -363,12 +370,11 @@ header.light{
     .sidebar{
         width: 300px;
     }
-    #main_title{
+    /* .main_title{
         margin-left: 85%;
-    }
+    } */
 }
 @media (max-width: 1200px){
- 
     .space_for_box{
         justify-content: center;
         margin: 0;
@@ -378,7 +384,7 @@ header.light{
         width: 450px;
     } */
 
-    #content{
+    .content{
         width:100%;
     }
     .sidebar {
@@ -389,56 +395,57 @@ header.light{
         margin-left: 0;
         transform: none;
     }
-    #sidebarCollapse_button span:first-of-type,
-    #sidebarCollapse_button span:nth-of-type(2),
-    #sidebarCollapse_button span:last-of-type {
+    .sidebarCollapse_button span:first-of-type,
+    .sidebarCollapse_button span:nth-of-type(2),
+    .sidebarCollapse_button span:last-of-type {
         transform: none;
         opacity: 1;
         margin: 5px auto;
     }
-    #sidebarCollapse_button.active span {
+    .sidebarCollapse_button.active span {
         margin: 0 auto;
     }
-    #sidebarCollapse_button.active span:first-of-type {
+    .sidebarCollapse_button.active span:first-of-type {
         transform: rotate(45deg) translate(2px, 2px);
     }
-    #sidebarCollapse_button.active span:nth-of-type(2) {
+    .sidebarCollapse_button.active span:nth-of-type(2) {
         opacity: 0;
     }
-    #sidebarCollapse_button.active span:last-of-type {
+    .sidebarCollapse_button.active span:last-of-type {
         transform: rotate(-45deg) translate(1px, -1px);
     }
 
 }
 
+
+
 @media (max-width: 900px){
-    .sidebar {
-        width: 580px;
+    .manage_creator{
+        margin-bottom: 10px;
     }
-    /* #content {
-        margin-right: -250px;
-        transform: rotateY(90deg);
-    } */
- 
+
     .space_for_box{
         justify-content: center;
         margin: 0;
         padding: 0;
     }
 
-}
+    .sidebar {
+        width: 580px;
+    }
 
-@media (max-width: 900px){
-    #main_title{
-        margin-left: 80%;
+    .main_title{
+        margin-right: 10%;
     }
+
     .box{
-        width: 450px;
+        width: 390px;
     }
+
 }
 
 @media (max-width: 600px){
-    #main_title{
+    /* .main_title{
         margin-left: 75%;
-    }
+    } */
 }

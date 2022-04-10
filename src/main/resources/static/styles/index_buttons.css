@@ -6,14 +6,14 @@
     color: #FFFFFF;
     cursor: pointer;
     font-size: 12px;
-    /* font-weight: 200px; */
-    /* line-height: 1.5rem; */
-    text-align: center;
     transition-duration: .3s;
     width: 120px;
     height: 30px;
     margin-right: 4%;
-    
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    /* margin-bottom: 10px; */
     box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
   }
   .see_button.light{
@@ -41,7 +41,7 @@
     -webkit-transition-property: box-shadow, transform;
     transition-property: box-shadow, transform;
   }
-  #sider_dash_box:hover, #sider_dash_box:focus, #sider_dash_box:active {
+  .sider_dash_box:hover, .sider_dash_box:focus, .sider_dash_box:active {
     box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.5);
     -webkit-transform: scale(1.1);
     transform: scale(1.05);
@@ -92,35 +92,72 @@
 }
 
 
-#add_button {
+.add_button {
   background-color: #0B122B;
   border: 1px solid transparent;
   border-radius: 20px;
   box-sizing: border-box;
   color: #FFFFFF;
   cursor: pointer;
-  font-size: 12px;
+  font-size: 15px;
   text-align: center;
-  transition-duration: .3s;
+  transition-duration: .3s; 
   min-width: 80px;
   height: 30px;
   margin-left: 5%;
-  
+  display: flex;
+  justify-content: center;
+  align-items:center;
   box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
 }
-#add_button.light{
+.add_button.light{
   background-color: #5094DF;
 }
 
-#add_button:hover {
+.add_button:hover {
   background-color: #2EE59D;
 }
 
-#add_button:focus {
+.add_button:focus {
   box-shadow: none; 
   outline: 2px solid transparent;
   outline-offset: 2px;
 }
-#plus{
+.plus{
   color:#114A90;
+  margin-right: 5px;
+}
+a:hover, a:visited, a:link, a:active{
+  text-decoration: none;
+  color:white;
+}
+
+
+
+.sign_out_button {
+  background-color: #3A506B;
+  border: 1px solid transparent;
+  border-radius: 20px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  font-family: "Inter var",ui-sans-serif,system-ui,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  font-size: 14px;
+  text-align: center;
+  transition-duration: .3s;
+  width: 130px;
+  height: 40px;
+  margin-right: 10px;
+  
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+}
+
+.sign_out_button:hover {
+  background-color: #2EE59D;
+}
+
+.sign_out_button:focus {
+  box-shadow: none; 
+  outline: 2px solid transparent;
+  outline-offset: 2px;
 }

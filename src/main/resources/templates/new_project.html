@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="../static/styles/new_project.css">
+    <link rel="stylesheet" href="../static/styles/new_proclasject_buttons.css">
+    <link rel="stylesheet" th:href="@{/styles/new_project.css}">
+    <link rel="stylesheet" th:href="@{/styles/new_project_buttons.css}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Project</title>
+</head>
+<body>
+<header th:insert="fragments/navigation :: back_to_dashoard"></header>
+<section>
+    <div class="box">
+        <div class="box_head">
+            <div class="new_project_button">
+                New project
+            </div>
+        </div>
+        <form th:object="${project}" th:action="@{/project/create}" method="post">
+            <p class="pr_name">Project name</p>
+            <label for="title" class="project_name_box">
+                <input type="text" class="name_input"
+                       id="title"
+                       th:field="*{title}"
+                       placeholder="Like 'Android App'">
+            </label>
+            <p class="pr_number">Project Id</p>
+            <label for="projectId" class="project_id_box">
+                <input type="text" class="number_input"
+                       th:field="*{projectId}"
+                       id="projectId"
+                       placeholder="Like '9511DXP'">
+            </label>
+            <p class="pr_version">Version:</p>
+            <label for="projectVersion" class="version_box">
+                <input type="text"
+                       th:field="*{projectVersion}"
+                       class="version_input"
+                       id="projectVersion"
+                       placeholder="Like 'B'">
+            </label>
+
+            <p class="pr_number">Date to start:</p>
+            <label for="startDate" class="project_id_box">
+                <input type="date" class="number_input"
+                       pattern="yyyy-MM-dd"
+                       th:field="*{startDate}"
+                       id="startDate">
+            </label>
+
+            <p class="pr_number">description</p>
+            <label for="description" class="project_id_box">
+                <input type="text" class="number_input"
+                       th:field="*{description}"
+                       id="description"
+                       placeholder="Like 'This is a project for a new company... bla bla bla'">
+            </label>
+            <div class="box_footer">
+                <input class="create_button" type="submit" value="Submit"/>
+            </div>
+        </form>
+    </div>
+
+</section>
+
+</body>
+</html>
