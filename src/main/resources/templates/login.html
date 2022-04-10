@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" th:href="@{styles/login_style.css}">
+    <link rel="stylesheet" th:href="@{styles/login_buttons.css}">
+    <link rel="stylesheet" href="../static/styles/login_style.css">
+    <link rel="stylesheet" href="../static/styles/login_buttons.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authorization</title>
+</head>
+<body>
+<header>
+    <button class="sign_button" role="button">Sign In</button>
+</header>
+
+<section>
+    <div class="registration_box">
+        
+        <div class= 'reg_text_box'>
+            <h1>Auth</h1>
+        </div>
+
+        <div class="line"></div>
+
+        <img th:src="@{/images/login-page-1.png}" alt="picture" class="picture">
+
+        <form action="#" th:action="@{/login}" method="post" class="form">
+            <div class="input_div">
+                <label for="email" class = 'label'>
+                    <input type="text"
+                           placeholder="Enter email" id="email" name="username" class="input_fields">
+                </label>
+
+               <!-- fixme class class="input_fields"> doesn't work correct -->
+                <label for="password" class = 'label'>
+                    <input type="password" placeholder="Enter password" id="password" name="password" class="input_fields">
+                </label>
+
+            </div>
+            <div th:if="${param.error}">
+                Invalid username and password.</div>
+            <div th:if="${param.logout}">
+                You have been logged out.</div>
+            <button type="submit" value="Submit" class="log_button">Log in</button>
+        </form>
+    </div>
+
+</section>
+
+</body>
+</html>

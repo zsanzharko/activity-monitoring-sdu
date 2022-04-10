@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" th:href="@{styles/loged_style.css}">
+    <link rel="stylesheet" th:href="@{styles/loged_buttons.css}">
+    <title>Home</title>
+</head>
+<body>
+<div th:insert="fragments/navigation :: header"></div>
+
+This is home page
+
+
+<script th:src="@{https://code.jquery.com/jquery-3.3.1.slim.min.js}"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script th:src="@{js/loged_js.js}"></script>
+</body>
+
+</html>
