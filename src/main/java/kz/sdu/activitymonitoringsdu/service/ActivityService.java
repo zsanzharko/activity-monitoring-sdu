@@ -8,8 +8,6 @@ import java.util.List;
 
 public interface ActivityService {
 
-    List<Activity> findAllByProjectId(String projectId);
-
     List<Activity> findAllByStatus(ActivityStatus status);
 
     ActivityDto findById(Long id);
@@ -17,6 +15,4 @@ public interface ActivityService {
     Activity save(Activity activity);
 
     void deleteById(Long id);
-
-    void deleteAllByProjectId(String projectId);
 }

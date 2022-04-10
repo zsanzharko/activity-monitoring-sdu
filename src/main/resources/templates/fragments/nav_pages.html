@@ -12,8 +12,8 @@
 <!--Dashboard content-->
 <div th:fragment="dashboard_main_content">
     <!--/*@thymesVar class="Role" type="kz.sdu.activitymonitoringsdu.enums.Role"*/-->
-    <div th:if="${user.getRole() != 'MANAGER'}" class="manage_creator">
-        <a class="add_button" th:href="@{/project/create}"><span class="plus">+</span>New</a>
+    <div class="manage_creator">
+        <a class="add_button" th:if="${user.getRole() == 'MANAGER'}" th:href="@{/project/create}"><span class="plus">+</span>New</a>
         <p class="main_title">Projects</p>
     </div>
     <div class="space_for_box">
@@ -38,7 +38,7 @@
                     <img th:src="@{images/test photo profile.png}" alt="" class="box_image">
                     <!--                           todo in this place will insert users image, check in database-->
                 </div>
-                <a th:href="'/project/details?id=' + ${project.getId()}" class="see_button" role="button">See more</a>
+                <a th:href="'/project/details?id=' + ${project.getProjectId()}" class="see_button" role="button">See more</a>
             </div>
         </div>
     </div>
