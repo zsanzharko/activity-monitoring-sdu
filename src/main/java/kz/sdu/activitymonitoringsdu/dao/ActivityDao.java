@@ -1,7 +1,9 @@
 package kz.sdu.activitymonitoringsdu.dao;
 
+import kz.sdu.activitymonitoringsdu.dto.ActivityDto;
 import kz.sdu.activitymonitoringsdu.entity.Activity;
 import kz.sdu.activitymonitoringsdu.enums.ActivityStatus;
+import kz.sdu.activitymonitoringsdu.handlers.ActivityHandlerUtils;
 import kz.sdu.activitymonitoringsdu.repository.ActivityRepository;
 import kz.sdu.activitymonitoringsdu.service.ActivityService;
 import org.springframework.stereotype.Service;
@@ -25,6 +27,13 @@ public class ActivityDao implements ActivityService {
     @Override
     public List<Activity> findAllByStatus(ActivityStatus status) {
         return activityRepository.findAllByStatus(status);
+    }
+
+    @Override
+    public ActivityDto findById(Long id) {
+        Activity activity = activityRepository.findById(id).orElse(null);
+
+        return ActivityHandlerUtils.convertToDto(activity);
     }
 
     @Override

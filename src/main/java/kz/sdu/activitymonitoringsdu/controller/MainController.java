@@ -70,6 +70,14 @@ public class MainController {
         model.addAttribute("user", userDto);
         model.addAttribute("projects", projects);
 
+        model.addAttribute("titlePage", "Dashboard");
+
         return new ModelAndView("index", model);
+    }
+
+    @GetMapping("/profile-panel")
+    public ModelAndView getProfilePanel(ModelMap model) {
+
+        return new ModelAndView("redirect:/");
     }
 }

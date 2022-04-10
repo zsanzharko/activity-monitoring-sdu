@@ -140,7 +140,7 @@ header{
     flex-direction: column;
     align-items:center;
     /* justify-content: center; */
-  
+
 }
 .topic_title_status{
   margin-top:50px;
@@ -174,13 +174,13 @@ header{
 }
 .description_box{
   width: 100%;
-  display: flex;
-  justify-content: flex-start;
-  align-items:flex-end;
+  /*display: flex;*/
+  /*justify-content: flex-start;*/
+  /*align-items:flex-end;*/
 }
 .description_text_box{
   /* background-color:burlywood; */
-  height: 200px;
+  /*height: 200px;*/
   margin-top: 20px;
 }
 .assignet_box_text{
@@ -202,11 +202,10 @@ header{
 .time_box{
   height:30px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items:center;
-  padding-left: 10px;
-  padding-right: 10px;
-  margin-bottom: 20px;
+  margin: 20px 0;
+  padding: 0 10px;
 }
 .end_datet{
   margin-right: 10px;
@@ -391,7 +390,7 @@ header.light{
 
 }
 @media (max-width: 1200px){
-   
+
 
 
     .content{

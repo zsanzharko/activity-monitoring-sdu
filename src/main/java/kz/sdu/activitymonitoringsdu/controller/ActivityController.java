@@ -3,11 +3,15 @@ package kz.sdu.activitymonitoringsdu.controller;
 import kz.sdu.activitymonitoringsdu.dao.ActivityDao;
 import kz.sdu.activitymonitoringsdu.dao.ProjectDao;
 import kz.sdu.activitymonitoringsdu.dao.UserDao;
+import kz.sdu.activitymonitoringsdu.dto.ActivityDto;
+import kz.sdu.activitymonitoringsdu.dto.UserDto;
 import kz.sdu.activitymonitoringsdu.enums.Role;
 import kz.sdu.activitymonitoringsdu.handlers.ActivityHandlerUtils;
 import kz.sdu.activitymonitoringsdu.handlers.UserHandlerUtils;
 import kz.sdu.activitymonitoringsdu.handlers.forms.ActivityCreateForm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -27,6 +31,22 @@ public class ActivityController {
         this.projectDao = projectDao;
         this.activityDao = activityDao;
         this.userDao = userDao;
+    }
+
+    @GetMapping("/{id}")
+    public ModelAndView detailsActivityPage(@PathVariable Long id, ModelMap modelMap) {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String userEmail = ((UserDetails) principal).getUsername();
+        UserDto userDto = userDao.findUserByEmailDto(userEmail);
+
+
+        ActivityDto activityDto = activityDao.findById(id);
+
+
+        modelMap.addAttribute("user", userDto);
+        modelMap.addAttribute("activity", activityDto);
+
+        return new ModelAndView("activity_details", modelMap);
     }
 
     @GetMapping("/create")
@@ -60,5 +80,4 @@ public class ActivityController {
         activityDao.save(ActivityHandlerUtils.convertToEntity(activityCreateForm.getDtoFromForm()));
         return new ModelAndView("redirect:/project/details?id=" + id);
     }
-
 }
