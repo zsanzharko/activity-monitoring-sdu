@@ -57,11 +57,12 @@ public class MainController {
 
         for (ProjectDto projectDto : projects) {
             List<ActivityDto> subActivities = new ArrayList<>();
-            int i = 0;
-            for (Activity activity : activityDao.findAllByProjectId(projectDto.getProjectId())) {
-                subActivities.add(ActivityHandlerUtils.convertToDto(activity));
-                if (i > 3) break;
-                i++;
+
+            List<Activity> activities = activityDao.findAllByProjectId(projectDto.getProjectId());
+            if(activities == null) activities = new ArrayList<>();
+            for (int i = 0; i < 2 && !activities.isEmpty(); i++) {
+                if (i > activities.size() - 1) break;
+                subActivities.add(ActivityHandlerUtils.convertToDto(activities.get(i)));
             }
             projectDto.setActivities(subActivities);
         }
@@ -69,6 +70,14 @@ public class MainController {
         model.addAttribute("user", userDto);
         model.addAttribute("projects", projects);
 
+        model.addAttribute("titlePage", "Dashboard");
+
         return new ModelAndView("index", model);
+    }
+
+    @GetMapping("/profile-panel")
+    public ModelAndView getProfilePanel(ModelMap model) {
+
+        return new ModelAndView("redirect:/");
     }
 }

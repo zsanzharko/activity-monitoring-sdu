@@ -95,6 +95,7 @@ public class ProjectController {
 
         model.addAttribute("userIsManager", userDto.getRole() == Role.MANAGER);
         model.addAttribute("activities", activities);
+        model.addAttribute("user", userDto);
         model.addAttribute("project", projectDto);
         return new ModelAndView("project_details", model);
     }
