@@ -19,28 +19,13 @@ public class ProjectDao implements ProjectService {
     }
 
     @Override
-    public Project findById(Long id) {
+    public Project findById(String id) {
         return projectRepository.findById(id).orElse(null);
-    }
-
-    @Override
-    public Project findByProjectId(String projectId) {
-        return projectRepository.findByProjectId(projectId);
-    }
-
-    @Override
-    public List<Project> findAllByCreatorId(Long creatorId) {
-        return projectRepository.findAllByCreatorId(creatorId);
     }
 
     @Override
     public void deleteByProjectId(String projectId) {
         projectRepository.deleteByProjectId(projectId);
-    }
-
-    @Override
-    public void deleteAllByCreatorId(Long creatorId) {
-        projectRepository.deleteAllByCreatorId(creatorId);
     }
 
     @Override

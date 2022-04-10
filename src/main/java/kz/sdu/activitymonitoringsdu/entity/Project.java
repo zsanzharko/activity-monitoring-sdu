@@ -18,18 +18,11 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class Project {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    private Long id;
-
     @Column(name = "project_id", nullable = false)
     private String projectId;
 
-    @Column(name = "project_version", nullable = false, length = 2)
+    @Column(name = "version", nullable = false, length = 2)
     private String projectVersion;
-
-    @Column(name="creator_id", nullable = false)
-    private Long creatorId;
 
     @Column(name = "title", nullable = false)
     private String title;

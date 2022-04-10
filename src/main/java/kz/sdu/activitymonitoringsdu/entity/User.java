@@ -32,7 +32,7 @@ public class User {
     @Column(name = "user_email", nullable = false)
     private String email;
 
-    @Column(name = "user_role", nullable = false)
+    @Column(name = "user_type", nullable = false)
     @Enumerated(EnumType.STRING)
     private Role role;
 

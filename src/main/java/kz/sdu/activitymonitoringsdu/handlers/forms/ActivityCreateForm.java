@@ -15,7 +15,6 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ActivityCreateForm {
-    private String projectId;
     private String title;
     private String description;
     private ActivityStatus status;
@@ -24,7 +23,6 @@ public class ActivityCreateForm {
 
     public ActivityDto getDtoFromForm() {
         ActivityDto activityDto = new ActivityDto();
-        activityDto.setProjectId(projectId);
         activityDto.setTitle(title);
         activityDto.setDescription(description);
         activityDto.setStatus(status);

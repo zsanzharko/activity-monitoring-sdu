@@ -1,6 +1,7 @@
 package kz.sdu.activitymonitoringsdu.controller;
 
 import kz.sdu.activitymonitoringsdu.dao.ActivityDao;
+import kz.sdu.activitymonitoringsdu.dao.ConsistDao;
 import kz.sdu.activitymonitoringsdu.dao.ProjectDao;
 import kz.sdu.activitymonitoringsdu.dao.UserDao;
 import kz.sdu.activitymonitoringsdu.dto.ActivityDto;
@@ -30,12 +31,14 @@ public class MainController {
     private final UserDao userDao;
     private final ProjectDao projectDao;
     private final ActivityDao activityDao;
+    private final ConsistDao consistDao;
 
     @Autowired
-    public MainController(UserDao userDao, ProjectDao projectDao, ActivityDao activityDao) {
+    public MainController(UserDao userDao, ProjectDao projectDao, ActivityDao activityDao, ConsistDao consistDao) {
         this.userDao = userDao;
         this.projectDao = projectDao;
         this.activityDao = activityDao;
+        this.consistDao = consistDao;
     }
 
     @GetMapping("/")
@@ -52,17 +55,17 @@ public class MainController {
         if (userDto.getRole() == Role.MANAGER) {
             projects = ProjectHandlerUtils.convertToDto(projectDao.findAll());
         } else {
-            projects = ProjectHandlerUtils.convertToDto(projectDao.findAllByCreatorId(userDto.getId()));
+            projects = ProjectHandlerUtils.convertToDto(projectDao.findAll());
         }
 
         for (ProjectDto projectDto : projects) {
             List<ActivityDto> subActivities = new ArrayList<>();
 
-            List<Activity> activities = activityDao.findAllByProjectId(projectDto.getProjectId());
+            List<ActivityDto> activities = activityDao.getActivitiesById(consistDao.findAllByProjectId(projectDto.getProjectId()));
             if(activities == null) activities = new ArrayList<>();
             for (int i = 0; i < 2 && !activities.isEmpty(); i++) {
                 if (i > activities.size() - 1) break;
-                subActivities.add(ActivityHandlerUtils.convertToDto(activities.get(i)));
+                subActivities.add(activities.get(i));
             }
             projectDto.setActivities(subActivities);
         }

@@ -39,6 +39,9 @@ public class ActivityController {
         String userEmail = ((UserDetails) principal).getUsername();
         UserDto userDto = userDao.findUserByEmailDto(userEmail);
 
+        if( userDto.getRole() == Role.MANAGER) {
+//            modelMap.addAttribute("")
+        }
 
         ActivityDto activityDto = activityDao.findById(id);
 
@@ -52,7 +55,9 @@ public class ActivityController {
     @GetMapping("/create")
     public ModelAndView createActivity(@RequestParam final Long id, ModelMap model) {
         //checking user is manager or not
-        if (UserHandlerUtils.getUserFromAuth(userDao).getRole() != Role.MANAGER) return new ModelAndView("redirect:/");
+        UserDto userDto = UserHandlerUtils.getUserFromAuth(userDao);
+        if (!userDto.getRole().name().equals(Role.MANAGER.name()))
+            return new ModelAndView("redirect:/");
 
         model.addAttribute("id", id);
         model.addAttribute("activity", new ActivityCreateForm());
@@ -66,7 +71,9 @@ public class ActivityController {
                                             ModelMap model,
                                             BindingResult bindingResult) {
         //checking user is manager or not
-        if (UserHandlerUtils.getUserFromAuth(userDao).getRole() != Role.MANAGER) return new ModelAndView("redirect:/");
+        UserDto userDto = UserHandlerUtils.getUserFromAuth(userDao);
+        if (userDto.getRole() != Role.MANAGER)
+            return new ModelAndView("redirect:/");
 
         if (bindingResult.hasErrors()) {
 
@@ -74,8 +81,6 @@ public class ActivityController {
             model.addAttribute("activity", new ActivityCreateForm());
             return new ModelAndView("redirect:/project/activity/create/" + id, model);
         }
-
-        activityCreateForm.setProjectId(projectDao.findById(id).getProjectId());
 
         activityDao.save(ActivityHandlerUtils.convertToEntity(activityCreateForm.getDtoFromForm()));
         return new ModelAndView("redirect:/project/details?id=" + id);

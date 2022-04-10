@@ -24,11 +24,10 @@ public class ProjectCreateForm {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date startDate;
 
-    public ProjectDto getDtoFromForm(Long creatorId) {
+    public ProjectDto getDtoFromForm() {
         ProjectDto projectDto = new ProjectDto();
         projectDto.setProjectId(projectId);
         projectDto.setProjectVersion(projectVersion);
-        projectDto.setCreatorId(creatorId);
         projectDto.setTitle(title);
         projectDto.setDescription(description);
         projectDto.setStatus(ProjectStatus.NOT_STARTED);

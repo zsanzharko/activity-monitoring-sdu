@@ -33,10 +33,8 @@ public class ProjectHandlerUtils {
 
     private static ProjectDto converting(Project project) {
         ProjectDto projectDto = new ProjectDto();
-        projectDto.setId(project.getId());
         projectDto.setProjectId(project.getProjectId());
         projectDto.setProjectVersion(project.getProjectVersion());
-        projectDto.setCreatorId(project.getCreatorId());
         projectDto.setTitle(project.getTitle());
         projectDto.setDescription(project.getDescription());
         projectDto.setStatus(project.getStatus());
@@ -54,7 +52,6 @@ public class ProjectHandlerUtils {
         Project project = new Project();
         project.setProjectId(projectDto.getProjectId());
         project.setProjectVersion(projectDto.getProjectVersion());
-        project.setCreatorId(projectDto.getCreatorId());
         project.setTitle(projectDto.getTitle());
         project.setDescription(projectDto.getDescription());
         project.setStatus(projectDto.getStatus());

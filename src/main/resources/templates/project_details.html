@@ -24,7 +24,7 @@
             <div class="left_part">
                 <div class="left_head">
                     <p class="activity">Activities</p>
-                    <a class="button_box" th:href="'/project/activity/create?id=' + ${project.getId()}">
+                    <a class="button_box" th:href="'/project/activity/create?id=' + ${project.getProjectId()}">
                         <img th:src="@{/images/nouveau-symbole-bleu.png}" alt="" class="plus">
                         New
                     </a>
@@ -36,7 +36,7 @@
                             <input type="radio" class="circle">
                             <p class="function_activities" th:text="${activity.title}">Do some function</p>
                         </div>
-                        <a th:href="'/project/activity/' + ${activity.getId()}" class="view_button">View</a>
+                        <a th:href="'/project/activity/' + ${activity.id}" class="view_button">View</a>
                     </div>
 
                 </div>
