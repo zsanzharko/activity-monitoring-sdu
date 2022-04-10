@@ -56,6 +56,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .dataSource(dataSource)
                 .passwordEncoder(new BCryptPasswordEncoder())
                 .usersByUsernameQuery("select user_email, user_password, user_enabled FROM users WHERE user_email = ?")
-                .authoritiesByUsernameQuery("select user_email, user_role from users where user_email = ?");
+                .authoritiesByUsernameQuery("select user_email, user_type from users where user_email = ?");
     }
 }

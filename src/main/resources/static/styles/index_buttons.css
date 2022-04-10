@@ -14,7 +14,7 @@
     align-items:center;
     justify-content: center;
     /* margin-bottom: 10px; */
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+    /*box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;*/
   }
   .see_button.light{
     background-color:#F6F4F3;
@@ -149,7 +149,7 @@ a:hover, a:visited, a:link, a:active{
   height: 40px;
   margin-right: 10px;
   
-  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+  /*box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;*/
 }
 
 .sign_out_button:hover {

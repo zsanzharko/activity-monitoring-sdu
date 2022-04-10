@@ -13,8 +13,7 @@ import java.util.Date;
 @AllArgsConstructor
 public class ActivityDto implements Serializable {
     private Long id;
-    private String projectId;
-    private String title; //
+    private String title;
     private String description;
     private ActivityStatus status;
     private Date startDate;

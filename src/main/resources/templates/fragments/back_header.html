@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" th:href="@{styles/index_style.css}">
+    <link rel="stylesheet" th:href="@{styles/index_buttons.css}">
+    <title></title>
+</head>
+<body>
+<header class="header" th:fragment="back_to_dashoard">
+    <button type="button" class="sidebarCollapse_button" id="navbar-btn">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+    <a th:href="@{/dashboard}" class="back">
+        <img th:src="@{/images/gauche-dark.png}" alt="" class="arrow">
+        <p>Back</p>
+    </a>
+    <form action="/logout" method="post">
+        <input type="submit" value="Sign Out" class='sign_out_button'/>
+    </form>
+</header>
+</body>
+</html>

@@ -5,9 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 @Table(name = "activities")
@@ -21,9 +23,6 @@ public class Activity {
     @Column(name = "activity_id", nullable = false)
     private Long id;
 
-    @Column(name = "project_id")
-    private String projectId;
-
     @Column(name = "title", nullable = false, length = 100)
     private String title;
 
@@ -35,7 +34,7 @@ public class Activity {
     private ActivityStatus status;
 
     @Column(name = "start_date", nullable = false)
-    private LocalDate startDate;
+    private Date startDate;
 
     @Column(name = "spent_time", length = 100)
     private String spentTime;

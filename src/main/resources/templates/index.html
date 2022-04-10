@@ -8,56 +8,24 @@
     <link rel="stylesheet" th:href="@{/styles/index_buttons.css}">
     <link rel="stylesheet" href="../static/styles/index_style.css">
     <link rel="stylesheet" href="../static/styles/index_buttons.css">
-    <title>Authorization</title>
+    <title th:text="${titlePage}">Authorization</title>
 </head>
 <body>
-    <div th:insert="fragments/navigation :: header"></div>
+<div th:insert="fragments/navigation :: header"></div>
 
-    <div class="wrapper">
-        <!-- Sidebar Holder -->
-        <nav class="sidebar">
-            <div class="sidebar_head">
-                <div class="name_picture_box">
-                    <img th:src="@{images/test photo profile.png}" src="../static/images/test photo profile.png" alt="Flowers" class="sidebar_picture">
-                    <p class="side_head_text" th:inline="text" th:text="${user.getFullName()}"></p>
-                </div>
-                <div class="sider_inf_box">
-                    <div class="upper_dev_inf">
-                        <p class="sider_dev_inf">Developer: <span class="input_inf">UX/UI Design</span></p>
-                        <p class="sider_dev_inf">Role: <span class="input_inf" th:text="${user.getRole().name()}">Free</span></p>
-                        <p class="sider_dev_inf">Gender: <span class="input_inf" th:text="${user.getGender().name()}">Free</span></p>
-                        <p class="sider_dev_inf">Email: <span class="input_inf" th:text="${user.getEmail()}">Free</span></p>
-                    </div>
-                    <p class="project">Project: <span class="input_project">IOS App</span></p>
-                </div>
-            </div>
-            <div class="sider_dashboards">
-                <div class="sider_dash_box">
-                     <img th:src="@{images/dashboard-dark-icon.png}" src="../static/images/dashboard-dark-icon.png" alt="dashboard_picture" class="dashboard_pic">
-                    <p class="dash_text">Dashboard</p>
-                </div>
+<div class="wrapper">
+    <div th:insert="fragments/navigation :: left_nav"></div>
 
-            </div>
+    <!-- Page Content Holder -->
+    <div class="content" th:insert="fragments/nav_pages :: dashboard_main_content"></div>
 
-            <div  class="color_swicher">
-                <input type="checkbox" class="checkbox" id="chk" />
-                <label class="label" for="chk">
-                  <div class="ball"></div>
-                </label>
-            </div>
-        </nav>
+</div>
 
-        <!-- Page Content Holder -->
-        <div class="content" th:insert="fragments/nav_pages :: dashboard_main_content"></div>
-        
-    </div>
-    
 
-    <script th:src="@{https://code.jquery.com/jquery-3.3.1.slim.min.js}"
-            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-            crossorigin="anonymous"></script>
-    <script th:src="@{js/loged_js.js}"></script>
-    <!-- <script src="../static/js/loged_js.js"></script> -->
+<script th:src="@{https://code.jquery.com/jquery-3.3.1.slim.min.js}"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script th:src="@{/js/loged_js.js}"></script>
 
 </body>
 

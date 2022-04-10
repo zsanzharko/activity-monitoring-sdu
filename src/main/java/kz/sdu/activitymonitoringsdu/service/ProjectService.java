@@ -6,15 +6,9 @@ import java.util.List;
 
 public interface ProjectService {
 
-    Project findById(Long id);
-
-    Project findByProjectId(String projectId);
-
-    List<Project> findAllByCreatorId(Long creatorId);
+    Project findById(String id);
 
     void deleteByProjectId(String projectId);
-
-    void deleteAllByCreatorId(Long creatorId);
 
     Project saveProject(Project project);
 
