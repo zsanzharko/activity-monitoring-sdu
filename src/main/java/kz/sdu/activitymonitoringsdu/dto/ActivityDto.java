@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.util.Date;
 
 @Data
 @NoArgsConstructor
@@ -17,6 +17,6 @@ public class ActivityDto implements Serializable {
     private String title; //
     private String description;
     private ActivityStatus status;
-    private LocalDate startDate;
+    private Date startDate;
     private String spentTime;
 }

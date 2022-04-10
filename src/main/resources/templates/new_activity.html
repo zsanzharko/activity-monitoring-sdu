@@ -12,48 +12,25 @@
 </head>
 <body>
 <div th:insert="fragments/navigation :: header"></div>
-<section>
-    <div class="box">
-        <div id="box_head">
-            <div id="new_project_button">
-                New project
-            </div>
-        </div>
-        <form th:action="'/project/activity/create/' + ${projectId}" th:object="${activity}" method="post">
-            <div id="project_name_box">
-                <p id="pr_name">Activity title</p>
-                <label for="title">
-                    <input type="text" id="title"
-                           th:value="*{title}"
-                           placeholder="Like 'Android App'"></label>
-            </div>
-            <div id="project_id_box">
-                <p id="pr_number">Description</p>
-                <label for="description">
-                    <input type="text" id="description"
-                           th:value="*{description}"
-                           placeholder="Like 'Develop new Application for the new company...'"></label>
-            </div>
-            <div id="version_box">
-                <p id="pr_version">Status:</p>
-                <label for="status">
-                    <input type="text" th:value="*{status}" id="status"
-                           placeholder="Like 'IN_PROGRESS'"></label>
-            </div>
-
-            <div id="version_box">
-                <p id="pr_version">Date to start:</p>
-                <label for="start_date">
-                    <input type="date" th:value="*{startDate}" id="start_date"></label>
-
-            </div>
-            <div id="box_footer">
-                <button id="create_button" type="submit" value="Submit" role="button">Create</button>
-            </div>
-        </form>
-    </div>
-
-</section>
+<form action="#" th:action="'/project/activity/create/' + ${id}" method="post" th:object="${activity}">
+    <p>title</p>
+    <label for="title">
+        <input type="text" th:field="*{title}" id="title"/>
+    </label>
+    <p>description</p>
+    <label for="description">
+        <input type="text" th:field="*{description}" id="description"/>
+    </label>
+    <p>status</p>
+    <label for="status">
+        <input type="text" th:field="*{status}" id="status"/>
+    </label>
+    <p>startDate</p>
+    <label for="startDate">
+        <input type="date" pattern="yyyy-MM-dd" th:field="*{startDate}" id="startDate"/>
+    </label>
+    <button value="Submit" type="submit">Submit</button>
+</form>
 
 </body>
 </html>

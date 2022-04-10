@@ -1,8 +1,9 @@
 package kz.sdu.activitymonitoringsdu.handlers;
 
-import kz.sdu.activitymonitoringsdu.dao.ProjectDao;
 import kz.sdu.activitymonitoringsdu.dto.ActivityDto;
 import kz.sdu.activitymonitoringsdu.entity.Activity;
+
+import java.time.ZoneId;
 
 public class ActivityHandlerUtils {
 
@@ -13,7 +14,10 @@ public class ActivityHandlerUtils {
         activityDto.setTitle(activity.getTitle());
         activityDto.setDescription(activity.getDescription());
         activityDto.setStatus(activity.getStatus());
-        activityDto.setStartDate(activity.getStartDate());
+        activityDto.setStartDate(java.util.Date.from(activity.getStartDate().atStartOfDay()
+                        .atZone(ZoneId.systemDefault())
+                        .toInstant())
+        );
         activityDto.setSpentTime(activity.getSpentTime());
         return activityDto;
     }
@@ -25,7 +29,9 @@ public class ActivityHandlerUtils {
         activity.setTitle(activityDto.getTitle());
         activity.setDescription(activityDto.getDescription());
         activity.setStatus(activityDto.getStatus());
-        activity.setStartDate(activityDto.getStartDate());
+        activity.setStartDate(activityDto.getStartDate().toInstant()
+                .atZone(ZoneId.systemDefault())
+                .toLocalDate());
         activity.setSpentTime(activityDto.getSpentTime());
         return activity;
     }

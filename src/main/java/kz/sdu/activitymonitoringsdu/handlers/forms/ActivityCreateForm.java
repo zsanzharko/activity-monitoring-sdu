@@ -6,8 +6,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -18,13 +19,14 @@ public class ActivityCreateForm {
     private String title;
     private String description;
     private ActivityStatus status;
-    private LocalDate startDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date startDate;
 
     public ActivityDto getDtoFromForm() {
         ActivityDto activityDto = new ActivityDto();
         activityDto.setProjectId(projectId);
-        activityDto.setTitle(description);
-        activityDto.setDescription(activityDto.getDescription());
+        activityDto.setTitle(title);
+        activityDto.setDescription(description);
         activityDto.setStatus(status);
         activityDto.setStartDate(startDate);
         activityDto.setSpentTime("0");
