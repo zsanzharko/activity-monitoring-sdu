@@ -3,9 +3,11 @@ package kz.sdu.activitymonitoringsdu.dao;
 import kz.sdu.activitymonitoringsdu.dto.ActivityDto;
 import kz.sdu.activitymonitoringsdu.entity.Activity;
 import kz.sdu.activitymonitoringsdu.entity.Consist;
+import kz.sdu.activitymonitoringsdu.entity.Report;
 import kz.sdu.activitymonitoringsdu.enums.ActivityStatus;
 import kz.sdu.activitymonitoringsdu.handlers.ActivityHandlerUtils;
 import kz.sdu.activitymonitoringsdu.repository.ActivityRepository;
+import kz.sdu.activitymonitoringsdu.repository.ReportRepository;
 import kz.sdu.activitymonitoringsdu.service.ActivityService;
 import org.springframework.stereotype.Service;
 
@@ -17,9 +19,10 @@ import java.util.Objects;
 public class ActivityDao implements ActivityService {
 
     private final ActivityRepository activityRepository;
-
-    public ActivityDao(ActivityRepository activityRepository) {
+    private final ReportRepository spendtimeUserRepository;
+    public ActivityDao(ActivityRepository activityRepository, ReportRepository spendtimeUserRepository) {
         this.activityRepository = activityRepository;
+        this.spendtimeUserRepository = spendtimeUserRepository;
     }
 
     @Override
@@ -53,5 +56,13 @@ public class ActivityDao implements ActivityService {
     @Override
     public void deleteById(Long id) {
         activityRepository.deleteById(id);
+    }
+
+    public Report save(Report report) {
+        return spendtimeUserRepository.save(report);
+    }
+
+    public List<Report> findByActivityId(Long activityId){
+        return spendtimeUserRepository.findAllByActivityId(activityId);
     }
 }

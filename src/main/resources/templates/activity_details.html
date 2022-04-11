@@ -34,51 +34,54 @@
         <div class="content_box">
             <div class="start_date_box">
                 <p class="start_date">Start date: <span
-                        th:text="${activity.getStartDate().toString()}">start date</span></p>
+                        th:text="${activity.getDate()}">start date</span></p>
             </div>
 
             <div class="description_box">
                 <p class="description">Description</p>
                 <p th:text="${activity.getDescription()}"></p>
             </div>
-            <div class="assignet_box_text">
-                <p class="assignet">Assigned</p>
+            <div th:if="${assignedUser != null}">
+                <div class="assignet_box_text">
+                    <p class="assignet">Assigned</p>
+                </div>
+
+                <div class="box_place">
+                    <div class="time_box" th:each="report : ${reports}" th:if="${reports.size() > 0}">
+                        <p><span class="end_datet" th:text="${report.getReportTime()}">04.09.2022
+                    </span>--------------------------------------------- <span
+                                class="wasted_time" th:text="${report.getReportTime()}">1 hour 20 min</span></p>
+                    </div>
+                    <div class="time_box" th:if="${reports.size() == 0}">
+                        <p>Report don't set</p>
+                    </div>
+                </div>
+                <form action="" class="input_box">
+                    <div class="text_of_input_box">
+                        <p class="enter_time">Enter the spent time (in minutes):</p>
+                        <label>
+                            <input type="number" class="input">
+                        </label>
+                    </div>
+                    <div class="push_box">
+                        <button class="push_button">push</button>
+                        <a href="" class="close_button">
+                            <div>close</div>
+                        </a>
+                    </div>
+                </form>
             </div>
-
-            <div class="box_place">
-                <div class="time_box">
-                    <p><span class="end_datet">04.09.2022</span>--------------------------------------------- <span
-                            class="wasted_time">1 hour 20 min</span></p>
-                </div>
-                <div class="time_box">
-                    <p><span class="end_datet">04.09.2022</span>--------------------------------------------- <span
-                            class="wasted_time">1 hour 20 min</span></p>
-                </div>
-                <div class="time_box">
-                    <p><span class="end_datet">04.09.2022</span>--------------------------------------------- <span
-                            class="wasted_time">1 hour 20 min</span></p>
-                </div>
-                <div class="time_box">
-                    <p><span class="end_datet">04.09.2022</span>--------------------------------------------- <span
-                            class="wasted_time">1 hour 20 min</span></p>
+            <div th:unless="${assignedUser != null}">
+                Don't have assignment
+                <div>
+                    You can Assign
+                    <div th:each="developer, state  : ${developers}">
+                        <p th:utext="${state}"></p>
+                        <p th:text="${developer.getFullName()}"></p>
+                        <a th:href="'project/activity/assign?id=' + ${developer.getId()}">Assign</a>
+                    </div>
                 </div>
             </div>
-            <form action="" class="input_box">
-                <!-- <div > -->
-                <div class="text_of_input_box">
-                    <p class="enter_time">Enter the spent time (in minutes):</p>
-                    <input type="number" class="input">
-                </div>
-                <div class="push_box">
-                    <button class="push_button">push</button>
-                    <a href="" class="close_button">
-                        <div>close</div>
-                    </a>
-                </div>
-                <!-- </div> -->
-
-            </form>
-
 
         </div>
     </div>

@@ -34,6 +34,8 @@ public class UserDao implements UserService, UserDetailsService {
         return userRepository.findAllByRole(role);
     }
 
+//    public List<User> findAllBy
+
     @Override
     public List<User> findAllByGender(Gender gender) {
         return userRepository.findAllByGender(gender);

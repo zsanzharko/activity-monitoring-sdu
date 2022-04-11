@@ -38,11 +38,7 @@ public class ProjectHandlerUtils {
         projectDto.setTitle(project.getTitle());
         projectDto.setDescription(project.getDescription());
         projectDto.setStatus(project.getStatus());
-        projectDto.setStartDate(
-                java.util.Date.from(project.getStartDate().atStartOfDay()
-                        .atZone(ZoneId.systemDefault())
-                        .toInstant())
-        );
+        projectDto.setStartDate(project.getStartDate());
         projectDto.setExpectedTime(project.getExpectedTime());
         projectDto.setSpentTime(project.getSpentTime());
         return projectDto;
@@ -55,9 +51,7 @@ public class ProjectHandlerUtils {
         project.setTitle(projectDto.getTitle());
         project.setDescription(projectDto.getDescription());
         project.setStatus(projectDto.getStatus());
-        project.setStartDate(projectDto.getStartDate().toInstant()
-                .atZone(ZoneId.systemDefault())
-                .toLocalDate());
+        project.setStartDate(projectDto.getStartDate());
         project.setExpectedTime(projectDto.getExpectedTime());
         project.setSpentTime(projectDto.getSpentTime());
 

@@ -6,7 +6,6 @@ import javax.persistence.*;
 @Table(name = "role")
 public class DevConnectionActivity {
     @Id
-
     @Column(name = "activity_id")
     private Long activityId;
 

@@ -18,4 +18,10 @@ public class ActivityDto implements Serializable {
     private ActivityStatus status;
     private Date startDate;
     private String spentTime;
+
+    public String getDate() {
+        if (startDate == null) {
+            return "Not set";
+        } else return startDate.toString();
+    }
 }
