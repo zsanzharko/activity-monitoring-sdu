@@ -25,7 +25,6 @@ public class Report {
 
     // fixme
     public String getReportTime() {
-        System.out.println(time / 60 + " hour(s) " + (time % 60) + " minute(s)");
         return time / 60 + " hour(s) " + (time % 60) + " minute(s)";
     }
 

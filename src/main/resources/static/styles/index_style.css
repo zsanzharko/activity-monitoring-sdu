@@ -138,6 +138,7 @@ header{
     CONTENT STYLE
 ----------------------------------------------------- */
 .content {
+    padding: 0 3%;
     width: 77%;
     min-height: 100vh;
     transition: all 0.3s;
@@ -153,7 +154,7 @@ header{
 }
 .main_title{
     color: #F3F5F7;
-    margin-right: 5%;
+    /*margin-right: 5%;*/
     font-size: 25px;
 }
 
@@ -162,7 +163,7 @@ header{
     background-color: #59636D;
     height: 1px;
     width: 100%;
-    margin-left: 0.7%;
+    /*margin-left: 0.7%;*/
 }
 .space_for_box{
     margin-top: 10px;

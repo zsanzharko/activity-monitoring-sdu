@@ -57,7 +57,7 @@
                         <p>Report don't set</p>
                     </div>
                 </div>
-                <form th:if="${user.getRole()} != 'MANAGER'" action="" class="input_box">
+                <form th:if="${user.getReportPermission()} " action="" class="input_box">
                     <div class="text_of_input_box">
                         <p class="enter_time">Enter the spent time (in minutes):</p>
                         <label>
