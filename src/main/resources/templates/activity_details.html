@@ -4,19 +4,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/styles/new_project.css}">
+    <link rel="stylesheet" th:href="@{/styles/new_project_buttons.css}">
     <link rel="stylesheet" th:href="@{/styles/activity_detail_css.css}">
     <link rel="stylesheet" th:href="@{/styles/index_buttons.css}">
     <link rel="stylesheet" th:href="@{/styles/index_style.css}">
-    <link rel="stylesheet" th:href="@{/styles/index_buttons.css}">
     <link rel="stylesheet" href="../static/styles/index_style.css">
     <link rel="stylesheet" href="../static/styles/index_buttons.css">
     <link rel="stylesheet" href="../static/styles/activity_detail_css.css">
 
-    <title>Document</title>
+    <title th:text="${activity.getTitle()}">Document</title>
 </head>
 <body>
 
-<div th:insert="fragments/navigation :: header"></div>
+<header th:insert="fragments/back_header :: back_to_dashoard"></header>
 
 <div class="wrapper">
     <div th:insert="fragments/navigation :: left_nav">
@@ -43,7 +44,7 @@
             </div>
             <div th:if="${assignedUser != null}">
                 <div class="assignet_box_text">
-                    <p class="assignet">Assigned</p>
+                    <p class="assignet">Assigned: <span th:text="${assignedUserName}"></span></p>
                 </div>
 
                 <div class="box_place">
@@ -56,7 +57,7 @@
                         <p>Report don't set</p>
                     </div>
                 </div>
-                <form action="" class="input_box">
+                <form th:if="${user.getRole()} != 'MANAGER'" action="" class="input_box">
                     <div class="text_of_input_box">
                         <p class="enter_time">Enter the spent time (in minutes):</p>
                         <label>
@@ -76,9 +77,10 @@
                 <div>
                     You can Assign
                     <div th:each="developer, state  : ${developers}">
-                        <p th:utext="${state}"></p>
+                        <p th:utext="${state.count}"></p>
                         <p th:text="${developer.getFullName()}"></p>
-                        <a th:href="'project/activity/assign?id=' + ${developer.getId()}">Assign</a>
+                        <a class="add_button"
+                           th:href="@{|/project/activity/assign/${developer.getId()}/${activity.getId()}/${projectId}|}">Assign</a>
                     </div>
                 </div>
             </div>

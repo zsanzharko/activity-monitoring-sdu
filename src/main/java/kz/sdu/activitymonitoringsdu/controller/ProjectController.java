@@ -106,6 +106,8 @@ public class ProjectController {
         model.addAttribute("back_page", "/dashboard");
         model.addAttribute("user", userDto);
         model.addAttribute("project", projectDto);
+        model.addAttribute("projectId", id);
+
         return new ModelAndView("project_details", model);
     }
 }

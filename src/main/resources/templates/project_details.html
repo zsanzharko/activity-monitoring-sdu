@@ -24,7 +24,7 @@
             <div class="left_part">
                 <div class="left_head">
                     <p class="activity">Activities</p>
-                    <a class="button_box" th:href="'/project/activity/create?id=' + ${project.getProjectId()}">
+                    <a th:if="${user.getRole().name()} == 'MANAGER'" class="button_box" th:href="'/project/activity/create?id=' + ${project.getProjectId()}">
                         <img th:src="@{/images/nouveau-symbole-bleu.png}" alt="" class="plus">
                         New
                     </a>
@@ -33,10 +33,12 @@
                     <div class="function_activities_box" th:each="activity : ${activities}">
                         <div class="circle_func_box">
                             <!-- <div class="circle"></div> -->
-                            <input type="radio" class="circle">
+                            <label>
+                                <input type="radio" class="circle">
+                            </label>
                             <p class="function_activities" th:text="${activity.title}">Do some function</p>
                         </div>
-                        <a th:href="'/project/activity/' + ${activity.id}" class="view_button">View</a>
+                        <a th:href="'/project/activity/' + ${projectId} +'/' + ${activity.id}" class="view_button">View</a>
                     </div>
 
                 </div>

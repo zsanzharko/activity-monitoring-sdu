@@ -1,11 +1,10 @@
 package kz.sdu.activitymonitoringsdu.controller;
 
-import kz.sdu.activitymonitoringsdu.dao.ActivityDao;
-import kz.sdu.activitymonitoringsdu.dao.DevConnectionActivityDao;
-import kz.sdu.activitymonitoringsdu.dao.ProjectDao;
-import kz.sdu.activitymonitoringsdu.dao.UserDao;
+import kz.sdu.activitymonitoringsdu.dao.*;
 import kz.sdu.activitymonitoringsdu.dto.ActivityDto;
 import kz.sdu.activitymonitoringsdu.dto.UserDto;
+import kz.sdu.activitymonitoringsdu.entity.Activity;
+import kz.sdu.activitymonitoringsdu.entity.Consist;
 import kz.sdu.activitymonitoringsdu.entity.DevConnectionActivity;
 import kz.sdu.activitymonitoringsdu.entity.Report;
 import kz.sdu.activitymonitoringsdu.enums.Role;
@@ -30,17 +29,19 @@ public class ActivityController {
     private final ActivityDao activityDao;
     private final DevConnectionActivityDao assignedUserDao;
     private final UserDao userDao;
+    private final ConsistDao consistDao;
 
     @Autowired
-    public ActivityController(ProjectDao projectDao, ActivityDao activityDao, DevConnectionActivityDao assignedUserDao, UserDao userDao) {
+    public ActivityController(ProjectDao projectDao, ActivityDao activityDao, DevConnectionActivityDao assignedUserDao, UserDao userDao, ConsistDao consistDao) {
         this.projectDao = projectDao;
         this.activityDao = activityDao;
         this.assignedUserDao = assignedUserDao;
         this.userDao = userDao;
+        this.consistDao = consistDao;
     }
 
-    @GetMapping("/{id}")
-    public ModelAndView detailsActivityPage(@PathVariable Long id, ModelMap modelMap) {
+    @GetMapping("/{projectId}/{id}")
+    public ModelAndView detailsActivityPage(@PathVariable final String projectId, @PathVariable Long id, ModelMap modelMap) {
         UserDto userDto = UserHandlerUtils.getUserFromAuth(userDao);
 
 
@@ -58,10 +59,12 @@ public class ActivityController {
         }
 
         modelMap.addAttribute("assignedUser", assignedUserDto);
+        modelMap.addAttribute("assignedUserName", userDao.findById(assignedUserDto.getUserId()).getFirstName());
         modelMap.addAttribute("user", userDto);
         modelMap.addAttribute("activity", activityDto);
         modelMap.addAttribute("reports", reportList);
-
+        modelMap.addAttribute("back_page",
+                "/project/details?id=" + projectId);
         modelMap.addAttribute("id", id);
 
         return new ModelAndView("activity_details", modelMap);
@@ -79,8 +82,19 @@ public class ActivityController {
         return new ModelAndView("redirect:/project/activity/" + modelMap.getAttribute("id"));
     }
 
+    @GetMapping("/assign/{id}/{activityId}/{projectId}")
+    public String assignUserToActivity(@PathVariable final Long id,
+                                       @PathVariable final Long activityId,
+                                       @PathVariable final String projectId) {
+        UserDto userDto = UserHandlerUtils.getUserFromAuth(userDao);
+        if(userDto.getRole() == Role.EMPLOYEE) return "redirect:/dashboard";
+
+        assignedUserDao.save(new DevConnectionActivity(activityId, id, ""));
+        return "redirect:/project/activity/" + projectId + "/" + activityId;
+    }
+
     @GetMapping("/create")
-    public ModelAndView createActivity(@RequestParam final Long id, ModelMap model) {
+    public ModelAndView createActivity(@RequestParam final String id, ModelMap model) {
         //checking user is manager or not
         UserDto userDto = UserHandlerUtils.getUserFromAuth(userDao);
         if (!userDto.getRole().name().equals(Role.MANAGER.name()))
@@ -95,7 +109,7 @@ public class ActivityController {
     }
 
     @PostMapping("/create/{id}")
-    public ModelAndView saveActivityProject(@PathVariable Long id,
+    public ModelAndView saveActivityProject(@PathVariable final String id,
                                             @ModelAttribute("activity") final ActivityCreateForm activityCreateForm,
                                             ModelMap model,
                                             BindingResult bindingResult) {
@@ -111,7 +125,8 @@ public class ActivityController {
             return new ModelAndView("redirect:/project/activity/create/" + id, model);
         }
 
-        activityDao.save(ActivityHandlerUtils.convertToEntity(activityCreateForm.getDtoFromForm()));
+        Activity activity = activityDao.save(ActivityHandlerUtils.convertToEntity(activityCreateForm.getDtoFromForm()));
+        consistDao.save(new Consist(activity.getId(), id));
         return new ModelAndView("redirect:/project/details?id=" + id);
     }
 }

@@ -43,7 +43,7 @@ public class ActivityDao implements ActivityService {
         for (Consist consist : consists) {
             activities.add(
                     ActivityHandlerUtils.convertToDto(
-                            Objects.requireNonNull(activityRepository.findById(consist.getId()).orElse(null))));
+                            Objects.requireNonNull(activityRepository.findById(consist.getActivityId()).orElse(null))));
         }
         return activities;
     }

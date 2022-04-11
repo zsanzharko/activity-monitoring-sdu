@@ -14,5 +14,5 @@ public interface ConsistRepository extends JpaRepository<Consist, Long> {
 
     List<Consist> findByProjectId(String projectId);
 
-    List<Consist> findAllById(Long activityId);
+    List<Consist> findAllByActivityId(Long activityId);
 }
