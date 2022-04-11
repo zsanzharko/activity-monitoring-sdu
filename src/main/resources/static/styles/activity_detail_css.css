@@ -211,6 +211,13 @@ header{
 .end_datet{
   margin-right: 10px;
 }
+.doted_line{
+    width: 50%;
+    height: 1px;
+    background-color:black;
+    border-style: dashed;
+
+}
 .wasted_time{
   margin-left: 5px;
 }
