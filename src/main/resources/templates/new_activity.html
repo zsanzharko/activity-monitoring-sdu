@@ -5,16 +5,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="stylesheet" th:href="@{/styles/index_style.css}">
     <link rel="stylesheet" th:href="@{/styles/index_buttons.css}">
+    <link rel="stylesheet" th:href="@{/styles/new_project.css}">
+    <link rel="stylesheet" th:href="@{/styles/new_activity.css}">
+
     <link rel="stylesheet" href="../static/styles/index_style.css">
     <link rel="stylesheet" href="../static/styles/index_buttons.css">
     <link rel="stylesheet" href="../static/styles/new_activity.css">
     <link rel="stylesheet" href="../static/styles/new_project.css">
-    <link rel="stylesheet" th:href="@{/styles/new_project.css}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>New Activity</title>
 </head>
 <body>
-<div th:insert="fragments/navigation :: header"></div>
+<header th:insert="fragments/back_header :: back_to_dashoard"></header>
 
 <div class="wrapper">
     <div th:insert="fragments/navigation :: left_nav"></div>
@@ -42,14 +44,14 @@
             <div class="input_box_style">
                 <p>Status</p>
                 <label for="status">
-                    <input type="text" th:field="*{status}" id="status"class="input_field" required/>
+                    <input type="text" th:field="*{status}" id="status" class="input_field" required/>
                 </label>
             </div>
            
             <div class="input_box_style">
                 <p>StartDate</p>
                 <label for="startDate">
-                    <input type="date" pattern="yyyy-MM-dd" th:field="*{startDate}" id="startDate"class="input_field" required/>
+                    <input type="date" pattern="yyyy-MM-dd" th:field="*{startDate}" id="startDate" class="input_field" required/>
                 </label>
             </div>
             <div class="button_box">

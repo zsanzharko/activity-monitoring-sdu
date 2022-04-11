@@ -86,6 +86,8 @@ public class ActivityController {
         if (!userDto.getRole().name().equals(Role.MANAGER.name()))
             return new ModelAndView("redirect:/");
 
+        model.addAttribute("back_page", "/dashboard");
+        model.addAttribute("user", userDto);
         model.addAttribute("id", id);
         model.addAttribute("activity", new ActivityCreateForm());
 

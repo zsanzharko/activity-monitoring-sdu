@@ -48,9 +48,9 @@
 
                 <div class="box_place">
                     <div class="time_box" th:each="report : ${reports}" th:if="${reports.size() > 0}">
-                        <p><span class="end_datet" th:text="${report.getReportTime()}">04.09.2022</span>
+                        <p><span class="end_datet" th:text="${report.getReportDate()}">04.09.2022</span>
                     <div class="doted_line"></div>
-                    <span class="wasted_time" th:text="${report.getReportTime()}">1 hour 20 min</span></p>
+                    <span class="wasted_time" th:text="${report.getReportTime()}">1 hour 20 min</span>
                     </div>
                     <div class="time_box" th:if="${reports.size() == 0}">
                         <p>Report don't set</p>

@@ -29,6 +29,10 @@ public class Report {
         return time / 60 + " hour(s) " + (time % 60) + " minute(s)";
     }
 
+    public String getReportDate() {
+        return dateFixing.toString();
+    }
+
     public void setTime(Integer time) {
         this.time = time;
     }

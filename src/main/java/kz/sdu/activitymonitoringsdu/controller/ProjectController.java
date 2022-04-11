@@ -55,6 +55,7 @@ public class ProjectController {
             return new ModelAndView("redirect:/dashboard");
         }
         model.addAttribute("user", userDto);
+        model.addAttribute("back_page", "/dashboard");
 
         // Adding project facade to place input
         model.addAttribute("project", new ProjectCreateForm());
@@ -102,6 +103,7 @@ public class ProjectController {
 
         model.addAttribute("userIsManager", userDto.getRole() == Role.MANAGER);
         model.addAttribute("activities", activities);
+        model.addAttribute("back_page", "/dashboard");
         model.addAttribute("user", userDto);
         model.addAttribute("project", projectDto);
         return new ModelAndView("project_details", model);
