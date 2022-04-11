@@ -17,7 +17,7 @@ import java.util.Date;
 @Getter
 @Setter
 public class ProjectCreateForm {
-    private String projectId;
+    private String projectId = generateId();
     private String projectVersion;
     private String title;
     private String description;
@@ -37,5 +37,21 @@ public class ProjectCreateForm {
 
         projectDto.setActivities(new ArrayList<>());
         return projectDto;
+    }
+
+    private String generateId() {
+        StringBuilder id = new StringBuilder();
+        for (int i = 0; i < 8; i++) {
+            if(i < 4) {
+                id.append((int) (Math.random() * 10));
+            } else {
+                id.append((char) (65 +Math.random() * 90));
+            }
+        }
+        return id.toString();
+    }
+
+    public void regenerateId() {
+        projectId = generateId();
     }
 }

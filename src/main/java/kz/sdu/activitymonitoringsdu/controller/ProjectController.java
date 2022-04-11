@@ -79,6 +79,15 @@ public class ProjectController {
             return "redirect:/create";
         }
 
+        boolean projectIdIsCorrect = false;
+        while (!projectIdIsCorrect) {
+            if (projectDao.findById(project.getProjectId()) == null) {
+                projectIdIsCorrect = true;
+            } else {
+                project.regenerateId();
+            }
+        }
+
         projectDao.saveProject(
                 ProjectHandlerUtils.convertToEntity(
                 project.getDtoFromForm()));
