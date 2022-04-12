@@ -9,6 +9,5 @@ import java.util.Date;
 public class SpendTimeForm {
 
     private Integer minutes;
-    private Long activityId;
     private Date dateStart = Date.from(Instant.now());
 }

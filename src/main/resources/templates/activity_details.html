@@ -57,16 +57,24 @@
                         <p>Report don't set</p>
                     </div>
                 </div>
-                <form th:if="${user.getReportPermission()} " action="" class="input_box">
+                <form th:if="${user.getReportPermission()} " th:object="${spendTimeForm}"
+                      th:action="@{|/project/activity/push/${projectId}/${activity.getId()}|}"
+                      method="post" class="input_box">
                     <div class="text_of_input_box">
                         <p class="enter_time">Enter the spent time (in minutes):</p>
                         <label>
-                            <input type="number" class="input" required>
+                            <input type="number" th:field="*{minutes}" class="input" required>
                         </label>
+<!--                        <label>-->
+<!--                            <input type="hidden" th:field="*{activityId}" th:value="${activity.getId()}" class="input" required>-->
+<!--                        </label>-->
+
                     </div>
                     <div class="push_box">
-                        <button class="push_button">push</button>
-                        <a href="" class="close_button">
+                        <label>
+                            <input type="submit" th:value="push" class="push_button">
+                        </label>
+                        <a href="#" class="close_button">
                             <div>close</div>
                         </a>
                     </div>
