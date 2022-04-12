@@ -143,6 +143,8 @@ header{
     min-height: 100vh;
     transition: all 0.3s;
     background-color: #3A506B;
+    /* background-color:#B4B4B4; */
+
 }
 .manage_creator{
     margin-top: 3%;
@@ -151,6 +153,7 @@ header{
     flex-direction: row;
     justify-content: space-between;
     align-items:center;
+    /* background-color:#292F40; */
 }
 .main_title{
     color: #F3F5F7;
@@ -166,6 +169,8 @@ header{
     /*margin-left: 0.7%;*/
 }
 .space_for_box{
+    /* width: 100%; */
+    /* background-color:#5094DF; */
     margin-top: 10px;
     height: auto;
     display: flex;
@@ -185,6 +190,20 @@ header{
     padding-bottom: 10px;
     border-radius: 10px;
     box-shadow: 1px 2px 3px 4px rgba(12,12,12,0.2);
+}
+.box_employee{
+    color:white;
+    background-color:#0B122B;
+    display: flex;
+    height: 70px;
+    min-width: 300px;
+    align-items:center;
+    justify-content: space-around;
+    border-radius: 15px;
+    margin: 15px;
+}
+.left_part{
+    display: flex;
 }
 
 .box_head{

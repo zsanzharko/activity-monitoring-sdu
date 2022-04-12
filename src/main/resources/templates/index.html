@@ -14,7 +14,9 @@
 <div th:insert="fragments/navigation :: header"></div>
 
 <div class="wrapper">
-    <div th:insert="fragments/navigation :: left_nav"></div>
+    <div th:insert="fragments/navigation :: left_nav">
+            <!-- Sidebar Holder -->
+    </div>
 
     <!-- Page Content Holder -->
     <div class="content" th:if="${user.getRole().name() == 'MANAGER'}" th:insert="fragments/nav_pages :: dashboard_main_content"></div>
@@ -24,12 +26,15 @@
             <p class="main_title">Activities</p>
         </div>
         <div class="line"></div>
-        <div class="space_for_box">
-            <div th:each="activity, state : ${activities}">
-                <p th:text="${state.count}">1</p>
-                <p th:text="${activity.getTitle()}">Project1</p>
+        <div class="space_for_box ">
+            <div th:each="activity, state : ${activities}" class="box_employee">
+                <div class="left_part">
+                    <p th:text="${state.count}">1</p>
+                    <p>.</p>
+                    <p th:text="${activity.getTitle()}">Project1</p>
+                </div>
                 <p th:text="${activity.getStatus().name()}">Started</p>
-                <a class="add_button" th:href="@{|project/activity/${consists.get(state.count - 1)}/${activity.getId()}|}">View</a>
+                <a class="add_button employee_button" th:href="@{|project/activity/${consists.get(state.count - 1)}/${activity.getId()}|}">View</a>
             </div>
         </div>
     </div>

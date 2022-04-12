@@ -123,6 +123,11 @@
   outline: 2px solid transparent;
   outline-offset: 2px;
 }
+
+.employee_button{
+  background-color: #3A506B;
+}
+
 .plus{
   color:#114A90;
   margin-right: 5px;
