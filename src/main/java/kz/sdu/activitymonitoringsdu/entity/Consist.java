@@ -1,15 +1,18 @@
 package kz.sdu.activitymonitoringsdu.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
-import java.math.BigDecimal;
 
 @Entity
 @Table(name = "consist")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Consist {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "activity_id", nullable = false, precision = 8)
-    private Long id;
+    @Column(name = "activity_id", nullable = false)
+    private Long activityId;
 
     @Column(name = "project_id", nullable = false, precision = 4)
     private String projectId;
@@ -22,11 +25,11 @@ public class Consist {
         this.projectId = projectId;
     }
 
-    public Long getId() {
-        return id;
+    public Long getActivityId() {
+        return activityId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setActivityId(Long id) {
+        this.activityId = id;
     }
 }

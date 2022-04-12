@@ -6,7 +6,20 @@ import kz.sdu.activitymonitoringsdu.entity.User;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class UserHandlerUtils {
+
+    public static List<UserDto> convertToDto(List<User> users) {
+        List<UserDto> userDtoList  = new ArrayList<>();
+
+        for (User user : users) {
+            userDtoList.add(convertToDto(user));
+        }
+        return userDtoList;
+    }
+
     public static UserDto convertToDto(User user) {
         UserDto userDto = new UserDto();
         userDto.setFullName(user.getFirstName() + " " + user.getLastName());

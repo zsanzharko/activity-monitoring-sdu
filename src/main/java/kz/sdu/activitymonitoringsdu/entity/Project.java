@@ -5,6 +5,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Date;
 
 //todo do documentation
 // about spent time and expected Time
@@ -35,7 +36,7 @@ public class Project {
     private ProjectStatus status;
 
     @Column(name = "start_date", nullable = false)
-    private LocalDate startDate;
+    private Date startDate;
 
     @Column(name = "expected_time", nullable = false)
     private String expectedTime;

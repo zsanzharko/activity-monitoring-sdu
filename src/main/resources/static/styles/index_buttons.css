@@ -104,7 +104,7 @@
   transition-duration: .3s; 
   min-width: 80px;
   height: 30px;
-  margin-left: 5%;
+  /*margin-left: 5%;*/
   display: flex;
   justify-content: center;
   align-items:center;
@@ -123,6 +123,12 @@
   outline: 2px solid transparent;
   outline-offset: 2px;
 }
+
+.employee_button{
+  background-color: #3A506B;
+  margin-left: 30px;
+}
+
 .plus{
   color:#114A90;
   margin-right: 5px;

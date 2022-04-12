@@ -17,4 +17,8 @@ public class UserDto implements Serializable {
     private Gender gender;
     private String email;
     private Role role;
+
+    public boolean getReportPermission() {
+        return role == Role.EMPLOYEE;
+    }
 }

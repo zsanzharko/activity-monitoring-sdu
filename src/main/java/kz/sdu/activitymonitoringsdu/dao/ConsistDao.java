@@ -29,4 +29,8 @@ public class ConsistDao implements ConsistService {
     public List<Consist> findAllByProjectId(String projectId){
         return consistRepository.findByProjectId(projectId);
     }
+
+    public void save(Consist consist) {
+        consistRepository.save(consist);
+    }
 }

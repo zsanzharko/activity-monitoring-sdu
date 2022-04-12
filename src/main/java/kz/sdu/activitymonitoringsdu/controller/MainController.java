@@ -1,15 +1,12 @@
 package kz.sdu.activitymonitoringsdu.controller;
 
-import kz.sdu.activitymonitoringsdu.dao.ActivityDao;
-import kz.sdu.activitymonitoringsdu.dao.ConsistDao;
-import kz.sdu.activitymonitoringsdu.dao.ProjectDao;
-import kz.sdu.activitymonitoringsdu.dao.UserDao;
+import kz.sdu.activitymonitoringsdu.dao.*;
 import kz.sdu.activitymonitoringsdu.dto.ActivityDto;
 import kz.sdu.activitymonitoringsdu.dto.ProjectDto;
 import kz.sdu.activitymonitoringsdu.dto.UserDto;
-import kz.sdu.activitymonitoringsdu.entity.Activity;
+import kz.sdu.activitymonitoringsdu.entity.Consist;
+import kz.sdu.activitymonitoringsdu.entity.DevConnectionActivity;
 import kz.sdu.activitymonitoringsdu.enums.Role;
-import kz.sdu.activitymonitoringsdu.handlers.ActivityHandlerUtils;
 import kz.sdu.activitymonitoringsdu.handlers.ProjectHandlerUtils;
 import kz.sdu.activitymonitoringsdu.handlers.UserHandlerUtils;
 import lombok.Getter;
@@ -22,8 +19,6 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.ArrayList;
 import java.util.List;
 
-//SecurityContextHolder.getContext().getAuthentication().getPrincipal()
-
 @Controller
 @Getter
 public class MainController {
@@ -32,13 +27,15 @@ public class MainController {
     private final ProjectDao projectDao;
     private final ActivityDao activityDao;
     private final ConsistDao consistDao;
+    private final DevConnectionActivityDao assignDao;
 
     @Autowired
-    public MainController(UserDao userDao, ProjectDao projectDao, ActivityDao activityDao, ConsistDao consistDao) {
+    public MainController(UserDao userDao, ProjectDao projectDao, ActivityDao activityDao, ConsistDao consistDao, DevConnectionActivityDao assignDao) {
         this.userDao = userDao;
         this.projectDao = projectDao;
         this.activityDao = activityDao;
         this.consistDao = consistDao;
+        this.assignDao = assignDao;
     }
 
     @GetMapping("/")
@@ -49,29 +46,11 @@ public class MainController {
     @GetMapping("/dashboard")
     public ModelAndView getDashboardPanel(ModelMap model) {
         UserDto userDto = UserHandlerUtils.getUserFromAuth(userDao);
-        List<ProjectDto> projects;
 
-        // Manager can get all projects
-        if (userDto.getRole() == Role.MANAGER) {
-            projects = ProjectHandlerUtils.convertToDto(projectDao.findAll());
-        } else {
-            projects = ProjectHandlerUtils.convertToDto(projectDao.findAll());
-        }
+        roleDefinitionDashboard(userDto, model);
 
-        for (ProjectDto projectDto : projects) {
-            List<ActivityDto> subActivities = new ArrayList<>();
-
-            List<ActivityDto> activities = activityDao.getActivitiesById(consistDao.findAllByProjectId(projectDto.getProjectId()));
-            if(activities == null) activities = new ArrayList<>();
-            for (int i = 0; i < 2 && !activities.isEmpty(); i++) {
-                if (i > activities.size() - 1) break;
-                subActivities.add(activities.get(i));
-            }
-            projectDto.setActivities(subActivities);
-        }
 
         model.addAttribute("user", userDto);
-        model.addAttribute("projects", projects);
 
         model.addAttribute("titlePage", "Dashboard");
 
@@ -82,5 +61,34 @@ public class MainController {
     public ModelAndView getProfilePanel(ModelMap model) {
 
         return new ModelAndView("redirect:/");
+    }
+
+    private void roleDefinitionDashboard(final UserDto user, ModelMap modelMap) {
+        if(user.getRole() == Role.MANAGER) {
+            List<ProjectDto> projects = ProjectHandlerUtils.convertToDto(projectDao.findAll());
+            for (ProjectDto projectDto : projects) {
+                List<ActivityDto> subActivities = new ArrayList<>();
+
+                List<ActivityDto> activities = activityDao.getActivitiesById(consistDao.findAllByProjectId(projectDto.getProjectId()));
+                if(activities == null) activities = new ArrayList<>();
+                for (int i = 0; i < 2 && !activities.isEmpty(); i++) {
+                    if (i > activities.size() - 1) break;
+                    subActivities.add(activities.get(i));
+                }
+                projectDto.setActivities(subActivities);
+            }
+            modelMap.addAttribute("projects", projects);
+        } else if(user.getRole() == Role.EMPLOYEE) {
+            List<DevConnectionActivity> assignedList = assignDao.findAllByUserIdAssign(user.getId());
+            List<ActivityDto> activityDtoList = new ArrayList<>();
+            List<Consist> consistList = new ArrayList<>();
+            for (DevConnectionActivity assign : assignedList) {
+                activityDtoList.add(activityDao.findById(assign.getActivityId()));
+                consistList.add(consistDao.findById(assign.getActivityId()));
+            }
+
+            modelMap.addAttribute("activities", activityDtoList);
+            modelMap.addAttribute("consists", consistList);
+        }
     }
 }

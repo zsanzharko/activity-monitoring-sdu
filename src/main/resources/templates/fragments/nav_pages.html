@@ -13,11 +13,12 @@
 <div th:fragment="dashboard_main_content">
     <!--/*@thymesVar class="Role" type="kz.sdu.activitymonitoringsdu.enums.Role"*/-->
     <div class="manage_creator">
-        <a class="add_button" th:if="${user.getRole() == 'MANAGER'}" th:href="@{/project/create}"><span class="plus">+</span>New</a>
+        <!--/*@thymesVar id="Role" type="kz.sdu.activitymonitoringsdu.enums.Role"*/-->
+        <a class="add_button" th:if="${user.getRole().name() == 'MANAGER'}" th:href="@{/project/create}"><span class="plus">+</span>New</a>
         <p class="main_title">Projects</p>
     </div>
+    <div class="line"></div>
     <div class="space_for_box">
-        <div class="line"></div>
         <div class="box" th:each="project : ${projects}">
             <div class="box_head">
                 <div class="box_head_left">

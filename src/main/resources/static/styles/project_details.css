@@ -40,7 +40,6 @@ section{
     display: flex;
     flex-direction: row;
     justify-content:center;
-    /* align-items:center; */
     flex-wrap: wrap;
 }
 
@@ -55,10 +54,6 @@ section{
   width: 50%;
   height: 85%;
   border-radius: 15px;
-  /* display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items:center */
 }
 
 .activity{
@@ -71,9 +66,7 @@ section{
   justify-content: space-between;
   align-items:center;
   border-bottom: 1px solid #656568;
-  /* height: 70px; */
   height: 12%;
-  /* border-radius: 15px; */
   border-radius: 15px 15px 0px 0px;
 }
 
@@ -110,7 +103,6 @@ section{
 .left_body{
   display: flex;
   flex-direction: column;
-  /* background-color:#2E2441; */
   height: 70%;
   border-radius: 0px 0px 15px 15px;
   margin-top: 25px;
@@ -119,7 +111,6 @@ section{
   display: flex;
   align-items:center;
   justify-content: space-between;
-  /* background-color: #266F62; */
   margin: 0 15px 15px 30px;
 }
 .circle_func_box{
@@ -140,14 +131,12 @@ section{
   width: 100px;
   height: 30px;
   font-size: 15px;
-  /* text-transform: uppercase; */
   background-color: #266FBF;
   border-radius: 15px;
   box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease 0s;
   cursor: pointer;
-  /* outline: none; */
-  /* transition-duration: .3s; */
+
   }
 
 .view_button:hover {
@@ -163,7 +152,6 @@ section{
   height: 85%;
   margin-left: 10px;
   width: 35%;
-  /* min-width: 400px; */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -193,9 +181,11 @@ section{
 }
 
 .box_1_body{
-  height: 75.5%;
-  margin: 20px 0 0 20px;
+  height: 68%;
+  overflow-y:scroll;
+  padding: 10px;
 }
+
 .daily_record, .total_record{
   margin-top: 15px;
 }

@@ -3,34 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="stylesheet" href="../static/styles/manager_new_task.css">
-    <link rel="stylesheet" href="../static/styles/manager_new_task_buttons.css">
-    <link rel="stylesheet" th:href="@{/styles/manager_new_task.css}">
-    <link rel="stylesheet" th:href="@{/styles/manager_new_task_buttons.css}">
+    <link rel="stylesheet" th:href="@{/styles/index_style.css}">
+    <link rel="stylesheet" th:href="@{/styles/index_buttons.css}">
+    <link rel="stylesheet" th:href="@{/styles/new_project.css}">
+    <link rel="stylesheet" th:href="@{/styles/new_activity.css}">
+
+    <link rel="stylesheet" href="../static/styles/index_style.css">
+    <link rel="stylesheet" href="../static/styles/index_buttons.css">
+    <link rel="stylesheet" href="../static/styles/new_activity.css">
+    <link rel="stylesheet" href="../static/styles/new_project.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>New Activity</title>
 </head>
 <body>
-<div th:insert="fragments/navigation :: header"></div>
-<form action="#" th:action="'/project/activity/create/' + ${id}" method="post" th:object="${activity}">
-    <p>title</p>
-    <label for="title">
-        <input type="text" th:field="*{title}" id="title"/>
-    </label>
-    <p>description</p>
-    <label for="description">
-        <input type="text" th:field="*{description}" id="description"/>
-    </label>
-    <p>status</p>
-    <label for="status">
-        <input type="text" th:field="*{status}" id="status"/>
-    </label>
-    <p>startDate</p>
-    <label for="startDate">
-        <input type="date" pattern="yyyy-MM-dd" th:field="*{startDate}" id="startDate"/>
-    </label>
-    <button value="Submit" type="submit">Submit</button>
-</form>
+<header th:insert="fragments/back_header :: back_to_dashoard"></header>
 
+<div class="wrapper">
+    <div th:insert="fragments/navigation :: left_nav"></div>
+
+    <!-- Page Content Holder -->
+    <div class="content">
+       
+        <form action="#" th:action="'/project/activity/create/' + ${id}" method="post" th:object="${activity}" class="right_part">
+            <div class="topic">
+                New Activity
+            </div>
+            <div class="input_box_style">
+                <p>Title</p>
+                <label for="title">
+                    <input type="text" th:field="*{title}" id="title" class="input_field" required/>
+                </label>
+            </div>
+            <div class="input_box_style">
+                <p>Description</p>
+                <label for="description">
+                    <textarea th:field="*{description}" name="" id="description" cols="30" rows="10" class="input_field">
+                    </textarea>
+                </label>
+            </div>
+            <div class="input_box_style">
+                <p>Status</p>
+                <label for="status">
+                    <input type="text" th:field="*{status}" id="status" class="input_field" required/>
+                </label>
+            </div>
+           
+            <div class="input_box_style">
+                <p>StartDate</p>
+                <label for="startDate">
+                    <input type="date" pattern="yyyy-MM-dd" th:field="*{startDate}" id="startDate" class="input_field" required/>
+                </label>
+            </div>
+            <div class="button_box">
+                <button value="Submit" type="submit" class="submit_button">Submit</button>
+            </div>
+            
+        </form>
+    </div>
+
+    <script th:src="@{https://code.jquery.com/jquery-3.3.1.slim.min.js}"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script th:src="@{/js/loged_js.js}"></script>
+</div>
 </body>
 </html>

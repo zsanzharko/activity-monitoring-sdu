@@ -4,16 +4,25 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/styles/new_project.css}">
+    <link rel="stylesheet" th:href="@{/styles/new_project_buttons.css}">
     <link rel="stylesheet" th:href="@{/styles/activity_detail_css.css}">
+    <link rel="stylesheet" th:href="@{/styles/index_buttons.css}">
+    <link rel="stylesheet" th:href="@{/styles/index_style.css}">
+    <link rel="stylesheet" href="../static/styles/index_style.css">
+    <link rel="stylesheet" href="../static/styles/index_buttons.css">
     <link rel="stylesheet" href="../static/styles/activity_detail_css.css">
-    <title>Document</title>
+
+    <title th:text="${activity.getTitle()}">Document</title>
 </head>
 <body>
 
-<div th:insert="fragments/navigation :: header"></div>
+<header th:insert="fragments/back_header :: back_to_dashoard"></header>
 
 <div class="wrapper">
-    <div th:insert="fragments/navigation :: left_nav"></div>
+    <div th:insert="fragments/navigation :: left_nav">
+            <!-- Sidebar Holder -->
+    </div>
 
     <!-- Page Content Holder -->
     <div class="content">
@@ -26,51 +35,79 @@
         <div class="content_box">
             <div class="start_date_box">
                 <p class="start_date">Start date: <span
-                        th:text="${activity.getStartDate().toString()}">start date</span></p>
+                        th:text="${activity.getDate()}">start date</span></p>
             </div>
 
             <div class="description_box">
                 <p class="description">Description</p>
                 <p th:text="${activity.getDescription()}"></p>
             </div>
-            <div class="assignet_box_text">
-                <p class="assignet">Assigned</p>
+            <div th:if="${assignedUser != null}">
+                <div class="assignet_box_text">
+                    <p class="assignet">Assigned: <span th:text="${assignedUserName}"></span></p>
+                </div>
+
+                <div class="box_place">
+                    <div class="time_box" th:each="report : ${reports}" th:if="${reports.size() > 0}">
+                        <p><span class="end_datet" th:text="${report.getReportDate()}">04.09.2022</span>
+                    <div class="doted_line"></div>
+                    <span class="wasted_time" th:text="${report.getReportTime()}">1 hour 20 min</span>
+                    </div>
+                    <div class="time_box" th:if="${reports.size() == 0}">
+                        <p>Report don't set</p>
+                    </div>
+                </div>
+                <form th:if="${user.getReportPermission()} " th:object="${spendTimeForm}"
+                      th:action="@{|/project/activity/push/${projectId}/${activity.getId()}|}"
+                      method="post" class="input_box">
+                    <div class="text_of_input_box">
+                        <p class="enter_time">Enter the spent time (in minutes):</p>
+                        <label>
+                            <input type="number" th:field="*{minutes}" class="input" required>
+                        </label>
+<!--                        <label>-->
+<!--                            <input type="hidden" th:field="*{activityId}" th:value="${activity.getId()}" class="input" required>-->
+<!--                        </label>-->
+
+                    </div>
+                    <div class="push_box">
+                        <label>
+                            <input type="submit" th:value="push" class="push_button">
+                        </label>
+                        <a href="#" class="close_button">
+                            <div>close</div>
+                        </a>
+                    </div>
+                </form>
+
+                <!-- <div class="space_for_box">
+                    <div th:each="activity, state : ${activities}" class="box_employee">
+                        <div class="left_part">
+                            <p th:text="${state.count}">1</p>
+                            <p>.</p>
+                            <p th:text="${activity.getTitle()}">Project1</p>
+                        </div>
+                        <div class="right_part">
+                            <p th:text="${activity.getStatus().name()}">Started</p>
+                            <a class="add_button employee_button" th:href="@{|project/activity/${consists.get(state.count - 1)}/${activity.getId()}|}">View</a>
+                        </div>
+                        
+                    </div>
+                </div> -->
+
             </div>
-
-            <div class="box_place">
-                <div class="time_box">
-                    <p><span class="end_datet">04.09.2022</span>--------------------------------------------- <span
-                            class="wasted_time">1 hour 20 min</span></p>
-                </div>
-                <div class="time_box">
-                    <p><span class="end_datet">04.09.2022</span>--------------------------------------------- <span
-                            class="wasted_time">1 hour 20 min</span></p>
-                </div>
-                <div class="time_box">
-                    <p><span class="end_datet">04.09.2022</span>--------------------------------------------- <span
-                            class="wasted_time">1 hour 20 min</span></p>
-                </div>
-                <div class="time_box">
-                    <p><span class="end_datet">04.09.2022</span>--------------------------------------------- <span
-                            class="wasted_time">1 hour 20 min</span></p>
+            <div th:unless="${assignedUser != null}" class="assign_box">
+                Don't have assignment
+                <div>
+                    You can Assign
+                    <div th:each="developer, state  : ${developers}">
+                        <p th:utext="${state.count}"></p>
+                        <p th:text="${developer.getFullName()}"></p>
+                        <a class="add_button"
+                           th:href="@{|/project/activity/assign/${developer.getId()}/${activity.getId()}/${projectId}|}">Assign</a>
+                    </div>
                 </div>
             </div>
-            <form action="" class="input_box">
-                <!-- <div > -->
-                <div class="text_of_input_box">
-                    <p class="enter_time">Enter the time (in minutes):</p>
-                    <input type="number">
-                </div>
-                <div class="push_box">
-                    <button class="push_button">push</button>
-                    <a href="" class="close_button">
-                        <div>close</div>
-                    </a>
-                </div>
-                <!-- </div> -->
-
-            </form>
-
 
         </div>
     </div>
