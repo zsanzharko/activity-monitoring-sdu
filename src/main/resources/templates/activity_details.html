@@ -21,7 +21,7 @@
 
 <div class="wrapper">
     <div th:insert="fragments/navigation :: left_nav">
-
+            <!-- Sidebar Holder -->
     </div>
 
     <!-- Page Content Holder -->
@@ -71,6 +71,19 @@
                         </a>
                     </div>
                 </form>
+
+                <!-- <div class="space_for_box">
+                    <div th:each="activity, state : ${activities}" class="box_employee">
+                        <div class="left_part">
+                            <p th:text="${state.count}">1</p>
+                            <p>.</p>
+                            <p th:text="${activity.getTitle()}">Project1</p>
+                        </div>
+                        <p th:text="${activity.getStatus().name()}">Started</p>
+                        <a class="add_button employee_button" th:href="@{|project/activity/${consists.get(state.count - 1)}/${activity.getId()}|}">View</a>
+                    </div>
+                </div> -->
+                
             </div>
             <div th:unless="${assignedUser != null}" class="assign_box">
                 Don't have assignment
