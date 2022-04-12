@@ -213,7 +213,7 @@ header{
 }
 .doted_line{
     width: 50%;
-    height: 1px;
+    height: 0.1px;
     background-color:black;
     border-style: dashed;
 

@@ -30,7 +30,7 @@
                     <input type="text" class="name_input"
                            id="title"
                            th:field="*{title}"
-                           placeholder="Like 'Android App'">
+                           placeholder="Like 'Android App'" required>
                 </label>
 <!--                <p class="pr_number">Project Id</p>-->
 <!--                <label for="projectId" class="project_id_box">-->
@@ -45,7 +45,7 @@
                            th:field="*{projectVersion}"
                            class="version_input"
                            id="projectVersion"
-                           placeholder="Like 'B'">
+                           placeholder="Like 'B'" required>
                 </label>
 
                 <p class="pr_number">Date to start:</p>
@@ -53,7 +53,7 @@
                     <input type="date" class="number_input"
                            pattern="yyyy-MM-dd"
                            th:field="*{startDate}"
-                           id="startDate">
+                           id="startDate" required>
                 </label>
 
                 <p class="pr_number">description</p>
@@ -61,7 +61,7 @@
                     <input type="text" class="number_input"
                            th:field="*{description}"
                            id="description"
-                           placeholder="Like 'This is a project for a new company... bla bla bla'">
+                           placeholder="Like 'This is a project for a new company... bla bla bla'" required>
                 </label>
                 <div class="box_footer">
                     <input class="create_button" type="submit" value="Submit"/>
