@@ -79,11 +79,14 @@
                             <p>.</p>
                             <p th:text="${activity.getTitle()}">Project1</p>
                         </div>
-                        <p th:text="${activity.getStatus().name()}">Started</p>
-                        <a class="add_button employee_button" th:href="@{|project/activity/${consists.get(state.count - 1)}/${activity.getId()}|}">View</a>
+                        <div class="right_part">
+                            <p th:text="${activity.getStatus().name()}">Started</p>
+                            <a class="add_button employee_button" th:href="@{|project/activity/${consists.get(state.count - 1)}/${activity.getId()}|}">View</a>
+                        </div>
+                        
                     </div>
                 </div> -->
-                
+
             </div>
             <div th:unless="${assignedUser != null}" class="assign_box">
                 Don't have assignment

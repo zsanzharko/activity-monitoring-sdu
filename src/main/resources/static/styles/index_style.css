@@ -174,7 +174,7 @@ header{
     margin-top: 10px;
     height: auto;
     display: flex;
-    flex-direction:row;
+    flex-direction:column;
     flex-wrap: wrap;
     padding-left: 3%;
 }
@@ -196,16 +196,22 @@ header{
     background-color:#0B122B;
     display: flex;
     height: 70px;
-    min-width: 300px;
+    width: 100%;
+    /* min-width: 300px; */
     align-items:center;
-    justify-content: space-around;
+    justify-content: space-between;
     border-radius: 15px;
     margin: 15px;
 }
-.left_part{
+.left_part,.right_part{
     display: flex;
 }
-
+.left_part{
+    margin-left: 20px;
+}
+.right_part{
+    margin-right: 20px;
+}
 .box_head{
     background-color:#707070;
     display: flex;

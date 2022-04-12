@@ -19,7 +19,7 @@
     </div>
 
     <!-- Page Content Holder -->
-    <div class="content" th:if="${user.getRole().name() == 'MANAGER'}" th:insert="fragments/nav_pages :: dashboard_main_content"></div>
+    <!-- <div class="content" th:if="${user.getRole().name() == 'MANAGER'}" th:insert="fragments/nav_pages :: dashboard_main_content"></div> -->
     <div class="content" th:unless="${user.getRole().name() == 'MANAGER'}">
         <div class="manage_creator">
             <p class="main_title">Dashboard</p>
@@ -33,8 +33,11 @@
                     <p>.</p>
                     <p th:text="${activity.getTitle()}">Project1</p>
                 </div>
-                <p th:text="${activity.getStatus().name()}">Started</p>
-                <a class="add_button employee_button" th:href="@{|project/activity/${consists.get(state.count - 1)}/${activity.getId()}|}">View</a>
+                <div class="right_part">
+                    <p th:text="${activity.getStatus().name()}">Started</p>
+                    <a class="add_button employee_button" th:href="@{|project/activity/${consists.get(state.count - 1)}/${activity.getId()}|}">View</a>
+                </div>
+                
             </div>
         </div>
     </div>
