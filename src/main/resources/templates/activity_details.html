@@ -21,7 +21,50 @@
 
 <div class="wrapper">
     <div th:insert="fragments/navigation :: left_nav">
-        
+           <!-- Sidebar Holder -->
+    <nav th:fragment="left_nav" class="sidebar">
+        <div class="sidebar_head">
+            <div class="name_picture_box">
+                <img th:src="@{/images/test photo profile.png}" src="../static/images/test photo profile.png"
+                     alt="Flowers" class="sidebar_picture">
+                <p class="side_head_text" th:inline="text" th:text="${user.getFullName()}"></p>
+            </div>
+            <div class="sider_inf_box">
+                <div class="upper_dev_inf">
+                    <p class="sider_dev_inf">Developer: <span class="input_inf">UX/UI Design</span></p>
+                    <p class="sider_dev_inf">Role: <span class="input_inf"
+                                                         th:text="${user.getRole().name()}">Free</span></p>
+                    <p class="sider_dev_inf">Gender: <span class="input_inf"
+                                                           th:text="${user.getGender().name()}">Free</span></p>
+                    <p class="sider_dev_inf">Email: <span class="input_inf" th:text="${user.getEmail()}">Free</span></p>
+                </div>
+<!--                <p class="project">Project: <span class="input_project">IOS App</span></p>-->
+            </div>
+        </div>
+        <div class="sider_dashboards">
+            <div class="sider_dash_box">
+                <a th:href="@{/dashboard}" class="side_box_link">
+                    <img th:src="@{/images/dashboard-dark-icon.png}" src="../static/images/dashboard-dark-icon.png"
+                         alt="dashboard_picture" class="dashboard_pic">
+                    <p class="dash_text">Dashboard</p>
+                </a>
+            </div>
+            <div class="sider_dash_box">
+                <a th:href="@{/profile-panel}" class="side_box_link" >
+                    <img th:src="@{/images/dashboard-dark-icon.png}" src="../static/images/dashboard-dark-icon.png"
+                         alt="dashboard_picture" class="dashboard_pic">
+                    <p class="dash_text">Profile</p>
+                </a>
+            </div>
+        </div>
+
+        <div class="color_swicher">
+            <input type="checkbox" class="checkbox" id="chk"/>
+            <label class="label" for="chk">
+                <div class="ball"></div>
+            </label>
+        </div>
+    </nav>
     </div>
 
     <!-- Page Content Holder -->
@@ -72,7 +115,7 @@
                     </div>
                 </form>
             </div>
-            <div th:unless="${assignedUser != null}">
+            <div th:unless="${assignedUser != null}" class="assign_box">
                 Don't have assignment
                 <div>
                     You can Assign
