@@ -185,7 +185,7 @@ header{
   margin-top: 20px;
 }
 .assignet_box_text{
-  width: 600px;
+  width: 700px;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
@@ -197,7 +197,7 @@ header{
 .box_place{
   border-radius:20px 20px 3px 3px;
   background-color: #0B122B;
-  width: 600px;
+  width: 700px;
   /* height: 100%; */
 }
 .time_box{
@@ -225,7 +225,7 @@ header{
 .input_box{
     background-color:#0B122B;
     margin-top: 10px;
-    width: 600px;
+    width: 700px;
     height: 80px;
     border-radius: 3px 3px 20px 20px;
     display: flex;
@@ -249,7 +249,7 @@ header{
     background-color:#30374A;
     font-size: 20px;
     color:white;
-    width: 75px;
+    width: 120px;
     height: 30px;
     border: none;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
@@ -260,7 +260,7 @@ header{
     flex-direction: column;
     align-items:flex-end;
     justify-content: flex-end;
-    width: 600px;
+    width: 700px;
 }
 /* ---------------------------------------------------
     button STYLE
