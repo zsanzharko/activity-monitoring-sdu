@@ -17,7 +17,6 @@
     <div th:insert="fragments/navigation :: left_nav">
             <!-- Sidebar Holder -->
     </div>
-
     <!-- Page Content Holder -->
      <div class="content" th:if="${user.getRole().name() == 'MANAGER'}" th:insert="fragments/nav_pages :: dashboard_main_content"></div>
     <div class="content" th:unless="${user.getRole().name() == 'MANAGER'}">
