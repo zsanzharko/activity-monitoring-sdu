@@ -30,14 +30,16 @@ public class ActivityController {
     private final DevConnectionActivityDao assignedUserDao;
     private final UserDao userDao;
     private final ConsistDao consistDao;
+    private final ReportDao reportDao;
 
     @Autowired
-    public ActivityController(ProjectDao projectDao, ActivityDao activityDao, DevConnectionActivityDao assignedUserDao, UserDao userDao, ConsistDao consistDao) {
+    public ActivityController(ProjectDao projectDao, ActivityDao activityDao, DevConnectionActivityDao assignedUserDao, UserDao userDao, ConsistDao consistDao, ReportDao reportDao) {
         this.projectDao = projectDao;
         this.activityDao = activityDao;
         this.assignedUserDao = assignedUserDao;
         this.userDao = userDao;
         this.consistDao = consistDao;
+        this.reportDao = reportDao;
     }
 
     @GetMapping("/{projectId}/{id}")
@@ -59,10 +61,13 @@ public class ActivityController {
         }
 
         modelMap.addAttribute("assignedUser", assignedUserDto);
-        modelMap.addAttribute("assignedUserName", userDao.findById(assignedUserDto.getUserId()).getFirstName());
+        modelMap.addAttribute("assignedUserName",
+                assignedUserDto != null ?
+                userDao.findById(assignedUserDto.getUserId()).getFirstName() : "");
         modelMap.addAttribute("user", userDto);
         modelMap.addAttribute("activity", activityDto);
         modelMap.addAttribute("reports", reportList);
+        modelMap.addAttribute("projectId", projectId);
         modelMap.addAttribute("back_page",
                 "/project/details?id=" + projectId);
         modelMap.addAttribute("id", id);
@@ -70,16 +75,22 @@ public class ActivityController {
         return new ModelAndView("activity_details", modelMap);
     }
 
-    @PostMapping("/push")
-    public ModelAndView pushSpendTime(@ModelAttribute SpendTimeForm form, ModelMap modelMap) {
+    @PostMapping("/push/{projectId}/{activityId}")
+    public ModelAndView pushSpendTime(@PathVariable Long activityId,
+                                      @PathVariable String projectId,
+                                      @ModelAttribute SpendTimeForm form,
+                                      ModelMap modelMap) {
         UserDto userDto = UserHandlerUtils.getUserFromAuth(userDao);
 
         if(userDto.getRole() == Role.MANAGER) {
             return new ModelAndView("redirect:/project/activity/" + modelMap.getAttribute("id"));
         }
 
+        Report report = new Report(activityId, form.getDateStart(), form.getMinutes());
 
-        return new ModelAndView("redirect:/project/activity/" + modelMap.getAttribute("id"));
+        reportDao.save(report);
+
+        return new ModelAndView("redirect:/project/activity/" + projectId + "/" + activityId);
     }
 
     @GetMapping("/assign/{id}/{activityId}/{projectId}")
