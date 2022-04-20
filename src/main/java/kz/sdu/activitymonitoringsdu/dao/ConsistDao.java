@@ -22,11 +22,11 @@ public class ConsistDao implements ConsistService {
         return consistRepository.findById(id).orElse(null);
     }
 
-    public Consist findByProjectId(String projectId) {
+    public Consist findByProjectId(Long projectId) {
         return consistRepository.findConsistByProjectId(projectId);
     }
 
-    public List<Consist> findAllByProjectId(String projectId){
+    public List<Consist> findAllByProjectId(Long projectId){
         return consistRepository.findByProjectId(projectId);
     }
 

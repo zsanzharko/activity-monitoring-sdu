@@ -1,14 +1,11 @@
 package kz.sdu.activitymonitoringsdu.controller;
 
-import kz.sdu.activitymonitoringsdu.dao.ActivityDao;
 import kz.sdu.activitymonitoringsdu.dao.ConsistDao;
 import kz.sdu.activitymonitoringsdu.dao.ProjectDao;
 import kz.sdu.activitymonitoringsdu.dao.UserDao;
 import kz.sdu.activitymonitoringsdu.dto.ActivityDto;
 import kz.sdu.activitymonitoringsdu.dto.ProjectDto;
 import kz.sdu.activitymonitoringsdu.dto.UserDto;
-import kz.sdu.activitymonitoringsdu.entity.Activity;
-import kz.sdu.activitymonitoringsdu.entity.Consist;
 import kz.sdu.activitymonitoringsdu.enums.Role;
 import kz.sdu.activitymonitoringsdu.handlers.ProjectHandlerUtils;
 import kz.sdu.activitymonitoringsdu.handlers.UserHandlerUtils;
@@ -23,7 +20,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -33,14 +29,12 @@ public class ProjectController {
 
     private final UserDao userDao;
     private final ProjectDao projectDao;
-    private final ActivityDao activityDao;
     private final ConsistDao consistDao;
 
     @Autowired
-    public ProjectController(UserDao userDao, ProjectDao projectDao, ActivityDao activityDao, ConsistDao consistDao) {
+    public ProjectController(UserDao userDao, ProjectDao projectDao, ConsistDao consistDao) {
         this.userDao = userDao;
         this.projectDao = projectDao;
-        this.activityDao = activityDao;
         this.consistDao = consistDao;
     }
 
@@ -108,7 +102,7 @@ public class ProjectController {
     public ModelAndView showDetails(@RequestParam final String id, ModelMap model) {
         UserDto userDto = UserHandlerUtils.getUserFromAuth(userDao);
         ProjectDto projectDto = ProjectHandlerUtils.convertToDto(projectDao.findById(id));
-        List<ActivityDto> activities = activityDao.getActivitiesById(consistDao.findAllByProjectId(projectDto.getProjectId()));
+        List<ActivityDto> activities = projectDao.getActivitiesById(consistDao.findAllByProjectId(projectDao.findById(id).getId()));
 
         model.addAttribute("userIsManager", userDto.getRole() == Role.MANAGER);
         model.addAttribute("activities", activities);

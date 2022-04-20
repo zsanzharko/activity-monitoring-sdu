@@ -26,16 +26,14 @@ import java.util.List;
 public class ActivityController {
 
     private final ProjectDao projectDao;
-    private final ActivityDao activityDao;
     private final DevConnectionActivityDao assignedUserDao;
     private final UserDao userDao;
     private final ConsistDao consistDao;
     private final ReportDao reportDao;
 
     @Autowired
-    public ActivityController(ProjectDao projectDao, ActivityDao activityDao, DevConnectionActivityDao assignedUserDao, UserDao userDao, ConsistDao consistDao, ReportDao reportDao) {
+    public ActivityController(ProjectDao projectDao, DevConnectionActivityDao assignedUserDao, UserDao userDao, ConsistDao consistDao, ReportDao reportDao) {
         this.projectDao = projectDao;
-        this.activityDao = activityDao;
         this.assignedUserDao = assignedUserDao;
         this.userDao = userDao;
         this.consistDao = consistDao;
@@ -47,8 +45,8 @@ public class ActivityController {
         UserDto userDto = UserHandlerUtils.getUserFromAuth(userDao);
 
 
-        ActivityDto activityDto = activityDao.findById(id);
-        List<Report> reportList = activityDao.findByActivityId(activityDto.getId());
+        ActivityDto activityDto = projectDao.findById(id);
+        List<Report> reportList = projectDao.findByActivityId(activityDto.getId());
         DevConnectionActivity assignedUserDto = assignedUserDao.getAssignedUserByActivityId(id);
 
         if(userDto.getRole() == Role.MANAGER) {
@@ -136,8 +134,8 @@ public class ActivityController {
             return new ModelAndView("redirect:/project/activity/create/" + id, model);
         }
 
-        Activity activity = activityDao.save(ActivityHandlerUtils.convertToEntity(activityCreateForm.getDtoFromForm()));
-        consistDao.save(new Consist(activity.getId(), id));
-        return new ModelAndView("redirect:/project/details?id=" + id);
+        Activity activity = projectDao.save(ActivityHandlerUtils.convertToEntity(activityCreateForm.getDtoFromForm()));
+        consistDao.save(new Consist(activity.getId(), projectDao.findById(id).getId()));
+        return new ModelAndView("redirect:/project/details" + "?id=" +  id);
     }
 }
