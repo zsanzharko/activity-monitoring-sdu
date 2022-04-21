@@ -5,7 +5,6 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="author" content="Serikkhan Ayan">
-  <title>Sidebars · Bootstrap v5.1</title>
 
   <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/sidebars/">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -33,7 +32,9 @@
 
 
   <!-- Custom styles for this template -->
-  <link rel="stylesheet" href="../static/styles/test.css">
+  <link rel="stylesheet" href="../static/new_styles/left_bar_style.css">
+  <link rel="stylesheet" href="../static/new_styles/index2_box.css">
+  <link rel="stylesheet" href="../static//new_styles/new_project2.css">
 </head>
 
 <body>
@@ -101,8 +102,10 @@
           <div class="upper_dev_inf">
             <p class="sider_dev_inf">Developer: <span class="input_inf">UX/UI Design</span></p>
             <p class="sider_dev_inf">Role: <span class="input_inf" th:text="${user.getRole().name()}">Manager</span></p>
-            <p class="sider_dev_inf">Gender: <span class="input_inf" th:text="${user.getGender().name()}">Male</span></p>
-            <p class="sider_dev_inf">Email: <span class="input_inf" th:text="${user.getEmail()}">ayan1bos@gmail.com</span></p>
+            <p class="sider_dev_inf">Gender: <span class="input_inf" th:text="${user.getGender().name()}">Male</span>
+            </p>
+            <p class="sider_dev_inf">Email: <span class="input_inf"
+                th:text="${user.getEmail()}">ayan1bos@gmail.com</span></p>
           </div>
         </div>
       </div>
@@ -134,7 +137,9 @@
               <svg class="bi me-2" width="25" height="25">
                 <use xlink:href="#help" />
               </svg>
-              Help
+              <button type="button" class="btn text-white" data-bs-toggle="modal" data-bs-target="#Modal_helper">
+                Help
+              </button>
             </a>
           </div>
         </li>
@@ -159,9 +164,117 @@
       </div>
     </div>
 
-    <div class="main_right_part">
+    <!-- HELP Notification ----------------------------------->
+    <div class="modal fade" id="Modal_helper" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Helper</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            If you have any question or problems, please contacts with Admin
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
     </div>
+    <!--   ----------------------------------------------   -->
 
+
+    <div class="main_right_part">
+
+      <!-- Code of the header ------------------------>
+      <div class="header_container"
+        style="box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;">
+        <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+          <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+            <span class="fs-4" style="margin-left: 25px;">Dashboard</span>
+          </a>
+
+          <ul class="nav nav-pills">
+            <li class="nav-item"><a href="#" class="nav-link text-black fs-4" aria-current="page"
+                th:text="${user.getRole().name()}">Manager</a></li>
+          </ul>
+        </header>
+      </div>
+      <!------------------------------------------->
+
+      <!-- Location ------------------------------->
+      <nav aria-label="breadcrumb" class="location_creation">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item active" aria-current="page" style="margin-left:25px;">Dashboard</li>
+          <li class="breadcrumb-item active" aria-current="page"></li>
+        </ol>
+        <button type="button" class="btn project_creation" data-bs-toggle="modal"
+          data-bs-target="#create_project_modal">
+          New project
+        </button>
+      </nav>
+      <!-- -------------------------------------- -->
+
+      <!-- New  projecs -------------------------- -->
+
+      <div class="modal fade" id="create_project_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">New Project</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              ...
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- --------------------------------------- -->
+
+
+      <!-- Box  area -------------------------------------- -->
+      <div class="space_for_box_of_the_box">
+        <div class="space_for_box">
+
+          <div class="box" th:each="project : ${projects}">
+            <div class="box_head">
+              <div class="box_head_left">
+                <p class="projects_id" style="font-size: 20px;" th:text="${project.projectId}">9511DXP</p>
+                <p class="project_version" style="font-size: 13px;">version <span th:text="${project.projectVersion}"
+                    style="font-size: 13px;">A</span></p>
+              </div>
+              <p class="project_name" style="font-size: 20px; margin-right: 10px;" th:text="${project.title}">Project
+                name</p>
+            </div>
+            <div class="box_body">
+              <p class="project_activities">Activities</p>
+              <p class="project_deep_id" th:each="activity : ${project.getActivities()}"
+                th:text="${activity.getTitle()}"></p>
+              <!-- <p class="project_deep_id">Data mining</p>
+              <p class="project_deep_id">Data cleaning</p> -->
+            </div>
+            <div class="footer">
+              <div class="footer_images">
+                <img th:src="@{images/test photo profile.png}" alt="" class="box_image">
+                <!--                           todo in this place will insert users image, check in database-->
+              </div>
+              <a th:href="'/project/details?id=' + ${project.getProjectId()}" class="see_button" role="button">See
+                more</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ------------------------------------------------ -->
+
+
+    </div>
 
 
   </main>
