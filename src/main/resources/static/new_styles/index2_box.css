@@ -1,0 +1,201 @@
+@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+
+body{
+  font-family: 'Poppins', sans-serif;
+}
+a{
+  text-decoration: none;
+}
+
+.space_for_box_of_the_box{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+.space_for_box{
+  border-radius:15px;
+  /* background-color:antiquewhite; */
+  width: 95%;
+  height: 78%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  overflow: auto;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+
+.box{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color:#212529;
+  color:#EFF0F1;
+  margin: 10px;
+  width: 330px;
+  height: 210px;
+  padding-bottom: 10px;
+  border-radius: 10px;
+  box-shadow: 1px 2px 3px 4px rgba(12,12,12,0.2);
+}
+.box_employee{
+  color:white;
+  background-color:#0B122B;
+  display: flex;
+  height: 70px;
+  width: 100%;
+  /* min-width: 300px; */
+  align-items:center;
+  justify-content: space-between;
+  border-radius: 15px;
+  margin: 15px;
+}
+
+.box_head{
+  height: 60px;
+  background-color:#D68301;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items:center;
+  border-radius: 10px 10px 0px 0px;
+}
+.box_head_left{
+  margin-left: 5px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.project_version, .projects_id{
+  margin: 0px;
+  padding: 0px;
+}
+
+
+.box_body{
+  height: 100%;
+  /* background-color: aqua; */
+  font-size: 9px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding-left: 2px;
+}
+
+.project_activities{
+  font-size:22px;
+  margin: 0px;
+  padding: 0px;
+  /* margin-bottom: 5px; */
+  /* margin-top: 0px; */
+}
+.project_deep_id{
+  font-size: 10px;
+  margin: 0px;
+  margin-left: 5px;
+  font-size: 12px;
+  padding: 0px;
+}
+.project_work_dev{
+  font-size: 17px;
+  margin-top: 10px;
+}
+.extra_id{
+  font-size: 15px;
+  margin-left: 10px;
+}
+.footer{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items:center;
+}
+.box_image{
+  width: 30px;
+  border-radius: 50%;
+}
+.footer_images{
+  margin-left: 2%;
+}
+.box_batton{
+  margin-right: 20px;
+}
+
+  /* Float Shadow */
+  .box {
+    /* display: inline-block; */
+    vertical-align: middle;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    position: relative;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-property: transform;
+    transition-property: transform;
+  }
+  .box:before {
+    pointer-events: none;
+    position: absolute;
+    z-index: -1;
+    content: '';
+    top: 100%;
+    left: 5%;
+    height: 10px;
+    width: 90%;
+    opacity: 0;
+    background: -webkit-radial-gradient(center, ellipse, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0) 80%);
+    background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0) 80%);
+    /* W3C */
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-property: transform, opacity;
+    transition-property: transform, opacity;
+  }
+  .box:hover, .box:focus, .box:active {
+    -webkit-transform: translateY(-5px);
+    transform: translateY(-5px);
+    /* move the element up by 5px */
+  }
+  .box:hover:before, .box:focus:before, .box:active:before {
+    opacity: 1;
+    -webkit-transform: translateY(5px);
+    transform: translateY(5px);
+    /* move the element down by 5px (it will stay in place because it's attached to the element that also moves up 5px) */
+  }
+
+
+  .see_button {
+    background-color: #373E44;
+    border: 1px solid transparent;
+    border-radius: 20px;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-size: 12px;
+    transition-duration: .3s;
+    width: 120px;
+    height: 30px;
+    margin-right: 4%;
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    /* margin-bottom: 10px; */
+    /*box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;*/
+  }
+  .see_button.light{
+    background-color:#F6F4F3;
+    color: #000000;
+  }
+  
+  .see_button:hover {
+    background-color: #FBBC05;
+  }
+  
+  .see_button:focus {
+    box-shadow: none; 
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+  }
