@@ -61,7 +61,7 @@ public class MainController {
     @GetMapping("/profile-panel")
     public ModelAndView getProfilePanel(ModelMap model) {
 
-        return new ModelAndView("redirect:/");
+        return new ModelAndView("redirect:/dashboard");
     }
 
     private void roleDefinitionDashboard(final UserDto user, ModelMap modelMap) {
