@@ -11,6 +11,9 @@ function notify() {
         }).catch(_ => console.error(_));
 }
 
+function main(){
+    notify()
+    setInterval(notify, 2000)
+}
 
-
-setInterval(notify, 2000)
+main()

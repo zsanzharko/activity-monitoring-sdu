@@ -35,6 +35,6 @@ public class Activity {
     private Date startDate;
 
     @Column(name = "spent_time", length = 100)
-    private String spentTime;
+    private Integer spentTime;
 
 }

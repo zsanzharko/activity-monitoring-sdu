@@ -45,7 +45,7 @@ public class ProjectController {
         String userEmail = ((UserDetails) principal).getUsername();
 
         UserDto userDto = userDao.findUserByEmailDto(userEmail);
-        if(userDto.getRole() == Role.EMPLOYEE) {
+        if (userDto.getRole() == Role.EMPLOYEE) {
             return new ModelAndView("redirect:/dashboard");
         }
         model.addAttribute("user", userDto);
@@ -58,7 +58,7 @@ public class ProjectController {
     }
 
     @PostMapping("/create")
-    public String createProject( @ModelAttribute ProjectCreateForm project,
+    public String createProject(@ModelAttribute ProjectCreateForm project,
                                 BindingResult bindingResult) {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
@@ -66,7 +66,7 @@ public class ProjectController {
 
         UserDto userDto = userDao.findUserByEmailDto(userEmail);
 
-        if(userDto.getRole() == Role.EMPLOYEE) {
+        if (userDto.getRole() == Role.EMPLOYEE) {
             return "redirect:/dashboard";
         }
         if (bindingResult.hasErrors()) {
@@ -84,7 +84,7 @@ public class ProjectController {
 
         projectDao.saveProject(
                 ProjectHandlerUtils.convertToEntity(
-                project.getDtoFromForm()));
+                        project.getDtoFromForm()));
 
         return "redirect:/dashboard";
     }
@@ -104,13 +104,40 @@ public class ProjectController {
         ProjectDto projectDto = ProjectHandlerUtils.convertToDto(projectDao.findById(id));
         List<ActivityDto> activities = projectDao.getActivitiesById(consistDao.findAllByProjectId(projectDao.findById(id).getId()));
 
+        List<Integer> spendTimeActivities = activities.stream().map(ActivityDto::getSpentTime).toList();
+
+        var total_time = spendTimeActivities.stream().mapToInt(Integer::intValue).sum();
+        var daily_time = total_time / spendTimeActivities.size();
+
+        String total_time_text = convertTimeToString(total_time);
+        String daily_time_text = convertTimeToString(daily_time);
+
+
+
         model.addAttribute("userIsManager", userDto.getRole() == Role.MANAGER);
         model.addAttribute("activities", activities);
         model.addAttribute("back_page", "/dashboard");
         model.addAttribute("user", userDto);
         model.addAttribute("project", projectDto);
         model.addAttribute("projectId", id);
+        model.addAttribute("total_time", total_time_text);
+        model.addAttribute("daily_time", daily_time_text);
 
         return new ModelAndView("project_details", model);
+    }
+
+    @GetMapping("/get-time-details")
+    @ResponseBody
+    public String getTimeDetails() {
+        return "";
+    }
+
+
+    private String convertTimeToString(Integer number) {
+        int hours = number / 10000;
+        int minutes = (number % 10000) / 100;
+        int seconds = number % 100;
+
+        return String.format("%02d:%02d:%02d", hours, minutes, seconds);
     }
 }
