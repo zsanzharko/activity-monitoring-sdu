@@ -134,10 +134,10 @@ public class ProjectController {
 
 
     private String convertTimeToString(Integer number) {
-        int hours = number / 10000;
-        int minutes = (number % 10000) / 100;
-        int seconds = number % 100;
+        int days = number / 60 / 24;
+        int hours = number / 60 % 24;
+        int minutes = number % 60;
 
-        return String.format("%02d:%02d:%02d", hours, minutes, seconds);
+        return String.format("%02d day(s) %02d hour(s) %02d minute(s)", days, hours, minutes);
     }
 }
