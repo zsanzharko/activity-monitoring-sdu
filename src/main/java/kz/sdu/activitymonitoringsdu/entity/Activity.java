@@ -37,4 +37,7 @@ public class Activity {
     @Column(name = "spent_time", length = 100)
     private Integer spentTime;
 
+    @Column(name = "expected_time", nullable = false)
+    private Integer expectedTime;
+
 }
