@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @Getter
@@ -101,6 +102,7 @@ public class ProjectController {
     @GetMapping("/details")
     public ModelAndView showDetails(@RequestParam final String id, ModelMap model) {
         UserDto userDto = UserHandlerUtils.getUserFromAuth(userDao);
+        if (userDto.getRole() != Role.MANAGER) return new ModelAndView("redirect:/dashboard");
         ProjectDto projectDto = ProjectHandlerUtils.convertToDto(projectDao.findById(id));
         List<ActivityDto> activities = projectDao.getActivitiesById(consistDao.findAllByProjectId(projectDao.findById(id).getId()));
 
@@ -116,6 +118,9 @@ public class ProjectController {
 
         model.addAttribute("userIsManager", userDto.getRole() == Role.MANAGER);
         model.addAttribute("activities", activities);
+        model.addAttribute("totalTime", activities.stream()
+                .map(activityDto -> getTimeDetails(activityDto.getId()))
+                .collect(Collectors.toList()));
         model.addAttribute("back_page", "/dashboard");
         model.addAttribute("user", userDto);
         model.addAttribute("project", projectDto);
@@ -126,10 +131,15 @@ public class ProjectController {
         return new ModelAndView("project_details", model);
     }
 
-    @GetMapping("/get-time-details")
+    @GetMapping("/get-time-details/{id}")
     @ResponseBody
-    public String getTimeDetails() {
-        return "";
+    public String getTimeDetails(@PathVariable Long id) {
+        var reports = projectDao.findByActivityId(id);
+        Integer totalSum = 0;
+        for (var report : reports) {
+            totalSum += report.getTime();
+        }
+        return convertTimeToString(totalSum);
     }
 
 
@@ -138,6 +148,9 @@ public class ProjectController {
         int hours = number / 60 % 24;
         int minutes = number % 60;
 
-        return String.format("%02d day(s) %02d hour(s) %02d minute(s)", days, hours, minutes);
+        if(days != 0) {
+            return String.format("%02d day(s) %02d hour(s) %02d minute(s)", days, hours, minutes);
+        }
+        return String.format("%02d hour(s) %02d minute(s)", hours, minutes);
     }
 }
