@@ -33,6 +33,11 @@ main {
   pointer-events: none;
   fill: currentColor;
 }
+.seting_box{
+  margin-left: 10px;
+  display: flex;
+  align-items:center;
+}
 
 .dropdown-toggle {
   outline: 0;

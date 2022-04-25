@@ -23,3 +23,17 @@
 }
 
 
+.project_name_box, .version_box, .project_id_box,.project_desc_box{
+  width: 100%;
+}
+
+
+label, input, p{
+  margin: 0px;
+  padding: 0px;
+}
+
+input{
+  margin-bottom: 15px;
+}
+
