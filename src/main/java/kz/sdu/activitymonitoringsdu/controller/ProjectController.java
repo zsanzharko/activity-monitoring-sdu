@@ -12,11 +12,11 @@ import kz.sdu.activitymonitoringsdu.handlers.UserHandlerUtils;
 import kz.sdu.activitymonitoringsdu.handlers.forms.ProjectCreateForm;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -58,9 +58,9 @@ public class ProjectController {
         return new ModelAndView("new_project", model);
     }
 
-    @PostMapping("/create")
-    public String createProject(@ModelAttribute ProjectCreateForm project,
-                                BindingResult bindingResult) {
+    @PostMapping(value = "/create", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<ProjectCreateForm> createProject(@RequestBody ProjectCreateForm project) {
+        if (project.getProjectVersion() == null) return ResponseEntity.internalServerError().build();
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         String userEmail = ((UserDetails) principal).getUsername();
@@ -68,29 +68,17 @@ public class ProjectController {
         UserDto userDto = userDao.findUserByEmailDto(userEmail);
 
         if (userDto.getRole() == Role.EMPLOYEE) {
-            return "redirect:/dashboard";
-        }
-        if (bindingResult.hasErrors()) {
-            return "redirect:/create";
-        }
-
-        boolean projectIdIsCorrect = false;
-        while (!projectIdIsCorrect) {
-            if (projectDao.findById(project.getProjectId()) == null) {
-                projectIdIsCorrect = true;
-            } else {
-                project.regenerateId();
-            }
+            return null;
         }
 
         projectDao.saveProject(
                 ProjectHandlerUtils.convertToEntity(
                         project.getDtoFromForm()));
 
-        return "redirect:/dashboard";
+        return ResponseEntity.ok(project);
     }
 
-    @PostMapping(name = "/remove")
+    @DeleteMapping(name = "/remove")
     public ModelAndView removeProject(@RequestParam Boolean isCorrect, @RequestParam String idProject) {
         UserDto userDto = UserHandlerUtils.getUserFromAuth(userDao);
         if (userDto.getRole() == Role.MANAGER && isCorrect) {

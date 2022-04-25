@@ -35,7 +35,7 @@ public class ProjectDao implements ProjectService, ActivityService {
 
     @Override
     public Project findById(String id) {
-        return projectRepository.findById(id).orElse(null);
+        return projectRepository.findByProjectId(id);
     }
 
     @Override

@@ -16,7 +16,7 @@ import java.util.Date;
 @Getter
 @Setter
 public class ProjectCreateForm {
-    private String projectId = generateId();
+    private String projectId;
     private String projectVersion;
     private String title;
     private String description;

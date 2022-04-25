@@ -17,12 +17,11 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Project {
-
-    @Column(name = "id")
+    @Id
+    @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Id
     @Column(name = "project_id", nullable = false)
     private String projectId;
 

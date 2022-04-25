@@ -7,16 +7,13 @@
     <meta name="author" content="Serikkhan Ayan">
 
     <!--    Thymeleaf assets-->
-    <link rel="stylesheet" th:href="@{new_styles/left_bar_style.css}">
-    <link rel="stylesheet" th:href="@{new_styles/index2_box.css}">
-    <link rel="stylesheet" th:href="@{new_styles/new_project2.css}">
+    <link rel="stylesheet" th:href="@{new_styles/left_bar_style.css}" href="../static/new_styles/left_bar_style.css">
+    <link rel="stylesheet" th:href="@{new_styles/index2_box.css}" href="../static/new_styles/index2_box.css">
+    <link rel="stylesheet" th:href="@{new_styles/new_project2.css}" href="../static/new_styles/new_project2.css">
 
     <!-- Custom styles for this template -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="../static/new_styles/left_bar_style.css">
-    <link rel="stylesheet" href="../static/new_styles/index2_box.css">
-    <link rel="stylesheet" href="../static/new_styles/new_project2.css">
     <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/sidebars/">
 
     <title th:text="${titlePage}"></title>
@@ -211,40 +208,51 @@
             <div class="modal fade" id="create_project_modal" tabindex="-1" aria-hidden="true">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
-                        <form action="/project/create" method="post">
+                        <form id="new-project">
                             <div class="modal-header">
                                 <h5 class="modal-title">New Project</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <p class="pr_name">Project name:</p>
-                                <label for="title" class="project_name_box">
-                                    <input type="text" class="form-control input" id="title" field="title"
-                                        placeholder="Like 'Android App'" aria-describedby="basic-addon1" required>
+                                <p class="pr_name">Project Id:</p>
+                                <label for="project-id" class="project_name_box">
+                                    <input type="text" class="form-control input"
+                                           name="projectId"
+                                           id="project-id" field="projectId"
+                                           placeholder="Like '4635LSFB'" aria-describedby="basic-addon1" required>
                                 </label>
 
                                 <p class="pr_version">Version:</p>
                                 <label for="projectVersion" class="version_box">
                                     <input type="text" class="form-control input" id="projectVersion"
-                                        field="title" placeholder="Like 'B'" required>
+                                           name="projectVersion"
+                                           field="title" placeholder="Like 'B'" required>
+                                </label>
+
+                                <p class="pr_name">Project name:</p>
+                                <label for="title" class="project_name_box">
+                                    <input type="text" class="form-control input"
+                                           name="title"
+                                           id="title" field="title"
+                                        placeholder="Like 'Android App'" aria-describedby="basic-addon1" required>
+                                </label>
+
+                                <p class="pr_number">Description:</p>
+                                <label for="description" class="project_desc_box">
+                                    <textarea class="form-control input" name="description" aria-label="With textarea" field="description" id="description" required></textarea>
                                 </label>
 
                                 <p class="pr_number">Date to start:</p>
                                 <label for="startDate" class="project_id_box">
                                     <input type="date" class="form-control input" pattern="yyyy-MM-dd"
+                                           name="startDate"
                                         id="startDate" field="startDate" required>
-                                </label>
-
-                                <p class="pr_number">Description:</p>
-                                <label for="description" class="project_desc_box">
-                                    <textarea class="form-control input" aria-label="With textarea" field="description" id="description" required></textarea>
-
                                 </label>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <input class="btn btn-primary" type="submit" value="Save changes" />
+                                <input class="btn btn-primary" type="submit" onclick="" value="Save changes" />
                             </div>
                         </form>
                     </div>
@@ -256,7 +264,7 @@
 
             <!-- Box  area -------------------------------------- -->
             <div class="space_for_box_of_the_box">
-                <div class="space_for_box">
+                <div class="space_for_box" id="project-dashboard-placeholder">
 
                     <div class="box" th:each="project : ${projects}">
                         <div class="box_head">
@@ -303,7 +311,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
-    <script src="../static/js/test.js"></script>
+    <script src="../static/js/test.js" th:src="@{js/test.js}"></script>
+    <script src="../static/js/add_object_handler.js" th:src="@{js/add_object_handler.js}"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 </body>
 
 </html>
