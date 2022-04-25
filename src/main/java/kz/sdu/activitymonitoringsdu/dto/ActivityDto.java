@@ -17,7 +17,8 @@ public class ActivityDto implements Serializable {
     private String description;
     private ActivityStatus status;
     private Date startDate;
-    private String spentTime;
+    private Integer spentTime;
+    private Integer expectedTime;
 
     public String getDate() {
         if (startDate == null) {

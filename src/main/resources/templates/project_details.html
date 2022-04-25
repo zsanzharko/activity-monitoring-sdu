@@ -59,9 +59,9 @@
                     <div class="box_1_body">
                         <p class="activity_num">Activities: <span class="activity_count"
                                                                   th:text="${activities.size()}">5</span></p>
-                        <p class="daily_record">Record Time (Daily):<span class="daily_record_count">3 hour 25 minutes (Test)</span>
+                        <p class="daily_record">Record Time (Daily): <span class="daily_record_count" th:text="${daily_time}">3 hour 25 minutes (Test)</span>
                         </p>
-                        <p class="total_record">Record Time (Total):<span class="total_record_count">32 hour 21 minutes(Test)</span>
+                        <p class="total_record">Record Time (Total): <span class="total_record_count" th:text="${total_time}">32 hour 21 minutes(Test)</span>
                         </p>
                     </div>
                 </div>

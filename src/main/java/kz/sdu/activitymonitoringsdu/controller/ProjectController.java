@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @Getter
@@ -45,7 +46,7 @@ public class ProjectController {
         String userEmail = ((UserDetails) principal).getUsername();
 
         UserDto userDto = userDao.findUserByEmailDto(userEmail);
-        if(userDto.getRole() == Role.EMPLOYEE) {
+        if (userDto.getRole() == Role.EMPLOYEE) {
             return new ModelAndView("redirect:/dashboard");
         }
         model.addAttribute("user", userDto);
@@ -58,7 +59,7 @@ public class ProjectController {
     }
 
     @PostMapping("/create")
-    public String createProject( @ModelAttribute ProjectCreateForm project,
+    public String createProject(@ModelAttribute ProjectCreateForm project,
                                 BindingResult bindingResult) {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
@@ -66,7 +67,7 @@ public class ProjectController {
 
         UserDto userDto = userDao.findUserByEmailDto(userEmail);
 
-        if(userDto.getRole() == Role.EMPLOYEE) {
+        if (userDto.getRole() == Role.EMPLOYEE) {
             return "redirect:/dashboard";
         }
         if (bindingResult.hasErrors()) {
@@ -84,7 +85,7 @@ public class ProjectController {
 
         projectDao.saveProject(
                 ProjectHandlerUtils.convertToEntity(
-                project.getDtoFromForm()));
+                        project.getDtoFromForm()));
 
         return "redirect:/dashboard";
     }
@@ -101,16 +102,55 @@ public class ProjectController {
     @GetMapping("/details")
     public ModelAndView showDetails(@RequestParam final String id, ModelMap model) {
         UserDto userDto = UserHandlerUtils.getUserFromAuth(userDao);
+        if (userDto.getRole() != Role.MANAGER) return new ModelAndView("redirect:/dashboard");
         ProjectDto projectDto = ProjectHandlerUtils.convertToDto(projectDao.findById(id));
         List<ActivityDto> activities = projectDao.getActivitiesById(consistDao.findAllByProjectId(projectDao.findById(id).getId()));
 
+        List<Integer> spendTimeActivities = activities.stream().map(ActivityDto::getSpentTime).toList();
+
+        var total_time = spendTimeActivities.stream().mapToInt(Integer::intValue).sum();
+        var daily_time = total_time / spendTimeActivities.size();
+
+        String total_time_text = convertTimeToString(total_time);
+        String daily_time_text = convertTimeToString(daily_time);
+
+
+
         model.addAttribute("userIsManager", userDto.getRole() == Role.MANAGER);
         model.addAttribute("activities", activities);
+        model.addAttribute("totalTime", activities.stream()
+                .map(activityDto -> getTimeDetails(activityDto.getId()))
+                .collect(Collectors.toList()));
         model.addAttribute("back_page", "/dashboard");
         model.addAttribute("user", userDto);
         model.addAttribute("project", projectDto);
         model.addAttribute("projectId", id);
+        model.addAttribute("total_time", total_time_text);
+        model.addAttribute("daily_time", daily_time_text);
 
         return new ModelAndView("project_details", model);
+    }
+
+    @GetMapping("/get-time-details/{id}")
+    @ResponseBody
+    public String getTimeDetails(@PathVariable Long id) {
+        var reports = projectDao.findByActivityId(id);
+        Integer totalSum = 0;
+        for (var report : reports) {
+            totalSum += report.getTime();
+        }
+        return convertTimeToString(totalSum);
+    }
+
+
+    private String convertTimeToString(Integer number) {
+        int days = number / 60 / 24;
+        int hours = number / 60 % 24;
+        int minutes = number % 60;
+
+        if(days != 0) {
+            return String.format("%02d day(s) %02d hour(s) %02d minute(s)", days, hours, minutes);
+        }
+        return String.format("%02d hour(s) %02d minute(s)", hours, minutes);
     }
 }
