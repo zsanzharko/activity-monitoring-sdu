@@ -1,58 +1,315 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="stylesheet" th:href="@{/styles/index_style.css}">
-    <link rel="stylesheet" th:href="@{/styles/index_buttons.css}">
-    <link rel="stylesheet" href="../static/styles/index_style.css">
-    <link rel="stylesheet" href="../static/styles/index_buttons.css">
-    <title th:text="${titlePage}">Authorization</title>
-</head>
-<body>
-<div th:insert="fragments/navigation :: header"></div>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Serikkhan Ayan">
 
-<div class="wrapper">
-    <div th:insert="fragments/navigation :: left_nav">
-            <!-- Sidebar Holder -->
-    </div>
-    <!-- Page Content Holder -->
-     <div class="content" th:if="${user.getRole().name() == 'MANAGER'}" th:insert="fragments/nav_pages :: dashboard_main_content"></div>
-    <div class="content" th:unless="${user.getRole().name() == 'MANAGER'}">
-        <div class="manage_creator">
-            <p class="main_title">Dashboard</p>
-            <p class="main_title">Activities</p>
+    <!--    Thymeleaf assets-->
+    <link rel="stylesheet" th:href="@{new_styles/left_bar_style.css}">
+    <link rel="stylesheet" th:href="@{new_styles/index2_box.css}">
+    <link rel="stylesheet" th:href="@{new_styles/new_project2.css}">
+
+    <!-- Custom styles for this template -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="../static/new_styles/left_bar_style.css">
+    <link rel="stylesheet" href="../static/new_styles/index2_box.css">
+    <link rel="stylesheet" href="../static/new_styles/new_project2.css">
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/sidebars/">
+
+    <title th:text="${titlePage}"></title>
+</head>
+
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <symbol id="bootstrap" viewBox="0 0 118 94">
+        <title>Bootstrap</title>
+        <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M24.509 0c-6.733 0-11.715 5.893-11.492 12.284.214 6.14-.064 14.092-2.066 20.577C8.943 39.365 5.547 43.485 0 44.014v5.972c5.547.529 8.943 4.649 10.951 11.153 2.002 6.485 2.28 14.437 2.066 20.577C12.794 88.106 17.776 94 24.51 94H93.5c6.733 0 11.714-5.893 11.491-12.284-.214-6.14.064-14.092 2.066-20.577 2.009-6.504 5.396-10.624 10.943-11.153v-5.972c-5.547-.529-8.934-4.649-10.943-11.153-2.002-6.484-2.28-14.437-2.066-20.577C105.214 5.894 100.233 0 93.5 0H24.508zM80 57.863C80 66.663 73.436 72 62.543 72H44a2 2 0 01-2-2V24a2 2 0 012-2h18.437c9.083 0 15.044 4.92 15.044 12.474 0 5.302-4.01 10.049-9.119 10.88v.277C75.317 46.394 80 51.21 80 57.863zM60.521 28.34H49.948v14.934h8.905c6.884 0 10.68-2.772 10.68-7.727 0-4.643-3.264-7.207-9.012-7.207zM49.948 49.2v16.458H60.91c7.167 0 10.964-2.876 10.964-8.281 0-5.406-3.903-8.178-11.425-8.178H49.948z">
+        </path>
+    </symbol>
+    <symbol id="home" viewBox="0 0 16 16">
+        <path
+                d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5z"/>
+    </symbol>
+
+    <symbol id="people-circle" viewBox="0 0 16 16">
+        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+        <path fill-rule="evenodd"
+              d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+    </symbol>
+
+    <symbol id="grid" viewBox="0 0 16 16">
+        <path
+                d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z"/>
+    </symbol>
+
+    <symbol id="help" viewBox="0 0 16 16">
+        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+        <path
+                d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"/>
+    </symbol>
+
+    <symbol id="sign_out" viewBox="0 0 16 16">
+        <path fill-rule="evenodd"
+              d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0v2z"/>
+        <path fill-rule="evenodd"
+              d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z"/>
+    </symbol>
+
+    <symbol id="settings" viewBox="0 0 16 16">
+        <path
+                d="M6.705 8.139a.25.25 0 0 0-.288-.376l-1.5.5.159.474.808-.27-.595.894a.25.25 0 0 0 .287.376l.808-.27-.595.894a.25.25 0 0 0 .287.376l1.5-.5-.159-.474-.808.27.596-.894a.25.25 0 0 0-.288-.376l-.808.27.596-.894Z"/>
+        <path
+                d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16Zm-6.202-4.751 1.988-1.657a4.5 4.5 0 0 1 7.537-4.623L7.497 6.5l1 2.5 1.333 3.11c-.56.251-1.18.39-1.833.39a4.49 4.49 0 0 1-1.592-.29L4.747 14.2a7.031 7.031 0 0 1-2.949-2.951ZM12.496 8a4.491 4.491 0 0 1-1.703 3.526L9.497 8.5l2.959-1.11c.027.2.04.403.04.61Z"/>
+    </symbol>
+
+    <symbol id="profile_pic" viewBox="0 0 16 16">
+        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+        <path
+                d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm12 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1v-1c0-1-1-4-6-4s-6 3-6 4v1a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12z"/>
+    </symbol>
+</svg>
+
+<main>
+    <div class="side_bar d-flex flex-column flex-shrink-0 p-3 text-white bg-dark">
+        <div class="sidebar_head">
+            <div class="name_picture_box">
+                <svg class="bi me-2" width="120" height="120">
+                    <use xlink:href="#profile_pic"/>
+                </svg>
+                <p class="side_head_text" th:inline="text" th:text="${user.getFullName()}">Ayan Serikkhan</p>
+            </div>
+            <div class="sider_inf_box">
+                <div class="upper_dev_inf">
+                    <p class="sider_dev_inf">Developer: <span class="input_inf">UX/UI Design</span></p>
+                    <p class="sider_dev_inf">Role: <span class="input_inf"
+                                                         th:text="${user.getRole().name()}">Manager</span></p>
+                    <p class="sider_dev_inf">Gender: <span class="input_inf"
+                                                           th:text="${user.getGender().name()}">Male</span>
+                    </p>
+                    <p class="sider_dev_inf">Email: <span class="input_inf"
+                                                          th:text="${user.getEmail()}">ayan1bos@gmail.com</span></p>
+                </div>
+            </div>
         </div>
-        <div class="line"></div>
-        <div class="space_for_box">
-            
-            <div th:each="activity, state : ${activities}" class="box_employee">
-                <div class="left_part">
-                    <p th:text="${state.count}">1</p>
-                    <p>.</p>
-                    <p th:text="${activity.getTitle()}">Project1</p>
+        <hr>
+        <ul class="nav nav-pills flex-column mb-auto">
+            <li>
+                <div class="sider_dash_box">
+                    <a th:href="@{/dashboard}" class="nav-link text-white">
+                        <svg class="bi me-2" width="25" height="25">
+                            <use xlink:href="#grid"/>
+                        </svg>
+                        Dashboard
+                    </a>
                 </div>
-                <div class="right_part">
-                    <p th:text="${activity.getStatus().name()}">Started</p>
-                    <a class="add_button employee_button" th:href="@{|project/activity/${consists.get(state.count - 1).getProjectId()}/${activity.getId()}|}">View</a>
+            </li>
+            <li>
+                <div class="sider_dash_box">
+                    <a th:href="@{/profile-panel}" class="nav-link text-white">
+                        <svg class="bi me-2" width="25" height="25">
+                            <use xlink:href="#people-circle"/>
+                        </svg>
+                        Profile
+                    </a>
                 </div>
-                
+            </li>
+            <li>
+                <div class="sider_dash_box">
+                    <a href="#" class="nav-link text-white">
+                        <svg class="bi me-2" width="25" height="25">
+                            <use xlink:href="#help"/>
+                        </svg>
+                        <button type="button" class="btn text-white" data-bs-toggle="modal"
+                                data-bs-target="#Modal_helper">
+                            Help
+                        </button>
+                    </a>
+                </div>
+            </li>
+        </ul>
+        <hr>
+        <div class="dropdown">
+            <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+               id="dropdownUser1"
+               data-bs-toggle="dropdown" aria-expanded="false">
+                <svg class="bi me-2" width="25" height="25">
+                    <use xlink:href="#settings"/>
+                </svg>
+                <strong>Settings</strong>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+                <li>
+                    <form action="/logout" method="post">
+                        <svg class="bi me-2" width="16" height="16">
+                            <use xlink:href="#sign_out"/>
+                        </svg>
+                        <input type="submit" value="Sign Out" class='dropdown-item'/>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- HELP Notification ----------------------------------->
+    <div class="modal fade" id="Modal_helper" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" >Helper</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    If you have any question or problems, please contacts with Admin
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                </div>
             </div>
         </div>
     </div>
+    <!--   ----------------------------------------------   -->
 
 
-</div>
+    <div class="main_right_part">
+
+        <!-- Code of the header ------------------------>
+        <div class="header_container"
+             style="box-shadow: rgba(50, 50, 93, 0.25) 0 6px 12px -2px, rgba(0, 0, 0, 0.3) 0 3px 7px -3px;">
+            <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+                <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+                    <span class="fs-4" style="margin-left: 25px;">Dashboard</span>
+                </a>
+
+                <ul class="nav nav-pills">
+                    <li class="nav-item"><a href="#" class="nav-link text-black fs-4" aria-current="page"
+                                            th:text="${user.getRole().name()}">Manager</a></li>
+                </ul>
+            </header>
+        </div>
+        <!------------------------------------------->
+
+        <!-- Location ------------------------------->
+        <nav aria-label="breadcrumb" class="location_creation">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active" aria-current="page" style="margin-left:25px;">Dashboard</li>
+                <li class="breadcrumb-item active" aria-current="page"></li>
+            </ol>
+            <button type="button" class="btn project_creation" data-bs-toggle="modal"
+                    data-bs-target="#create_project_modal">
+                New project
+            </button>
+        </nav>
+        <!-- -------------------------------------- -->
+
+        <!-- New  projecs -------------------------- -->
+
+        <div class="modal fade" id="create_project_modal" tabindex="-1"
+             aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <form action="/project/create" method="post">
+                        <div class="modal-header">
+                            <h5 class="modal-title">New Project</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p class="pr_name">Project name</p>
+                            <label for="title" class="project_name_box">
+                                <input type="text" class="name_input"
+                                       id="title"
+                                       field="title"
+                                       placeholder="Like 'Android App'" required>
+                            </label>
+                            <p class="pr_version">Version:</p>
+                            <label for="projectVersion" class="version_box">
+                                <input type="text"
+                                       field="projectVersion"
+                                       class="version_input"
+                                       id="projectVersion"
+                                       placeholder="Like 'B'" required>
+                            </label>
+
+                            <p class="pr_number">Date to start:</p>
+                            <label for="startDate" class="project_id_box">
+                                <input type="date" class="number_input"
+                                       pattern="yyyy-MM-dd"
+                                       field="startDate"
+                                       id="startDate" required>
+                            </label>
+
+                            <p class="pr_number">description</p>
+                            <label for="description" class="project_id_box">
+                                <input type="text" class="number_input"
+                                       field="description"
+                                       id="description"
+                                       placeholder="Like 'This is a project for a new company... bla bla bla'" required>
+                            </label>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <input class="btn btn-primary" type="submit" value="Save changes"/>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- --------------------------------------- -->
 
 
-<script th:src="@{https://code.jquery.com/jquery-3.3.1.slim.min.js}"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        <!-- Box  area -------------------------------------- -->
+        <div class="space_for_box_of_the_box">
+            <div class="space_for_box">
+
+                <div class="box" th:each="project : ${projects}">
+                    <div class="box_head">
+                        <div class="box_head_left">
+                            <p class="projects_id" style="font-size: 20px;" th:text="${project.projectId}">9511DXP</p>
+                            <p class="project_version" style="font-size: 13px;">version <span
+                                    th:text="${project.projectVersion}"
+                                    style="font-size: 13px;">A</span></p>
+                        </div>
+                        <p class="project_name" style="font-size: 20px; margin-right: 10px;" th:text="${project.title}">
+                            Project
+                            name</p>
+                    </div>
+                    <div class="box_body">
+                        <p class="project_activities">Activities</p>
+                        <p class="project_deep_id" th:each="activity : ${project.getActivities()}"
+                           th:text="${activity.getTitle()}"></p>
+                        <!-- <p class="project_deep_id">Data mining</p>
+                        <p class="project_deep_id">Data cleaning</p> -->
+                    </div>
+                    <div class="footer">
+                        <div class="footer_images">
+                            <img src="#" th:src="@{images/test photo profile.png}" alt="" class="box_image">
+                            <!--                           todo in this place will insert users image, check in database-->
+                        </div>
+                        <a th:href="'/project/details?id=' + ${project.getProjectId()}" class="see_button"
+                           role="button">See
+                            more</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ------------------------------------------------ -->
+
+
+    </div>
+
+
+</main>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
-<script th:src="@{/js/loged_js.js}"></script>
-<script th:src="@{/js/notifier.js}"></script>
-
-
+<script src="../static/js/test.js"></script>
 </body>
 
 </html>
