@@ -92,6 +92,7 @@ public class ProjectDao implements ProjectService, ActivityService {
 
     public List<Report> findByActivityId(Long activityId){
         return spendTimeUserRepository.findAllByActivityId(activityId);
+//        return spendTimeUserRepository.getReportsByActivityId(activityId);
     }
 
 }
