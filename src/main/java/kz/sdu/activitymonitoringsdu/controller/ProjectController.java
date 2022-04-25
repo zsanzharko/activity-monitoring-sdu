@@ -84,7 +84,7 @@ public class ProjectController {
         if (userDto.getRole() == Role.MANAGER && isCorrect) {
             projectDao.deleteByProjectId(idProject);
         }
-        return new ModelAndView("redirect:/");
+        return new ModelAndView("redirect:/dashboard");
     }
 
     @GetMapping("/details")
@@ -97,7 +97,9 @@ public class ProjectController {
         List<Integer> spendTimeActivities = activities.stream().map(ActivityDto::getSpentTime).toList();
 
         var total_time = spendTimeActivities.stream().mapToInt(Integer::intValue).sum();
-        var daily_time = total_time / spendTimeActivities.size();
+        var daily_time = 0;
+        if(total_time != 0)
+            daily_time = total_time / spendTimeActivities.size();
 
         String total_time_text = convertTimeToString(total_time);
         String daily_time_text = convertTimeToString(daily_time);
