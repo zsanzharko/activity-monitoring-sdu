@@ -35,7 +35,7 @@
                 </div>
                 <div class="right_part">
                     <p th:text="${activity.getStatus().name()}">Started</p>
-                    <a class="add_button employee_button" th:href="@{|project/activity/${consists.get(state.count - 1)}/${activity.getId()}|}">View</a>
+                    <a class="add_button employee_button" th:href="@{|project/activity/${consists.get(state.count - 1).getProjectId()}/${activity.getId()}|}">View</a>
                 </div>
                 
             </div>
