@@ -8144,13 +8144,21 @@ a {
   -webkit-transition: .3s all ease;
   -o-transition: .3s all ease;
   transition: .3s all ease;
+<<<<<<< Updated upstream
   color: #D68301; }
+=======
+  color: #8d448b; }
+>>>>>>> Stashed changes
   a:hover, a:focus {
     text-decoration: none !important;
     outline: none !important;
     -webkit-box-shadow: none;
     box-shadow: none;
+<<<<<<< Updated upstream
     color: #D68301; }
+=======
+    color: #8d448b; }
+>>>>>>> Stashed changes
 
 h1, h2, h3, h4, h5,
 .h1, .h2, .h3, .h4, .h5 {
@@ -8190,11 +8198,19 @@ h1, h2, h3, h4, h5,
   .login-wrap h3 {
     font-weight: 700;
     font-size: 20px;
+<<<<<<< Updated upstream
     color: #D68301; }
   .login-wrap .icon {
     width: 80px;
     height: 80px;
     background: #D68301;
+=======
+    color: #8d448b; }
+  .login-wrap .icon {
+    width: 80px;
+    height: 80px;
+    background: #8d448b;
+>>>>>>> Stashed changes
     border-radius: 50%;
     font-size: 30px;
     margin: 0 auto;
@@ -8283,8 +8299,23 @@ h1, h2, h3, h4, h5,
       -o-transition: none;
       transition: none; } }
 
+<<<<<<< Updated upstream
 
 
+=======
+/* Show the checkmark when checked */
+.checkbox-wrap input:checked ~ .checkmark:after {
+  display: block;
+  content: "\f14a";
+  font-family: "FontAwesome";
+  color: rgba(0, 0, 0, 0.2); }
+
+/* Style the checkmark/indicator */
+.checkbox-primary {
+  color: #8d448b; }
+  .checkbox-primary input:checked ~ .checkmark:after {
+    color: #8d448b; }
+>>>>>>> Stashed changes
 
 .btn {
   cursor: pointer;
@@ -8322,6 +8353,7 @@ h1, h2, h3, h4, h5,
     @media (max-width: 767.98px) {
       .form-group .submit {
         top: 0; } }
+<<<<<<< Updated upstream
 
 
 .orange_color{
@@ -8336,3 +8368,5 @@ h1, h2, h3, h4, h5,
 h3{
   color:#D68301;
 }
+=======
+>>>>>>> Stashed changes
