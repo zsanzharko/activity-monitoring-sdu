@@ -225,6 +225,13 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+              
+              <label class="form-label">Project name</label>
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">@</span>
+                <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+              </div>
+              
               ...
             </div>
             <div class="modal-footer">
@@ -268,6 +275,159 @@
                 more</a>
             </div>
           </div>
+          <div class="box" th:each="project : ${projects}">
+            <div class="box_head">
+              <div class="box_head_left">
+                <p class="projects_id" style="font-size: 20px;" th:text="${project.projectId}">9511DXP</p>
+                <p class="project_version" style="font-size: 13px;">version <span th:text="${project.projectVersion}"
+                    style="font-size: 13px;">A</span></p>
+              </div>
+              <p class="project_name" style="font-size: 20px; margin-right: 10px;" th:text="${project.title}">Project
+                name</p>
+            </div>
+            <div class="box_body">
+              <p class="project_activities">Activities</p>
+              <p class="project_deep_id" th:each="activity : ${project.getActivities()}"
+                th:text="${activity.getTitle()}"></p>
+              <!-- <p class="project_deep_id">Data mining</p>
+              <p class="project_deep_id">Data cleaning</p> -->
+            </div>
+            <div class="footer">
+              <div class="footer_images">
+                <img th:src="@{images/test photo profile.png}" alt="" class="box_image">
+                <!--                           todo in this place will insert users image, check in database-->
+              </div>
+              <a th:href="'/project/details?id=' + ${project.getProjectId()}" class="see_button" role="button">See
+                more</a>
+            </div>
+          </div><div class="box" th:each="project : ${projects}">
+            <div class="box_head">
+              <div class="box_head_left">
+                <p class="projects_id" style="font-size: 20px;" th:text="${project.projectId}">9511DXP</p>
+                <p class="project_version" style="font-size: 13px;">version <span th:text="${project.projectVersion}"
+                    style="font-size: 13px;">A</span></p>
+              </div>
+              <p class="project_name" style="font-size: 20px; margin-right: 10px;" th:text="${project.title}">Project
+                name</p>
+            </div>
+            <div class="box_body">
+              <p class="project_activities">Activities</p>
+              <p class="project_deep_id" th:each="activity : ${project.getActivities()}"
+                th:text="${activity.getTitle()}"></p>
+              <!-- <p class="project_deep_id">Data mining</p>
+              <p class="project_deep_id">Data cleaning</p> -->
+            </div>
+            <div class="footer">
+              <div class="footer_images">
+                <img th:src="@{images/test photo profile.png}" alt="" class="box_image">
+                <!--                           todo in this place will insert users image, check in database-->
+              </div>
+              <a th:href="'/project/details?id=' + ${project.getProjectId()}" class="see_button" role="button">See
+                more</a>
+            </div>
+          </div><div class="box" th:each="project : ${projects}">
+            <div class="box_head">
+              <div class="box_head_left">
+                <p class="projects_id" style="font-size: 20px;" th:text="${project.projectId}">9511DXP</p>
+                <p class="project_version" style="font-size: 13px;">version <span th:text="${project.projectVersion}"
+                    style="font-size: 13px;">A</span></p>
+              </div>
+              <p class="project_name" style="font-size: 20px; margin-right: 10px;" th:text="${project.title}">Project
+                name</p>
+            </div>
+            <div class="box_body">
+              <p class="project_activities">Activities</p>
+              <p class="project_deep_id" th:each="activity : ${project.getActivities()}"
+                th:text="${activity.getTitle()}"></p>
+              <!-- <p class="project_deep_id">Data mining</p>
+              <p class="project_deep_id">Data cleaning</p> -->
+            </div>
+            <div class="footer">
+              <div class="footer_images">
+                <img th:src="@{images/test photo profile.png}" alt="" class="box_image">
+                <!--                           todo in this place will insert users image, check in database-->
+              </div>
+              <a th:href="'/project/details?id=' + ${project.getProjectId()}" class="see_button" role="button">See
+                more</a>
+            </div>
+          </div><div class="box" th:each="project : ${projects}">
+            <div class="box_head">
+              <div class="box_head_left">
+                <p class="projects_id" style="font-size: 20px;" th:text="${project.projectId}">9511DXP</p>
+                <p class="project_version" style="font-size: 13px;">version <span th:text="${project.projectVersion}"
+                    style="font-size: 13px;">A</span></p>
+              </div>
+              <p class="project_name" style="font-size: 20px; margin-right: 10px;" th:text="${project.title}">Project
+                name</p>
+            </div>
+            <div class="box_body">
+              <p class="project_activities">Activities</p>
+              <p class="project_deep_id" th:each="activity : ${project.getActivities()}"
+                th:text="${activity.getTitle()}"></p>
+              <!-- <p class="project_deep_id">Data mining</p>
+              <p class="project_deep_id">Data cleaning</p> -->
+            </div>
+            <div class="footer">
+              <div class="footer_images">
+                <img th:src="@{images/test photo profile.png}" alt="" class="box_image">
+                <!--                           todo in this place will insert users image, check in database-->
+              </div>
+              <a th:href="'/project/details?id=' + ${project.getProjectId()}" class="see_button" role="button">See
+                more</a>
+            </div>
+          </div><div class="box" th:each="project : ${projects}">
+            <div class="box_head">
+              <div class="box_head_left">
+                <p class="projects_id" style="font-size: 20px;" th:text="${project.projectId}">9511DXP</p>
+                <p class="project_version" style="font-size: 13px;">version <span th:text="${project.projectVersion}"
+                    style="font-size: 13px;">A</span></p>
+              </div>
+              <p class="project_name" style="font-size: 20px; margin-right: 10px;" th:text="${project.title}">Project
+                name</p>
+            </div>
+            <div class="box_body">
+              <p class="project_activities">Activities</p>
+              <p class="project_deep_id" th:each="activity : ${project.getActivities()}"
+                th:text="${activity.getTitle()}"></p>
+              <!-- <p class="project_deep_id">Data mining</p>
+              <p class="project_deep_id">Data cleaning</p> -->
+            </div>
+            <div class="footer">
+              <div class="footer_images">
+                <img th:src="@{images/test photo profile.png}" alt="" class="box_image">
+                <!--                           todo in this place will insert users image, check in database-->
+              </div>
+              <a th:href="'/project/details?id=' + ${project.getProjectId()}" class="see_button" role="button">See
+                more</a>
+            </div>
+          </div><div class="box" th:each="project : ${projects}">
+            <div class="box_head">
+              <div class="box_head_left">
+                <p class="projects_id" style="font-size: 20px;" th:text="${project.projectId}">9511DXP</p>
+                <p class="project_version" style="font-size: 13px;">version <span th:text="${project.projectVersion}"
+                    style="font-size: 13px;">A</span></p>
+              </div>
+              <p class="project_name" style="font-size: 20px; margin-right: 10px;" th:text="${project.title}">Project
+                name</p>
+            </div>
+            <div class="box_body">
+              <p class="project_activities">Activities</p>
+              <p class="project_deep_id" th:each="activity : ${project.getActivities()}"
+                th:text="${activity.getTitle()}"></p>
+              <!-- <p class="project_deep_id">Data mining</p>
+              <p class="project_deep_id">Data cleaning</p> -->
+            </div>
+            <div class="footer">
+              <div class="footer_images">
+                <img th:src="@{images/test photo profile.png}" alt="" class="box_image">
+                <!--                           todo in this place will insert users image, check in database-->
+              </div>
+              <a th:href="'/project/details?id=' + ${project.getProjectId()}" class="see_button" role="button">See
+                more</a>
+            </div>
+          </div>
+
+
         </div>
       </div>
 
