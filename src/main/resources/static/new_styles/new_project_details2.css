@@ -1,0 +1,67 @@
+.space_for_project{
+  height: 70%;
+  display: flex;
+  align-items:center;
+}
+
+.project_name_box{
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  border-radius: 10px;
+  margin-left: 20px;
+  margin-right: 10px;
+  text-align: center;
+}
+
+.project_name{
+  margin: 10px;
+}
+
+.activity_container{
+  /* background-color:antiquewhite; */
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 0px;
+  /* height: 100%; */
+  width: 100%;
+  border-width:5px;
+  border-style: solid;
+  border-radius: 30px;
+  border-color: white white white #212529;
+  display: flex;
+  flex-direction: column;
+}
+
+.buffer_container{
+  margin: 2px 0px 2px 10px;
+}
+.activity_box{
+  margin: 10px 0px 10px 0px;
+  display: flex;
+  background-color:aquamarine;
+  height: 40px;
+  display: flex;
+  width: 100%;
+  align-items:center;
+}
+
+.activity_name{
+  height: 100%;
+  display: flex;
+  padding: 5px;
+  /* background-color:red; */
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  border-radius:20px;
+  align-items:center;
+}
+.progress{
+  height: 80%;
+}
+
+#myProgress {
+  width: 100%;
+  background-color: rgb(214, 214, 214);
+}
+
+#myBar {
+  width: 1%;
+  height: 30px;
+  background-color: green;
+}
