@@ -69,7 +69,7 @@ public class ActivityController {
         modelMap.addAttribute("reports", reportList);
         modelMap.addAttribute("projectId", projectId);
         modelMap.addAttribute("back_page",
-                "/project/details?id=" + projectId);
+                "/project/panel?id=" + projectId);
         modelMap.addAttribute("id", id);
 
         return new ModelAndView("activity_details", modelMap);
@@ -166,7 +166,7 @@ public class ActivityController {
 
         Activity activity = projectDao.save(ActivityHandlerUtils.convertToEntity(activityCreateForm.getDtoFromForm()));
         consistDao.save(new Consist(activity.getId(), projectDao.findById(id).getId()));
-        return new ModelAndView("redirect:/project/details" + "?id=" + id);
+        return new ModelAndView("redirect:/project/panel" + "?id=" + id);
     }
 
     @GetMapping(value = "/panel", consumes = "application/json", produces = "application/json")
