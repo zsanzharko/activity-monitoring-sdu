@@ -2,6 +2,7 @@ package kz.sdu.activitymonitoringsdu.controller;
 
 import kz.sdu.activitymonitoringsdu.dao.*;
 import kz.sdu.activitymonitoringsdu.dto.ActivityDto;
+import kz.sdu.activitymonitoringsdu.dto.ProjectDto;
 import kz.sdu.activitymonitoringsdu.dto.UserDto;
 import kz.sdu.activitymonitoringsdu.entity.Activity;
 import kz.sdu.activitymonitoringsdu.entity.Consist;
@@ -13,6 +14,7 @@ import kz.sdu.activitymonitoringsdu.handlers.UserHandlerUtils;
 import kz.sdu.activitymonitoringsdu.handlers.forms.ActivityCreateForm;
 import kz.sdu.activitymonitoringsdu.handlers.forms.SpendTimeForm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -26,16 +28,14 @@ import java.util.List;
 public class ActivityController {
 
     private final ProjectDao projectDao;
-    private final ActivityDao activityDao;
     private final DevConnectionActivityDao assignedUserDao;
     private final UserDao userDao;
     private final ConsistDao consistDao;
     private final ReportDao reportDao;
 
     @Autowired
-    public ActivityController(ProjectDao projectDao, ActivityDao activityDao, DevConnectionActivityDao assignedUserDao, UserDao userDao, ConsistDao consistDao, ReportDao reportDao) {
+    public ActivityController(ProjectDao projectDao, DevConnectionActivityDao assignedUserDao, UserDao userDao, ConsistDao consistDao, ReportDao reportDao) {
         this.projectDao = projectDao;
-        this.activityDao = activityDao;
         this.assignedUserDao = assignedUserDao;
         this.userDao = userDao;
         this.consistDao = consistDao;
@@ -47,29 +47,29 @@ public class ActivityController {
         UserDto userDto = UserHandlerUtils.getUserFromAuth(userDao);
 
 
-        ActivityDto activityDto = activityDao.findById(id);
-        List<Report> reportList = activityDao.findByActivityId(activityDto.getId());
+        ActivityDto activityDto = projectDao.findById(id);
+        List<Report> reportList = projectDao.findByActivityId(activityDto.getId());
         DevConnectionActivity assignedUserDto = assignedUserDao.getAssignedUserByActivityId(id);
 
-        if(userDto.getRole() == Role.MANAGER) {
+        if (userDto.getRole() == Role.MANAGER) {
             List<UserDto> freeDevelopers = UserHandlerUtils
                     .convertToDto(userDao.findAllByRole(Role.EMPLOYEE));
 
             modelMap.addAttribute("developers", freeDevelopers);
-        } else if (userDto.getRole() == Role.EMPLOYEE){
+        } else if (userDto.getRole() == Role.EMPLOYEE) {
             modelMap.addAttribute("spendTimeForm", new SpendTimeForm());
         }
 
         modelMap.addAttribute("assignedUser", assignedUserDto);
         modelMap.addAttribute("assignedUserName",
                 assignedUserDto != null ?
-                userDao.findById(assignedUserDto.getUserId()).getFirstName() : "");
+                        userDao.findById(assignedUserDto.getUserId()).getFirstName() : "");
         modelMap.addAttribute("user", userDto);
         modelMap.addAttribute("activity", activityDto);
         modelMap.addAttribute("reports", reportList);
         modelMap.addAttribute("projectId", projectId);
         modelMap.addAttribute("back_page",
-                "/project/details?id=" + projectId);
+                "/project/panel?id=" + projectId);
         modelMap.addAttribute("id", id);
 
         return new ModelAndView("activity_details", modelMap);
@@ -82,26 +82,54 @@ public class ActivityController {
                                       ModelMap modelMap) {
         UserDto userDto = UserHandlerUtils.getUserFromAuth(userDao);
 
-        if(userDto.getRole() == Role.MANAGER) {
+        if (userDto.getRole() == Role.MANAGER) {
             return new ModelAndView("redirect:/project/activity/" + modelMap.getAttribute("id"));
         }
 
-        Report report = new Report(activityId, form.getDateStart(), form.getMinutes());
+//        Report report = new Report(activityId, form.getDateStart(), form.getMinutes());
+        Report report = Report.builder()
+                .activityId(activityId)
+                .reportDate(form.getDateStart())
+                .time(form.getMinutes())
+                .build();
 
         reportDao.save(report);
 
         return new ModelAndView("redirect:/project/activity/" + projectId + "/" + activityId);
     }
+//
+//    @PostMapping("/push/{projectId}/{activityId}")
+//    @ResponseBody
+//    public ResponseEntity<ResponseHandler> pushReport(@PathVariable Long activityId,
+//                                                      @PathVariable String projectId,
+//                                                      @ModelAttribute SpendTimeForm form,
+//                                                      ModelMap modelMap) {
+//        UserDto userDto = UserHandlerUtils.getUserFromAuth(userDao);
+//
+//        if (userDto.getRole() == Role.MANAGER) {
+//            return ResponseEntity.noContent().build();
+//        }
+//
+//        Report report = new Report(activityId, form.getDateStart(), form.getMinutes());
+//
+//        reportDao.save(report);
+//
+//        return ResponseEntity.ok(new ResponseHandler(
+//                RequestProcess.SUCCESSFUL,
+//                new Date(System.currentTimeMillis()),
+//                "object",
+//                List.of(report)));
+//    }
 
     @GetMapping("/assign/{id}/{activityId}/{projectId}")
     public String assignUserToActivity(@PathVariable final Long id,
                                        @PathVariable final Long activityId,
                                        @PathVariable final String projectId) {
         UserDto userDto = UserHandlerUtils.getUserFromAuth(userDao);
-        if(userDto.getRole() == Role.EMPLOYEE) return "redirect:/dashboard";
+        if (userDto.getRole() == Role.EMPLOYEE) return "redirect:/dashboard";
 
         assignedUserDao.save(new DevConnectionActivity(activityId, id, ""));
-        return "redirect:/project/activity/" + projectId + "/" + activityId;
+        return String.format("redirect:/project/activity/%s/%s", projectId, activityId);
     }
 
     @GetMapping("/create")
@@ -109,7 +137,7 @@ public class ActivityController {
         //checking user is manager or not
         UserDto userDto = UserHandlerUtils.getUserFromAuth(userDao);
         if (!userDto.getRole().name().equals(Role.MANAGER.name()))
-            return new ModelAndView("redirect:/");
+            return new ModelAndView("redirect:/dashboard");
 
         model.addAttribute("back_page", "/dashboard");
         model.addAttribute("user", userDto);
@@ -127,7 +155,7 @@ public class ActivityController {
         //checking user is manager or not
         UserDto userDto = UserHandlerUtils.getUserFromAuth(userDao);
         if (userDto.getRole() != Role.MANAGER)
-            return new ModelAndView("redirect:/");
+            return new ModelAndView("redirect:/dashboard");
 
         if (bindingResult.hasErrors()) {
 
@@ -136,8 +164,15 @@ public class ActivityController {
             return new ModelAndView("redirect:/project/activity/create/" + id, model);
         }
 
-        Activity activity = activityDao.save(ActivityHandlerUtils.convertToEntity(activityCreateForm.getDtoFromForm()));
-        consistDao.save(new Consist(activity.getId(), id));
-        return new ModelAndView("redirect:/project/details?id=" + id);
+        Activity activity = projectDao.save(ActivityHandlerUtils.convertToEntity(activityCreateForm.getDtoFromForm()));
+        consistDao.save(new Consist(activity.getId(), projectDao.findById(id).getId()));
+        return new ModelAndView("redirect:/project/panel" + "?id=" + id);
+    }
+
+    @GetMapping(value = "/panel", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<ProjectDto> getActivityPanel(@RequestParam String projectId) {
+        ProjectDto body = projectDao.findByIdDto(projectId);
+        if (body == null) ResponseEntity.notFound().build();
+        return ResponseEntity.ok(body);
     }
 }

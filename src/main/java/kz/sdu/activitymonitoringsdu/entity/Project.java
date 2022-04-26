@@ -4,7 +4,6 @@ import kz.sdu.activitymonitoringsdu.enums.ProjectStatus;
 import lombok.*;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.util.Date;
 
 //todo do documentation
@@ -19,6 +18,10 @@ import java.util.Date;
 @AllArgsConstructor
 public class Project {
     @Id
+    @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     @Column(name = "project_id", nullable = false)
     private String projectId;
 

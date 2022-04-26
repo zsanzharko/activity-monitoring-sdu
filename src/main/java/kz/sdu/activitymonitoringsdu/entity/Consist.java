@@ -3,7 +3,10 @@ package kz.sdu.activitymonitoringsdu.entity;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "consist")
@@ -15,13 +18,13 @@ public class Consist {
     private Long activityId;
 
     @Column(name = "project_id", nullable = false, precision = 4)
-    private String projectId;
+    private Long projectId;
 
-    public String getProjectId() {
+    public Long getProjectId() {
         return projectId;
     }
 
-    public void setProjectId(String projectId) {
+    public void setProjectId(Long projectId) {
         this.projectId = projectId;
     }
 

@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -17,7 +16,7 @@ import java.util.Date;
 @Getter
 @Setter
 public class ProjectCreateForm {
-    private String projectId = generateId();
+    private String projectId;
     private String projectVersion;
     private String title;
     private String description;
@@ -45,7 +44,7 @@ public class ProjectCreateForm {
             if(i < 4) {
                 id.append((int) (Math.random() * 10));
             } else {
-                id.append((char) (65 +Math.random() * 90));
+                id.append((char) ((int) (65 + Math.random() * 25)));
             }
         }
         return id.toString();

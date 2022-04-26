@@ -27,7 +27,8 @@ public class ActivityCreateForm {
         activityDto.setDescription(description);
         activityDto.setStatus(status);
         activityDto.setStartDate(startDate);
-        activityDto.setSpentTime("0");
+        activityDto.setSpentTime(0);
+        activityDto.setExpectedTime(0);
         return activityDto;
     }
 }

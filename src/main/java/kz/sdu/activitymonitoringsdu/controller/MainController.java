@@ -1,6 +1,9 @@
 package kz.sdu.activitymonitoringsdu.controller;
 
-import kz.sdu.activitymonitoringsdu.dao.*;
+import kz.sdu.activitymonitoringsdu.dao.ConsistDao;
+import kz.sdu.activitymonitoringsdu.dao.DevConnectionActivityDao;
+import kz.sdu.activitymonitoringsdu.dao.ProjectDao;
+import kz.sdu.activitymonitoringsdu.dao.UserDao;
 import kz.sdu.activitymonitoringsdu.dto.ActivityDto;
 import kz.sdu.activitymonitoringsdu.dto.ProjectDto;
 import kz.sdu.activitymonitoringsdu.dto.UserDto;
@@ -25,15 +28,13 @@ public class MainController {
 
     private final UserDao userDao;
     private final ProjectDao projectDao;
-    private final ActivityDao activityDao;
     private final ConsistDao consistDao;
     private final DevConnectionActivityDao assignDao;
 
     @Autowired
-    public MainController(UserDao userDao, ProjectDao projectDao, ActivityDao activityDao, ConsistDao consistDao, DevConnectionActivityDao assignDao) {
+    public MainController(UserDao userDao, ProjectDao projectDao, ConsistDao consistDao, DevConnectionActivityDao assignDao) {
         this.userDao = userDao;
         this.projectDao = projectDao;
-        this.activityDao = activityDao;
         this.consistDao = consistDao;
         this.assignDao = assignDao;
     }
@@ -60,7 +61,7 @@ public class MainController {
     @GetMapping("/profile-panel")
     public ModelAndView getProfilePanel(ModelMap model) {
 
-        return new ModelAndView("redirect:/");
+        return new ModelAndView("redirect:/dashboard");
     }
 
     private void roleDefinitionDashboard(final UserDto user, ModelMap modelMap) {
@@ -69,7 +70,8 @@ public class MainController {
             for (ProjectDto projectDto : projects) {
                 List<ActivityDto> subActivities = new ArrayList<>();
 
-                List<ActivityDto> activities = activityDao.getActivitiesById(consistDao.findAllByProjectId(projectDto.getProjectId()));
+                List<ActivityDto> activities = projectDao.getActivitiesById(
+                        consistDao.findAllByProjectId(projectDao.findById(projectDto.getProjectId()).getId()));
                 if(activities == null) activities = new ArrayList<>();
                 for (int i = 0; i < 2 && !activities.isEmpty(); i++) {
                     if (i > activities.size() - 1) break;
@@ -83,7 +85,7 @@ public class MainController {
             List<ActivityDto> activityDtoList = new ArrayList<>();
             List<Consist> consistList = new ArrayList<>();
             for (DevConnectionActivity assign : assignedList) {
-                activityDtoList.add(activityDao.findById(assign.getActivityId()));
+                activityDtoList.add(projectDao.findById(assign.getActivityId()));
                 consistList.add(consistDao.findById(assign.getActivityId()));
             }
 

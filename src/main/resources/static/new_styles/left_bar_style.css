@@ -1,0 +1,113 @@
+@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+
+body {
+  min-height: 100vh;
+  font-family: 'Poppins', sans-serif;
+  min-height: -webkit-fill-available;
+}
+
+html {
+  height: -webkit-fill-available;
+}
+
+main {
+  display: flex;
+  flex-wrap: nowrap;
+  height: 100vh;
+  height: -webkit-fill-available;
+  max-height: 100vh;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.side_bar {
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  /* box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset; */
+  /* background-color: #333333; */
+  height: 100vh;
+  width: 300px;
+}
+
+.bi {
+  vertical-align: -.125em;
+  pointer-events: none;
+  fill: currentColor;
+}
+.seting_box{
+  margin-left: 10px;
+  display: flex;
+  align-items:center;
+}
+
+.dropdown-toggle {
+  outline: 0;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+}
+
+.sidebar_head {
+  border-radius: 5px;
+}
+
+
+.name_picture_box {
+  display: flex;
+  align-items: center;
+}
+
+.side_head_text {
+  font-size: 25px;
+  margin-left: 20px;
+}
+
+.upper_dev_inf {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.sider_dev_inf {
+  margin: 0px;
+  padding: 0px;
+  color: #D2D3D6;
+  font-size: 14px;
+}
+
+.input_inf {
+  color: white;
+  margin-left: 5px;
+  font-size: 15px;
+}
+
+.sider_dash_box {
+  background-color: #D68300;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3;
+  -webkit-transition-property: box-shadow, transform;
+  transition-property: box-shadow, transform;
+}
+
+.sider_dash_box:hover,
+.sider_dash_box:focus,
+.sider_dash_box:active {
+  box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.5);
+  -webkit-transform: scale(1.1);
+  transform: scale(1.05);
+}
+
+.main_right_part {
+  /* background-color:bisque; */
+  width: 100%;
+}

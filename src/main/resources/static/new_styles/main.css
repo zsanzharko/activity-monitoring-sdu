@@ -1,0 +1,13 @@
+.vertical_line {
+    border-left: 1px solid gray;
+    /*height: 500px;*/
+}
+
+.pad-h-2 {
+    padding: 0 2rem;
+}
+
+.flex-space-evenly {
+    display: flex;
+    justify-content: space-evenly;
+}
