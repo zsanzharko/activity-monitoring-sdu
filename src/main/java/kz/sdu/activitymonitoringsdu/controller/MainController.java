@@ -70,7 +70,8 @@ public class MainController {
             for (ProjectDto projectDto : projects) {
                 List<ActivityDto> subActivities = new ArrayList<>();
 
-                List<ActivityDto> activities = projectDao.getActivitiesById(consistDao.findAllByProjectId(projectDao.findById(projectDto.getProjectId()).getId()));
+                List<ActivityDto> activities = projectDao.getActivitiesById(
+                        consistDao.findAllByProjectId(projectDao.findById(projectDto.getProjectId()).getId()));
                 if(activities == null) activities = new ArrayList<>();
                 for (int i = 0; i < 2 && !activities.isEmpty(); i++) {
                     if (i > activities.size() - 1) break;

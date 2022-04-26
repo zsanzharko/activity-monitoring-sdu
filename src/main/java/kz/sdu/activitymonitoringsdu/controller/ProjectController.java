@@ -20,6 +20,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -105,7 +106,7 @@ public class ProjectController {
         String daily_time_text = convertTimeToString(daily_time);
 
 
-
+        model.addAttribute("titlePage", "Project: " + projectDto.getTitle());
         model.addAttribute("userIsManager", userDto.getRole() == Role.MANAGER);
         model.addAttribute("activities", activities);
         model.addAttribute("totalTime", activities.stream()
@@ -118,7 +119,13 @@ public class ProjectController {
         model.addAttribute("total_time", total_time_text);
         model.addAttribute("daily_time", daily_time_text);
 
-        return new ModelAndView("project_details", model);
+        var daily_count = new ArrayList<Integer>();
+        for (int i = 0; i < 15; i++) {
+            daily_count.add(i + 1);
+        }
+        model.addAttribute("daily_count", daily_count);
+
+        return new ModelAndView("new_project_details2", model);
     }
 
     @GetMapping("/get-time-details/{id}")

@@ -2,6 +2,7 @@ package kz.sdu.activitymonitoringsdu.controller;
 
 import kz.sdu.activitymonitoringsdu.dao.*;
 import kz.sdu.activitymonitoringsdu.dto.ActivityDto;
+import kz.sdu.activitymonitoringsdu.dto.ProjectDto;
 import kz.sdu.activitymonitoringsdu.dto.UserDto;
 import kz.sdu.activitymonitoringsdu.entity.Activity;
 import kz.sdu.activitymonitoringsdu.entity.Consist;
@@ -13,6 +14,7 @@ import kz.sdu.activitymonitoringsdu.handlers.UserHandlerUtils;
 import kz.sdu.activitymonitoringsdu.handlers.forms.ActivityCreateForm;
 import kz.sdu.activitymonitoringsdu.handlers.forms.SpendTimeForm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -165,5 +167,12 @@ public class ActivityController {
         Activity activity = projectDao.save(ActivityHandlerUtils.convertToEntity(activityCreateForm.getDtoFromForm()));
         consistDao.save(new Consist(activity.getId(), projectDao.findById(id).getId()));
         return new ModelAndView("redirect:/project/details" + "?id=" + id);
+    }
+
+    @GetMapping(value = "/panel", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<ProjectDto> getActivityPanel(@RequestParam String projectId) {
+        ProjectDto body = projectDao.findByIdDto(projectId);
+        if (body == null) ResponseEntity.notFound().build();
+        return ResponseEntity.ok(body);
     }
 }
