@@ -47,23 +47,29 @@
                         </div>
                         <div class="form-group d-md-flex">
                             <div class="w-50">
+                                <div th:if="${param.error}">
+                                    Invalid username and password.
+                                </div>
+                                <div th:if="${param.logout}">
+                                    You have been logged out.
+                                </div>
                             </div>
-                            <div class="w-50 text-md-right">
+                            <dsiv class="w-50 text-md-right">
                                 <button type="button" class="btn" style="color: #D68301;" data-bs-toggle="modal"
                                         data-bs-target="#Modal_helper">
                                     Forgot Password
                                 </button>
                                 <!-- <a href="#">Forgot Password</a> -->
-                            </div>
+                            </dsiv>
                         </div>
-                        <div class="form-group">
-                            <div th:if="${param.error}">
+                        <div class="form-group answer">
+                            <!-- <div th:if="${param.error}">
                                 Invalid username and password.
                             </div>
                             <div th:if="${param.logout}">
                                 You have been logged out.
-                            </div>
-                            <button type="submit" value="Submit" class="btn  rounded submit p-3 px-5 orange_color">Log
+                            </div> -->
+                            <button type="submit" value="Submit" style="background-color: #D68301; color:white;" class="btn  rounded submit p-3 px-5 orange_color">Log
                                 in
                             </button>
                         </div>
