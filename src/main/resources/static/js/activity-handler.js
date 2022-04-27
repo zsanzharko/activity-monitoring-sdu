@@ -1,7 +1,5 @@
-// import postData from "./add_object_handler"
-
 function getActivityDayInformation(projectId) {
-    const url = '/project/activity/panel?projectId=' + projectId
+    const url = '/api/activity/panel?projectId=' + projectId
 
     fetch(url, {
         headers: {
@@ -14,41 +12,17 @@ function getActivityDayInformation(projectId) {
             const activities = data["activities"];
             const assigned = data["devConnectionActivities"];
 
-            let assign_json = {}
-
             let display_activity_boxs = ``;
             let display_assign_box = ``;
 
-            let recursiveFunction = function (arr, x, start, end) {
+            let key_assign = Object.keys(assigned)
 
-                // Base Condition
-                if (start > end) return false;
-
-                // Find the middle index
-                let mid = Math.floor((start + end) / 2);
-
-                // Compare mid with given key x
-                if (arr[mid] === x) return true;
-
-                // If element at mid is greater than x,
-                // search in the left half of mid
-                if (arr[mid] > x)
-                    return recursiveFunction(arr, x, start, mid - 1);
-                else
-
-                    // If element at mid is smaller than x,
-                    // search in the right half of mid
-                    return recursiveFunction(arr, x, mid + 1, end);
-            }
-
-            Object.keys(assigned).forEach(function (entry) {
-                assign_json +=
-                    {
-                        first_name: assigned[`${entry}`].firstName
-                    }
-                let assign_name = assigned[`${entry}`].firstName
-                const assignIsNull = assign_name != null && assign_name.length !== 0
-
+            for (const [key, value] of Object.entries(assigned)) {
+                let assign_name = null;
+                if (value != null) {
+                    assign_name = value["firstName"]
+                }
+                const assignIsNull = assign_name != null
                 display_assign_box += `
                 <div class="activity_placeholder">
                                 <div class="activity_box">
@@ -58,9 +32,7 @@ function getActivityDayInformation(projectId) {
                                 </div>
                             </div>
                 `
-            });
-
-
+            }
 
             for (let i = 0; i < activities.length; i++) {
                 display_activity_boxs += `
