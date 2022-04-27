@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface ProjectService {
 
-    Project findById(String id);
+    Project findByProjectId(String id);
 
-    void deleteByProjectId(String projectId);
+    void deleteProjectByProjectId(String projectId);
 
     Project saveProject(Project project);
 

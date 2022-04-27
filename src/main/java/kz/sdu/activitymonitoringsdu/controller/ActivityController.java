@@ -30,16 +30,12 @@ public class ActivityController {
     private final ProjectDao projectDao;
     private final DevConnectionActivityDao assignedUserDao;
     private final UserDao userDao;
-    private final ConsistDao consistDao;
-    private final ReportDao reportDao;
 
     @Autowired
-    public ActivityController(ProjectDao projectDao, DevConnectionActivityDao assignedUserDao, UserDao userDao, ConsistDao consistDao, ReportDao reportDao) {
+    public ActivityController(ProjectDao projectDao, DevConnectionActivityDao assignedUserDao, UserDao userDao) {
         this.projectDao = projectDao;
         this.assignedUserDao = assignedUserDao;
         this.userDao = userDao;
-        this.consistDao = consistDao;
-        this.reportDao = reportDao;
     }
 
     @GetMapping("/{projectId}/{id}")
@@ -75,52 +71,6 @@ public class ActivityController {
         return new ModelAndView("activity_details", modelMap);
     }
 
-    @PostMapping("/push/{projectId}/{activityId}")
-    public ModelAndView pushSpendTime(@PathVariable Long activityId,
-                                      @PathVariable String projectId,
-                                      @ModelAttribute SpendTimeForm form,
-                                      ModelMap modelMap) {
-        UserDto userDto = UserHandlerUtils.getUserFromAuth(userDao);
-
-        if (userDto.getRole() == Role.MANAGER) {
-            return new ModelAndView("redirect:/project/activity/" + modelMap.getAttribute("id"));
-        }
-
-//        Report report = new Report(activityId, form.getDateStart(), form.getMinutes());
-        Report report = Report.builder()
-                .activityId(activityId)
-                .reportDate(form.getDateStart())
-                .time(form.getMinutes())
-                .build();
-
-        reportDao.save(report);
-
-        return new ModelAndView("redirect:/project/activity/" + projectId + "/" + activityId);
-    }
-//
-//    @PostMapping("/push/{projectId}/{activityId}")
-//    @ResponseBody
-//    public ResponseEntity<ResponseHandler> pushReport(@PathVariable Long activityId,
-//                                                      @PathVariable String projectId,
-//                                                      @ModelAttribute SpendTimeForm form,
-//                                                      ModelMap modelMap) {
-//        UserDto userDto = UserHandlerUtils.getUserFromAuth(userDao);
-//
-//        if (userDto.getRole() == Role.MANAGER) {
-//            return ResponseEntity.noContent().build();
-//        }
-//
-//        Report report = new Report(activityId, form.getDateStart(), form.getMinutes());
-//
-//        reportDao.save(report);
-//
-//        return ResponseEntity.ok(new ResponseHandler(
-//                RequestProcess.SUCCESSFUL,
-//                new Date(System.currentTimeMillis()),
-//                "object",
-//                List.of(report)));
-//    }
-
     @GetMapping("/assign/{id}/{activityId}/{projectId}")
     public String assignUserToActivity(@PathVariable final Long id,
                                        @PathVariable final Long activityId,
@@ -130,49 +80,5 @@ public class ActivityController {
 
         assignedUserDao.save(new DevConnectionActivity(activityId, id, ""));
         return String.format("redirect:/project/activity/%s/%s", projectId, activityId);
-    }
-
-    @GetMapping("/create")
-    public ModelAndView createActivity(@RequestParam final String id, ModelMap model) {
-        //checking user is manager or not
-        UserDto userDto = UserHandlerUtils.getUserFromAuth(userDao);
-        if (!userDto.getRole().name().equals(Role.MANAGER.name()))
-            return new ModelAndView("redirect:/dashboard");
-
-        model.addAttribute("back_page", "/dashboard");
-        model.addAttribute("user", userDto);
-        model.addAttribute("id", id);
-        model.addAttribute("activity", new ActivityCreateForm());
-
-        return new ModelAndView("new_activity", model);
-    }
-
-    @PostMapping("/create/{id}")
-    public ModelAndView saveActivityProject(@PathVariable final String id,
-                                            @ModelAttribute("activity") final ActivityCreateForm activityCreateForm,
-                                            ModelMap model,
-                                            BindingResult bindingResult) {
-        //checking user is manager or not
-        UserDto userDto = UserHandlerUtils.getUserFromAuth(userDao);
-        if (userDto.getRole() != Role.MANAGER)
-            return new ModelAndView("redirect:/dashboard");
-
-        if (bindingResult.hasErrors()) {
-
-            model.addAttribute("id", id);
-            model.addAttribute("activity", new ActivityCreateForm());
-            return new ModelAndView("redirect:/project/activity/create/" + id, model);
-        }
-
-        Activity activity = projectDao.save(ActivityHandlerUtils.convertToEntity(activityCreateForm.getDtoFromForm()));
-        consistDao.save(new Consist(activity.getId(), projectDao.findById(id).getId()));
-        return new ModelAndView("redirect:/project/panel" + "?id=" + id);
-    }
-
-    @GetMapping(value = "/panel", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<ProjectDto> getActivityPanel(@RequestParam String projectId) {
-        ProjectDto body = projectDao.findByIdDto(projectId);
-        if (body == null) ResponseEntity.notFound().build();
-        return ResponseEntity.ok(body);
     }
 }

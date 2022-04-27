@@ -9,9 +9,11 @@ import java.util.List;
 @Repository
 public interface ConsistRepository extends JpaRepository<Consist, Long> {
 
-    Consist findConsistByProjectId(Long projectId);
+    Consist findConsistByProjectId(String projectId);
 
-    List<Consist> findByProjectId(Long projectId);
+    List<Consist> findByProjectId(String projectId);
 
     List<Consist> findAllByActivityId(Long activityId);
+
+    void deleteAllByProjectId(String projectId);
 }
