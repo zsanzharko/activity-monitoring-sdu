@@ -91,6 +91,7 @@ body {
     height: 3rem;
     width: 100%;
     align-items: center;
+    text-align: center;
 }
 
 .assign_box {

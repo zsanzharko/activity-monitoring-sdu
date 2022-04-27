@@ -14,8 +14,7 @@ function getActivityDayInformation(projectId) {
 
             let display_activity_boxs = ``;
             let display_assign_box = ``;
-
-            let key_assign = Object.keys(assigned)
+            let display_activity_link_boxs = ``;
 
             for (const [key, value] of Object.entries(assigned)) {
                 let assign_name = null;
@@ -44,9 +43,42 @@ function getActivityDayInformation(projectId) {
                                 </div>
                             </div>`
 
+                display_activity_link_boxs +=
+                    `
+                    <div class="activity_box">
+                        <div style="height: 100%;">
+                            <a href="/${projectId}/${activities[i].id}" class="activity_name">View</a>
+                        </div>
+                    </div>`
+
             }
             document.getElementById("activity_title_placeholder").innerHTML = display_activity_boxs;
             document.getElementById("activity_assigned_placeholder").innerHTML = display_assign_box;
+            document.getElementById("activity_details_placeholder").innerHTML = display_activity_link_boxs;
         }).catch(_ => console.error(_));
 }
 
+async function newActivity(projectId) {
+    if (projectId == null) return null;
+
+    const url = 'api/manager/create/' + projectId
+
+    const form = document.getElementById('new-activity')
+    const formData = new FormData(form)
+
+    const object = {};
+    formData.forEach(function (value, key) {
+        object[key] = value;
+    });
+
+    console.log(object)
+    // const response = await fetch(url, {
+    //     method: 'POST', // *GET, POST, PUT, DELETE, etc.
+    //     headers: {
+    //         'Accept': 'application/json',
+    //         'Content-Type': 'application/json'
+    //     },
+    //     body: JSON.stringify(data) // body data type must match "Content-Type" header
+    // });
+    // return response.json(); // parses JSON response into native JavaScript objects
+}

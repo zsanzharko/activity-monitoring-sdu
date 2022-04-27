@@ -54,8 +54,6 @@ window.addEventListener("load", function () {
 
 // Example POST method implementation:
 async function postData(url = '', data = {}) {
-    // Default options are marked with *
-    console.log(url)
     const response = await fetch(url, {
         method: 'POST', // *GET, POST, PUT, DELETE, etc.
         headers: {

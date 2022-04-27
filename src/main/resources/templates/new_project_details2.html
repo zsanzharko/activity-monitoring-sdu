@@ -226,7 +226,7 @@
                 <div class="modal fade" id="create_activity_modal" tabindex="-1" aria-hidden="true">
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">
-                            <form id="new-project">
+                            <form id="new-activity">
                                 <div class="modal-header">
                                     <h5 class="modal-title">New activity</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
@@ -248,11 +248,12 @@
                                     </label>
 
                                     <p>Status:</p>
-                                    <select id="status" name="status">
+                                    <label for="status"><select id="status" name="status">
                                         <option value="active">Active</option>
                                         <option value="disabled">Disabled</option>
                                         <option value="finished">Finished</option>
                                     </select>
+                                    </label>
 
                                     <p class="pr_number">Date to start:</p>
                                     <label for="startDate" class="project_id_box">
@@ -263,7 +264,7 @@
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary"
                                         data-bs-dismiss="modal">Close</button>
-                                    <input class="btn btn-primary" type="submit" value="Save changes" />
+                                    <button class="btn btn-primary" type="submit" th:attr="onclick=|newActivity('${projectId}')|">Save changes</button>
                                 </div>
                             </form>
                         </div>
