@@ -54,19 +54,6 @@ public class ProjectController {
         model.addAttribute("project", projectDto);
         model.addAttribute("projectId", id);
 
-
-        var daily_count = new ArrayList<Integer>();
-        var currentDay = LocalDate.now().getDayOfMonth();
-        var lastDay = LocalDate.now().with(TemporalAdjusters.lastDayOfMonth()).getDayOfMonth();
-        for (int i = 0; i < 15; i++) {
-            if (currentDay <= lastDay)
-                daily_count.add(currentDay);
-            else
-                daily_count.add(currentDay = 1);
-            currentDay++;
-        }
-        model.addAttribute("daily_count", daily_count);
-
         return new ModelAndView("new_project_details2", model);
     }
 

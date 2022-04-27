@@ -6,15 +6,16 @@ import kz.sdu.activitymonitoringsdu.entity.Activity;
 public class ActivityHandlerUtils {
 
     public static ActivityDto convertToDto(Activity activity) {
-        ActivityDto activityDto = new ActivityDto();
-        activityDto.setId(activity.getId());
-        activityDto.setTitle(activity.getTitle());
-        activityDto.setDescription(activity.getDescription());
-        activityDto.setStatus(activity.getStatus());
-        activityDto.setStartDate(activity.getStartDate());
-        activityDto.setSpentTime(activity.getSpentTime());
-        activityDto.setExpectedTime(activity.getExpectedTime());
-        return activityDto;
+        return ActivityDto.builder()
+                .id(activity.getId())
+                .title(activity.getTitle())
+                .description(activity.getDescription())
+                .status(activity.getStatus())
+                .startDate(activity.getStartDate())
+                .endDate(activity.getEndDate())
+                .spentTime(activity.getSpentTime())
+                .expectedTime(activity.getExpectedTime())
+                .build();
     }
 
     // fixme converting to entity
@@ -24,6 +25,7 @@ public class ActivityHandlerUtils {
         activity.setDescription(activityDto.getDescription());
         activity.setStatus(activityDto.getStatus());
         activity.setStartDate(activityDto.getStartDate());
+        activity.setEndDate(activityDto.getEndDate());
         activity.setSpentTime(activityDto.getSpentTime());
         activity.setExpectedTime(activityDto.getExpectedTime());
         return activity;

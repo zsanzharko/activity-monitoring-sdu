@@ -34,6 +34,9 @@ public class Activity {
     @Column(name = "start_date", nullable = false)
     private Date startDate;
 
+    @Column(name = "end_date")
+    private Date endDate;
+
     @Column(name = "spent_time", length = 100)
     private Integer spentTime;
 
