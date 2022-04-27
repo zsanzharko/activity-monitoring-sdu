@@ -1,7 +1,9 @@
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 
-body{
+body {
+  min-height: 100vh;
   font-family: 'Poppins', sans-serif;
+  min-height: -webkit-fill-available;
 }
 a{
   text-decoration: none;

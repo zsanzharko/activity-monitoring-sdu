@@ -4,6 +4,16 @@
  * Copyright 2011-2019 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
+
+
+ @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+
+body {
+  min-height: 100vh;
+  font-family: 'Poppins', sans-serif;
+  min-height: -webkit-fill-available;
+}
+
 :root {
   --blue: #007bff;
   --indigo: #6610f2;

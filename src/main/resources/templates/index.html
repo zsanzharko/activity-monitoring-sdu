@@ -1,20 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="Serikkhan Ayan">
 
-    <!--    Thymeleaf assets-->
-    <link rel="stylesheet" th:href="@{new_styles/left_bar_style.css}" href="../static/new_styles/left_bar_style.css">
-    <link rel="stylesheet" th:href="@{new_styles/index2_box.css}" href="../static/new_styles/index2_box.css">
-    <link rel="stylesheet" th:href="@{new_styles/new_project2.css}" href="../static/new_styles/new_project2.css">
+
+
 
     <!-- Custom styles for this template -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/sidebars/">
+
+    <link rel="stylesheet" th:href="@{new_styles/index2_box.css}" href="../static/new_styles/index2_box.css">
+    <link rel="stylesheet" th:href="@{new_styles/new_project2.css}" href="../static/new_styles/new_project2.css">
+    <link rel="stylesheet" th:href="@{new_styles/left_bar_style.css}" href="../static/new_styles/left_bar_style.css">
+    <link rel="stylesheet" th:href="@{new_styles/natification_style.css}"
+        href="../static/new_styles/natification_style.css">
+
 
     <title th:text="${titlePage}"></title>
 </head>
@@ -69,6 +74,15 @@
             <path
                 d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm12 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1v-1c0-1-1-4-6-4s-6 3-6 4v1a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12z" />
         </symbol>
+
+
+        <symbol id='bell' viewBox="0 0 16 16">
+            <path
+                d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z" />
+            <path
+                d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z" />
+        </symbol>
+
     </svg>
 
     <main>
@@ -97,7 +111,7 @@
             <ul class="nav nav-pills flex-column mb-auto">
                 <li>
                     <div class="sider_dash_box">
-                        <a th:href="@{/dashboard}" class="nav-link text-white">
+                        <a th:href="@{/dashboard}" class="nav-link text-white" style="display: flex;">
                             <svg class="bi me-2" width="25" height="25">
                                 <use xlink:href="#grid" />
                             </svg>
@@ -160,7 +174,9 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        If you have any question or problems, please contacts with Admin
+                        <p>If you have any question or problems, please contacts with Admin</p>
+                        <p>email: admin_admin.gmail.com</p>
+                        <p>mob-number: +77754668428</p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
@@ -169,6 +185,42 @@
             </div>
         </div>
         <!--   ----------------------------------------------   -->
+
+
+        <!-- Notification -------------------------------------- -->
+
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="right_natification">
+            <div class="offcanvas-header">
+                <h3 id="offcanvasRightLabel">Notification</h3>
+                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                    aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+
+                <div class="not_box">
+                    <h5 class="title_not">Atention!</h5>
+                    <p class="description_not">
+                        You are forgot finished the tasks. Please, end them.
+                        <a href="" link> see more...</a>
+                    </p>
+                    <hr>
+                </div>
+
+                <div class="not_box">
+                    <h5 class="title_not">Atention!</h5>
+                    <p class="description_not">
+                        You are forgot finished the tasks. Please, end them.
+                        <a href="" link> see more...</a>
+                    </p>
+                    <hr>
+                </div>
+                
+
+            </div>
+        </div>
+        <!-- ------------------------------------------------------ -->
+
+
 
 
         <div class="main_right_part">
@@ -181,6 +233,13 @@
                         class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
                         <span class="fs-4" style="margin-left: 25px;">Dashboard</span>
                     </a>
+
+                    <button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#right_natification"
+                        aria-controls="offcanvasRight">
+                        <svg class="bi me-1" width="25" height="25">
+                            <use xlink:href="#bell" />
+                        </svg>
+                    </button>
 
                     <ul class="nav nav-pills">
                         <li class="nav-item"><a href="#" class="nav-link text-black fs-4" aria-current="page"
@@ -217,36 +276,32 @@
                             <div class="modal-body">
                                 <p class="pr_name">Project Id:</p>
                                 <label for="project-id" class="project_name_box">
-                                    <input type="text" class="form-control input"
-                                           name="projectId"
-                                           id="project-id" field="projectId"
-                                           placeholder="Like '4635LSFB'" aria-describedby="basic-addon1" required>
+                                    <input type="text" class="form-control input" name="projectId" id="project-id"
+                                        field="projectId" placeholder="Like '4635LSFB'" aria-describedby="basic-addon1"
+                                        required>
                                 </label>
 
                                 <p class="pr_version">Version:</p>
                                 <label for="projectVersion" class="version_box">
                                     <input type="text" class="form-control input" id="projectVersion"
-                                           name="projectVersion"
-                                           field="title" placeholder="Like 'B'" required>
+                                        name="projectVersion" field="title" placeholder="Like 'B'" required>
                                 </label>
 
                                 <p class="pr_name">Project name:</p>
                                 <label for="title" class="project_name_box">
-                                    <input type="text" class="form-control input"
-                                           name="title"
-                                           id="title" field="title"
+                                    <input type="text" class="form-control input" name="title" id="title" field="title"
                                         placeholder="Like 'Android App'" aria-describedby="basic-addon1" required>
                                 </label>
 
                                 <p class="pr_number">Description:</p>
                                 <label for="description" class="project_desc_box">
-                                    <textarea class="form-control input" name="description" aria-label="With textarea" field="description" id="description" required></textarea>
+                                    <textarea class="form-control input" name="description" aria-label="With textarea"
+                                        field="description" id="description" required></textarea>
                                 </label>
 
                                 <p class="pr_number">Date to start:</p>
                                 <label for="startDate" class="project_id_box">
-                                    <input type="date" class="form-control input" pattern="yyyy-MM-dd"
-                                           name="startDate"
+                                    <input type="date" class="form-control input" pattern="yyyy-MM-dd" name="startDate"
                                         id="startDate" field="startDate" required>
                                 </label>
                             </div>
