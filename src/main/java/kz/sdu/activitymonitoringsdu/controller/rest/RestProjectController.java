@@ -6,18 +6,22 @@ import kz.sdu.activitymonitoringsdu.entity.Activity;
 import kz.sdu.activitymonitoringsdu.entity.Consist;
 import kz.sdu.activitymonitoringsdu.entity.Report;
 import kz.sdu.activitymonitoringsdu.handlers.ActivityHandlerUtils;
-import kz.sdu.activitymonitoringsdu.handlers.ProjectHandlerUtils;
 import kz.sdu.activitymonitoringsdu.handlers.forms.ActivityCreateForm;
 import kz.sdu.activitymonitoringsdu.handlers.forms.ProjectCreateForm;
 import kz.sdu.activitymonitoringsdu.handlers.forms.SpendTimeForm;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@Slf4j
 @RequestMapping(value = "/api", consumes = "application/json", produces = "application/json")
 public class RestProjectController {
+
+    private final static String LOG_TAG = "RestProjectController";
 
     private final UserDao userDao;
     private final ProjectDao projectDao;
@@ -34,13 +38,21 @@ public class RestProjectController {
         this.reportDao = reportDao;
     }
 
+    /**
+     * THAT'S WORK
+     * @apiNote method that creating a new Project with default parameters. He is get a json format project
+     * form, and spring parse the form to object.
+     * @param project the form to get from request. Need to save the params to database
+     * @return response with the form when front end can to show, otherwise get internalServerError
+     */
     @PostMapping(value = "/manager/project/create")
-    public ResponseEntity<ProjectCreateForm> createProject(@RequestBody ProjectCreateForm project) {
-        if (project.getProjectVersion() == null) return ResponseEntity.badRequest().build();
-
-        projectDao.saveProject(
-                ProjectHandlerUtils.convertToEntity(
-                        project.getDtoFromForm()));
+    public ResponseEntity<ProjectCreateForm> createProject(@Validated @RequestBody ProjectCreateForm project) {
+        try {
+            projectDao.saveProject(project.getEntityFromForm());
+        } catch (Exception e) {
+            log.info(LOG_TAG, e);
+            return ResponseEntity.internalServerError().build();
+        }
 
         return ResponseEntity.ok(project);
     }
