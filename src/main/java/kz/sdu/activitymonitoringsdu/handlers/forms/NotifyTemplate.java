@@ -11,6 +11,7 @@ import java.util.Date;
 public class NotifyTemplate implements Serializable {
     private Date startDate;
     private String title;
+    private String description;
 
     private String link;
 }

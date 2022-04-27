@@ -1,9 +1,8 @@
 package kz.sdu.activitymonitoringsdu.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import kz.sdu.activitymonitoringsdu.enums.RemindType;
+
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -25,6 +24,10 @@ public class DevTimeReminder {
 
     @Column(name = "date_remind", nullable = false)
     private Date dateRemind;
+
+    @Column(name = "remind_type", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private RemindType remindType;
 
     public Long getId() {
         return id;
@@ -48,5 +51,13 @@ public class DevTimeReminder {
 
     public void setDateRemind(Date dateRemind) {
         this.dateRemind = dateRemind;
+    }
+
+    public RemindType getRemindType() {
+        return remindType;
+    }
+
+    public void setRemindType(RemindType remindType) {
+        this.remindType = remindType;
     }
 }

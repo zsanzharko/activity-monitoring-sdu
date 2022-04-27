@@ -5,21 +5,31 @@ function notify() {
             let display = '';
             for (let i = 0; i < data.length; i++) {
                 display +=
-                    `<div style="display: flex">\n` +
-                    `    <p style="padding: 0 5px">${i}. </p>\n` +
-                    `    <h5 style="padding: 0 5px">${data[i].title}</h5>\n` +
-                    `    <a style="padding: 0 5px" href=\"${data[i].link}\">Enter</a>\n` +
-                    `</div>`
+                    `<div class="not_box">
+                        <h5 class="title_not">${data[i].title}</h5>
+                        <p class="description_not">
+                            ${data[i].description}
+                            <a href="${data[i].link}"> see more...</a>
+                        </p>
+                        <hr>
+                    </div>`
             }
-            document.getElementById("log").innerHTML = display;
-
+            if (display.length === 0) {
+                display = `
+                <div class="is_empty_box">
+                You don't have notification
+                </div>
+                `
+            }
+            document.getElementById("notification-place").innerHTML = display;
 
         }).catch(_ => console.error(_));
 }
 
-function main(){
+function main() {
     notify()
     setInterval(notify, 5000)
 }
 
 main()
+
