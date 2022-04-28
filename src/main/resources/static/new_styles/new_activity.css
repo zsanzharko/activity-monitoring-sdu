@@ -5,6 +5,9 @@ body {
   font-family: 'Poppins', sans-serif;
   min-height: -webkit-fill-available;
 }
+a{
+  text-decoration: none;
+}
 
 .creation_activity{
   display: flex;

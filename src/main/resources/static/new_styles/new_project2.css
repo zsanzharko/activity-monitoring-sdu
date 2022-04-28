@@ -5,6 +5,9 @@ body {
   font-family: 'Poppins', sans-serif;
   min-height: -webkit-fill-available;
 }
+a{
+  text-decoration: none;
+}
 .location_creation{
   display: flex;
   justify-content: space-between;

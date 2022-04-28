@@ -5,7 +5,9 @@ body {
   font-family: 'Poppins', sans-serif;
   min-height: -webkit-fill-available;
 }
-
+a{
+  text-decoration: none;
+}
 html {
   height: -webkit-fill-available;
 }
@@ -28,6 +30,10 @@ main {
   width: 300px;
 }
 
+.dropdown-item{
+  padding: 0px;
+  margin: 0px;
+}
 .bi {
   vertical-align: -.125em;
   pointer-events: none;
@@ -36,7 +42,13 @@ main {
 .seting_box{
   margin-left: 10px;
   display: flex;
+  justify-content: center;
   align-items:center;
+  height: 40px;
+}
+.out_button{
+  margin-left: 10px;
+  height: 100%;
 }
 
 .dropdown-toggle {

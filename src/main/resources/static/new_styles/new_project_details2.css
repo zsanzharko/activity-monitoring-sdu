@@ -1,9 +1,13 @@
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 
 body {
-  min-height: 100vh;
-  font-family: 'Poppins', sans-serif;
-  min-height: -webkit-fill-available;
+    min-height: 100vh;
+    font-family: 'Poppins', sans-serif;
+    min-height: -webkit-fill-available;
+}
+
+a {
+    text-decoration: none;
 }
 
 .main_placeholder {
@@ -53,11 +57,11 @@ body {
 .day-counter {
     width: 2rem;
     height: 2rem;
-    align-content: center;
-    flex-direction: column;
-    box-shadow: rgba(50, 50, 93, 0.25) 0 2px 5px -1px, rgba(0, 0, 0, 0.3) 0 1px 3px -1px;
-    border-radius: 20px;
+    display: flex;
     align-items: center;
+    justify-content: center;
+    box-shadow: rgba(50, 50, 93, 0.25) 0 2px 5px -1px, rgba(0, 0, 0, 0.3) 0 1px 3px -1px;
+    border-radius: 50%;
 }
 
 .buffer_container {
@@ -89,7 +93,8 @@ body {
     width: 100%;
     background-color: white;
     color: black;
-    border: 2px solid #4CAF50; /* Green */
+    border: 2px solid #4CAF50;
+    /* Green */
     align-items: center;
     border-radius: 12px;
     padding: 0 0.5rem;
@@ -115,9 +120,7 @@ body {
     flex-wrap: nowrap;
 }
 
-.nav-buttons {
-
-}
+.nav-buttons {}
 
 .stamp_date-placeholder {
     /*todo change padding*/
@@ -157,10 +160,10 @@ body {
     background-color: green;
 }
 
-.flex-space-evenly{
+.flex-space-evenly {
     /* background-color:#4CAF50; */
     display: flex;
-    align-content:center;
+    align-content: center;
 
 }
 
@@ -172,19 +175,21 @@ body {
 
 
 
-*, ::after, ::before{
+*,
+::after,
+::before {
 
-	box-sizing: border-box;
+    box-sizing: border-box;
 
-	-webkit-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
 
-	-moz-box-sizing: border-box;
+    -moz-box-sizing: border-box;
 
 }
 
-.tabs ul{
+.tabs ul {
 
-	padding: 0;
+    padding: 0;
 
     margin: 0;
 
@@ -200,52 +205,52 @@ body {
 
 }
 
-.tabs ul li a{
+.tabs ul li a {
 
-	display: block;
+    display: block;
 
-	outline: none;
+    outline: none;
 
-	padding: 1rem;
+    padding: 1rem;
 
-	text-decoration: none;
+    text-decoration: none;
 
-	border: 1px solid #eee;
+    border: 1px solid #eee;
 
-	border-bottom: 0;
+    border-bottom: 0;
 
-	background-color: #eee;
+    background-color: #eee;
 
-	color: #000;
+    color: #000;
 
     transform: translateY(1px);
 
-	-webkit-transform: translateY(1px);
+    -webkit-transform: translateY(1px);
 
-	-moz-transform: translateY(1px);
-
-}
-
-.tabs ul li a.active{
-
-	background-color: #FFF;
+    -moz-transform: translateY(1px);
 
 }
 
-.tabs > div > div{
+.tabs ul li a.active {
 
-	display: none;
+    background-color: #FFF;
 
-	border: 1px solid #eee;
+}
 
-	border-top: 0;
+.tabs>div>div {
+
+    display: none;
+
+    border: 1px solid #eee;
+
+    border-top: 0;
 
     padding: 2rem 1rem;
 
 }
 
-.tabs > div > div.active{
+.tabs>div>div.active {
 
-	display: block;
+    display: block;
 
 }
