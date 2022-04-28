@@ -19,6 +19,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.time.LocalDate;
+import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -93,6 +95,23 @@ public class MainController {
 
             modelMap.addAttribute("activities", activityDtoList);
             modelMap.addAttribute("consists", consistList);
+            modelMap.addAttribute("assigns", assignedList);
+            modelMap.addAttribute("daily_count", getDayCount());
+
         }
+    }
+
+    private List<Integer> getDayCount() {
+        var daily_count = new ArrayList<Integer>();
+        var currentDay = LocalDate.now().getDayOfMonth();
+        var lastDay = LocalDate.now().with(TemporalAdjusters.lastDayOfMonth()).getDayOfMonth();
+        for (int i = 0; i < 15; i++) {
+            if (currentDay <= lastDay)
+                daily_count.add(currentDay);
+            else
+                daily_count.add(currentDay = 1);
+            currentDay++;
+        }
+        return daily_count;
     }
 }

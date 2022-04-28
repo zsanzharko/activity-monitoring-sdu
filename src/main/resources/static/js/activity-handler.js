@@ -49,7 +49,7 @@ function getActivityDayInformation(projectId) {
                     `
                     <div class="activity_box">
                         <div style="height: 100%;">
-                            <a href="/${projectId}/${activities[i].id}" class="activity_name">View</a>
+                            <a href="project/activity/${projectId}/${activities[i].id}" class="activity_name">View</a>
                         </div>
                     </div>`
 

@@ -56,26 +56,4 @@ public class ProjectController {
 
         return new ModelAndView("new_project_details2", model);
     }
-
-    @GetMapping("/details")
-    public ModelAndView getProjectDetails(@RequestParam final String id, ModelMap model) {
-        UserDto userDto = UserHandlerUtils.getUserFromAuth(userDao);
-        if (userDto.getRole() != Role.MANAGER) return new ModelAndView("redirect:/dashboard");
-        ProjectDto projectDto = ProjectHandlerUtils.convertToDto(projectDao.findByProjectId(id));
-        List<ActivityDto> activities = projectDao.getActivitiesById(consistDao.findAllByProjectId(projectDao.findByProjectId(id).getProjectId()));
-
-        List<Integer> spendTimeActivities = activities.stream().map(ActivityDto::getSpentTime).toList();
-
-        model.addAttribute("titlePage", "Project details: " + projectDto.getTitle());
-
-        model.addAttribute("projectId", id);
-        model.addAttribute("back_page", "/dashboard");
-        model.addAttribute("userIsManager", userDto.getRole() == Role.MANAGER);
-        model.addAttribute("user", userDto);
-        model.addAttribute("projectId", id);
-        model.addAttribute("project", projectDto);
-        return new ModelAndView("new_project_details2", model);
-    }
-
-
 }

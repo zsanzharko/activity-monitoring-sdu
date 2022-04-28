@@ -15,8 +15,11 @@
     <link rel="stylesheet" th:href="@{new_styles/index2_box.css}" href="../static/new_styles/index2_box.css">
     <link rel="stylesheet" th:href="@{new_styles/new_project2.css}" href="../static/new_styles/new_project2.css">
     <link rel="stylesheet" th:href="@{new_styles/left_bar_style.css}" href="../static/new_styles/left_bar_style.css">
-    <link rel="stylesheet" th:href="@{new_styles/natification_style.css}" href="../static/new_styles/natification_style.css">
-
+    <link rel="stylesheet" th:href="@{new_styles/natification_style.css}"
+          href="../static/new_styles/natification_style.css">
+    <link rel="stylesheet" th:href="@{/new_styles/new_project_details2.css}"
+          href="../static/new_styles/new_project_details2.css">
+    <link rel="stylesheet" th:href="@{/new_styles/main.css}" href="../static/new_styles/main.css">
 
     <title th:text="${titlePage}"></title>
 </head>
@@ -195,13 +198,13 @@
         <div class="offcanvas-body" id="notification-place">
 
             <div class="not_box">
-<!--                <h5 class="title_not">Atention!</h5>-->
-<!--                <p class="description_not">-->
-<!--                    You are forgot finished the tasks. Please, end them.-->
-<!--                    <a href=""> see more...</a>-->
-<!--                </p>-->
-<!--                <hr>-->
-<!--            </div>-->
+                <!--                <h5 class="title_not">Atention!</h5>-->
+                <!--                <p class="description_not">-->
+                <!--                    You are forgot finished the tasks. Please, end them.-->
+                <!--                    <a href=""> see more...</a>-->
+                <!--                </p>-->
+                <!--                <hr>-->
+                <!--            </div>-->
 
             </div>
 
@@ -250,9 +253,9 @@
         </nav>
         <!-- -------------------------------------- -->
 
-        <!-- New  projecs -------------------------- -->
+        <!-- New  projects -------------------------- -->
 
-        <div class="modal fade" id="create_project_modal" tabindex="-1" aria-hidden="true">
+        <div th:if="${accessRole}" class="modal fade" id="create_project_modal" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <form id="new-project">
@@ -265,32 +268,32 @@
                             <p class="pr_name">Project Id:</p>
                             <label for="project-id" class="project_name_box">
                                 <input type="text" class="form-control input" name="projectId" id="project-id"
-                                       field="projectId" placeholder="Like '4635LSFB'" aria-describedby="basic-addon1"
+                                       placeholder="Like '4635LSFB'" aria-describedby="basic-addon1"
                                        required>
                             </label>
 
                             <p class="pr_version">Version:</p>
                             <label for="projectVersion" class="version_box">
                                 <input type="text" class="form-control input" id="projectVersion"
-                                       name="projectVersion" field="title" placeholder="Like 'B'" required>
+                                       name="projectVersion" placeholder="Like 'B'" required>
                             </label>
 
                             <p class="pr_name">Project name:</p>
                             <label for="title" class="project_name_box">
-                                <input type="text" class="form-control input" name="title" id="title" field="title"
+                                <input type="text" class="form-control input" name="title" id="title"
                                        placeholder="Like 'Android App'" aria-describedby="basic-addon1" required>
                             </label>
 
                             <p class="pr_number">Description:</p>
                             <label for="description" class="project_desc_box">
                                     <textarea class="form-control input" name="description" aria-label="With textarea"
-                                              field="description" id="description" required></textarea>
+                                              id="description" required></textarea>
                             </label>
 
                             <p class="pr_number">Date to start:</p>
                             <label for="startDate" class="project_id_box">
                                 <input type="date" class="form-control input" pattern="yyyy-MM-dd" name="startDate"
-                                       id="startDate" field="startDate" required>
+                                       id="startDate" required>
                             </label>
                         </div>
                         <div class="modal-footer">
@@ -306,9 +309,8 @@
 
 
         <!-- Box  area -------------------------------------- -->
-        <div class="space_for_box_of_the_box">
+        <div th:if="${accessRole}" class="space_for_box_of_the_box">
             <div class="space_for_box" id="project-dashboard-placeholder">
-
                 <div class="box" th:each="project : ${projects}">
                     <div class="box_head">
                         <div class="box_head_left">
@@ -341,11 +343,69 @@
                 </div>
             </div>
         </div>
+        <div class="space_for_project pad-h-2" th:unless="${accessRole}">
+            <div class="buffer_container">
+                <div class="left-project-info">
+                    <div class="project_name_box">
+                        <p class="activity_name">Test Id</p>
+                    </div>
+                    <div class="flex-space-evenly">
+                        <div class="activity_placeholder" id="activity_title_placeholder">
+                            <div class="activity_placeholder" th:each="activity : ${activities}">
+                                <div class="activity_box">
+                                    <div style="height: 100%;">
+                                        <p class="activity_name" th:text="${activity.getTitle()}"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="activity_placeholder" id="activity_assigned_placeholder">
+                            <div class="activity_placeholder" th:each="assign : ${assigns}">
+                                <div class="activity_box">
+                                    <div class="assign_box"
+                                         style="background-color:  white; border-color: #D68300; color: black;"
+                                         th:text="${assign.getUserId()} != null ? 'assigned' : 'assign'">
+                                        <!--                                        todo check link a tag-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="activity_placeholder" id="activity_details_placeholder">
+                            <div class="activity_box" th:each="consist : ${consists}">
+                                <div style="height: 100%;">
+                                    <a th:href="@{|project/activity/${consist.getProjectId()}/${consist.getActivityId()}|}"
+                                       class="activity_name">View</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="activity_container">
+                    <div class="stamp_date-placeholder">
+                        <div class="activity-day-timestamp" id="activity-day">
+                            <div class="day-counter" th:each="day : ${daily_count}">
+                                <p style="margin: auto; text-align: center" th:text="${day}"></p>
+                            </div>
+                        </div>
+                        <div id="progress-calendar-placeholder">
+                            <div class="activity_box" th:each="consist : ${consists}">
+                                <div class="progress-placeholder">
+                                    <div class="progress-bar"
+                                         style="height: 100%; width: 6.67%; background-color: #93FF96"
+                                         th:each="day : ${daily_count}"
+                                         th:id="${consist.getActivityId()} + '-progress-day-' + ${day}"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-        <!-- ------------------------------------------------ -->
-
-
+            </div>
+        </div>
     </div>
+
+
+    <!-- ------------------------------------------------ -->
 
 
 </main>
@@ -356,7 +416,7 @@
         crossorigin="anonymous"></script>
 <script src="../static/js/test.js" th:src="@{js/test.js}"></script>
 <script src="../static/js/add_object_handler.js" th:src="@{js/add_object_handler.js}"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="../static/js/notifier.js" th:src="@{js/notifier.js}"></script>
 </body>
 
