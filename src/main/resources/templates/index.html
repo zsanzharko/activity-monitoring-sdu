@@ -83,6 +83,12 @@
                 d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z" />
         </symbol>
 
+        <symbol id='three_dots' viewBox="0 0 16 16">
+            <path
+                d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+        </symbol>
+
+
     </svg>
 
     <main>
@@ -189,7 +195,7 @@
 
         <!-- Notification -------------------------------------- -->
 
-        <div class="offcanvas offcanvas-end" tabindex="-1" id="right_natification">
+        <div class="offcanvas offcanvas-end right_natification" tabindex="-1">
             <div class="offcanvas-header">
                 <h3 id="offcanvasRightLabel">Notification</h3>
                 <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
@@ -214,7 +220,7 @@
                     </p>
                     <hr>
                 </div>
-                
+
 
             </div>
         </div>
@@ -234,7 +240,7 @@
                         <span class="fs-4" style="margin-left: 25px;">Dashboard</span>
                     </a>
 
-                    <button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#right_natification"
+                    <button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target=".right_natification"
                         aria-controls="offcanvasRight">
                         <svg class="bi me-1" width="25" height="25">
                             <use xlink:href="#bell" />
@@ -293,6 +299,7 @@
                                         placeholder="Like 'Android App'" aria-describedby="basic-addon1" required>
                                 </label>
 
+
                                 <p class="pr_number">Description:</p>
                                 <label for="description" class="project_desc_box">
                                     <textarea class="form-control input" name="description" aria-label="With textarea"
@@ -329,10 +336,31 @@
                                 <p class="project_version" style="font-size: 13px;">version <span
                                         th:text="${project.projectVersion}" style="font-size: 13px;">A</span></p>
                             </div>
-                            <p class="project_name" style="font-size: 20px; margin-right: 10px;"
-                                th:text="${project.title}">
-                                Project
-                                name</p>
+                            <div class="box_head_right">
+                                <p class="project_name" style="font-size: 20px; margin-right: 10px;"
+                                    th:text="${project.title}">
+                                    Project name
+                                </p>
+
+                                <div class="dropdown">
+                                    <button class="btn  dropdown-toggle tree_dots" type="button"
+                                        data-bs-toggle="dropdown">
+                                        <svg class="bi me-1" width="20" height="20">
+                                            <use xlink:href="#three_dots" />
+                                        </svg>
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-dark">
+                                        <li class="item_drop"><a class="dropdown-item" href="#">Delete</a></li>
+                                        <li class="item_drop"><a class="dropdown-item" href="#">Edit</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+
+
+
+
+
                         </div>
                         <div class="box_body">
                             <p class="project_activities">Activities</p>
