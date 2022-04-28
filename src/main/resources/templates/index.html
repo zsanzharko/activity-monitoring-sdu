@@ -324,6 +324,7 @@
         <div th:if="${accessRole}" class="space_for_box_of_the_box">
             <div class="space_for_box" id="project-dashboard-placeholder">
                 <div class="box" th:each="project : ${projects}">
+
                     <div class="box_head">
                         <div class="box_head_left">
                             <p class="projects_id" style="font-size: 20px;" th:text="${project.projectId}">9511DXP
@@ -331,10 +332,25 @@
                             <p class="project_version" style="font-size: 13px;">version <span
                                     th:text="${project.projectVersion}" style="font-size: 13px;">A</span></p>
                         </div>
-                        <p class="project_name" style="font-size: 20px; margin-right: 10px;"
-                           th:text="${project.title}">
-                            Project
-                            name</p>
+                        <div class="box_head_right">
+                            <p class="project_name" style="font-size: 20px;"
+                               th:text="${project.getTitle()}">
+                                Project name
+                            </p>
+
+                            <div class="dropdown">
+                                <button class="btn  dropdown-toggle tree_dots" type="button"
+                                        data-bs-toggle="dropdown">
+                                    <svg class="bi me-1" width="20" height="20" style="color: white">
+                                        <use xlink:href="#three_dots" />
+                                    </svg>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-dark">
+                                    <li class="item_drop"><a class="dropdown-item" href="#">Delete</a></li>
+                                    <li class="item_drop"><a class="dropdown-item" href="#">Edit</a></li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                     <div class="box_body">
                         <p class="project_activities">Activities</p>
@@ -370,33 +386,6 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="box_head_right">
-                                <p class="project_name" style="font-size: 20px;"
-                                    th:text="${project.title}">
-                                    Project name
-                                </p>
-
-                                <div class="dropdown">
-                                    <button class="btn  dropdown-toggle tree_dots" type="button"
-                                        data-bs-toggle="dropdown">
-                                        <svg class="bi me-1" width="20" height="20" style="color: white">
-                                            <use xlink:href="#three_dots" />
-                                        </svg>
-                                    </button>
-                                    <ul class="dropdown-menu dropdown-menu-dark">
-                                        <li class="item_drop"><a class="dropdown-item" href="#">Delete</a></li>
-                                        <li class="item_drop"><a class="dropdown-item" href="#">Edit</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-
-
-
-
-
-
-
                         </div>
                         <div class="activity_placeholder" id="activity_assigned_placeholder">
                             <div class="activity_placeholder" th:each="assign : ${assigns}">
