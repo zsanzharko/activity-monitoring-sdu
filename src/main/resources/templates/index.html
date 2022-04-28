@@ -95,7 +95,7 @@
             <div class="sidebar_head">
                 <div class="name_picture_box">
                     <svg class="bi me-2" width="120" height="120">
-                        <use xlink:href="#profile_pic" />
+                        <use xlink:href="#profile_pic"/>
                     </svg>
                     <p class="side_head_text" th:inline="text" th:text="${user.getFullName()}">Ayan Serikkhan</p>
                 </div>
@@ -103,73 +103,72 @@
                     <div class="upper_dev_inf">
                         <p class="sider_dev_inf">Developer: <span class="input_inf">UX/UI Design</span></p>
                         <p class="sider_dev_inf">Role: <span class="input_inf"
-                                th:text="${user.getRole().name()}">Manager</span></p>
+                                                             th:text="${user.getRole().name()}">Manager</span></p>
                         <p class="sider_dev_inf">Gender: <span class="input_inf"
-                                th:text="${user.getGender().name()}">Male</span>
+                                                               th:text="${user.getGender().name()}">Male</span>
                         </p>
                         <p class="sider_dev_inf">Email: <span class="input_inf"
-                                th:text="${user.getEmail()}">ayan1bos@gmail.com</span></p>
+                                                              th:text="${user.getEmail()}">ayan1bos@gmail.com</span></p>
                     </div>
                 </div>
             </div>
-        </div>
-        <hr>
-        <ul class="nav nav-pills flex-column mb-auto">
-            <li>
-                <div class="sider_dash_box">
-                    <a th:href="@{/dashboard}" class="nav-link text-white" style="display: flex;">
-                        <svg class="bi me-2" width="25" height="25">
-                            <use xlink:href="#grid"/>
-                        </svg>
-                        Dashboard
-                    </a>
-                </div>
-            </li>
-            <li>
-                <div class="sider_dash_box">
-                    <a th:href="@{/profile-panel}" class="nav-link text-white">
-                        <svg class="bi me-2" width="25" height="25">
-                            <use xlink:href="#people-circle"/>
-                        </svg>
-                        Profile
-                    </a>
-                </div>
-            </li>
-            <li>
-                <div class="sider_dash_box">
-                    <a href="#" class="nav-link text-white">
-                        <svg class="bi me-2" width="25" height="25">
-                            <use xlink:href="#help"/>
-                        </svg>
-                        <button type="button" class="btn text-white" data-bs-toggle="modal"
-                                data-bs-target="#Modal_helper">
-                            Help
-                        </button>
-                    </a>
-                </div>
-            </li>
-        </ul>
-        <hr>
-        <div class="dropdown">
-            <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
-               id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                <svg class="bi me-2" width="25" height="25">
-                    <use xlink:href="#settings"/>
-                </svg>
-                <strong>Settings</strong>
-            </a>
-            <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+            <hr>
+            <ul class="nav nav-pills flex-column mb-auto">
                 <li>
-                    <form action="/logout" class="seting_box" method="post">
-                        <svg class="bi me-2" width="16" height="16">
-                            <use xlink:href="#sign_out"/>
-                        </svg>
-                        <input type="submit" value="Sign Out" class='dropdown-item'/>
-                    </form>
+                    <div class="sider_dash_box">
+                        <a th:href="@{/dashboard}" class="nav-link text-white">
+                            <svg class="bi me-2" width="25" height="25">
+                                <use xlink:href="#grid"/>
+                            </svg>
+                            Dashboard
+                        </a>
+                    </div>
+                </li>
+                <li>
+                    <div class="sider_dash_box">
+                        <a th:href="@{/profile-panel}" class="nav-link text-white">
+                            <svg class="bi me-2" width="25" height="25">
+                                <use xlink:href="#people-circle"/>
+                            </svg>
+                            Profile
+                        </a>
+                    </div>
+                </li>
+                <li>
+                    <div class="sider_dash_box">
+                        <a href="#" class="nav-link text-white">
+                            <svg class="bi me-2" width="25" height="25">
+                                <use xlink:href="#help"/>
+                            </svg>
+                            <button type="button" class="btn text-white" data-bs-toggle="modal"
+                                    data-bs-target="#Modal_helper">
+                                Help
+                            </button>
+                        </a>
+                    </div>
                 </li>
             </ul>
+            <hr>
+            <div class="dropdown">
+                <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+                   id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                    <svg class="bi me-2" width="25" height="25">
+                        <use xlink:href="#settings"/>
+                    </svg>
+                    <strong>Settings</strong>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+                    <li>
+                        <form action="/logout" class="seting_box" method="post">
+                            <svg class="bi me-2" width="16" height="16">
+                                <use xlink:href="#sign_out"/>
+                            </svg>
+                            <input type="submit" value="Sign Out" class='dropdown-item'/>
+                        </form>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </div>
 
     <!-- HELP Notification ----------------------------------->
     <div class="modal fade" id="Modal_helper" tabindex="-1" aria-hidden="true">
