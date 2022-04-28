@@ -38,15 +38,15 @@ public class NotifierController {
         UserDto userDto = UserHandlerUtils.getUserFromAuth(userDao);
         var userReminders = reminderDao.findTimeRemindersByUserId(userDto.getId());
         var activities = reminderDao.getTitleFromActivity(userReminders);
-        List<NotifyTemplate> notifyTemplates = userReminders.stream()
+        return userReminders.stream()
                 .map(reminder -> new NotifyTemplate(
                         reminder.getDateRemind(),
                         activities.get(reminder.getActivityId()),
+                        reminder.getRemindDescription(),
                         "project/activity/" +
                                 consistDao.findById(reminder.getActivityId()).getProjectId() +
                                 "/" + reminder.getActivityId()
                 )).collect(Collectors.toList());
-        return notifyTemplates;
     }
 
     @PostMapping("/update")

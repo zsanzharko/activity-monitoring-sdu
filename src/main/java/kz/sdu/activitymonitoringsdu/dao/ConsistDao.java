@@ -18,19 +18,33 @@ public class ConsistDao implements ConsistService {
         this.consistRepository = consistRepository;
     }
 
+    @Override
     public Consist findById(Long id) {
         return consistRepository.findById(id).orElse(null);
     }
 
-    public Consist findByProjectId(Long projectId) {
+    @Override
+    public Consist findByProjectId(String projectId) {
         return consistRepository.findConsistByProjectId(projectId);
     }
 
-    public List<Consist> findAllByProjectId(Long projectId){
+    @Override
+    public List<Consist> findAllByProjectId(String projectId){
         return consistRepository.findByProjectId(projectId);
     }
 
+    @Override
     public void save(Consist consist) {
         consistRepository.save(consist);
+    }
+
+    @Override
+    public void deleteAllByProjectId(String projectId) {
+        consistRepository.deleteAllByProjectId(projectId);
+    }
+
+    @Override
+    public void deleteByActivityId(Long activityId) {
+        consistRepository.deleteById(activityId);
     }
 }

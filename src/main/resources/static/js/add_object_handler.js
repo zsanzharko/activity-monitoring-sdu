@@ -7,7 +7,7 @@ window.addEventListener("load", function () {
             object[key] = value;
         });
 
-        let response = postData('project/create/', object)
+        let response = postData('/api/manager/project/create', object)
             .then(data => {
                 $(function () {
                     $('#create_project_modal').modal('toggle');
@@ -54,7 +54,6 @@ window.addEventListener("load", function () {
 
 // Example POST method implementation:
 async function postData(url = '', data = {}) {
-    // Default options are marked with *
     const response = await fetch(url, {
         method: 'POST', // *GET, POST, PUT, DELETE, etc.
         headers: {
@@ -65,3 +64,4 @@ async function postData(url = '', data = {}) {
     });
     return response.json(); // parses JSON response into native JavaScript objects
 }
+

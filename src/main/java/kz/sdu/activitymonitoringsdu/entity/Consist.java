@@ -18,13 +18,13 @@ public class Consist {
     private Long activityId;
 
     @Column(name = "project_id", nullable = false, precision = 4)
-    private Long projectId;
+    private String projectId;
 
-    public Long getProjectId() {
+    public String getProjectId() {
         return projectId;
     }
 
-    public void setProjectId(Long projectId) {
+    public void setProjectId(String projectId) {
         this.projectId = projectId;
     }
 

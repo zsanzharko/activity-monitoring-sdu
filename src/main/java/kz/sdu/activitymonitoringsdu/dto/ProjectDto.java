@@ -24,8 +24,8 @@ public class ProjectDto implements Serializable {
     private String description;
     private ProjectStatus status;
     private Date startDate;
-    private String expectedTime;
-    private String spentTime;
+    private Integer expectedTime;
+    private Integer spentTime;
 
     private List<ActivityDto> activities;
     private Map<Long, List<Report>> reports;

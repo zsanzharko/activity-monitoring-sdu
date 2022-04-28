@@ -16,6 +16,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Getter
@@ -32,6 +33,15 @@ public class UserDao implements UserService, UserDetailsService {
     @Override
     public List<User> findAllByRole(Role role) {
         return userRepository.findAllByRole(role);
+    }
+
+    @Override
+    public List<UserDto> findAllByEmailOrFullName(String email, String firstName, String lastName) {
+        return userRepository.findAllByEmailOrFirstNameOrLastName(email, firstName, lastName)
+                .stream()
+                .filter(user -> user.getRole() == Role.EMPLOYEE)
+                .map(user -> new UserDto(user.getId(), (user.getFirstName() + " " + user.getLastName()), user.getGender(), user.getEmail(), user.getRole()))
+                .collect(Collectors.toList());
     }
 
 //    public List<User> findAllBy

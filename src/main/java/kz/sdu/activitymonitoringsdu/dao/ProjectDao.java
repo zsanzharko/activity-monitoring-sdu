@@ -41,13 +41,13 @@ public class ProjectDao implements ProjectService, ActivityService {
     }
 
     @Override
-    public Project findById(String id) {
+    public Project findByProjectId(String id) {
         return projectRepository.findByProjectId(id);
     }
 
     public ProjectDto findByIdDto(String id) {
         Project project = projectRepository.findByProjectId(id);
-        List<ActivityDto> activityDtoList = getActivitiesById(consistDao.findAllByProjectId(project.getId()));
+        List<ActivityDto> activityDtoList = getActivitiesById(consistDao.findAllByProjectId(project.getProjectId()));
         var reports = new HashMap<Long, List<Report>>();
         var assignActivity = new HashMap<Long, User>();
 
@@ -77,8 +77,20 @@ public class ProjectDao implements ProjectService, ActivityService {
     }
 
     @Override
-    public void deleteByProjectId(String projectId) {
+    public void deleteProjectByProjectId(String projectId) {
         projectRepository.deleteByProjectId(projectId);
+        List<Consist> consists = consistDao.findAllByProjectId(projectId);
+        consists.forEach(consist ->
+                activityRepository.deleteById(consist.getActivityId()));
+        consistDao.deleteAllByProjectId(projectId);
+    }
+
+    @Override
+    public void deleteActivityById(Long id) {
+        connectionActivityDao.deleteAllByActivityId(id);
+        activityRepository.deleteById(id);
+        consistDao.deleteByActivityId(id);
+        spendTimeUserRepository.removeAllByActivityId(id);
     }
 
     @Override
