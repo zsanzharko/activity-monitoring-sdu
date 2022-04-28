@@ -53,6 +53,8 @@ public class MainController {
 
         model.addAttribute("user", userDto);
 
+        model.addAttribute("accessRole", userDto.getRole() == Role.MANAGER);
+
         model.addAttribute("titlePage", "Dashboard");
 
         return new ModelAndView("index", model);

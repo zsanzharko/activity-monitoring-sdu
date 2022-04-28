@@ -47,7 +47,7 @@ public class ProjectController {
 
 
         model.addAttribute("titlePage", "Project: " + projectDto.getTitle());
-        model.addAttribute("userIsManager", userDto.getRole() == Role.MANAGER);
+        model.addAttribute("accessRole", userDto.getRole() == Role.MANAGER);
         model.addAttribute("activities", activities);
         model.addAttribute("back_page", "/dashboard");
         model.addAttribute("user", userDto);

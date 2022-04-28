@@ -198,7 +198,7 @@
                     <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
                     <li class="breadcrumb-item active" aria-current="page">Project details</li>
                 </ol>
-                <button type="button" class="btn activiity_creation" data-bs-toggle="modal"
+                <button th:if="${accessRole}" type="button" class="btn activiity_creation" data-bs-toggle="modal"
                         data-bs-target="#create_activity_modal">
                     New activity
                 </button>

@@ -243,6 +243,7 @@
                 <li class="breadcrumb-item active" aria-current="page"></li>
             </ol>
             <button type="button" class="btn project_creation" data-bs-toggle="modal"
+                    th:if="${accessRole}"
                     data-bs-target="#create_project_modal">
                 New project
             </button>
