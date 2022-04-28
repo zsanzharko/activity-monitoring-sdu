@@ -2,10 +2,12 @@ package kz.sdu.activitymonitoringsdu.controller.rest;
 
 import kz.sdu.activitymonitoringsdu.dao.*;
 import kz.sdu.activitymonitoringsdu.dto.ProjectDto;
-import kz.sdu.activitymonitoringsdu.entity.Activity;
-import kz.sdu.activitymonitoringsdu.entity.Consist;
-import kz.sdu.activitymonitoringsdu.entity.Report;
+import kz.sdu.activitymonitoringsdu.dto.UserDto;
+import kz.sdu.activitymonitoringsdu.entity.*;
+import kz.sdu.activitymonitoringsdu.enums.Role;
+import kz.sdu.activitymonitoringsdu.exception.ApiRequestException;
 import kz.sdu.activitymonitoringsdu.handlers.ActivityHandlerUtils;
+import kz.sdu.activitymonitoringsdu.handlers.UserHandlerUtils;
 import kz.sdu.activitymonitoringsdu.handlers.forms.ActivityCreateForm;
 import kz.sdu.activitymonitoringsdu.handlers.forms.ProjectCreateForm;
 import kz.sdu.activitymonitoringsdu.handlers.forms.SpendTimeForm;
@@ -15,6 +17,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @Slf4j
@@ -88,6 +92,34 @@ public class RestProjectController {
         ProjectDto body = projectDao.findByIdDto(projectId);
         if (body == null) ResponseEntity.notFound().build();
         return ResponseEntity.ok(body);
+    }
+
+    @PostMapping(value = "project/activity/assign/{activityId}")
+    public ResponseEntity<DevConnectionActivity> assignDevelop(@PathVariable final Long activityId,
+                                                                  @RequestParam final Long developId,
+                                                                  @RequestParam String title) {
+        UserDto userDto = UserHandlerUtils.getUserFromAuth(userDao);
+        if (userDto.getRole() != Role.MANAGER)
+            throw new ApiRequestException("Do not have permission");
+
+        DevConnectionActivity assignation = new DevConnectionActivity();
+        assignation.setActivityId(activityId);
+        assignation.setUserId(developId);
+        assignation.setTitle(title.isEmpty() ? "": title);
+        assignedUserDao.save(assignation);
+
+        return ResponseEntity.ok(assignation);
+    }
+
+    @GetMapping(value = "project/activity/assign/search")
+    public ResponseEntity<List<UserDto>> searchDevelopForAssign(@RequestParam final String text) {
+        UserDto userDto = UserHandlerUtils.getUserFromAuth(userDao);
+        if (userDto.getRole() != Role.MANAGER)
+            throw new ApiRequestException("Do not have permission");
+
+        List<UserDto> users = userDao.findAllByEmailOrFullName(text, text, text);
+
+        return ResponseEntity.ok(users);
     }
 
     //todo check method
