@@ -84,17 +84,23 @@ function getActivityDayInformation(projectId) {
 
                 const activity_date = new Date(end_activity_dates[i])
                 let color_progress = ''
-                if (current_date > activity_date)
-                    color_progress = "#000000"
-                else if ((current_date.getDate() - activity_date.getDate() > 5) ||
-                    current_date.getDate() - activity_date.getDate() < -5)
-                    color_progress = "#93FF96"
+                //если текущий день будет превышать от конца дня назначения задачи
+
+
                 for (let j = 0; j < dayCount.length; j++) {
-                    let day_count_date = new Date(current_date.getFullYear(), current_date.getMonth() + 1, dayCount[j])
-                    console.log(current_date.getDate() - activity_date.getDate())
-                    if ((current_date.getDate() - activity_date.getDate() < 5) ||
-                        current_date.getDate() - activity_date.getDate() > -5)
-                        color_progress = "#6D6466"
+                    // const year = activity_date.getFullYear() >
+                    const month = dayCount[j] >=  new Date(current_date.getFullYear(), current_date.getMonth() + 1, 0).getDate() ? current_date.getMonth() + 1  : current_date.getMonth()
+                    const day = dayCount[j] >=  new Date(current_date.getFullYear(), current_date.getMonth() + 1, 0).getDate() ? 0  : current_date.getDate()
+                    let day_count_date = new Date(current_date.getFullYear(), month, day)
+                    console.log(day_count_date.getDate() + " - " +  activity_date.getDate() + " = " + (day_count_date.getDate() - activity_date.getDate()) + " > -5 = " +  (day_count_date.getDate() - activity_date.getDate()  > -5))
+                    console.log(day_count_date.getDate() + " - " +  activity_date.getDate() + " = " + (day_count_date.getDate() - activity_date.getDate()) + " < -5 = " +  (day_count_date.getDate() - activity_date.getDate()  < -5))
+                    if (day_count_date > activity_date)
+                        color_progress = "#000000"
+                    else if (day_count_date.getDate() <= activity_date.getDate())
+                        color_progress = "#93FF96"
+
+                    console.log(value["id"] + " " + dayCount[j] + " " + color_progress)
+
                     progress_display += `
                     <div class="progress-bar" style="height: 100%; width: 6.67%; background-color: ${color_progress}"
                                          id="${value["id"]} + '-progress-day-' + ${dayCount[j]}"></div>
