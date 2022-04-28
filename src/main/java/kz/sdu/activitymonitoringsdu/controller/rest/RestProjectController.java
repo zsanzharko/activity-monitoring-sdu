@@ -83,7 +83,6 @@ public class RestProjectController {
         return ResponseEntity.badRequest().build();
     }
 
-    //fixme need to check user role
     @GetMapping(value = "activity/panel")
     public ResponseEntity<ProjectDto> getActivityPanel(@RequestParam String projectId) {
         ProjectDto body = projectDao.findByIdDto(projectId);
