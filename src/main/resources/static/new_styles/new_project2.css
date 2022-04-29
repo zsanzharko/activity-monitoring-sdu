@@ -9,6 +9,7 @@ a{
   text-decoration: none;
 }
 .location_creation{
+  /* background-color:violet; */
   display: flex;
   justify-content: space-between;
   align-items:center;
