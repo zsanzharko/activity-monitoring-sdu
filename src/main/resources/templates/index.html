@@ -346,9 +346,20 @@
                                     </svg>
                                 </button>
                                 <ul class="dropdown-menu dropdown-menu-dark">
-                                    <li class="item_drop"><a class="dropdown-item" href="#">Delete</a></li>
-                                    <li class="item_drop"><a class="dropdown-item" href="#">Edit</a></li>
+<!--                                    th:href="@{|project/delete-project/${project.getProjectId()}|}"-->
+                                    <li class="item_drop"><button class="dropdown-item" th:id="'delete-' + ${project.getProjectId()}" th:attr="onclick=|openModal('delete-${project.getProjectId()}')|">Delete</button></li>
+                                    <li class="item_drop"><button class="dropdown-item">Edit</button></li>
                                 </ul>
+
+                                <div th:id="${project.getProjectId()} + '-delete'" class="modal">
+
+                                    <!-- Modal content -->
+                                    <div class="modal-content">
+                                        <span class="close" th:onclick="closeModal('delete-' + ${project.getProjectId()})">&times;</span>
+                                        <p>Some text in the Modal..</p>
+                                    </div>
+
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -447,6 +458,7 @@
 <script src="../static/js/add_object_handler.js" th:src="@{js/add_object_handler.js}"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="../static/js/notifier.js" th:src="@{js/notifier.js}"></script>
+<script src="../static/js/dropdown_modal_project.js" th:src="@{js/dropdown_modal_project.js}"></script>
 </body>
 
 </html>

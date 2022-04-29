@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${page_title}">Title</title>
+</head>
+<body>
+
+<div>
+    <h1>Are you absolutely sure?</h1>
+    <p>Unexpected bad things will happen if you don’t read this!</p>
+    <div>
+        <a th:href="@{|/project/delete/${projectId}|}" >Delete</a>
+    </div>
+</div>
+
+</body>
+</html>

@@ -12,6 +12,7 @@ import kz.sdu.activitymonitoringsdu.service.ActivityService;
 import kz.sdu.activitymonitoringsdu.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,6 +20,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Service
+@Transactional
 public class ProjectDao implements ProjectService, ActivityService {
 
     private final ProjectRepository projectRepository;
@@ -77,6 +79,7 @@ public class ProjectDao implements ProjectService, ActivityService {
     }
 
     @Override
+
     public void deleteProjectByProjectId(String projectId) {
         projectRepository.deleteByProjectId(projectId);
         List<Consist> consists = consistDao.findAllByProjectId(projectId);
