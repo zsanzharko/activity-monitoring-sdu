@@ -57,17 +57,6 @@ public class ProjectController {
         return new ModelAndView("project_details", model);
     }
 
-    @GetMapping("/delete-project/{projectId}")
-    public ModelAndView deleteProjectPage(@PathVariable final String projectId, ModelMap modelMap) {
-        UserDto userDto = UserHandlerUtils.getUserFromAuth(userDao);
-        if (userDto.getRole() != Role.MANAGER) return new ModelAndView("redirect:/dashboard");
-
-        modelMap.addAttribute("page_title", "Delete: " + projectDao.findByProjectId(projectId).getTitle());
-        modelMap.addAttribute("projectId", projectId);
-
-        return new ModelAndView("delete_project_page", modelMap);
-    }
-
     @GetMapping("/delete/{projectId}")
     public ModelAndView deleteProject(@PathVariable final String projectId){
         UserDto userDto = UserHandlerUtils.getUserFromAuth(userDao);

@@ -347,7 +347,9 @@
                                 </button>
                                 <ul class="dropdown-menu dropdown-menu-dark">
 <!--                                    th:href="@{|project/delete-project/${project.getProjectId()}|}"-->
-                                    <li class="item_drop"><button class="dropdown-item" th:id="'delete-' + ${project.getProjectId()}" th:attr="onclick=|openModal('delete-${project.getProjectId()}')|">Delete</button></li>
+                                    <li class="item_drop">
+                                        <a class="dropdown-item"
+                                           th:href="@{|/project/delete/${project.getProjectId()}|}">Delete</a></li>
                                     <li class="item_drop"><button class="dropdown-item">Edit</button></li>
                                 </ul>
 
@@ -458,7 +460,6 @@
 <script src="../static/js/add_object_handler.js" th:src="@{js/add_object_handler.js}"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="../static/js/notifier.js" th:src="@{js/notifier.js}"></script>
-<script src="../static/js/dropdown_modal_project.js" th:src="@{js/dropdown_modal_project.js}"></script>
 </body>
 
 </html>
