@@ -82,7 +82,6 @@ function getActivityDayInformation(projectId) {
                                 <div class="progress-placeholder">
                 `
 
-
                 const start_date = getStartDate(activities)[i]
                 const end_date = new Date(end_activity_dates[i])
 
@@ -94,7 +93,7 @@ function getActivityDayInformation(projectId) {
                     if (dayCount[j - 1] < dayCount[j]) {
                         date = new Date(new Date().getFullYear(), new Date().getMonth()+1, dayCount[j-1])
                     }
-
+                    
 
 
                     console.log(date)
