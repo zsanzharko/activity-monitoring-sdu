@@ -304,9 +304,9 @@
                                 </label>
 
                                 <p class="pr_number">Expected date:</p>
-                                <label for="Expected_Date" class="project_id_box">
+                                <label for="expected-date" class="project_id_box">
                                     <input type="date" class="form-control input" pattern="yyyy-MM-dd"
-                                        name="expectedDate" id="Expected_Date" required>
+                                        name="expectedDate" id="expected-date" required>
                                 </label>
                             </div>
                             <div class="modal-footer">
@@ -324,7 +324,7 @@
             <div th:if="${accessRole}" class="modal fade edit_project_model" tabindex="-1" aria-hidden="true">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
-                        <form id="new-project">
+                        <form id="edit-project">
                             <div class="modal-header">
                                 <h5 class="modal-title">New Project</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
@@ -332,40 +332,40 @@
                             </div>
                             <div class="modal-body">
                                 <p class="pr_name">Project Id:</p>
-                                <label for="project-id" class="project_name_box">
-                                    <input type="text" class="form-control input" name="projectId" id="project-id"
+                                <label for="edit-project-id" class="project_name_box">
+                                    <input type="text" class="form-control input" name="projectId" id="edit-project-id"
                                         placeholder="Like '4635LSFB'" aria-describedby="basic-addon1" required>
                                 </label>
 
                                 <p class="pr_version">Version:</p>
-                                <label for="projectVersion" class="version_box">
-                                    <input type="text" class="form-control input" id="projectVersion"
+                                <label for="edit-projectVersion" class="version_box">
+                                    <input type="text" class="form-control input" id="edit-projectVersion"
                                         name="projectVersion" placeholder="Like 'B'" required>
                                 </label>
 
                                 <p class="pr_name">Project name:</p>
-                                <label for="title" class="project_name_box">
-                                    <input type="text" class="form-control input" name="title" id="title"
+                                <label for="edit-title" class="project_name_box">
+                                    <input type="text" class="form-control input" name="title" id="edit-title"
                                         placeholder="Like 'Android App'" aria-describedby="basic-addon1" required>
                                 </label>
 
                                 <p class="pr_number">Description:</p>
-                                <label for="description" class="project_desc_box">
+                                <label for="edit-description" class="project_desc_box">
 
                                     <textarea class="form-control input" name="description" aria-label="With textarea"
-                                        id="description" required></textarea>
+                                        id="edit-description" required></textarea>
                                 </label>
 
                                 <p class="pr_number">Date to start:</p>
                                 <label for="startDate" class="project_id_box">
                                     <input type="date" class="form-control input" pattern="yyyy-MM-dd" name="startDate"
-                                        id="startDate" required>
+                                        id="edit-startDate" required>
                                 </label>
 
                                 <p class="pr_number">Expected date:</p>
-                                <label for="Expected_Date" class="project_id_box">
+                                <label for="edit-expected-date" class="project_id_box">
                                     <input type="date" class="form-control input" pattern="yyyy-MM-dd"
-                                        name="expectedDate" id="Expected_Date" required>
+                                        name="expectedDate" id="edit-expected-date" required>
                                 </label>
                             </div>
                             <div class="modal-footer">
@@ -405,9 +405,9 @@
                                     </button>
                                     <ul class="dropdown-menu dropdown-menu-dark">
                                         <!--                                    th:href="@{|project/delete-project/${project.getProjectId()}|}"-->
-                                        <li class="item_drop"><button class="dropdown-item"
-                                                th:id="'delete-' + ${project.getProjectId()}"
-                                                th:attr="onclick=|openModal('delete-${project.getProjectId()}')|">Delete</button>
+                                        <li class="item_drop">
+                                            <a class="dropdown-item" th:id="'delete-' + ${project.getProjectId()}"
+                                                                 th:href="@{|project/delete/${project.getProjectId()}|}">Delete</a>
                                         </li>
                                         <li class="item_drop"><button type="button" data-bs-toggle="modal" data-bs-target=".edit_project_model" class="btn dropdown-item edit_project">Edit</button></li>
                                     </ul>
@@ -527,7 +527,6 @@
     <script src="../static/js/add_object_handler.js" th:src="@{js/add_object_handler.js}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="../static/js/notifier.js" th:src="@{js/notifier.js}"></script>
-    <script src="../static/js/dropdown_modal_project.js" th:src="@{js/dropdown_modal_project.js}"></script>
 </body>
 
 </html>
