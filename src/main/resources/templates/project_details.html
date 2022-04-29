@@ -481,8 +481,8 @@
                 tabTriggers.children[i].addEventListener('click', e => {
                     e.preventDefault();
                     for (let j = 0; j < tabContents.children.length; j++) {
-                        tabContents.children[j].dataset.tab == tabTriggers.children[i].firstElementChild.dataset.tab ? tabContents.children[j].classList.add('active') : tabContents.children[j].classList.remove('active');
-                        tabTriggers.children[j].firstElementChild.dataset.tab == tabTriggers.children[i].firstElementChild.dataset.tab ? tabTriggers.children[j].firstElementChild.classList.add('active') : tabTriggers.children[j].firstElementChild.classList.remove('active');
+                        tabContents.children[j].dataset.tab === tabTriggers.children[i].firstElementChild.dataset.tab ? tabContents.children[j].classList.add('active') : tabContents.children[j].classList.remove('active');
+                        tabTriggers.children[j].firstElementChild.dataset.tab === tabTriggers.children[i].firstElementChild.dataset.tab ? tabTriggers.children[j].firstElementChild.classList.add('active') : tabTriggers.children[j].firstElementChild.classList.remove('active');
                     }
                 });
             }

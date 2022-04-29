@@ -61,13 +61,13 @@ function getActivityDayInformation(projectId) {
 
             // PROGRESS BAR
 
-            let dayCount = getDateForPanel()
+            const dayCount = getDateForPanel()
             let display = ``
             let progress_display = ``
             for (let i = 0; i < dayCount.length; i++) {
                 display += `
                 <div class="day-counter">
-                                    <p style="margin: auto; text-align: center">${dayCount[i]}</p>
+                                    <p style="margin: auto; text-align: center">${dayCount[i].getDate()}</p>
                                 </div>
                 `
             }
@@ -76,37 +76,50 @@ function getActivityDayInformation(projectId) {
             const end_activity_dates = getEndDate(activities)
             let i = 0
             for (const [key, value] of Object.entries(activities)) {
-                let color_progress = ''
-                progress_display += `
-                <div class="activity_box">
-                                <div class="progress-placeholder">
-                `
 
                 const start_date = getStartDate(activities)[i]
                 const end_date = new Date(end_activity_dates[i])
 
-
-                console.log(start_date)
-                console.log(end_date)
-                for (let j = 1; j <= dayCount.length; j++) {
-                    let date = new Date(new Date().getFullYear(), new Date().getMonth(), dayCount[j-1])
-                    if (dayCount[j - 1] < dayCount[j]) {
-                        date = new Date(new Date().getFullYear(), new Date().getMonth()+1, dayCount[j-1])
-                    }
-                    
-
-
-                    console.log(date)
-                    if (date => start_date && date <= end_date) {
-                        color_progress = "#93FF96"
-                    } else
-                        color_progress = "#000000"
-
+                progress_display += `
+                <div class="activity_box">
+                                <div class="progress-placeholder">
+                `
+                if (start_date == null || end_date == null) {
                     progress_display += `
-                    <div class="progress-bar" style="height: 100%; width: 6.67%; background-color: ${color_progress}"
-                                         id="${value["id"]} + '-progress-day-' + ${dayCount[j-1]}"></div>
+                <div class="empty_progress">
+                    <h3>Date is not set</h3>
+                </div>
+                `
+                } else {
+                    const start_time = start_date.getTime()
+                    const end_time = end_date.getTime()
+                    let color_progress = ""
+                    let color_progress_main = ""
+                    for (let j = 0; j < dayCount.length; j++) {
 
-                    `
+                        let date = dayCount[j]
+                        const date_time = date.getTime()
+
+                        if (color_progress_main === "" && date_time >= start_time && date_time <= end_time) {
+                            color_progress = ""
+                            if (end_time - date_time > 864_000_000) {
+                                color_progress_main = "#33A853"
+                            } else if (end_time - date_time < 864_000_000 && end_time - date_time > 259200000) {
+                                color_progress_main = "#FBBC05"
+                            } else if (end_time - date_time < 259200000) {
+                                color_progress_main = "#EA4336"
+                            }
+                        }
+
+                        if (date_time < start_time || date_time > end_time) {
+                            color_progress = "#DADADA"
+                        }
+
+
+                        progress_display += `
+                                <div class="custom-progress-bar" style="height: 100%; width: 6.67%; background-color: ${color_progress.length === 0 ? color_progress_main : color_progress}"
+                                         id="${value["id"]}-progress-day-${date.getDate()}"></div>`
+                    }
                 }
                 progress_display += `
                  </div>
@@ -147,16 +160,10 @@ async function newActivity(projectId) {
 
 function getDateForPanel() {
     let dayCount = [];
-    let today_date = new Date().getDate()
-    let last_month = new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0)
+    let today_date = new Date()
     for (let i = 0; i < DAY_COUNT; i++) {
-        if (today_date > last_month.getDate()) {
-            today_date = 1
-        }
-        dayCount.push(today_date)
-
-        today_date++
-
+        dayCount.push(new Date(today_date))
+        today_date.setDate(today_date.getDate() + 1);
     }
     return dayCount
 }
@@ -186,6 +193,10 @@ function getEndDate(activities) {
 function getStartDate(activities) {
     let start_date = []
     for (const [key, value] of Object.entries(activities)) {
+        if (value["startDate"] === null) {
+            start_date.push(null);
+            continue;
+        }
         let json_date = value["startDate"].substring(0, 10)
         let date = new Date(json_date.replaceAll('-', '/'))
         start_date.push(date)
