@@ -73,38 +73,40 @@ function getActivityDayInformation(projectId) {
             }
             document.getElementById('activity-day').innerHTML = display
 
-            const current_date = new Date()
             const end_activity_dates = getEndDate(activities)
             let i = 0
             for (const [key, value] of Object.entries(activities)) {
+                let color_progress = ''
                 progress_display += `
                 <div class="activity_box">
                                 <div class="progress-placeholder">
                 `
 
-                const activity_date = new Date(end_activity_dates[i])
-                let color_progress = ''
-                //если текущий день будет превышать от конца дня назначения задачи
+
+                const start_date = getStartDate(activities)[i]
+                const end_date = new Date(end_activity_dates[i])
 
 
-                for (let j = 0; j < dayCount.length; j++) {
-                    // const year = activity_date.getFullYear() >
-                    const month = dayCount[j] >=  new Date(current_date.getFullYear(), current_date.getMonth() + 1, 0).getDate() ? current_date.getMonth() + 1  : current_date.getMonth()
-                    const day = dayCount[j] >=  new Date(current_date.getFullYear(), current_date.getMonth() + 1, 0).getDate() ? 0  : current_date.getDate()
-                    let day_count_date = new Date(current_date.getFullYear(), month, day)
-                    console.log(day_count_date.getDate() + " - " +  activity_date.getDate() + " = " + (day_count_date.getDate() - activity_date.getDate()) + " > -5 = " +  (day_count_date.getDate() - activity_date.getDate()  > -5))
-                    console.log(day_count_date.getDate() + " - " +  activity_date.getDate() + " = " + (day_count_date.getDate() - activity_date.getDate()) + " < -5 = " +  (day_count_date.getDate() - activity_date.getDate()  < -5))
-                    if (day_count_date > activity_date)
-                        color_progress = "#000000"
-                    else if (day_count_date.getDate() <= activity_date.getDate())
+                console.log(start_date)
+                console.log(end_date)
+                for (let j = 1; j <= dayCount.length; j++) {
+                    let date = new Date(new Date().getFullYear(), new Date().getMonth(), dayCount[j-1])
+                    if (dayCount[j - 1] < dayCount[j]) {
+                        date = new Date(new Date().getFullYear(), new Date().getMonth()+1, dayCount[j-1])
+                    }
+
+
+
+                    console.log(date)
+                    if (date => start_date && date <= end_date) {
                         color_progress = "#93FF96"
-
-                    console.log(value["id"] + " " + dayCount[j] + " " + color_progress)
+                    } else
+                        color_progress = "#000000"
 
                     progress_display += `
                     <div class="progress-bar" style="height: 100%; width: 6.67%; background-color: ${color_progress}"
-                                         id="${value["id"]} + '-progress-day-' + ${dayCount[j]}"></div>
-                              
+                                         id="${value["id"]} + '-progress-day-' + ${dayCount[j-1]}"></div>
+
                     `
                 }
                 progress_display += `
@@ -145,19 +147,33 @@ async function newActivity(projectId) {
 
 
 function getDateForPanel() {
-    let today_date = new Date();
-
-    let current_date = today_date.getDate()
     let dayCount = [];
-    let next_month = new Date(today_date.getFullYear(), today_date.getMonth() + 1, 0);
+    let today_date = new Date().getDate()
+    let last_month = new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0)
     for (let i = 0; i < DAY_COUNT; i++) {
-        if (current_date > next_month.getDate()) {
-            current_date = 1
-            dayCount.push(current_date)
-        } else dayCount.push(current_date)
-        current_date++
+        if (today_date > last_month.getDate()) {
+            today_date = 1
+        }
+        dayCount.push(today_date)
+
+        today_date++
+
     }
     return dayCount
+}
+
+function getNumberOfDays(start, end) {
+    const date1 = new Date(start);
+    const date2 = new Date(end);
+
+    // One day in milliseconds
+    const oneDay = 1000 * 60 * 60 * 24;
+
+    // Calculating the time difference between two dates
+    const diffInTime = date2.getTime() - date1.getTime();
+
+    // Calculating the no. of days between two dates
+    return Math.round(diffInTime / oneDay);
 }
 
 function getEndDate(activities) {
@@ -166,4 +182,14 @@ function getEndDate(activities) {
         end_dates.push(value["endDate"])
     }
     return end_dates
+}
+
+function getStartDate(activities) {
+    let start_date = []
+    for (const [key, value] of Object.entries(activities)) {
+        let json_date = value["startDate"].substring(0, 10)
+        let date = new Date(json_date.replaceAll('-', '/'))
+        start_date.push(date)
+    }
+    return start_date
 }
