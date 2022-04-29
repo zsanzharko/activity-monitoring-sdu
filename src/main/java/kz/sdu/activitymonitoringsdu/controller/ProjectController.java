@@ -54,6 +54,6 @@ public class ProjectController {
         model.addAttribute("project", projectDto);
         model.addAttribute("projectId", id);
 
-        return new ModelAndView("new_project_details2", model);
+        return new ModelAndView("project_details", model);
     }
 }
