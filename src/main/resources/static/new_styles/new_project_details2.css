@@ -254,3 +254,38 @@ a {
     display: block;
 
 }
+
+.project_id, .project_version, .process, .start_date, .end_date, .expected_time{
+    font-weight: bold;
+}
+span{
+    font-weight: normal;
+    margin-left: 5px;
+}
+
+.title_button{
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+}
+.button_edit{
+    margin-right: 50px;
+    width: 60px;
+    height: 40px;
+}
+.times{
+    margin-top: 30px;
+}
+
+.project_description_text{
+    height: 300px;
+    overflow-y: scroll;
+    width: 100%;
+}
+.project_description_box{
+    width: 70%;
+}
+.project_body{
+    display: flex;
+    justify-content: space-between;
+}

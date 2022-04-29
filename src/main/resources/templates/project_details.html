@@ -195,11 +195,12 @@
                 <!-- Location ------------------------------->
                 <nav aria-label="breadcrumb" class="creation_activity">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item active" aria-current="page"><a th:href="@{/dashboard}" style="color: #6D757D;">Dashboard</a></li>
+                        <li class="breadcrumb-item active" aria-current="page"><a th:href="@{/dashboard}"
+                                style="color: #6D757D;">Dashboard</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Project details</li>
                     </ol>
                     <button th:if="${accessRole}" type="button" class="btn activiity_creation" data-bs-toggle="modal"
-                        data-bs-target="#create_activity_modal">
+                        data-bs-target=".create_activity_modal">
                         New activity
                     </button>
                 </nav>
@@ -298,44 +299,58 @@
 
 
                         <div>
-                            <h4 class="project_title">Project title</h4>
+                            <div class="title_button">
+                                <h4 class="project_title">Project title</h4>
+                                <button type="button" data-bs-toggle="modal" data-bs-target=".edit_project_model"
+                                    class="btn button_edit edit_project activiity_creation">Edit</button>
+                            </div>
                             <hr>
-                            <p class="project_id">EX5532</p>
-                            <p class="project_version">A</p>
-                            <div class="topic_button">
-                                <h5 class="project_descriptio">Description</h5>
-                                <button>Edit</button>
-                            </div>
-                            <p>
-                                sanzhar makau sanzhar makau sanzhar makau sanzhar makau sanzhar makau sanzhar makau
-                                sanzhar makau sanzhar makau sanzhar makau sanzhar makau sanzhar makau sanzhar makau
-                                sanzhar makau sanzhar makau sanzhar makau sanzhar makau sanzhar makau sanzhar makau
-                                sanzhar makau sanzhar makau sanzhar makau sanzhar makau sanzhar makau sanzhar makau
-                                sanzhar makau sanzhar makau
-                            </p>
-
-                            <div>
+                            <div class="project_body">
                                 <div>
-                                    <p class="start_date"></p>
-                                    <p class="end_date"></p>
+                                    <p class="project_id">Project ID:<span>EX5532</span></p>
+                                    <p class="project_version">Project version:<span>A</span></p>
+                                    <p class="process">Process is:<span>Active</span></p>
+                                    <p class="start_date">Start date:<span>31.01.2002</span></p>
+                                    <p class="end_date">End date: <span>30.04.2022</span></p>
+                                    <p class="expected_time">Expected end date: <span>25.05.2021</span></p>
+                                    
                                 </div>
+                                
+                                <div class="project_description_box">
+                                    <h5 class="project_description">Description</h5>
+                                    <div class="project_description_text">
+                                        sanzhar makau sanzhar makau sanzhar makau sanzhar makau sanzhar makau sanzhar makau
+                                        sanzhar makau sanzhar makau sanzhar makau sanzhar makau sanzhar makau sanzhar makau
+                                        sanzhar makau sanzhar makau sanzhar makau sanzhar makau sanzhar makau sanzhar makau
+                                        sanzhar makau sanzhar makau sanzhar makau sanzhar makau sanzhar makau sanzhar makau
+                                        sanzhar makau sanzhar makau
+                                        sanzhar makau sanzhar makau sanzhar makau sanzhar makau sanzhar makau sanzhar makau
+                                        sanzhar makau sanzhar makau sanzhar makau sanzhar makau sanzhar makau sanzhar makau
+                                        sanzhar makau sanzhar makau sanzhar makau sanzhar makau sanzhar makau sanzhar makau
+                                        sanzhar makau sanzhar makau sanzhar makau sanzhar makau sanzhar makau sanzhar makau
+                                        sanzhar makau sanzhar makau
+                                        sanzhar makau sanzhar makau sanzhar makau sanzhar makau sanzhar makau sanzhar makau
+                                        sanzhar makau sanzhar makau sanzhar makau sanzhar makau sanzhar makau sanzhar makau
+                                        sanzhar makau sanzhar makau sanzhar makau sanzhar makau sanzhar makau sanzhar makau
+                                        sanzhar makau sanzhar makau sanzhar makau sanzhar makau sanzhar makau sanzhar makau
+                                        sanzhar makau sanzhar makau
+                                        
+                                    </div>
+                                </div>
+                                
                             </div>
-
 
 
                         </div>
 
-
                     </div>
-
                 </div>
-
             </div>
 
 
             <!-- New  Activity -------------------------- -->
 
-            <div class="modal fade" id="create_activity_modal" tabindex="-1" aria-hidden="true">
+            <div class="modal fade create_activity_modal" tabindex="-1" aria-hidden="true">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <form id="new-activity">
@@ -385,6 +400,64 @@
 
             <!-- --------------------------------------- -->
 
+            <!-- Edit projects -------------------------- -->
+            <div class="modal fade edit_project_model" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <form id="new-project">
+                            <div class="modal-header">
+                                <h5 class="modal-title">New Project</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p class="pr_name">Project Id:</p>
+                                <label for="project-id" class="project_name_box">
+                                    <input type="text" class="form-control input" name="projectId" id="project-id"
+                                        placeholder="Like '4635LSFB'" aria-describedby="basic-addon1" required>
+                                </label>
+
+                                <p class="pr_version">Version:</p>
+                                <label for="projectVersion" class="version_box">
+                                    <input type="text" class="form-control input" id="projectVersion"
+                                        name="projectVersion" placeholder="Like 'B'" required>
+                                </label>
+
+                                <p class="pr_name">Project name:</p>
+                                <label for="title" class="project_name_box">
+                                    <input type="text" class="form-control input" name="title" id="title"
+                                        placeholder="Like 'Android App'" aria-describedby="basic-addon1" required>
+                                </label>
+
+                                <p class="pr_number">Description:</p>
+                                <label for="description" class="project_desc_box">
+
+                                    <textarea class="form-control input" name="description" aria-label="With textarea"
+                                        id="description" required></textarea>
+                                </label>
+
+                                <p class="pr_number">Date to start:</p>
+                                <label for="startDate" class="project_id_box">
+                                    <input type="date" class="form-control input" pattern="yyyy-MM-dd" name="startDate"
+                                        id="startDate" required>
+                                </label>
+
+                                <p class="pr_number">Expected date:</p>
+                                <label for="Expected_Date" class="project_id_box">
+                                    <input type="date" class="form-control input" pattern="yyyy-MM-dd"
+                                        name="expectedDate" id="Expected_Date" required>
+                                </label>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <input class="btn btn-primary" type="submit" onclick="" value="Create" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- --------------------------------------- -->
 
 
         </div>
