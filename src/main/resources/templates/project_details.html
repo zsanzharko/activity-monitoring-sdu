@@ -385,12 +385,18 @@
                                     <input type="date" class="form-control input" pattern="yyyy-MM-dd" name="startDate"
                                         id="startDate" required>
                                 </label>
+
+                                <p class="pr_number">End date:</p>
+                                <label for="EndDate" class="project_id_box">
+                                    <input type="date" class="form-control input" pattern="yyyy-MM-dd" name="EndDate"
+                                        id="EndDate" required>
+                                </label>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
                                 </button>
                                 <button class="btn btn-primary" type="submit"
-                                    th:attr="onclick=|newActivity('${projectId}')|">Save changes
+                                    th:attr="onclick=|newActivity('${projectId}')|">Create
                                 </button>
                             </div>
                         </form>

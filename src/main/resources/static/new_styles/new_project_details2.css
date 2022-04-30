@@ -72,6 +72,7 @@ a {
 
 .activity_placeholder {
     margin: 0 auto;
+    /* background-color:red; */
 }
 
 #activity_assigned_placeholder {
@@ -81,14 +82,21 @@ a {
 
 .activity_box {
     margin: 10px 0 10px 0;
-    display: flex;
-    /*background-color: aquamarine;*/
+    /* display: flex; */
+    /* background-color: aquamarine; */
     height: 3rem;
     width: 100%;
     align-items: center;
+    justify-content: center;
     text-align: center;
 }
 
+.active_box_centered{
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+}
 .assign_box {
     width: 100%;
     background-color: white;
@@ -98,8 +106,16 @@ a {
     align-items: center;
     border-radius: 12px;
     padding: 0 0.5rem;
+    /* background-color:yellow; */
 }
 
+.names{
+    /* background-color:#4CAF50; */
+    height: 100%;
+    /* display: flex;
+    justify-content: center;
+    align-items:center; */
+}
 .activity_name {
     height: 100%;
     display: flex;
@@ -161,7 +177,7 @@ a {
 }
 
 .flex-space-evenly {
-    /* background-color:#4CAF50; */
+    /* background-color:blue; */
     display: flex;
     align-content: center;
 

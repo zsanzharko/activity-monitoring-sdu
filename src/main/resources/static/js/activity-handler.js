@@ -26,7 +26,7 @@ function getActivityDayInformation(projectId) {
                 const assignIsNull = assign_name != null
                 display_assign_box += `
                 <div class="activity_placeholder">
-                                <div class="activity_box">
+                                <div class="activity_box active_box_centered">
                                     <div class="assign_box" style="background-color:  ${assignIsNull ? `white` : "#D68300"}; border-color: ${assignIsNull ? "#D68300" : "red"}; color: ${assignIsNull ? "black" : "white"};">
                                         ${assignIsNull ? 'assigned' : 'assign'}
                                     </div>
@@ -40,7 +40,7 @@ function getActivityDayInformation(projectId) {
                     <div class="activity_placeholder">
                         <div class="activity_box">
                                 <div style="height: 100%;">
-                                    <p class="activity_name">${i + 1}. ${activities[i].title}</p>
+                                    <p class="activity_name names">${i + 1}. ${activities[i].title}</p>
                                 </div>
                                 </div>
                             </div>`
