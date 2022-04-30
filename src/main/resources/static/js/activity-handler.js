@@ -56,23 +56,159 @@ function getActivityDayInformation(projectId) {
                     </div>
                     
                     <!-- Modal -->
-                    <div class="modal fade view_modal"  data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                      <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+            <div class="modal fade view_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Activity details</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                          </div>
-                          <div class="modal-body">
-                            ...
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Okey</button>
-                          </div>
                         </div>
-                      </div>
+                        <div class="modal-body">
+                            <div class="header">
+                                <div class="title_head">
+                                    <p class="title_activity_modal title">Title:<span>Create database</span></p>
+                                    <p class="title_activity_modal title">Activity ID:<span>EXP3101</span></p>
+                                    <p class="start_day_activity_modal title">Stat day:<span>31.01.2002</span></p>
+                                    <p class="start_day_activity_modal title">End day:<span>31.05.2002</span></p>
+                                </div>
+
+                                <div class="head_description">
+                                    <h5>Description</h5>
+                                    <hr>
+                                    <div class="description_activity">
+                                        bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla
+                                        bla bla bla bla bla
+                                        bla
+                                        bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla
+                                        bla bla bla bla bla
+                                        bla
+                                        bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla
+                                        bla bla bla bla bla
+                                        bla
+                                        bla bla bla bla bla bla bla bla
+                                        bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla
+                                        bla bla bla bla bla
+                                        bla
+                                        bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla
+                                        bla bla bla bla bla
+                                        bla
+                                        bla bla bla bla bla bla bla bla
+                                        bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla
+                                        bla bla bla bla bla
+                                        bla
+                                        bla bla bla bla bla bla bla bla
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="topic">
+                                    <h5>Developers</h5>
+                                    <hr>
+                                </div>
+
+                                <div class="main_box">
+                                    <div class="container">
+                                        <div class="person_box">
+                                            <h6 class="person_name">Serikkhan Ayan
+                                            </h6>
+
+                                            <div class="box_proger">
+                                                <div class="zogolovok_box">
+                                                    <p class="zogolovok">Contacts</p>
+                                                </div>
+                                                <p class="person_PH_number info">Phone number: <span>+777546684228</span></p>
+                                                <p class="person_email info">Email: <span>ayan1bos@gmail.com</span></p>
+                                            </div>
+                                            <div class="box_proger">
+                                                <div class="zogolovok_box">
+                                                    <p class="zogolovok">Projects</p>
+                                                </div>
+                                                <p class="person_pr_num info">Active projects: <span>4</span>
+                                                </p>
+                                            </div>
+                                            <div class="box_proger">
+                                                <div class="zogolovok_box">
+                                                    <p class="zogolovok">Choose</p>
+                                                </div>
+                                                <button type="button" data-bs-toggle="modal"
+                                                    class="btn choose">select</button>
+                                            </div>
+                                        </div>
+
+                                        <div class="person_box">
+                                            <h6 class="person_name">Serikkhan Ayan
+                                            </h6>
+
+                                            <div class="box_proger">
+                                                <div class="zogolovok_box">
+                                                    <p class="zogolovok">Contacts</p>
+                                                </div>
+                                                <p class="person_PH_number info">Phone number: <span>+777546684228</span></p>
+                                                <p class="person_email info">Email: <span>ayan1bos@gmail.com</span></p>
+                                            </div>
+                                            <div class="box_proger">
+                                                <div class="zogolovok_box">
+                                                    <p class="zogolovok">Projects</p>
+                                                </div>
+                                                <p class="person_pr_num info">Active projects: <span>4</span>
+                                                </p>
+                                            </div>
+                                            <div class="box_proger">
+                                                <div class="zogolovok_box">
+                                                    <p class="zogolovok">Choose</p>
+                                                </div>
+                                                <button type="button" data-bs-toggle="modal"
+                                                    class="btn choose">select</button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <div class="spent_topic">
+                                    <h5>Spent time</h5>
+                                    <hr>
+                                </div>
+                                <div class="spent_time_container">
+                                    
+                                    <div class="spent_time_box">
+                                        <div class="spent_left_box">
+                                            <p class="zogolovok">Entered day</p>
+                                            <p>31.01.2002</p>
+                                        </div>
+                                        <div class="spent_space_line"></div>
+                                        <div class="spent_right_box">
+                                            <p class="zogolovok">Spent time</p>
+                                            <p>31.01.2002</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="spent_time_box">
+                                        <div class="spent_left_box">
+                                            <p class="zogolovok">Entered day</p>
+                                            <p>31.01.2002</p>
+                                        </div>
+                                        <div class="spent_space_line"></div>
+                                        <div class="spent_right_box">
+                                            <p class="zogolovok">Spent time</p>
+                                            <p>31.01.2002</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Delete</button>
+                        </div>
                     </div>
+                </div>
+            </div>
+            <!-- ------------------------------------------ -->
                     
                     `
 

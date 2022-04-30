@@ -16,7 +16,6 @@ a {
 
 .space_for_project {
     margin: auto;
-
 }
 
 .project_name_box {
@@ -27,6 +26,7 @@ a {
     text-wrap: avoid;
     height: 2rem;
     width: 100%;
+    /* background-color:red; */
 
 }
 
@@ -68,6 +68,8 @@ a {
     /*margin: 2px 0 2px 10px;*/
     display: flex;
     justify-content: space-evenly;
+    /* background-color:red; */
+    overflow: scroll;
 }
 
 .activity_placeholder {
@@ -218,7 +220,7 @@ a {
     align-items: center;
 
     justify-content: flex-start;
-
+    /* background-color:#4CAF50; */
 }
 
 .tabs ul li a {
@@ -305,3 +307,10 @@ span{
     display: flex;
     justify-content: space-between;
 }
+
+
+
+
+
+
+
