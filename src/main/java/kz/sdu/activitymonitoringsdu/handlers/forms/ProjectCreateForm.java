@@ -23,6 +23,8 @@ public class ProjectCreateForm {
     private String description;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date startDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date endDate;
 
     public Project getEntityFromForm() {
         return Project.builder()
@@ -31,7 +33,7 @@ public class ProjectCreateForm {
                 .title(title)
                 .description(description)
                 .startDate(startDate)
-                .expectedTime(0)
+                .endDate(endDate)
                 .spentTime(0)
                 .build();
     }

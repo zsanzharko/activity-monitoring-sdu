@@ -69,7 +69,6 @@ public class ProjectDao implements ProjectService, ActivityService {
                 .activities(activityDtoList)
                 .description(project.getDescription())
                 .startDate(project.getStartDate())
-                .expectedTime(project.getExpectedTime())
                 .spentTime(project.getSpentTime())
                 .title(project.getTitle())
                 .status(project.getStatus())

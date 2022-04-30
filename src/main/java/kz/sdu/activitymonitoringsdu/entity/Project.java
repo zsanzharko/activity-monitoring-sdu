@@ -38,8 +38,8 @@ public class Project {
     @Column(name = "start_date", nullable = false)
     private Date startDate;
 
-    @Column(name = "expected_time", nullable = false)
-    private Integer expectedTime;
+    @Column(name = "end_date", nullable = false)
+    private Date endDate;
 
     @Column(name = "spent_time", nullable = false)
     private Integer spentTime;

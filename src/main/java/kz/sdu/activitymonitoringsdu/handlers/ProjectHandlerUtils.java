@@ -39,7 +39,7 @@ public class ProjectHandlerUtils {
                 .description(project.getDescription())
                 .status(project.getStatus())
                 .startDate(project.getStartDate())
-                .expectedTime(project.getExpectedTime())
+                .endDate(project.getEndDate())
                 .spentTime(project.getSpentTime())
                 .build();
     }
@@ -52,7 +52,7 @@ public class ProjectHandlerUtils {
         project.setDescription(projectDto.getDescription());
         project.setStatus(projectDto.getStatus());
         project.setStartDate(projectDto.getStartDate());
-        project.setExpectedTime(projectDto.getExpectedTime());
+        project.setEndDate(projectDto.getEndDate());
         project.setSpentTime(projectDto.getSpentTime());
 
         return project;
