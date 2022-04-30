@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface UserService {
 
-    List<User> findAllByRole(Role role);
+    List<UserDto> findAllByRole(Role role);
 
     List<UserDto> findAllByEmailOrFullName(String email, String firstName, String lastName);
 

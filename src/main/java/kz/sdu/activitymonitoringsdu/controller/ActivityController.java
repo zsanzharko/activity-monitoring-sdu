@@ -48,8 +48,7 @@ public class ActivityController {
         DevConnectionActivity assignedUserDto = assignedUserDao.getAssignedUserByActivityId(id);
 
         if (userDto.getRole() == Role.MANAGER) {
-            List<UserDto> freeDevelopers = UserHandlerUtils
-                    .convertToDto(userDao.findAllByRole(Role.EMPLOYEE));
+            List<UserDto> freeDevelopers = userDao.findAllByRole(Role.EMPLOYEE);
 
             modelMap.addAttribute("developers", freeDevelopers);
         } else if (userDto.getRole() == Role.EMPLOYEE) {

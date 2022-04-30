@@ -26,6 +26,7 @@ public class UserHandlerUtils {
         userDto.setEmail(user.getEmail());
         userDto.setId(user.getId());
         userDto.setGender(user.getGender());
+        userDto.setPhoneNumber(user.getPhoneNumber());
         userDto.setRole(user.getRole());
         return userDto;
     }

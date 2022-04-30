@@ -125,12 +125,12 @@
                     </div>
                 </li>
                 <li>
-                    <div class="sider_dash_box">
+                    <div class="sider_dash_box" th:if="${accessRole}">
                         <a th:href="@{/profile-panel}" class="nav-link text-white">
                             <svg class="bi me-2" width="25" height="25">
                                 <use xlink:href="#people-circle" />
                             </svg>
-                            Profiles
+                            Developers
                         </a>
                     </div>
                 </li>

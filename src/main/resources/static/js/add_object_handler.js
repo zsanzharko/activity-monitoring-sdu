@@ -22,6 +22,36 @@ window.addEventListener("load", function () {
                                 <p class="project_version" style="font-size: 13px;">version <span style="font-size: 13px;">${data.projectVersion}</span></p>
                             </div>
                             <p class="project_name" style="font-size: 20px; margin-right: 10px;">${data.title}</p>
+                            <div class="dropdown">
+                                    <button class="btn  dropdown-toggle tree_dots" type="button" data-bs-toggle="dropdown">
+                                        <svg class="bi me-1" width="20" height="20" style="color: white">
+                                            <use xlink:href="#three_dots"></use>
+                                        </svg>
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-dark">
+                                        <li class="item_drop">
+                                            <a class="dropdown-item" id="delete-${projectId}" href="project/delete/${projectId}">Delete</a>
+                                        </li>
+                                        <li class="item_drop"><button type="button" data-bs-toggle="modal" data-bs-target=".edit_project_model" class="btn dropdown-item edit_project">Edit</button></li>
+                                    </ul>
+
+                                    <!-- <button type="button" class="btn project_creation" data-bs-toggle="modal"
+                                        th:if="${accessRole}" data-bs-target=".create_project_modal">
+                                        New project
+                                    </button> -->
+
+                                    
+
+                                    <div id="${projectId}-delete" class="modal">
+
+                                        <!-- Modal content -->
+                                        <div class="modal-content">
+                                            <span class="close" onclick="closeModal('delete-' + )">×</span>
+                                            <p>Some text in the Modal..</p>
+                                        </div>
+
+                                    </div>
+                                </div>
                         </div>
                         <div class="box_body">
                             <p class="project_activities">Activities</p>

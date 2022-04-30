@@ -31,8 +31,8 @@ public class UserDao implements UserService, UserDetailsService {
 
 
     @Override
-    public List<User> findAllByRole(Role role) {
-        return userRepository.findAllByRole(role);
+    public List<UserDto> findAllByRole(Role role) {
+        return UserHandlerUtils.convertToDto(userRepository.findAllByRole(role));
     }
 
     @Override
@@ -40,7 +40,7 @@ public class UserDao implements UserService, UserDetailsService {
         return userRepository.findAllByEmailOrFirstNameOrLastName(email, firstName, lastName)
                 .stream()
                 .filter(user -> user.getRole() == Role.EMPLOYEE)
-                .map(user -> new UserDto(user.getId(), (user.getFirstName() + " " + user.getLastName()), user.getGender(), user.getEmail(), user.getRole()))
+                .map(user -> new UserDto(user.getId(), (user.getFirstName() + " " + user.getLastName()), user.getGender(), user.getEmail(), user.getPhoneNumber(),user.getRole()))
                 .collect(Collectors.toList());
     }
 

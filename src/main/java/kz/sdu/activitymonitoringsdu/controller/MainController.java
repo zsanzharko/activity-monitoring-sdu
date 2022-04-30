@@ -23,6 +23,7 @@ import java.time.LocalDate;
 import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @Getter
@@ -64,8 +65,23 @@ public class MainController {
 
     @GetMapping("/profile-panel")
     public ModelAndView getProfilePanel(ModelMap model) {
+        UserDto userDto = UserHandlerUtils.getUserFromAuth(userDao);
+        List<UserDto> developers = userDao.findAllByRole(Role.EMPLOYEE);
+        List<Integer> activityCount = developers.stream()
+                .map(developer ->  assignDao.findAllByUserIdAssign(developer.getId()).size())
+                .toList();
+        List<Boolean> isActiveDevelopers = activityCount.stream()
+                .map(count -> count >= 5)
+                .toList();
 
-        return new ModelAndView("redirect:/dashboard");
+
+        model.addAttribute("titlePage", "Developers");
+        model.addAttribute("user", userDto);
+        model.addAttribute("developers", developers);
+        model.addAttribute("developersActivityCount", activityCount);
+        model.addAttribute("developersActiveState", isActiveDevelopers);
+
+        return new ModelAndView("profiles_page");
     }
 
     private void roleDefinitionDashboard(final UserDto user, ModelMap modelMap) {

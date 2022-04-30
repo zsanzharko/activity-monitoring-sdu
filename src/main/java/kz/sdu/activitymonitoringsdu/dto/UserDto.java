@@ -18,6 +18,7 @@ public class UserDto implements Serializable {
     private String fullName;
     private Gender gender;
     private String email;
+    private String phoneNumber;
     private Role role;
 
     public boolean getReportPermission() {
