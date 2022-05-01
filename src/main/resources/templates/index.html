@@ -17,8 +17,8 @@
     <link rel="stylesheet" th:href="@{new_styles/left_bar_style.css}" href="../static/new_styles/left_bar_style.css">
     <link rel="stylesheet" th:href="@{new_styles/natification_style.css}"
         href="../static/new_styles/natification_style.css">
-    <!-- <link rel="stylesheet" th:href="@{/new_styles/new_project_details2.css}"
-        href="../static/new_styles/new_project_details2.css"> -->
+    <link rel="stylesheet" th:href="@{/new_styles/new_project_details2.css}"
+        href="../static/new_styles/new_project_details2.css">
     <link rel="stylesheet" th:href="@{/new_styles/main.css}" href="../static/new_styles/main.css">
 
     <title th:text="${titlePage}"></title>
@@ -262,7 +262,8 @@
             <!-- -------------------------------------- -->
 
             <!-- New  projects -------------------------- -->
-            <div th:if="${accessRole}" class="modal fade create_project_modal" id="create_project_modal" tabindex="-1" aria-hidden="true">
+            <div th:if="${accessRole}" class="modal fade create_project_modal" id="create_project_modal" tabindex="-1"
+                aria-hidden="true">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <form id="new-project">
@@ -272,7 +273,7 @@
                                     aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <p class="pr_name">Project Id:</p>
+                                <p class="pr_id">Project Id:</p>
                                 <label for="project-id" class="project_name_box">
                                     <input type="text" class="form-control input" name="projectId" id="project-id"
                                         placeholder="Like '4635LSFB'" aria-describedby="basic-addon1" required>
@@ -305,8 +306,8 @@
 
                                 <p class="pr_number">Expected end date:</p>
                                 <label for="expected-date" class="project_id_box">
-                                    <input type="date" class="form-control input" pattern="yyyy-MM-dd"
-                                        name="endDate" id="expected-date" required>
+                                    <input type="date" class="form-control input" pattern="yyyy-MM-dd" name="endDate"
+                                        id="expected-date" required>
                                 </label>
                             </div>
                             <div class="modal-footer">
@@ -386,7 +387,8 @@
 
                         <div class="box_head">
                             <div class="box_head_left">
-                                <p class="projects_id" style="font-size: 20px;" th:text="${project.getProjectId()}">9511DXP
+                                <p class="projects_id" style="font-size: 20px;" th:text="${project.getProjectId()}">
+                                    9511DXP
                                 </p>
                                 <p class="project_version" style="font-size: 13px;">version <span
                                         th:text="${project.getProjectVersion()}" style="font-size: 13px;">A</span></p>
@@ -407,9 +409,11 @@
                                         <!--                                    th:href="@{|project/delete-project/${project.getProjectId()}|}"-->
                                         <li class="item_drop">
                                             <a class="dropdown-item" th:id="'delete-' + ${project.getProjectId()}"
-                                                                 th:href="@{|project/delete/${project.getProjectId()}|}">Delete</a>
+                                                th:href="@{|project/delete/${project.getProjectId()}|}">Delete</a>
                                         </li>
-                                        <li class="item_drop"><button type="button" data-bs-toggle="modal" data-bs-target=".edit_project_model" class="btn dropdown-item edit_project">Edit</button></li>
+                                        <li class="item_drop"><button type="button" data-bs-toggle="modal"
+                                                data-bs-target=".edit_project_model"
+                                                class="btn dropdown-item edit_project">Edit</button></li>
                                     </ul>
 
                                     <div th:id="${project.getProjectId()} + '-delete'" class="modal">
@@ -503,6 +507,54 @@
 
                 </div>
             </div>
+            <div>
+                <div class="spent_title">
+                    <h5>Spent time</h5>
+                    <hr>
+                </div>
+                <div class="add_spent_container">
+
+                    <div class="spent_buffer">
+                        <div class="input_add_box">
+                            <div class="name_box">
+                                <p class="activity_name">User Dashboard Page Front</p>
+                            </div>
+                            <div class="input_box">
+                                <p>Enter spent time:</p>
+                                <input type="text" class="form-control spent_input">
+                                <button type="button" class="btn btn-secondary">Submit</button>
+
+                            </div>
+                        </div>
+
+                        <div class="input_add_box">
+                            <div class="name_box">
+                                <p class="activity_name">User Dashboard Page Front</p>
+                            </div>
+                            <div class="input_box">
+                                <p>Enter spent time:</p>
+                                <input type="text" class="form-control spent_input">
+                                <button type="button" class="btn btn-secondary">Submit</button>
+
+                            </div>
+                        </div>
+                        <div class="input_add_box">
+                            <div class="name_box">
+                                <p class="activity_name">User Dashboard Page Front</p>
+                            </div>
+                            <div class="input_box">
+                                <p>Enter spent time:</p>
+                                <input type="text" class="form-control spent_input">
+                                <button type="button" class="btn btn-secondary">Submit</button>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
         </div>
 
 

@@ -46,3 +46,7 @@ input{
   margin-bottom: 15px;
 }
 
+
+.pr_version, .pr_name,.pr_number{
+  margin-top: 10px;
+}

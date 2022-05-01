@@ -16,8 +16,12 @@ a {
 
 .space_for_project {
     margin: auto;
-    /* background-color:aqua; */
     height: 300px;
+    overflow-y: scroll;
+}
+.space_for_project_details{
+    margin: auto;
+    height: 500px;
     overflow-y: scroll;
 }
 
@@ -321,11 +325,11 @@ span{
 .add_spent_container{
     margin-top: 20px;
     /* background-color:darkseagreen; */
-    height: 160px;
+    height: 200px;
     
 }
 .spent_buffer{
-    height: 140px;
+    height: 190px;
     overflow-y: scroll;
     display: flex;
     flex-direction: column;
@@ -369,8 +373,9 @@ p,input{
     text-align: center;
 }
 .spent_input{
-    /* width:150px; */
+    width:150px;
     margin-left: 10px;
+    margin-right: 10px;
 }
 
 .spent_title{
