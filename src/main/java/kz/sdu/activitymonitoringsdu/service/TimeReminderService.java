@@ -7,13 +7,15 @@ import java.util.List;
 
 public interface TimeReminderService {
 
-    List<DevTimeReminderDto> findTimeRemindersByActivityId(Integer activityId);
+    List<DevTimeReminderDto> findTimeRemindersByActivityId(Long activityId);
 
     List<DevTimeReminderDto> findTimeRemindersByDateRemind(Date dateRemind);
+
+    DevTimeReminderDto findTimeReminderByActivityIdAndDate(Long activityId, Date dateRemind);
 
     List<DevTimeReminderDto> findTimeRemindersByUserId(Long userId);
 
     void removeAllByUserId(Long userId);
 
-    void removeDevTimeReminderByIdAndActivityIdAndDateRemind(Long id, Integer activityId, Date dateRemind);
+    void removeDevTimeReminderByIdAndActivityIdAndDateRemind(Long id, Long activityId, Date dateRemind);
 }

@@ -10,13 +10,15 @@ import java.util.List;
 @Repository
 public interface DevTimeReminderRepository extends JpaRepository<DevTimeReminder, Long> {
 
-    List<DevTimeReminder> findDevTimeRemindersByActivityId(Integer activityId);
+    List<DevTimeReminder> findDevTimeRemindersByActivityId(Long activityId);
 
     List<DevTimeReminder> findDevTimeRemindersByDateRemind(Date dateRemind);
+
+    DevTimeReminder findDevTimeReminderByActivityIdAndDateRemind(Long activityId, Date dateRemind);
 
     List<DevTimeReminder> findDevTimeRemindersById(Long id);
 
     void removeAllById(Long id);
 
-    void removeDevTimeReminderByIdAndActivityIdAndDateRemind(Long id, Integer activityId, Date dateRemind);
+    void removeDevTimeReminderByIdAndActivityIdAndDateRemind(Long id, Long activityId, Date dateRemind);
 }

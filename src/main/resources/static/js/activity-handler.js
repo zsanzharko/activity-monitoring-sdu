@@ -10,6 +10,7 @@ function getActivityDayInformation(projectId) {
     })
         .then(result => result.json())
         .then((data) => {
+            let developers = []
             console.log(data)
             const activities = data["activities"];
             const assigned = data["devConnectionActivities"];
@@ -18,13 +19,16 @@ function getActivityDayInformation(projectId) {
             let display_assign_box = ``;
             let display_activity_link_boxs = ``;
 
+
+            let cortege_display_assign_box = ``
+
             for (const [key, value] of Object.entries(assigned)) {
                 let assign_name = null;
                 if (value != null) {
                     assign_name = value["firstName"]
                 }
                 const assignIsNull = assign_name != null
-                display_assign_box += `
+                cortege_display_assign_box += `
                 <div class="activity_placeholder">
                                 <div class="activity_box active_box_centered">
                                     <div class="assign_box" style="background-color:  ${assignIsNull ? `white` : "#D68300"}; border-color: ${assignIsNull ? "#D68300" : "red"}; color: ${assignIsNull ? "black" : "white"};">
@@ -34,6 +38,47 @@ function getActivityDayInformation(projectId) {
                             </div>
                 `
             }
+
+            fetch('/manager/get-developers', {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(result => result.json())
+                .then((developers) => {
+                    console.log(developers)
+                    for (let j = 0; j < developers.length; j++) {
+                        display_activity_link_boxs += `
+                                <div class="person_box">
+                                            <h6 class="person_name">Serikkhan Ayan
+                                            </h6>
+
+                                            <div class="box_proger">
+                                                <div class="zogolovok_box">
+                                                    <p class="zogolovok">Contacts</p>
+                                                </div>
+                                                <p class="person_PH_number info">Phone number: <span>${developers[i]['phoneNumber']}</span></p>
+                                                <p class="person_email info">Email: <span>${developers[i]['email']}</span></p>
+                                            </div>
+                                            <div class="box_proger">
+                                                <div class="zogolovok_box">
+                                                    <p class="zogolovok">Projects</p>
+                                                </div>
+                                                <p class="person_pr_num info">Active projects: <span>4</span>
+                                                </p>
+                                            </div>
+                                            <div class="box_proger">
+                                                <div class="zogolovok_box">
+                                                    <p class="zogolovok">Choose</p>
+                                                </div>
+                                                <a type="button" href="/project/activity/assign/${activities[i].id}/${projectId}}" data-bs-toggle="modal"
+                                                    class="btn choose">select</a>
+                                            </div>
+                                        </div>
+                    `
+                    }
+                })
+                .catch(_ => console.error(_));
 
             for (let i = 0; i < activities.length; i++) {
                 display_activity_boxs += `
@@ -67,38 +112,16 @@ function getActivityDayInformation(projectId) {
                         <div class="modal-body">
                             <div class="header">
                                 <div class="title_head">
-                                    <p class="title_activity_modal title">Title:<span>Create database</span></p>
-                                    <p class="title_activity_modal title">Activity ID:<span>EXP3101</span></p>
-                                    <p class="start_day_activity_modal title">Stat day:<span>31.01.2002</span></p>
-                                    <p class="start_day_activity_modal title">End day:<span>31.05.2002</span></p>
+                                    <p class="title_activity_modal title">Title:<span>${activities[i].title}</span></p>
+                                    <!--<p class="title_activity_modal title">Activity ID:<span>${activities[i]}</span></p> -->
+                                    <p class="start_day_activity_modal title">Stat day:<span>${activities[i].startDate.split('T')[0]}</span></p>
+                                    <p class="start_day_activity_modal title">End day:<span>${activities[i].endDate.split('T')[0]}</span></p>
                                 </div>
 
                                 <div class="head_description">
                                     <h5>Description</h5>
                                     <hr>
-                                    <div class="description_activity">
-                                        bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla
-                                        bla bla bla bla bla
-                                        bla
-                                        bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla
-                                        bla bla bla bla bla
-                                        bla
-                                        bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla
-                                        bla bla bla bla bla
-                                        bla
-                                        bla bla bla bla bla bla bla bla
-                                        bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla
-                                        bla bla bla bla bla
-                                        bla
-                                        bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla
-                                        bla bla bla bla bla
-                                        bla
-                                        bla bla bla bla bla bla bla bla
-                                        bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla
-                                        bla bla bla bla bla
-                                        bla
-                                        bla bla bla bla bla bla bla bla
-                                    </div>
+                                    <div class="description_activity">${activities[i].description}</div>
                                 </div>
                             </div>
 
@@ -109,61 +132,10 @@ function getActivityDayInformation(projectId) {
                                 </div>
 
                                 <div class="main_box">
-                                    <div class="container">
-                                        <div class="person_box">
-                                            <h6 class="person_name">Serikkhan Ayan
-                                            </h6>
+                                    <div class="container">`
 
-                                            <div class="box_proger">
-                                                <div class="zogolovok_box">
-                                                    <p class="zogolovok">Contacts</p>
-                                                </div>
-                                                <p class="person_PH_number info">Phone number: <span>+777546684228</span></p>
-                                                <p class="person_email info">Email: <span>ayan1bos@gmail.com</span></p>
-                                            </div>
-                                            <div class="box_proger">
-                                                <div class="zogolovok_box">
-                                                    <p class="zogolovok">Projects</p>
-                                                </div>
-                                                <p class="person_pr_num info">Active projects: <span>4</span>
-                                                </p>
-                                            </div>
-                                            <div class="box_proger">
-                                                <div class="zogolovok_box">
-                                                    <p class="zogolovok">Choose</p>
-                                                </div>
-                                                <button type="button" data-bs-toggle="modal"
-                                                    class="btn choose">select</button>
-                                            </div>
-                                        </div>
-
-                                        <div class="person_box">
-                                            <h6 class="person_name">Serikkhan Ayan
-                                            </h6>
-
-                                            <div class="box_proger">
-                                                <div class="zogolovok_box">
-                                                    <p class="zogolovok">Contacts</p>
-                                                </div>
-                                                <p class="person_PH_number info">Phone number: <span>+777546684228</span></p>
-                                                <p class="person_email info">Email: <span>ayan1bos@gmail.com</span></p>
-                                            </div>
-                                            <div class="box_proger">
-                                                <div class="zogolovok_box">
-                                                    <p class="zogolovok">Projects</p>
-                                                </div>
-                                                <p class="person_pr_num info">Active projects: <span>4</span>
-                                                </p>
-                                            </div>
-                                            <div class="box_proger">
-                                                <div class="zogolovok_box">
-                                                    <p class="zogolovok">Choose</p>
-                                                </div>
-                                                <button type="button" data-bs-toggle="modal"
-                                                    class="btn choose">select</button>
-                                            </div>
-                                        </div>
-
+                display_activity_link_boxs += cortege_display_assign_box
+                display_activity_link_boxs += `
                                     </div>
                                 </div>
                             </div>
@@ -299,21 +271,11 @@ async function newActivity(projectId) {
     const form = document.getElementById('new-activity')
     const formData = new FormData(form)
 
-    const object = {};
-    formData.forEach(function (value, key) {
-        object[key] = value;
-    });
+        const object = {};
+        formData.forEach(function (value, key) {
+            object[key] = value;
+        });
 
-    console.log(object)
-    // const response = await fetch(url, {
-    //     method: 'POST', // *GET, POST, PUT, DELETE, etc.
-    //     headers: {
-    //         'Accept': 'application/json',
-    //         'Content-Type': 'application/json'
-    //     },
-    //     body: JSON.stringify(data) // body data type must match "Content-Type" header
-    // });
-    // return response.json(); // parses JSON response into native JavaScript objects
 }
 
 

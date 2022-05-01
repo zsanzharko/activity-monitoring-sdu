@@ -12,7 +12,7 @@ public interface ReportRepository extends JpaRepository<Report, Long> {
 
     List<Report> findAllByActivityId(Long activityId);
 
-    List<Report> findAllByActivityIdAndReportDate(Long activityId, Date reportDate);
+    Report findByActivityIdAndReportDate(Long activityId, Date reportDate);
 
     List<Report> getReportsByActivityId(Long activityId);
 

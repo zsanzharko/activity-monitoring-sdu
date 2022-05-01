@@ -13,8 +13,8 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>activity-monitoring-sdu</name>
     <description>activity-monitoring-sdu</description>
+    <packaging>jar</packaging>
     <properties>
-<!--        <maven.compiler.source>17</maven.compiler.source>-->
         <maven.compiler.realese>17</maven.compiler.realese>
         <java.version>17</java.version>
     </properties>
@@ -110,18 +110,19 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
     </dependencies>
 
     <build>
         <plugins>
             <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <configuration>
-                <source>17</source>
-                <target>17</target>
-            </configuration>
-        </plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>17</source>
+                    <target>17</target>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
@@ -135,6 +136,7 @@
                     </excludes>
                 </configuration>
             </plugin>
+
         </plugins>
     </build>
 

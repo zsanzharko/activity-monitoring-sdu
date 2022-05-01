@@ -64,7 +64,8 @@ public class RestProjectController {
     @PostMapping("/manager/create/{projectId}")
     public ResponseEntity<ActivityCreateForm> saveActivity(@PathVariable String projectId, @RequestBody final ActivityCreateForm form) {
         Activity activity = projectDao.save(ActivityHandlerUtils.convertToEntity(form.getDtoFromForm()));
-        consistDao.save(new Consist(activity.getId(), projectDao.findByProjectId(projectId).getProjectId()));
+        log.info(form.toString());
+//        consistDao.save(new Consist(activity.getId(), projectDao.findByProjectId(projectId).getProjectId()));
         return ResponseEntity.ok(form);
     }
 
@@ -120,22 +121,6 @@ public class RestProjectController {
         List<UserDto> users = userDao.findAllByEmailOrFullName(text, text, text);
 
         return ResponseEntity.ok(users);
-    }
-
-    //todo check method
-    @PostMapping("/push/{projectId}/{activityId}")
-    public ResponseEntity<Report> pushSpendTime(@PathVariable Long activityId,
-                                      @PathVariable String projectId,
-                                      @RequestBody SpendTimeForm form) {
-        Report report = Report.builder()
-                .activityId(activityId)
-                .reportDate(form.getDateStart())
-                .time(form.getMinutes())
-                .build();
-
-        reportDao.save(report);
-
-        return ResponseEntity.ok(report);
     }
 
 

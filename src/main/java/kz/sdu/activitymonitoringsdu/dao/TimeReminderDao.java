@@ -2,6 +2,7 @@ package kz.sdu.activitymonitoringsdu.dao;
 
 import kz.sdu.activitymonitoringsdu.dto.DevTimeReminderDto;
 import kz.sdu.activitymonitoringsdu.entity.Activity;
+import kz.sdu.activitymonitoringsdu.entity.DevTimeReminder;
 import kz.sdu.activitymonitoringsdu.repository.ActivityRepository;
 import kz.sdu.activitymonitoringsdu.repository.DevTimeReminderRepository;
 import kz.sdu.activitymonitoringsdu.service.TimeReminderService;
@@ -27,7 +28,7 @@ public class TimeReminderDao implements TimeReminderService {
     }
 
     @Override
-    public List<DevTimeReminderDto> findTimeRemindersByActivityId(Integer activityId) {
+    public List<DevTimeReminderDto> findTimeRemindersByActivityId(Long activityId) {
         return timeReminderRepository.findDevTimeRemindersByActivityId(activityId)
                 .stream()
                 .map(DevTimeReminderDto::convertToDto)
@@ -40,6 +41,13 @@ public class TimeReminderDao implements TimeReminderService {
                 .stream()
                 .map(DevTimeReminderDto::convertToDto)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public DevTimeReminderDto findTimeReminderByActivityIdAndDate(Long activityId, Date dateRemind) {
+        DevTimeReminder reminder = timeReminderRepository.findDevTimeReminderByActivityIdAndDateRemind(activityId, dateRemind);
+        if (reminder == null) return null;
+        return DevTimeReminderDto.convertToDto(reminder);
     }
 
     @Override
@@ -56,17 +64,18 @@ public class TimeReminderDao implements TimeReminderService {
     }
 
     @Override
-    public void removeDevTimeReminderByIdAndActivityIdAndDateRemind(Long id, Integer activityId, Date dateRemind) {
+    public void removeDevTimeReminderByIdAndActivityIdAndDateRemind(Long id, Long activityId, Date dateRemind) {
         timeReminderRepository.removeDevTimeReminderByIdAndActivityIdAndDateRemind(id, activityId, dateRemind);
     }
 
     public Map<Long, String> getTitleFromActivity(List<DevTimeReminderDto> reminderDtoList) {
-        assert reminderDtoList == null;
+        assert reminderDtoList != null;
         Map<Long, String> titles = new HashMap<>(reminderDtoList.size());
-        for (int i = 0; i < reminderDtoList.size(); i++) {
+        for (DevTimeReminderDto devTimeReminderDto : reminderDtoList) {
             Activity activity = activityRepository.findById(
-                    reminderDtoList.get(i).getActivityId()).orElse(null);
-            titles.put(reminderDtoList.get(i).getActivityId(), activity.getTitle());
+                    devTimeReminderDto.getActivityId()).orElse(null);
+            assert activity != null;
+            titles.put(devTimeReminderDto.getActivityId(), activity.getTitle());
         }
         return titles;
     }

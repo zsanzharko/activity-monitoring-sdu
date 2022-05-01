@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -42,6 +43,13 @@ public class ReportDao implements ReportService {
     @Override
     public List<Report> findAllByActivityId(Long activityId) {
         return reportRepository.findAllByActivityId(activityId);
+    }
+
+    @Override
+    public Report findByActivityIdAndReportDate(Long activityId, Date reportDate) {
+        Report report = reportRepository.findByActivityIdAndReportDate(activityId, reportDate);
+        reportRepository.flush();
+        return report;
     }
 
     @Override

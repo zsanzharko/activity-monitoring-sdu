@@ -2,40 +2,41 @@ package kz.sdu.activitymonitoringsdu.controller;
 
 import kz.sdu.activitymonitoringsdu.dao.*;
 import kz.sdu.activitymonitoringsdu.dto.ActivityDto;
-import kz.sdu.activitymonitoringsdu.dto.ProjectDto;
 import kz.sdu.activitymonitoringsdu.dto.UserDto;
-import kz.sdu.activitymonitoringsdu.entity.Activity;
-import kz.sdu.activitymonitoringsdu.entity.Consist;
 import kz.sdu.activitymonitoringsdu.entity.DevConnectionActivity;
 import kz.sdu.activitymonitoringsdu.entity.Report;
 import kz.sdu.activitymonitoringsdu.enums.Role;
-import kz.sdu.activitymonitoringsdu.handlers.ActivityHandlerUtils;
+import kz.sdu.activitymonitoringsdu.handlers.DateHandler;
 import kz.sdu.activitymonitoringsdu.handlers.UserHandlerUtils;
-import kz.sdu.activitymonitoringsdu.handlers.forms.ActivityCreateForm;
 import kz.sdu.activitymonitoringsdu.handlers.forms.SpendTimeForm;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Date;
 import java.util.List;
 
 @Controller
+@Slf4j
 @RequestMapping(path = "/project/activity")
 public class ActivityController {
 
     private final ProjectDao projectDao;
     private final DevConnectionActivityDao assignedUserDao;
     private final UserDao userDao;
+    private final TimeReminderDao timeReminderDao;
+    private final ReportDao reportDao;
 
     @Autowired
-    public ActivityController(ProjectDao projectDao, DevConnectionActivityDao assignedUserDao, UserDao userDao) {
+    public ActivityController(ProjectDao projectDao, DevConnectionActivityDao assignedUserDao, UserDao userDao, TimeReminderDao timeReminderDao, ReportDao reportDao) {
         this.projectDao = projectDao;
         this.assignedUserDao = assignedUserDao;
         this.userDao = userDao;
+        this.timeReminderDao = timeReminderDao;
+        this.reportDao = reportDao;
     }
 
     @GetMapping("/{projectId}/{id}")
@@ -70,14 +71,45 @@ public class ActivityController {
         return new ModelAndView("activity_details", modelMap);
     }
 
-    @GetMapping("/assign/{id}/{activityId}/{projectId}")
-    public String assignUserToActivity(@PathVariable final Long id,
-                                       @PathVariable final Long activityId,
+    @GetMapping("/assign/{activityId}/{projectId}")
+    public String assignUserToActivity(@PathVariable final Long activityId,
                                        @PathVariable final String projectId) {
         UserDto userDto = UserHandlerUtils.getUserFromAuth(userDao);
         if (userDto.getRole() == Role.EMPLOYEE) return "redirect:/dashboard";
 
-        assignedUserDao.save(new DevConnectionActivity(activityId, id, ""));
+        assignedUserDao.save(new DevConnectionActivity(activityId, userDto.getId(), ""));
         return String.format("redirect:/project/activity/%s/%s", projectId, activityId);
+    }
+
+    @PostMapping("/{activityId}/push/{spendDateTime}")
+    public ModelAndView pushTime(@PathVariable Long activityId,
+                                 @PathVariable Long spendDateTime,
+                                 @ModelAttribute final SpendTimeForm form) {
+        var spendDate = new Date(spendDateTime - 10000L);
+        spendDate.setSeconds(0);
+        spendDate.setMinutes(0);
+        spendDate.setHours(0);
+        UserDto userDto = UserHandlerUtils.getUserFromAuth(userDao);
+        log.info(String.format("activityId %s spendDate %s minutes %d",
+                activityId, spendDate, form.getMinutes()
+        ));
+        Report report = new Report();
+
+            report.setActivityId(activityId);
+            report.setTime(form.getMinutes());
+            report.setReportDate(spendDate);
+
+            reportDao.save(report);
+
+            log.info("Report saved");
+        {
+            var reminder = timeReminderDao.findTimeReminderByActivityIdAndDate(activityId, spendDate);
+            if (reminder != null) {
+                timeReminderDao.removeDevTimeReminderByIdAndActivityIdAndDateRemind(userDto.getId(), activityId, spendDate);
+                log.info("Notification removed");
+            }
+        }
+
+        return new ModelAndView("redirect:/dashboard");
     }
 }
