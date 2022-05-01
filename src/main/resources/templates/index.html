@@ -262,7 +262,7 @@
             <!-- -------------------------------------- -->
 
             <!-- New  projects -------------------------- -->
-            <div th:if="${accessRole}" class="modal fade create_project_modal" tabindex="-1" aria-hidden="true">
+            <div th:if="${accessRole}" class="modal fade create_project_modal" id="create_project_modal" tabindex="-1" aria-hidden="true">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <form id="new-project">
@@ -386,10 +386,10 @@
 
                         <div class="box_head">
                             <div class="box_head_left">
-                                <p class="projects_id" style="font-size: 20px;" th:text="${project.projectId}">9511DXP
+                                <p class="projects_id" style="font-size: 20px;" th:text="${project.getProjectId()}">9511DXP
                                 </p>
                                 <p class="project_version" style="font-size: 13px;">version <span
-                                        th:text="${project.projectVersion}" style="font-size: 13px;">A</span></p>
+                                        th:text="${project.getProjectVersion()}" style="font-size: 13px;">A</span></p>
                             </div>
                             <div class="box_head_right">
                                 <p class="project_name" style="font-size: 20px;" th:text="${project.getTitle()}">
@@ -411,13 +411,6 @@
                                         </li>
                                         <li class="item_drop"><button type="button" data-bs-toggle="modal" data-bs-target=".edit_project_model" class="btn dropdown-item edit_project">Edit</button></li>
                                     </ul>
-
-                                    <!-- <button type="button" class="btn project_creation" data-bs-toggle="modal"
-                                        th:if="${accessRole}" data-bs-target=".create_project_modal">
-                                        New project
-                                    </button> -->
-
-                                    
 
                                     <div th:id="${project.getProjectId()} + '-delete'" class="modal">
 

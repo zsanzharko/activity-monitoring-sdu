@@ -12,10 +12,8 @@ window.addEventListener("load", function () {
                 $(function () {
                     $('#create_project_modal').modal('toggle');
                 });
-                console.log(data);// JSON data parsed by `data.json()` call
-
                 let display =
-                        `<div class="box">
+                    `<div class="box">
                         <div class="box_head">
                             <div class="box_head_left">
                                 <p class="projects_id" style="font-size: 20px;">${data.projectId}</p>
@@ -30,19 +28,12 @@ window.addEventListener("load", function () {
                                     </button>
                                     <ul class="dropdown-menu dropdown-menu-dark">
                                         <li class="item_drop">
-                                            <a class="dropdown-item" id="delete-${projectId}" href="project/delete/${projectId}">Delete</a>
+                                            <a class="dropdown-item" id="delete-${data.projectId}" href="project/delete/${data.projectId}">Delete</a>
                                         </li>
                                         <li class="item_drop"><button type="button" data-bs-toggle="modal" data-bs-target=".edit_project_model" class="btn dropdown-item edit_project">Edit</button></li>
                                     </ul>
 
-                                    <!-- <button type="button" class="btn project_creation" data-bs-toggle="modal"
-                                        th:if="${accessRole}" data-bs-target=".create_project_modal">
-                                        New project
-                                    </button> -->
-
-                                    
-
-                                    <div id="${projectId}-delete" class="modal">
+                                    <div id="${data.projectId}-delete" class="modal">
 
                                         <!-- Modal content -->
                                         <div class="modal-content">
@@ -69,7 +60,7 @@ window.addEventListener("load", function () {
                         </div>
                     </div>`
                 // document.getElementsByClassName("box").insertAdjacentHTML("afterend", display)
-                $("div#project-dashboard-placeholder").append(display);
+                $("#project-dashboard-placeholder").append(display);
             });
     }
 
