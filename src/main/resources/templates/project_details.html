@@ -233,8 +233,7 @@
 
                     </ul>
 
-                    <div>
-
+                    <div class="monitoring_space">
                         <!-- Box  area -------------------------------------- -->
                         <div class="space_for_project pad-h-2">
                             <div class="buffer_container">
@@ -355,134 +354,178 @@
 
                             </div>
 
-
                         </div>
 
                     </div>
+
+
+
                 </div>
             </div>
-
-
-            <!-- New  Activity -------------------------- -->
-
-            <div class="modal fade create_activity_modal" tabindex="-1" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <form id="new-activity">
-                            <div class="modal-header">
-                                <h5 class="modal-title">New activity</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <p class="pr_name">Title:</p>
-                                <label for="title" class="project_name_box">
-                                    <input type="text" class="form-control input" name="title" id="title"
-                                        aria-describedby="basic-addon1" required>
-                                </label>
-
-                                <p class="pr_desc">Description:</p>
-                                <label for="description" class="project_desc_box">
-                                    <textarea class="form-control input" name="description" aria-label="With textarea"
-                                        id="description" required></textarea>
-                                </label>
-
-                                <p>Status:</p>
-                                <label for="status"><select id="status" name="status">
-                                        <option value="active">Active</option>
-                                        <option value="disabled">Disabled</option>
-                                        <option value="finished">Finished</option>
-                                    </select>
-                                </label>
-
-                                <p class="pr_number">Date to start:</p>
-                                <label for="startDate" class="project_id_box">
-                                    <input type="date" class="form-control input" pattern="yyyy-MM-dd" name="startDate"
-                                        id="startDate" required>
-                                </label>
-
-                                <p class="pr_number">End date:</p>
-                                <label for="EndDate" class="project_id_box">
-                                    <input type="date" class="form-control input" pattern="yyyy-MM-dd" name="EndDate"
-                                        id="EndDate" required>
-                                </label>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
-                                </button>
-                                <button class="btn btn-primary" type="submit"
-                                    th:attr="onclick=|newActivity('${projectId}')|">Create
-                                </button>
-                            </div>
-                        </form>
+            <div class="spent_title">
+                <h5>Spent time</h5>
+                <hr>
+            </div>
+            <div class="add_spent_container">
+                
+                <div class="spent_buffer">
+                    <div class="input_add_box">
+                        <div class="name_box">
+                            <p class="activity_name">User Dashboard Page Front</p>
+                        </div>
+                        <div class="input_box">
+                            <p>Enter spent time:</p>
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+    
+                    <div class="input_add_box">
+                        <div class="name_box">
+                            <p class="activity_name">User Dashboard Page Front</p>
+                        </div>
+                        <div class="input_box">
+                            <p>Enter spent time:</p>
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="input_add_box">
+                        <div class="name_box">
+                            <p class="activity_name">User Dashboard Page Front</p>
+                        </div>
+                        <div class="input_box">
+                            <p>Enter spent time:</p>
+                            <input type="text" class="form-control">
+                        </div>
                     </div>
                 </div>
+
+                
             </div>
 
-            <!-- --------------------------------------- -->
 
-            <!-- Edit projects -------------------------- -->
-            <div class="modal fade edit_project_model" tabindex="-1" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <form id="new-project">
-                            <div class="modal-header">
-                                <h5 class="modal-title">New Project</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
+                    <!-- New  Activity -------------------------- -->
+
+                    <div class="modal fade create_activity_modal" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <form id="new-activity">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">New activity</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p class="pr_name">Title:</p>
+                                        <label for="title" class="project_name_box">
+                                            <input type="text" class="form-control input" name="title" id="title"
+                                                aria-describedby="basic-addon1" required>
+                                        </label>
+
+                                        <p class="pr_desc">Description:</p>
+                                        <label for="description" class="project_desc_box">
+                                            <textarea class="form-control input" name="description"
+                                                aria-label="With textarea" id="description" required></textarea>
+                                        </label>
+
+                                        <p>Status:</p>
+                                        <label for="status"><select id="status" name="status">
+                                                <option value="active">Active</option>
+                                                <option value="disabled">Disabled</option>
+                                                <option value="finished">Finished</option>
+                                            </select>
+                                        </label>
+
+                                        <p class="pr_number">Date to start:</p>
+                                        <label for="startDate" class="project_id_box">
+                                            <input type="date" class="form-control input" pattern="yyyy-MM-dd"
+                                                name="startDate" id="startDate" required>
+                                        </label>
+
+                                        <p class="pr_number">End date:</p>
+                                        <label for="EndDate" class="project_id_box">
+                                            <input type="date" class="form-control input" pattern="yyyy-MM-dd"
+                                                name="EndDate" id="EndDate" required>
+                                        </label>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
+                                        </button>
+                                        <button class="btn btn-primary" type="submit"
+                                            th:attr="onclick=|newActivity('${projectId}')|">Create
+                                        </button>
+                                    </div>
+                                </form>
                             </div>
-                            <div class="modal-body">
-                                <p class="pr_name">Project Id:</p>
-                                <label for="project-id" class="project_name_box">
-                                    <input type="text" class="form-control input" name="projectId" id="project-id"
-                                        placeholder="Like '4635LSFB'" aria-describedby="basic-addon1" required>
-                                </label>
-
-                                <p class="pr_version">Version:</p>
-                                <label for="projectVersion" class="version_box">
-                                    <input type="text" class="form-control input" id="projectVersion"
-                                        name="projectVersion" placeholder="Like 'B'" required>
-                                </label>
-
-                                <p class="pr_name">Project name:</p>
-                                <label for="title" class="project_name_box">
-                                    <input type="text" class="form-control input" name="title" id="title"
-                                        placeholder="Like 'Android App'" aria-describedby="basic-addon1" required>
-                                </label>
-
-                                <p class="pr_number">Description:</p>
-                                <label for="description" class="project_desc_box">
-
-                                    <textarea class="form-control input" name="description" aria-label="With textarea"
-                                        id="description" required></textarea>
-                                </label>
-
-                                <p class="pr_number">Date to start:</p>
-                                <label for="startDate" class="project_id_box">
-                                    <input type="date" class="form-control input" pattern="yyyy-MM-dd" name="startDate"
-                                        id="startDate" required>
-                                </label>
-
-                                <p class="pr_number">Expected date:</p>
-                                <label for="Expected_Date" class="project_id_box">
-                                    <input type="date" class="form-control input" pattern="yyyy-MM-dd"
-                                        name="expectedDate" id="Expected_Date" required>
-                                </label>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <input class="btn btn-primary" type="submit" onclick="" value="Create" />
-                            </div>
-                        </form>
+                        </div>
                     </div>
+
+                    <!-- --------------------------------------- -->
+
+                    <!-- Edit projects -------------------------- -->
+                    <div class="modal fade edit_project_model" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <form id="new-project">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">New Project</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p class="pr_name">Project Id:</p>
+                                        <label for="project-id" class="project_name_box">
+                                            <input type="text" class="form-control input" name="projectId"
+                                                id="project-id" placeholder="Like '4635LSFB'"
+                                                aria-describedby="basic-addon1" required>
+                                        </label>
+
+                                        <p class="pr_version">Version:</p>
+                                        <label for="projectVersion" class="version_box">
+                                            <input type="text" class="form-control input" id="projectVersion"
+                                                name="projectVersion" placeholder="Like 'B'" required>
+                                        </label>
+
+                                        <p class="pr_name">Project name:</p>
+                                        <label for="title" class="project_name_box">
+                                            <input type="text" class="form-control input" name="title" id="title"
+                                                placeholder="Like 'Android App'" aria-describedby="basic-addon1"
+                                                required>
+                                        </label>
+
+                                        <p class="pr_number">Description:</p>
+                                        <label for="description" class="project_desc_box">
+
+                                            <textarea class="form-control input" name="description"
+                                                aria-label="With textarea" id="description" required></textarea>
+                                        </label>
+
+                                        <p class="pr_number">Date to start:</p>
+                                        <label for="startDate" class="project_id_box">
+                                            <input type="date" class="form-control input" pattern="yyyy-MM-dd"
+                                                name="startDate" id="startDate" required>
+                                        </label>
+
+                                        <p class="pr_number">Expected date:</p>
+                                        <label for="Expected_Date" class="project_id_box">
+                                            <input type="date" class="form-control input" pattern="yyyy-MM-dd"
+                                                name="expectedDate" id="Expected_Date" required>
+                                        </label>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+                                        <input class="btn btn-primary" type="submit" onclick="" value="Create" />
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- --------------------------------------- -->
+
+
                 </div>
             </div>
-
-            <!-- --------------------------------------- -->
-
-
-        </div>
-        </div>
 
 
     </main>

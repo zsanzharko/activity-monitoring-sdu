@@ -16,6 +16,9 @@ a {
 
 .space_for_project {
     margin: auto;
+    /* background-color:aqua; */
+    height: 300px;
+    overflow-y: scroll;
 }
 
 .project_name_box {
@@ -221,6 +224,7 @@ a {
 
     justify-content: flex-start;
     /* background-color:#4CAF50; */
+    /* height: 400px; */
 }
 
 .tabs ul li a {
@@ -309,8 +313,66 @@ span{
 }
 
 
+.monitoring_space{
+    /* background-color:blueviolet; */
+}
 
+.add_spent_container{
+    margin-top: 20px;
+    /* background-color:darkseagreen; */
+    height: 160px;
+    
+}
+.spent_buffer{
+    height: 140px;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.input_add_box{
+    margin-top: 15px;
+    border-radius:15px;
+    /* background-color:coral; */
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    width: 900px;
+    min-height: 80px;
+    display: flex;
+    justify-content: space-between;
+}
 
+.name_box{
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    border-right: 2px solid #EEEEEE;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
 
+.activity_name{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+p,input{
+    margin: 0px;
+    padding: 0px;
+}
+.input_box{
+    /* height: 15px; */
+    width: 50%;
+    /* background-color: cyan; */
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    text-align: center;
+}
+.form-control{
+    width:150px;
+    margin-left: 10px;
+}
 
-
+.spent_title{
+    margin-top: 15px;
+    margin-left: 10px;
+}
