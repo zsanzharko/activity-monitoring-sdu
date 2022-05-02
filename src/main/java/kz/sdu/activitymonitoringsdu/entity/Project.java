@@ -14,16 +14,12 @@ import java.util.Date;
 @Getter
 @Setter
 @ToString
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Project {
-
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
     @Id
-    @Column(name = "project_id", nullable = false)
+    @Column(name = "project_id", nullable = false, length = 8)
     private String projectId;
 
     @Column(name = "version", nullable = false, length = 2)
@@ -42,11 +38,11 @@ public class Project {
     @Column(name = "start_date", nullable = false)
     private Date startDate;
 
-    @Column(name = "expected_time", nullable = false)
-    private String expectedTime;
+    @Column(name = "end_date", nullable = false)
+    private Date endDate;
 
     @Column(name = "spent_time", nullable = false)
-    private String spentTime;
+    private Integer spentTime;
 
 //    @OneToMany(mappedBy = "project", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 //    @ToString.Exclude

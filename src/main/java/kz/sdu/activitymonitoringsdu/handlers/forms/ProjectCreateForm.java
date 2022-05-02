@@ -1,6 +1,7 @@
 package kz.sdu.activitymonitoringsdu.handlers.forms;
 
 import kz.sdu.activitymonitoringsdu.dto.ProjectDto;
+import kz.sdu.activitymonitoringsdu.entity.Project;
 import kz.sdu.activitymonitoringsdu.enums.ProjectStatus;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,26 +17,25 @@ import java.util.Date;
 @Getter
 @Setter
 public class ProjectCreateForm {
-    private String projectId = generateId();
+    private String projectId;
     private String projectVersion;
     private String title;
     private String description;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date startDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date endDate;
 
-    public ProjectDto getDtoFromForm() {
-        ProjectDto projectDto = new ProjectDto();
-        projectDto.setProjectId(projectId);
-        projectDto.setProjectVersion(projectVersion);
-        projectDto.setTitle(title);
-        projectDto.setDescription(description);
-        projectDto.setStatus(ProjectStatus.NOT_STARTED);
-        projectDto.setStartDate(startDate);
-        projectDto.setExpectedTime("0");
-        projectDto.setSpentTime("0");
-
-        projectDto.setActivities(new ArrayList<>());
-        return projectDto;
+    public Project getEntityFromForm() {
+        return Project.builder()
+                .projectId(projectId)
+                .projectVersion(projectVersion)
+                .title(title)
+                .description(description)
+                .startDate(startDate)
+                .endDate(endDate)
+                .spentTime(0)
+                .build();
     }
 
     private String generateId() {

@@ -1,7 +1,9 @@
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 
-body{
+body {
+  min-height: 100vh;
   font-family: 'Poppins', sans-serif;
+  min-height: -webkit-fill-available;
 }
 a{
   text-decoration: none;
@@ -199,3 +201,27 @@ a{
     outline: 2px solid transparent;
     outline-offset: 2px;
   }
+
+.box_head_right{
+  display: flex;
+  flex-direction: row;
+  align-items:center;
+  justify-content: right;
+}
+
+.tree_dots{ 
+  height: 30px;
+  width: 35px;
+}
+
+.dropdown-toggle::after {
+  content: none;
+  display: flex;
+  align-items:center;
+
+}
+
+
+
+
+  

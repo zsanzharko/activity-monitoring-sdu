@@ -32,16 +32,16 @@ public class ProjectHandlerUtils {
     }
 
     private static ProjectDto converting(Project project) {
-        ProjectDto projectDto = new ProjectDto();
-        projectDto.setProjectId(project.getProjectId());
-        projectDto.setProjectVersion(project.getProjectVersion());
-        projectDto.setTitle(project.getTitle());
-        projectDto.setDescription(project.getDescription());
-        projectDto.setStatus(project.getStatus());
-        projectDto.setStartDate(project.getStartDate());
-        projectDto.setExpectedTime(project.getExpectedTime());
-        projectDto.setSpentTime(project.getSpentTime());
-        return projectDto;
+        return ProjectDto.builder()
+                .projectId(project.getProjectId())
+                .projectVersion(project.getProjectVersion())
+                .title(project.getTitle())
+                .description(project.getDescription())
+                .status(project.getStatus())
+                .startDate(project.getStartDate())
+                .endDate(project.getEndDate())
+                .spentTime(project.getSpentTime())
+                .build();
     }
 
     private static Project converting(ProjectDto projectDto) {
@@ -52,7 +52,7 @@ public class ProjectHandlerUtils {
         project.setDescription(projectDto.getDescription());
         project.setStatus(projectDto.getStatus());
         project.setStartDate(projectDto.getStartDate());
-        project.setExpectedTime(projectDto.getExpectedTime());
+        project.setEndDate(projectDto.getEndDate());
         project.setSpentTime(projectDto.getSpentTime());
 
         return project;

@@ -1,20 +1,23 @@
 package kz.sdu.activitymonitoringsdu.entity;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 @Table(name = "report")
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Report {
     @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
     @Column(name = "activity_id", nullable = false)
     private Long activityId;
 
@@ -31,6 +34,14 @@ public class Report {
     // fixme
     public String getReportTime() {
         return time / 60 + " hour(s) " + (time % 60) + " minute(s)";
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getReportInDate() {

@@ -26,4 +26,8 @@ public class DevConnectionActivityDao {
     public List<DevConnectionActivity> findAllByUserIdAssign(Long userId) {
         return activityRepository.findAllByUserId(userId);
     }
+
+    public void deleteAllByActivityId(Long activityId) {
+        activityRepository.deleteAllByActivityId(activityId);
+    }
 }

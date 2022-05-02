@@ -1,6 +1,15 @@
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 
+body {
+  min-height: 100vh;
+  font-family: 'Poppins', sans-serif;
+  min-height: -webkit-fill-available;
+}
+a{
+  text-decoration: none;
+}
 .location_creation{
+  /* background-color:violet; */
   display: flex;
   justify-content: space-between;
   align-items:center;
@@ -20,4 +29,24 @@
   background-color:#D68301;
   color:white;
   font-family: 'Poppins', sans-serif;
+}
+
+
+.project_name_box, .version_box, .project_id_box,.project_desc_box{
+  width: 100%;
+}
+
+
+label, input, p{
+  margin: 0px;
+  padding: 0px;
+}
+
+input{
+  margin-bottom: 15px;
+}
+
+
+.pr_version, .pr_name,.pr_number{
+  margin-top: 10px;
 }

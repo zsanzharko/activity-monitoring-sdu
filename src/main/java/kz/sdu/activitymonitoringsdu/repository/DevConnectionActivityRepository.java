@@ -10,4 +10,6 @@ import java.util.List;
 public interface DevConnectionActivityRepository extends JpaRepository<DevConnectionActivity, Long> {
 
     List<DevConnectionActivity> findAllByUserId(Long userId);
+
+    void deleteAllByActivityId(Long activityId);
 }

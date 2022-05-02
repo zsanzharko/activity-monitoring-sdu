@@ -15,4 +15,6 @@ public interface ActivityService {
     Activity save(Activity activity);
 
     void deleteById(Long id);
+
+    void deleteActivityById(Long id);
 }
