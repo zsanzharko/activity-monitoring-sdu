@@ -3,14 +3,15 @@ package kz.sdu.activitymonitoringsdu.controller.rest;
 import kz.sdu.activitymonitoringsdu.dao.*;
 import kz.sdu.activitymonitoringsdu.dto.ProjectDto;
 import kz.sdu.activitymonitoringsdu.dto.UserDto;
-import kz.sdu.activitymonitoringsdu.entity.*;
+import kz.sdu.activitymonitoringsdu.entity.Activity;
+import kz.sdu.activitymonitoringsdu.entity.DevConnectionActivity;
 import kz.sdu.activitymonitoringsdu.enums.Role;
 import kz.sdu.activitymonitoringsdu.exception.ApiRequestException;
 import kz.sdu.activitymonitoringsdu.handlers.ActivityHandlerUtils;
 import kz.sdu.activitymonitoringsdu.handlers.UserHandlerUtils;
+import kz.sdu.activitymonitoringsdu.handlers.body.ColorHandlerBody;
 import kz.sdu.activitymonitoringsdu.handlers.forms.ActivityCreateForm;
 import kz.sdu.activitymonitoringsdu.handlers.forms.ProjectCreateForm;
-import kz.sdu.activitymonitoringsdu.handlers.forms.SpendTimeForm;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -144,5 +145,12 @@ public class RestProjectController {
             return String.format("%02d day(s) %02d hour(s) %02d minute(s)", days, hours, minutes);
         }
         return String.format("%02d hour(s) %02d minute(s)", hours, minutes);
+    }
+
+    @PostMapping("/get-color-activity-calendar")
+    public ResponseEntity<?> getColorDay(@RequestBody ColorHandlerBody colorBody) {
+        if (colorBody == null) return ResponseEntity.noContent().build();
+
+        return ResponseEntity.ok(colorBody.getColor());
     }
 }

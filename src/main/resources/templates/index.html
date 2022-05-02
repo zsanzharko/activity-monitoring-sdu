@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:background-color="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="utf-8">
@@ -498,12 +498,12 @@
                             </div>
                         </div>
                         <div id="progress-calendar-placeholder">
-                            <div class="activity_box" th:each="consist : ${consists}">
+                            <div class="activity_box" th:each="consist, state1 : ${consists}">
                                 <div class="progress-placeholder">
                                     <div class="progress-bar"
-                                         style="height: 100%; width: 6.67%; background-color: #93FF96"
-                                         th:each="day : ${daily_count}"
-                                         th:id="${consist.getActivityId()} + '-progress-day-' + ${day}"></div>
+                                         th:each="day, state2 : ${daily_count}"
+                                         th:style="'height: 100%; width: 6.67%; background-color: ' + ${activityBackgroundColor.get(state1.count - 1).get(state2.count - 1)}"
+                                         th:id="${consist.getActivityId()} + '-progress-day-' + ${day}"> </div>
                                 </div>
                             </div>
                         </div>
@@ -525,7 +525,7 @@
                     <div class="spent_buffer">
                         <div class="input_add_box" th:each="spentTime, state : ${sendSpendTimes}">
                             <div class="name_box">
-                                <p class="activity_name" th:text="${spentTime.getTitle()}">User Dashboard Page Front</p>
+                                <p class="activity_name" th:text="${spentTime.getTitle()}"></p>
                             </div>
                             <div class="name_box">
                                 <p class="activity_name" th:text="${spentTime.getSpendDate().toGMTString().substring(0, 11)}">User Dashboard Page Front</p>

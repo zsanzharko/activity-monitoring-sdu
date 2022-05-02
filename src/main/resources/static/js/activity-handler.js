@@ -5,6 +5,7 @@ function getActivityDayInformation(projectId) {
 
     fetch(url, {
         headers: {
+            'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
     })
@@ -211,6 +212,8 @@ function getActivityDayInformation(projectId) {
                 const start_date = getStartDate(activities)[i]
                 const end_date = new Date(end_activity_dates[i])
 
+                getColorRequest(start_date, end_date, DAY_COUNT).then(r => console.log(r));
+
                 progress_display += `
                 <div class="activity_box">
                                 <div class="progress-placeholder">
@@ -271,10 +274,10 @@ async function newActivity(projectId) {
     const form = document.getElementById('new-activity')
     const formData = new FormData(form)
 
-        const object = {};
-        formData.forEach(function (value, key) {
-            object[key] = value;
-        });
+    const object = {};
+    formData.forEach(function (value, key) {
+        object[key] = value;
+    });
 
 }
 
@@ -323,4 +326,22 @@ function getStartDate(activities) {
         start_date.push(date)
     }
     return start_date
+}
+
+async function getColorRequest(startDate, endDate, duration) {
+    const url = '/api/get-color-activity-calendar'
+
+    let data = {
+        startDate: startDate,
+        endDate: endDate,
+        duration: duration
+    }
+    return await fetch(url, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    }).then(result => result.json());
 }

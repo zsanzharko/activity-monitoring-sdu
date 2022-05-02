@@ -12,6 +12,7 @@ import kz.sdu.activitymonitoringsdu.enums.Role;
 import kz.sdu.activitymonitoringsdu.handlers.DateHandler;
 import kz.sdu.activitymonitoringsdu.handlers.ProjectHandlerUtils;
 import kz.sdu.activitymonitoringsdu.handlers.UserHandlerUtils;
+import kz.sdu.activitymonitoringsdu.handlers.body.ColorHandlerBody;
 import kz.sdu.activitymonitoringsdu.handlers.body.SendSpendTimeBody;
 import kz.sdu.activitymonitoringsdu.handlers.forms.SpendTimeForm;
 import lombok.Getter;
@@ -187,8 +188,22 @@ public class MainController {
                 }
             }
 
+            int activityColorSize = activityDtoList == null ?
+                    0 : activityDtoList.size();
+
+            List<List<String>> colorHandlerBodies = new ArrayList<>(activityColorSize);
+
+            for (int i = 0; i < activityColorSize; i++) {
+                colorHandlerBodies.add(new ColorHandlerBody(
+                        activityDtoList.get(i).getStartDate(),
+                        activityDtoList.get(i).getEndDate(),
+                        getDayCount().size())
+                        .getColor());
+            }
+
 
             modelMap.addAttribute("activities", activityDtoList);
+            modelMap.addAttribute("activityBackgroundColor", colorHandlerBodies);
             modelMap.addAttribute("consists", consistList);
             modelMap.addAttribute("assigns", assignedList);
             modelMap.addAttribute("daily_count", getDayCount());
