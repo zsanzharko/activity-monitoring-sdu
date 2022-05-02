@@ -10,9 +10,20 @@ function getActivityDayInformation(projectId) {
         },
     })
         .then(result => result.json())
-        .then((data) => {
-            let developers = []
+        .then(async (data) => {
             console.log(data)
+            let developers = []
+
+            await fetch('/assignation', {
+                method: "GET",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+            }).then(result => result.json())
+                .then((date) => developers = date)
+
+            console.log(developers)
             const activities = data["activities"];
             const assigned = data["devConnectionActivities"];
 
@@ -21,65 +32,9 @@ function getActivityDayInformation(projectId) {
             let display_activity_link_boxs = ``;
 
 
-            let cortege_display_assign_box = ``
+            let cortege_display_assign_box = ``;
 
-            for (const [key, value] of Object.entries(assigned)) {
-                let assign_name = null;
-                if (value != null) {
-                    assign_name = value["firstName"]
-                }
-                const assignIsNull = assign_name != null
-                cortege_display_assign_box += `
-                <div class="activity_placeholder">
-                                <div class="activity_box active_box_centered">
-                                    <div class="assign_box" style="background-color:  ${assignIsNull ? `white` : "#D68300"}; border-color: ${assignIsNull ? "#D68300" : "red"}; color: ${assignIsNull ? "black" : "white"};">
-                                        ${assignIsNull ? 'assigned' : 'assign'}
-                                    </div>
-                                </div>
-                            </div>
-                `
-            }
 
-            fetch('/manager/get-developers', {
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-                .then(result => result.json())
-                .then((developers) => {
-                    console.log(developers)
-                    for (let j = 0; j < developers.length; j++) {
-                        display_activity_link_boxs += `
-                                <div class="person_box">
-                                            <h6 class="person_name">Serikkhan Ayan
-                                            </h6>
-
-                                            <div class="box_proger">
-                                                <div class="zogolovok_box">
-                                                    <p class="zogolovok">Contacts</p>
-                                                </div>
-                                                <p class="person_PH_number info">Phone number: <span>${developers[i]['phoneNumber']}</span></p>
-                                                <p class="person_email info">Email: <span>${developers[i]['email']}</span></p>
-                                            </div>
-                                            <div class="box_proger">
-                                                <div class="zogolovok_box">
-                                                    <p class="zogolovok">Projects</p>
-                                                </div>
-                                                <p class="person_pr_num info">Active projects: <span>4</span>
-                                                </p>
-                                            </div>
-                                            <div class="box_proger">
-                                                <div class="zogolovok_box">
-                                                    <p class="zogolovok">Choose</p>
-                                                </div>
-                                                <a type="button" href="/project/activity/assign/${activities[i].id}/${projectId}}" data-bs-toggle="modal"
-                                                    class="btn choose">select</a>
-                                            </div>
-                                        </div>
-                    `
-                    }
-                })
-                .catch(_ => console.error(_));
 
             for (let i = 0; i < activities.length; i++) {
                 display_activity_boxs += `
@@ -124,8 +79,11 @@ function getActivityDayInformation(projectId) {
                                     <hr>
                                     <div class="description_activity">${activities[i].description}</div>
                                 </div>
-                            </div>
+                            </div>`
+                if (Object.keys(developers).length !== 0
+                    && Object.getPrototypeOf(developers) !== Object.prototype) {
 
+                    display_activity_link_boxs = `
                             <div>
                                 <div class="topic">
                                     <h5>Developers</h5>
@@ -133,14 +91,52 @@ function getActivityDayInformation(projectId) {
                                 </div>
 
                                 <div class="main_box">
-                                    <div class="container">`
+                                    <div class="container">
+                            `
 
-                display_activity_link_boxs += cortege_display_assign_box
-                display_activity_link_boxs += `
+                    for (const [key, value] of Object.entries(developers)) {
+
+                        display_activity_link_boxs += `
+                                <div class="person_box">
+                                            <h6 class="person_name">${value["fullName"]}
+                                            </h6>
+
+                                            <!-- <div class="box_proger">-->
+                                            <!--     <div class="zogolovok_box">-->
+                                            <!--         <p class="zogolovok">Contacts</p>-->
+                                            <!--     </div>-->
+                                            <!--     <p class="person_PH_number info">Phone number: <span>{developers[i]['phoneNumber']}</span></p>-->
+                                            <!--     <p class="person_email info">Email: <span>{developers[i]['email']}</span></p>-->
+                                            <!-- </div>-->
+                                            <div class="box_proger">
+                                                <div class="zogolovok_box">
+                                                    <p class="zogolovok">Projects</p>
+                                                </div>
+                                                <p class="person_pr_num info">Active projects: <span>${value['activityCount']}</span>
+                                                </p>
+                                            </div>
+                                            <div class="box_proger">
+                                                <div class="zogolovok_box">
+                                                    <p class="zogolovok">Choose</p>
+                                                </div>
+                                                <a type="button" href="project/activity/assign/${activities[i].id}?developId=${value['userId']}&title=" data-bs-toggle="modal"
+                                                    class="btn choose">select</a>
+                                            </div>
+                                        </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            
+                            `
+                    }
+                }
+
+
+
+
+
+
+
+                display_activity_link_boxs += `                            
                             <div>
                                 <div class="spent_topic">
                                     <h5>Spent time</h5>
@@ -212,7 +208,6 @@ function getActivityDayInformation(projectId) {
                 const start_date = getStartDate(activities)[i]
                 const end_date = new Date(end_activity_dates[i])
 
-                getColorRequest(start_date, end_date, DAY_COUNT).then(r => console.log(r));
 
                 progress_display += `
                 <div class="activity_box">
@@ -326,6 +321,10 @@ function getStartDate(activities) {
         start_date.push(date)
     }
     return start_date
+}
+
+function getAssignationDevelopers() {
+
 }
 
 async function getColorRequest(startDate, endDate, duration) {
