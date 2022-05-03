@@ -26,15 +26,37 @@ function getActivityDayInformation(projectId) {
             console.log(developers)
             const activities = data["activities"];
             const assigned = data["devConnectionActivities"];
+            const reports = data["reports"]
+
+            console.log("assigned list cheeck" + assigned)
+            if (Object.keys(assigned).length <= 1
+                && Object.getPrototypeOf(assigned) === Object.prototype) {
+                document.getElementById("monitoring-space").innerHTML = `
+                You don't have any activities in this project
+                `;
+                return
+            }
 
             let display_activity_boxs = ``;
             let display_assign_box = ``;
             let display_activity_link_boxs = ``;
 
-
-            let cortege_display_assign_box = ``;
-
-
+            for (const [key, value] of Object.entries(assigned)) {
+                let assign_name = null;
+                if (value != null) {
+                    assign_name = value["firstName"]
+                }
+                const assignIsNull = assign_name != null
+                display_assign_box += `
+                <div class="activity_placeholder">
+                                <div class="activity_box active_box_centered">
+                                    <div class="assign_box" style="background-color:  ${assignIsNull ? `white` : "#D68300"}; border-color: ${assignIsNull ? "#D68300" : "red"}; color: ${assignIsNull ? "black" : "white"};">
+                                        ${assignIsNull ? 'assigned' : 'assign'}
+                                    </div>
+                                </div>
+                            </div>
+                `
+            }
 
             for (let i = 0; i < activities.length; i++) {
                 display_activity_boxs += `
@@ -59,8 +81,8 @@ function getActivityDayInformation(projectId) {
                     <!-- Modal -->
             <div class="modal fade view_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
                 aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
+                <div class="modal-dialog modal-lg height-90">
+                    <div class="modal-content height-100">
                         <div class="modal-header">
                             <h5 class="modal-title" id="staticBackdropLabel">Activity details</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -70,20 +92,23 @@ function getActivityDayInformation(projectId) {
                                 <div class="title_head">
                                     <p class="title_activity_modal title">Title:<span>${activities[i].title}</span></p>
                                     <!--<p class="title_activity_modal title">Activity ID:<span>${activities[i]}</span></p> -->
-                                    <p class="start_day_activity_modal title">Stat day:<span>${activities[i].startDate.split('T')[0]}</span></p>
-                                    <p class="start_day_activity_modal title">End day:<span>${activities[i].endDate.split('T')[0]}</span></p>
+<!--                                    <p class="start_day_activity_modal title">Stat day:<span>${activities[i]}</span></p>-->
+                                    <p class="start_day_activity_modal title">Stat day:<span>${activities[i].startDate}</span></p>
+<!--                                    <p class="start_day_activity_modal title">End day:<span>${activities[i]}</span></p>-->
+                                    <p class="start_day_activity_modal title">End day:<span>${activities[i].endDate}</span></p>
                                 </div>
-
-                                <div class="head_description">
+                            <div class="head_description">
                                     <h5>Description</h5>
                                     <hr>
                                     <div class="description_activity">${activities[i].description}</div>
-                                </div>
-                            </div>`
-                if (Object.keys(developers).length !== 0
-                    && Object.getPrototypeOf(developers) !== Object.prototype) {
+                                    </div></div>`
+                const isAssigned = activityIsAssigned(activities[i].id, assigned)
+                let report = reports[activities[i].id]
+                if (!isAssigned) {
+                    if (Object.keys(developers).length !== 0
+                        && Object.getPrototypeOf(developers) !== Object.prototype) {
 
-                    display_activity_link_boxs = `
+                        display_activity_link_boxs += `
                             <div>
                                 <div class="topic">
                                     <h5>Developers</h5>
@@ -92,22 +117,15 @@ function getActivityDayInformation(projectId) {
 
                                 <div class="main_box">
                                     <div class="container">
+                                    </div>
                             `
 
-                    for (const [key, value] of Object.entries(developers)) {
+                        for (const [key, value] of Object.entries(developers)) {
 
-                        display_activity_link_boxs += `
+                            display_activity_link_boxs += `
                                 <div class="person_box">
                                             <h6 class="person_name">${value["fullName"]}
                                             </h6>
-
-                                            <!-- <div class="box_proger">-->
-                                            <!--     <div class="zogolovok_box">-->
-                                            <!--         <p class="zogolovok">Contacts</p>-->
-                                            <!--     </div>-->
-                                            <!--     <p class="person_PH_number info">Phone number: <span>{developers[i]['phoneNumber']}</span></p>-->
-                                            <!--     <p class="person_email info">Email: <span>{developers[i]['email']}</span></p>-->
-                                            <!-- </div>-->
                                             <div class="box_proger">
                                                 <div class="zogolovok_box">
                                                     <p class="zogolovok">Projects</p>
@@ -122,55 +140,45 @@ function getActivityDayInformation(projectId) {
                                                 <a type="button" href="project/activity/assign/${activities[i].id}?developId=${value['userId']}&title=" data-bs-toggle="modal"
                                                     class="btn choose">select</a>
                                             </div>
-                                        </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            `
+                                        </div>`
+
+
+                        }
                     }
-                }
-
-
-
-
-
-
-
-                display_activity_link_boxs += `                            
+                } else if (isAssigned) {
+                    display_activity_link_boxs += `                            
                             <div>
                                 <div class="spent_topic">
                                     <h5>Spent time</h5>
                                     <hr>
                                 </div>
-                                <div class="spent_time_container">
-                                    
+                                <div class="spent_time_container">`
+
+                    for (const [key, value] of Object.entries(report)) {
+                        if (value.length === 0) {
+                            continue
+                        }
+                        display_activity_link_boxs += `
                                     <div class="spent_time_box">
                                         <div class="spent_left_box">
                                             <p class="zogolovok">Entered day</p>
-                                            <p>31.01.2002</p>
+                                            <p>${value['reportInDate']}</p>
                                         </div>
                                         <div class="spent_space_line"></div>
                                         <div class="spent_right_box">
-                                            <p class="zogolovok">Spent time</p>
-                                            <p>31.01.2002</p>
+                                            <p class="zogolovok">Spent time</p  >
+                                            <p>${value['reportTime']}</p>
                                         </div>
-                                    </div>
-
-                                    <div class="spent_time_box">
-                                        <div class="spent_left_box">
-                                            <p class="zogolovok">Entered day</p>
-                                            <p>31.01.2002</p>
-                                        </div>
-                                        <div class="spent_space_line"></div>
-                                        <div class="spent_right_box">
-                                            <p class="zogolovok">Spent time</p>
-                                            <p>31.01.2002</p>
-                                        </div>
-                                    </div>
-
-                                </div>
+                                    </div>  `
+                    }
+                    display_activity_link_boxs += `
                             </div>
-                        </div>
+                           </div>
+                        </div>`
+                }
+
+
+                display_activity_link_boxs += `
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Delete</button>
                         </div>
@@ -323,10 +331,6 @@ function getStartDate(activities) {
     return start_date
 }
 
-function getAssignationDevelopers() {
-
-}
-
 async function getColorRequest(startDate, endDate, duration) {
     const url = '/api/get-color-activity-calendar'
 
@@ -343,4 +347,15 @@ async function getColorRequest(startDate, endDate, duration) {
         },
         body: JSON.stringify(data)
     }).then(result => result.json());
+}
+
+function activityIsAssigned(activityId, assigned) {
+    let isAssigned = false
+    for (const [key, value] of Object.entries(assigned)) {
+        if (activityId == key && value != null) {
+            isAssigned = true
+            break
+        }
+    }
+    return isAssigned
 }

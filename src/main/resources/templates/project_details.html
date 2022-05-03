@@ -234,7 +234,7 @@
 
                 <div class="monitoring_space">
                     <!-- Box  area -------------------------------------- -->
-                    <div class="space_for_project_details pad-h-2">
+                    <div class="space_for_project_details pad-h-2" id="monitoring-space">
                         <div class="buffer_container">
                             <div class="left-project-info">
                                 <div class="project_name_box">
@@ -245,50 +245,13 @@
                                     <div class="activity_placeholder" id="activity_assigned_placeholder"></div>
                                     <div class="activity_placeholder" id="activity_details_placeholder"></div>
                                 </div>
-                                <!--                            <div class="project_name_box">-->
-                                <!--                                <p class="activity_name" th:text="${project.title}">Project Title</p>-->
-                                <!--                            </div>-->
-                                <!--                            <div class="flex-space-evenly">-->
-                                <!--                                <div class="activity_placeholder" id="activity_title_placeholder">-->
-                                <!--                                    <div class="activity_box" th:each="activity : ${activities}">-->
-                                <!--                                        <div style="height: 100%;">-->
-                                <!--                                            <p class="activity_name" th:text="${activity.title}">wrapping data</p>-->
-                                <!--                                        </div>-->
-                                <!--                                    </div>-->
-                                <!--                                </div>-->
-                                <!--                                <div class="activity_placeholder" id="activity_assigned_placeholder">-->
-                                <!--                                    <div class="activity_box" th:each="activity : ${activities}">-->
-                                <!--                                        <div class="assign_box">-->
-                                <!--                                            <p class="activity_name " th:text="${activity.title}">wrapping data</p>-->
-                                <!--                                        </div>-->
-                                <!--                                    </div>-->
-                                <!--                                </div>-->
-                                <!--                                <div class="activity_placeholder" id="activity_details_placeholder">-->
-                                <!--                                    <div class="activity_box" th:each="activity : ${activities}">-->
-                                <!--                                        <div style="height: 100%;">-->
-                                <!--                                            <a class="activity_name">View</a>-->
-                                <!--                                        </div>-->
-                                <!--                                    </div>-->
-                                <!--                                </div>-->
-
-                                <!--                            </div>-->
                             </div>
 
                             <div class="activity_container">
                                 <div class="stamp_date-placeholder">
                                     <div class="activity-day-timestamp" id="activity-day">
-                                        <!--                                <div class="day-counter" th:each="count : ${daily_count}">-->
-                                        <!--                                    <p style="margin: auto; text-align: center" th:text="${count}"></p>-->
-                                        <!--                                </div>-->
                                     </div>
                                     <div id="progress-calendar-placeholder">
-                                        <!--                                <div class="activity_box" th:each="activity : ${activities}">-->
-                                        <!--                                    <div class="progress-placeholder">-->
-                                        <!--                                        <div class="progress-bar" style="height: 100%; width: 6.67%;"-->
-                                        <!--                                             th:each="count : ${daily_count}"-->
-                                        <!--                                             th:id="${activity.id} + '-progress-day-' + ${count}"></div>-->
-                                        <!--                                    </div>-->
-                                        <!--                                </div>-->
                                     </div>
                                 </div>
                             </div>
@@ -321,34 +284,6 @@
                             <div class="project_description_box">
                                 <h5 class="project_description">Description</h5>
                                 <div class="project_description_text" th:text="${project.getDescription()}">
-                                    sanzhar makau sanzhar makau sanzhar makau sanzhar makau sanzhar makau sanzhar
-                                    makau
-                                    sanzhar makau sanzhar makau sanzhar makau sanzhar makau sanzhar makau sanzhar
-                                    makau
-                                    sanzhar makau sanzhar makau sanzhar makau sanzhar makau sanzhar makau sanzhar
-                                    makau
-                                    sanzhar makau sanzhar makau sanzhar makau sanzhar makau sanzhar makau sanzhar
-                                    makau
-                                    sanzhar makau sanzhar makau
-                                    sanzhar makau sanzhar makau sanzhar makau sanzhar makau sanzhar makau sanzhar
-                                    makau
-                                    sanzhar makau sanzhar makau sanzhar makau sanzhar makau sanzhar makau sanzhar
-                                    makau
-                                    sanzhar makau sanzhar makau sanzhar makau sanzhar makau sanzhar makau sanzhar
-                                    makau
-                                    sanzhar makau sanzhar makau sanzhar makau sanzhar makau sanzhar makau sanzhar
-                                    makau
-                                    sanzhar makau sanzhar makau
-                                    sanzhar makau sanzhar makau sanzhar makau sanzhar makau sanzhar makau sanzhar
-                                    makau
-                                    sanzhar makau sanzhar makau sanzhar makau sanzhar makau sanzhar makau sanzhar
-                                    makau
-                                    sanzhar makau sanzhar makau sanzhar makau sanzhar makau sanzhar makau sanzhar
-                                    makau
-                                    sanzhar makau sanzhar makau sanzhar makau sanzhar makau sanzhar makau sanzhar
-                                    makau
-                                    sanzhar makau sanzhar makau
-
                                 </div>
                             </div>
 
@@ -426,9 +361,9 @@
         <div class="modal fade edit_project_model" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
-                    <form id="new-project">
+                    <form th:action="@{/project/manager/update}" id="new-project" th:object="${updateProject}" method="post">
                         <div class="modal-header">
-                            <h5 class="modal-title">New Project</h5>
+                            <h5 class="modal-title">Update<span th:text="${projectId} + ' ' +  ${project.getTitle()}"></span></h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                         </div>
@@ -436,19 +371,25 @@
                             <p class="pr_name">Project Id:</p>
                             <label for="project-id" class="project_name_box">
                                 <input type="text" class="form-control input" name="projectId"
-                                       id="project-id" placeholder="Like '4635LSFB'"
-                                       aria-describedby="basic-addon1" required>
+                                       th:value="${project.getProjectId()}"
+                                       th:name="*{projectId}"
+                                       id="project-id"
+                                       aria-describedby="basic-addon1" required disabled>
                             </label>
 
                             <p class="pr_version">Version:</p>
                             <label for="projectVersion" class="version_box">
                                 <input type="text" class="form-control input" id="projectVersion"
+                                       th:value="${project.getProjectVersion()}"
+                                       th:name="*{projectVersion}"
                                        name="projectVersion" placeholder="Like 'B'" required>
                             </label>
 
                             <p class="pr_name">Project name:</p>
                             <label for="title" class="project_name_box">
                                 <input type="text" class="form-control input" name="title" id="title"
+                                       th:value="${project.getTitle()}"
+                                       th:name="*{title}"
                                        placeholder="Like 'Android App'" aria-describedby="basic-addon1"
                                        required>
                             </label>
@@ -457,18 +398,24 @@
                             <label for="description" class="project_desc_box">
 
                                             <textarea class="form-control input" name="description"
+                                                      th:text="${project.getDescription()}"
+                                                      th:name="*{description}"
                                                       aria-label="With textarea" id="description" required></textarea>
                             </label>
 
                             <p class="pr_number">Date to start:</p>
                             <label for="startDate" class="project_id_box">
                                 <input type="date" class="form-control input" pattern="yyyy-MM-dd"
+                                       th:value="${{project.getStartDate()}}"
+                                       th:name="*{startDate}"
                                        name="startDate" id="startDate" required>
                             </label>
 
                             <p class="pr_number">Expected date:</p>
                             <label for="Expected_Date" class="project_id_box">
                                 <input type="date" class="form-control input" pattern="yyyy-MM-dd"
+                                       th:value="${{project.getEndDate()}}"
+                                       th:name="*{endDate}"
                                        name="expectedDate" id="Expected_Date" required>
                             </label>
                         </div>
@@ -476,7 +423,7 @@
                             <button type="button" class="btn btn-secondary"
                                     data-bs-dismiss="modal">Close
                             </button>
-                            <input class="btn btn-primary" type="submit" onclick="" value="Create"/>
+                            <button th:href="@{/project/manager/update}" type="submit" class="btn btn-primary">Update</button>
                         </div>
                     </form>
                 </div>

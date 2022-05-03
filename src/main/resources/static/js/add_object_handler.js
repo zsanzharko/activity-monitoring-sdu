@@ -55,7 +55,7 @@ window.addEventListener("load", function () {
                                 <img src="images/test photo profile.png" alt="" class="box_image">
                                 <!--                           todo in this place will insert users image, check in database-->
                             </div>
-                            <a href="/project/panel?id=${data.projectId}" class="see_button" role="button">See
+                            <a href="/project/manager/panel?id=${data.projectId}" class="see_button" role="button">See
                                 more</a>
                         </div>
                     </div>`

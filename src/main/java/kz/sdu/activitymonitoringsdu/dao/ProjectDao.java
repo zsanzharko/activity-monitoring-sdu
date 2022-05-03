@@ -5,6 +5,7 @@ import kz.sdu.activitymonitoringsdu.dto.ProjectDto;
 import kz.sdu.activitymonitoringsdu.entity.*;
 import kz.sdu.activitymonitoringsdu.enums.ActivityStatus;
 import kz.sdu.activitymonitoringsdu.handlers.ActivityHandlerUtils;
+import kz.sdu.activitymonitoringsdu.handlers.ProjectHandlerUtils;
 import kz.sdu.activitymonitoringsdu.repository.ActivityRepository;
 import kz.sdu.activitymonitoringsdu.repository.ProjectRepository;
 import kz.sdu.activitymonitoringsdu.repository.ReportRepository;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -147,4 +149,11 @@ public class ProjectDao implements ProjectService, ActivityService {
 //        return spendTimeUserRepository.getReportsByActivityId(activityId);
     }
 
+    public ProjectDto updateProject(@NotNull ProjectDto projectDto) {
+        Project project = ProjectHandlerUtils.convertToEntity(projectDto);
+        Project dbProject = projectRepository.findByProjectId(project.getProjectId());
+        if(dbProject != null) {
+            return ProjectHandlerUtils.convertToDto(projectRepository.saveAndFlush(project));
+        } return null;
+    }
 }

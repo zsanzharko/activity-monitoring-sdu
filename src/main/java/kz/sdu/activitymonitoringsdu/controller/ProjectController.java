@@ -1,5 +1,7 @@
 package kz.sdu.activitymonitoringsdu.controller;
 
+import kz.sdu.activitymonitoringsdu.configuration.ApplicationContextProvider;
+import kz.sdu.activitymonitoringsdu.controller.rest.RestProjectController;
 import kz.sdu.activitymonitoringsdu.dao.ConsistDao;
 import kz.sdu.activitymonitoringsdu.dao.ProjectDao;
 import kz.sdu.activitymonitoringsdu.dao.UserDao;
@@ -12,6 +14,7 @@ import kz.sdu.activitymonitoringsdu.handlers.UserHandlerUtils;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -37,7 +40,7 @@ public class ProjectController {
         this.consistDao = consistDao;
     }
 
-    @GetMapping("/panel")
+    @GetMapping("/manager/panel")
     public ModelAndView showProjectPanel(@RequestParam final String id, ModelMap model) {
         UserDto userDto = UserHandlerUtils.getUserFromAuth(userDao);
         if (userDto.getRole() != Role.MANAGER) return new ModelAndView("redirect:/dashboard");
@@ -53,6 +56,7 @@ public class ProjectController {
         model.addAttribute("user", userDto);
         model.addAttribute("project", projectDto);
         model.addAttribute("projectId", id);
+        model.addAttribute("updateProject", new ProjectDto());
 
         return new ModelAndView("project_details", model);
     }
@@ -65,4 +69,14 @@ public class ProjectController {
         projectDao.deleteProjectByProjectId(projectId);
         return new ModelAndView("redirect:/dashboard");
     }
+
+    @PostMapping("/manager/update")
+    public ModelAndView updateProject(@ModelAttribute ProjectDto projectDto) {;
+        ProjectDto updateProject = projectDao.updateProject(projectDto);
+
+        if (updateProject == null) return new ModelAndView("redirect:/dashboard");
+
+        return new ModelAndView("redirect:/project/panel?id=" + projectDto.getProjectId());
+    }
+
 }
